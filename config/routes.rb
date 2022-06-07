@@ -1,5 +1,47 @@
 Rails.application.routes.draw do
 
+  namespace :public do
+    get 'categories/index'
+    get 'categories/show'
+    get 'categories/edit'
+  end
+  namespace :public do
+    get 'items/index'
+    get 'items/show'
+    get 'items/edit'
+  end
+  namespace :public do
+    get 'order_details/index'
+    get 'order_details/edit'
+    get 'order_details/show'
+  end
+  namespace :public do
+    get 'orders/index'
+    get 'orders/show'
+    get 'orders/edit'
+  end
+  namespace :public do
+    get 'addresses/index'
+    get 'addresses/show'
+    get 'addresses/edit'
+  end
+  namespace :public do
+    get 'books/index'
+    get 'books/show'
+  end
+  namespace :public do
+    get 'reviews/index'
+    get 'reviews/show'
+    get 'reviews/edit'
+  end
+  namespace :public do
+    get 'end_users/index'
+    get 'end_users/show'
+    get 'end_users/edit'
+  end
+  namespace :public do
+    get 'homes/top'
+  end
 #会員側
 # URL /end_users/sign_in...
 #会員側のコントローラーがどこに存在するかを指定
