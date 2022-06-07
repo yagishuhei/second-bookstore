@@ -1,2 +1,0 @@
-class OrderDateil < ApplicationRecord
-end
