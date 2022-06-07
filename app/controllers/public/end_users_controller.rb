@@ -1,6 +1,6 @@
 class Public::EndUsersController < ApplicationController
   def index
-    @end_user = EndUser.all
+    @end_users = EndUser.all
   end
 
   def show
