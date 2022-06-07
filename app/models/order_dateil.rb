@@ -1,0 +1,2 @@
+class OrderDateil < ApplicationRecord
+end
