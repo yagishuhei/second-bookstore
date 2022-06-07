@@ -1,4 +1,8 @@
 <h1>Public::EndUsers#show</h1>
+
+<p>Profile Image</p>
+<%= image_tag @end_user.get_profile_image("100x100") %>
+
 <p>Name</p>
 <%= @end_user.last_name %>
 <%= @end_user.first_name %>
