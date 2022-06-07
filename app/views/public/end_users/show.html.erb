@@ -1,4 +1,31 @@
 <h1>Public::EndUsers#show</h1>
-<p>Find me in app/views/public/end_users/show.html.erb</p>
+<p>Name</p>
+<%= @end_user.last_name %>
+<%= @end_user.first_name %>
 
+<p>Name_kana</p>
+<%= @end_user.last_name_kana %>
+<%= @end_user.first_name_kana %>
+
+<p>Nickname</p>
+<%= @end_user.nickname %>
+
+<p>Introduction</p>
+<%= @end_user.introduction %>
+
+
+<p>Email</p>
+<%= @end_user.email %>
+
+<p>Telephone_number</p>
+<%= @end_user.telephone_number %>
+
+<p>Postal_code</p>
+<%= @end_user.postal_code %>
+
+<p>Address</p>
+<%= @end_user.address %>
+
+<p>Status</p>
+<%= @end_user.is_deleted ? "有効" : "無効" %>
 

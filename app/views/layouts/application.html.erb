@@ -11,6 +11,11 @@
   </head>
 
   <body>
+    <header>
+      <li>
+        <%= link_to "ログアウト", destroy_end_user_session_path, method: :delete %>
+      </li>
+    </header>
     <%= yield %>
   </body>
 </html>

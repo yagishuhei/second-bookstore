@@ -1,6 +1,19 @@
 # frozen_string_literal: true
 
 class Public::RegistrationsController < Devise::RegistrationsController
+  #emailとpassword以外のデータを保存できるようにする。
+  #会員登録前にconfigure_permittd_parametersメソッドを実行。
+  before_action :configure_permited_parameters, if: :devise_controller?
+
+
+  #publicのregistration内で使用するため
+  protected
+  #devise_parameter_sanitizer.permitメソッドで会員登録時、以下のデータ操作を許可。
+  def configure_permited_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys:[:last_name, :first_name, :last_name_kana, :first_name_kana, :nickname, :postal_code, :address, :telephone_number])
+  end
+
+
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
