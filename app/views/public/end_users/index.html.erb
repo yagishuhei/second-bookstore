@@ -1,2 +1,7 @@
 <h1>Public::EndUsers#index</h1>
 <p>Find me in app/views/public/end_users/index.html.erb</p>
+<% @end_users.each do |end_user| %>
+<%#= image_tag end_user.get_image("100x100") %>
+<%= end_user.nickname %>
+
+<% end %>
