@@ -1,47 +1,41 @@
 Rails.application.routes.draw do
 
-  namespace :public do
-    get 'categories/index'
-    get 'categories/show'
-    get 'categories/edit'
+#URLはそのまま、ファイル構成だけ指定のパス
+  scope module: :public do
+     get root to: 'homes#top'
   end
+
+#URLはpublicをつけて、ファイル構成も指定
   namespace :public do
-    get 'items/index'
-    get 'items/show'
-    get 'items/edit'
+
+    resources :categories
+    resources :items
+    resources :order_details
+    resources :orders
+    resources :addresses
+    resources :books, only: [:index, :show]
+    resources :reviews
+    resources :end_users
+
   end
-  namespace :public do
-    get 'order_details/index'
-    get 'order_details/edit'
-    get 'order_details/show'
+
+#URLはpublicをつけて、ファイル構成も指定
+   namespace :admin do
+
+    resources :categories
+    resources :items
+    resources :order_details
+    resources :orders
+    resources :addresses
+    resources :books, only: [:index, :show]
+    resources :reviews
+    resources :end_users
+
   end
-  namespace :public do
-    get 'orders/index'
-    get 'orders/show'
-    get 'orders/edit'
-  end
-  namespace :public do
-    get 'addresses/index'
-    get 'addresses/show'
-    get 'addresses/edit'
-  end
-  namespace :public do
-    get 'books/index'
-    get 'books/show'
-  end
-  namespace :public do
-    get 'reviews/index'
-    get 'reviews/show'
-    get 'reviews/edit'
-  end
-  namespace :public do
-    get 'end_users/index'
-    get 'end_users/show'
-    get 'end_users/edit'
-  end
-  namespace :public do
-    get 'homes/top'
-  end
+
+
+
+
 #会員側
 # URL /end_users/sign_in...
 #会員側のコントローラーがどこに存在するかを指定
@@ -55,6 +49,7 @@ Rails.application.routes.draw do
 # URL /admin/sign_in...
 #管理者側のコントローラーがどこに存在するかを指定
 #新規登録、パスワード変更はしないためskip オプションで削除
+#加えてapp/views/admin/shared/_links.html.erbの余分な記述を削除
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
