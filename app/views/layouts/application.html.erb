@@ -13,8 +13,19 @@
   <body>
     <header>
       <li>
+        <%= link_to "会員登録", new_end_user_registration_path %>
+      </li>
+      <li>
+        <%= link_to "ログイン", new_end_user_session_path %>
+      </li>
+      <li>
+        <%= link_to "ユーザー一覧", public_end_users_path %>
+      </li>
+       <li>
         <%= link_to "ログアウト", destroy_end_user_session_path, method: :delete %>
       </li>
+
+      <%= render "public/books/rakuten_search" %>
     </header>
     <%= yield %>
   </body>
