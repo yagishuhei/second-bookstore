@@ -1,0 +1,8 @@
+<%= form_with model:[:public, @review ] do |f| %>
+<%= f.label :title %>
+<%= f.text_field :title %>
+<%= f.label :blog %>
+<%= f.text_area :blog %>
+<%= f.label :rate %>
+<%= f.hidden_field :rate, id: :review_star %>
+<% end %>
