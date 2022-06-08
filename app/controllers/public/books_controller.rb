@@ -8,6 +8,7 @@ class Public::BooksController < ApplicationController
       # 引数に , page: ページ数を入れると次の30件が取得できる
       # orFlag: 1で複数検索可能
       @books = RakutenWebService::Books::Total.search(keyword: params[:keyword], orFlag: 1)
+      #検証用
       #binding.pry
     end
   end

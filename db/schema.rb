@@ -58,11 +58,21 @@ ActiveRecord::Schema.define(version: 2022_06_07_074157) do
   end
 
   create_table "books", force: :cascade do |t|
+    t.integer "end_user_id"
+    t.integer "isbn"
+    t.string "title"
+    t.string "author"
+    t.string "publisher_name"
+    t.string "item_price"
+    t.string "item_url"
+    t.string "large_image_url"
+    t.string "medium_image_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "categories", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -105,6 +115,12 @@ ActiveRecord::Schema.define(version: 2022_06_07_074157) do
   end
 
   create_table "reviews", force: :cascade do |t|
+    t.integer "end_user_id"
+    t.integer "book_id"
+    t.integer "category_id"
+    t.string "heading"
+    t.text "blog"
+    t.float "rate"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
