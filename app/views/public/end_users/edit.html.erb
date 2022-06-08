@@ -1,0 +1,33 @@
+<%= form_with model: [:public, @end_user] do |f| %>
+<%= f.label :profile_image %>
+<%= f.file_field :profile_image, placeholder: "profile image", accept: "image/*" %>
+
+<%= f.label :last_name %>
+<%= f.text_field :last_name %>
+
+<%= f.label :first_name %>
+<%= f.text_field :first_name %>
+
+<%= f.label :last_name_kana %>
+<%= f.text_field :last_name_kana %>
+
+<%= f.label :first_name_kana %>
+<%= f.text_field :first_name_kana %>
+
+<%= f.label :nickname %>
+<%= f.text_field :nickname %>
+
+<%= f.label :introduction %>
+<%= f.text_area :introduction %>
+
+<%= f.label :postal_code %>
+<%= f.text_field :postal_code %>
+
+<%= f.label :address %>
+<%= f.text_field :address %>
+
+<%= f.label :telephone_number %>
+<%= f.text_field :telephone_number %>
+
+<%= f.submit "プロフィールを編集" %>
+<% end %>

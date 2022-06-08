@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SecondBookstore</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <li>
+        <%= link_to "会員登録", new_end_user_registration_path %>
+      </li>
+      <li>
+        <%= link_to "ログイン", new_end_user_session_path %>
+      </li>
+      <li>
+        <%= link_to "ユーザー一覧", public_end_users_path %>
+      </li>
+       <li>
+        <%= link_to "ログアウト", destroy_end_user_session_path, method: :delete %>
+      </li>
+
+      <%= render "public/books/rakuten_search" %>
+    </header>
+    <%= yield %>
+  </body>
+</html>
