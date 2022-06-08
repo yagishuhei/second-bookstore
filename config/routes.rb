@@ -31,8 +31,9 @@ Rails.application.routes.draw do
     resources :order_details
     resources :orders
     resources :addresses
-    resources :books, only: [:index, :show]
-    resources :reviews
+    resources :books, only: [:index, :show] do
+      resources :reviews
+    end
     resources :end_users
 
   end

@@ -120,7 +120,7 @@ ActiveRecord::Schema.define(version: 2022_06_07_074157) do
     t.integer "category_id"
     t.string "heading"
     t.text "blog"
-    t.float "rate"
+    t.float "score"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
