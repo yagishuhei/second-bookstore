@@ -8,8 +8,10 @@
 
 <h2>ユーザーのレビューする本</h2>
 <% @books.each do |book| %>
-
+<%= link_to public_book_path(book) do %>
+<%= image_tag book.get_book_iamge("100x100") %>
+<% end %>
 <%= book.title %>
 <%= book.author %>
-<%= link_to "レビューする", public_book_path(book) %>
+
 <% end %>

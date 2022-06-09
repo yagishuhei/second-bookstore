@@ -4,11 +4,11 @@ class EndUser < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  #imageカラムが追加されたように扱える
+  #profile_imageカラムが追加されたように扱える
   has_one_attached :profile_image
 
 
-  #imageが設定されない時、no-image.jpgをデフォルト画像としてActiveStorageに格納、その後表示。
+  #profile_imageが設定されない時、no-image.jpgをデフォルト画像としてActiveStorageに格納、その後表示。
   #サイズの変更も行う。
   def get_profile_image(size)
     unless profile_image.attached?
