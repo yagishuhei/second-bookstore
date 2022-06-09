@@ -5,6 +5,14 @@ class Public::RegistrationsController < Devise::RegistrationsController
   #会員登録前にconfigure_permittd_parametersメソッドを実行。
   before_action :configure_permited_parameters, if: :devise_controller?
 
+  #会員登録後のパス指定
+  def after_sign_up_path_for(resource)
+    public_book_reviews_path(resource)
+  end
+  #会員登録後のパス指定
+  def after_sign_out_path_for(resource)
+    public_root_path(resource)
+  end
 
   #publicのregistration内で使用するため
   protected
