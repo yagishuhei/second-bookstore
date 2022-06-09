@@ -33,8 +33,11 @@
 <p>Status</p>
 <%= @end_user.is_deleted ? "退会" : "有効" %>
 
+<%= link_to "プロフィールを編集", edit_public_end_user_path(@end_user) %>
+
 <h2>お気に入り本の本棚</h2>
 
 <% @books.each do |book| %>
+<%= image_tag book.get_book_iamge("100x100") %>
 <%= book.title %>
 <% end %>

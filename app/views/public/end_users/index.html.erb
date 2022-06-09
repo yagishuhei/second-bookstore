@@ -1,7 +1,9 @@
-<h1>Public::EndUsers#index</h1>
-<p>Find me in app/views/public/end_users/index.html.erb</p>
+<h1>ユーザー一覧</h1>
+<p>本好きメンバー</p>
 <% @end_users.each do |end_user| %>
+<%= link_to public_end_user_path(end_user) do %>
 <%= image_tag end_user.get_profile_image("100x100") %>
 <%= end_user.nickname %>
+<% end %>
 
 <% end %>
