@@ -1,0 +1,10 @@
+<h1>楽天Books検索結果一覧</h1>
+<h4>気になる本を自分のページに追加できます。</h4>
+<% @books.each do |book| %>
+<div class = "rakuten-book">
+<%= link_to (image_tag(book.medium_image_url)), book.item_url %>
+<p><%= book.title %></p>
+<%= link_to "気になる本として追加する", 
+</div>
+
+<% end %>

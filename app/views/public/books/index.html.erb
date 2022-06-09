@@ -1,7 +1,15 @@
-<h1>Public::Books#index</h1>
+<%= form_with model: @books, url: public_books_path, method: :post do |f| %>
+<%= f.label :tite %>
+<%= f.text_field :title %>
+<%= f.label :author %>
+<%= f.text_field :author %>
+<%= f.submit "投稿する" %>
+<% end %>
+
+<h2>ユーザーのレビューする本</h2>
 <% @books.each do |book| %>
 
-<%= link_to (image_tag(book.medium_image_url)), book.item_url %>
 <%= book.title %>
-
+<%= book.author %>
+<%= link_to "レビューする", public_book_path(book) %>
 <% end %>

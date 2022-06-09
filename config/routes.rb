@@ -31,9 +31,11 @@ Rails.application.routes.draw do
     resources :order_details
     resources :orders
     resources :addresses
-    resources :books, only: [:index, :show] do
+    resources :books, only: [:index, :create, :show] do
+      get 'rakuten_result', to: "books#rakuten_result", as: "rakuten_result"
       resources :reviews
     end
+
     resources :end_users
 
   end

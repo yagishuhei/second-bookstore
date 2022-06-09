@@ -1,23 +1,7 @@
 <P> この本に関する関するレビューを書く</P>
 
-<div class= "rating-box" >
-  <% form_with model: review, url: public_book_reviews_path(book), local: true do |review| %>
-    <div class="main-routing">
-      <div class="ratings">
-        <span class="fa fa-star-o" id="star"></span>
-        <span class="fa fa-star-o" id="star"></span>
-        <span class="fa fa-star-o" id="star"></span>
-        <span class="fa fa-star-o" id="star"></span>
-        <span class="fa fa-star-o" id="star"></span>
-        <!--レーティングはデフォルト０から５まで-->
-        <div class="rating-value-display"><span id="rating-value-display">0</span>/5</div>
-      </div>
-      <!--どの本に結びつくのかを付け加える hidden_fieldのvalueはbook.id-->
-      <%= hidden_field :book_id, value: book.id %>
-      <%= hidden_field :score, id: "rating-value" %>
-      <%= text_area :blog %>
-      <%= f.submit"保存" %>
-    </div>
-  <% end %>
-  
-</div>
+<%= form_with model:[book, review], url: public_book_reviews_path, method: :post do |f| %>
+<%= f.text_area :blog %>
+<%= f.submit %>
+<% end %>
+
