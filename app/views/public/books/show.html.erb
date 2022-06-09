@@ -1,4 +1,5 @@
 <h2>楽天Booksから選んだ持っている本の詳細ページ</h2>
+<%= image_tag @book.get_book_iamge("200x200") %>
 <%= @book.title %>
 <%= @book.author %>
 <%#= render "public/reviews/form", review: @review, book: @book %>
