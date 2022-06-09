@@ -1,9 +1,10 @@
 class CreateBooks < ActiveRecord::Migration[6.1]
   def change
-    create_table :books do |t|
-
-      t.integer :end_user_id
-      t.integer :isbn
+    #idを勝手につけない
+    create_table :books, id: false do |t|
+      t.references :end_user, null: false, foreign_key: true
+      #isbnを主キーにする
+      t.bigint :isbn, null: false, primary_key: true
       t.string :title
       t.string :author
       t.string :publisher_name

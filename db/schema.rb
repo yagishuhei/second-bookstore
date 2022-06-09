@@ -57,9 +57,8 @@ ActiveRecord::Schema.define(version: 2022_06_07_074157) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "books", force: :cascade do |t|
-    t.integer "end_user_id"
-    t.integer "isbn"
+  create_table "books", primary_key: "isbn", force: :cascade do |t|
+    t.integer "end_user_id", null: false
     t.string "title"
     t.string "author"
     t.string "publisher_name"
@@ -69,6 +68,7 @@ ActiveRecord::Schema.define(version: 2022_06_07_074157) do
     t.string "medium_image_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["end_user_id"], name: "index_books_on_end_user_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -115,16 +115,22 @@ ActiveRecord::Schema.define(version: 2022_06_07_074157) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer "end_user_id"
-    t.integer "book_id"
-    t.integer "category_id"
+    t.integer "end_user_id", null: false
+    t.integer "book_id", null: false
+    t.integer "category_id", null: false
     t.string "heading"
     t.text "blog"
     t.float "score"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_reviews_on_book_id"
+    t.index ["category_id"], name: "index_reviews_on_category_id"
+    t.index ["end_user_id"], name: "index_reviews_on_end_user_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "books", "end_users"
+  add_foreign_key "reviews", "categories"
+  add_foreign_key "reviews", "end_users"
 end
