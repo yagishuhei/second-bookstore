@@ -6,6 +6,8 @@ class EndUser < ApplicationRecord
 
   has_many :books, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_many :review_comments, dependent: :destroy
+  
 
   #profile_imageカラムが追加されたように扱える
   has_one_attached :profile_image

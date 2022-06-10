@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2022_06_10_051331) do
   end
 
   create_table "addresses", force: :cascade do |t|
-    t.integer "end_user_id", null: false
+    t.integer "end_user_id"
     t.string "name"
     t.string "postal_code"
     t.string "address"
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 2022_06_10_051331) do
   end
 
   create_table "books", force: :cascade do |t|
-    t.integer "end_user_id", null: false
+    t.integer "end_user_id"
     t.bigint "isbn"
     t.string "title"
     t.string "author"
@@ -78,8 +78,8 @@ ActiveRecord::Schema.define(version: 2022_06_10_051331) do
   end
 
   create_table "cart_items", force: :cascade do |t|
-    t.integer "sale_id", null: false
-    t.integer "end_user_id", null: false
+    t.integer "sale_id"
+    t.integer "end_user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["end_user_id"], name: "index_cart_items_on_end_user_id"
@@ -115,8 +115,8 @@ ActiveRecord::Schema.define(version: 2022_06_10_051331) do
   end
 
   create_table "order_details", force: :cascade do |t|
-    t.integer "order_id", null: false
-    t.integer "sale_id", null: false
+    t.integer "order_id"
+    t.integer "sale_id"
     t.integer "price"
     t.integer "shipping_status"
     t.datetime "created_at", precision: 6, null: false
@@ -126,7 +126,7 @@ ActiveRecord::Schema.define(version: 2022_06_10_051331) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "end_user_id", null: false
+    t.integer "end_user_id"
     t.string "postal_code"
     t.string "address"
     t.string "name"
@@ -139,9 +139,19 @@ ActiveRecord::Schema.define(version: 2022_06_10_051331) do
     t.index ["end_user_id"], name: "index_orders_on_end_user_id"
   end
 
-  create_table "reviews", force: :cascade do |t|
+  create_table "review_comments", force: :cascade do |t|
     t.integer "end_user_id", null: false
-    t.integer "book_id", null: false
+    t.integer "review_id", null: false
+    t.text "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["end_user_id"], name: "index_review_comments_on_end_user_id"
+    t.index ["review_id"], name: "index_review_comments_on_review_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "end_user_id"
+    t.integer "book_id"
     t.integer "category_id"
     t.string "heading"
     t.text "blog"
@@ -154,7 +164,7 @@ ActiveRecord::Schema.define(version: 2022_06_10_051331) do
   end
 
   create_table "sales", force: :cascade do |t|
-    t.integer "book_id", null: false
+    t.integer "book_id"
     t.integer "category_id"
     t.text "introduction"
     t.integer "price"
@@ -174,6 +184,8 @@ ActiveRecord::Schema.define(version: 2022_06_10_051331) do
   add_foreign_key "order_details", "orders"
   add_foreign_key "order_details", "sales"
   add_foreign_key "orders", "end_users"
+  add_foreign_key "review_comments", "end_users"
+  add_foreign_key "review_comments", "reviews"
   add_foreign_key "reviews", "books"
   add_foreign_key "reviews", "categories"
   add_foreign_key "reviews", "end_users"

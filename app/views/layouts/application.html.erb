@@ -13,47 +13,29 @@
   <body>
     <header>
       <% if admin_signed_in? %>
+
         <p>管理者用</p>
-        <li>
-          <%= link_to "ユーザー一覧", admin_end_users_path %>
-        </li>
-        <li>
-          <%= link_to "レビュー一覧", admin_reviews_path %>
-        </li>
-        <li>
-          <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-        </li>
+
+        <li><%= link_to "ユーザー一覧", admin_end_users_path %></li>
+        <li><%= link_to "レビュー一覧", admin_reviews_path %></li>
+        <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
 
       <% elsif end_user_signed_in? %>
+
         <p>ようこそ<%= current_end_user.last_name %><%= current_end_user.first_name %>さん</p>
 
-        <li>
-          <%= link_to "ホーム", root_path %>
-        </li>
-        <li>
-          <%= link_to "ユーザー一覧", public_end_users_path %>
-        </li>
-
-        <li>
-          <%= link_to "レビューする本一覧", public_books_path %>
-          <%#= link_to "レビューされた本一覧", public_book_reviews_path %>
-        </li>
-         <li>
-          <%= link_to "ログアウト", destroy_end_user_session_path, method: :delete %>
-        </li>
+        <li><%= link_to "ホーム", root_path %></li>
+        <li><%= link_to "ユーザー一覧", public_end_users_path %></li>
+        <li><%= link_to "レビューする本一覧", public_books_path %></li>
+        <li><%= link_to "レビュー一覧", public_reviews_path %></li>
+        <li><%= link_to "ログアウト", destroy_end_user_session_path, method: :delete %></li>
 
         <%= render "public/books/rakuten_search" %>
       <% else %>
 
-        <li>
-          <%= link_to "ホーム", root_path %>
-        </li>
-        <li>
-          <%= link_to "会員登録", new_end_user_registration_path %>
-        </li>
-        <li>
-          <%= link_to "ログイン", new_end_user_session_path %>
-        </li>
+        <li><%= link_to "ホーム", root_path %></li>
+        <li><%= link_to "会員登録", new_end_user_registration_path %></li>
+        <li><%= link_to "ログイン", new_end_user_session_path %></li>
 
       <% end %>
     </header>

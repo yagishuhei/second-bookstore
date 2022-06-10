@@ -1,8 +1,9 @@
 class CreateBooks < ActiveRecord::Migration[6.1]
   def change
-    #idを勝手につけない
+ 
     create_table :books do |t|
-      t.references :end_user, null: false, foreign_key: true
+      
+      t.references :end_user, foreign_key: true
       t.bigint :isbn
       t.string :title
       t.string :author
