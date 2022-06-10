@@ -1,6 +1,9 @@
 class Public::ReviewsController < ApplicationController
+ #ログインしているか確認、ログイン状態ではない場合ログインページに移動
+  before_action :authenticate_end_user!
+
   def index
-    
+    @review = Review.all
   end
 
   def create

@@ -3,9 +3,13 @@
 
 <h2>ユーザーのレビューする本</h2>
 <% @books.each do |book| %>
-<%= link_to public_book_path(book) do %>
-<%= image_tag book.get_book_iamge("100x100") %>
-<% end %>
+
+<!--楽天のitem_urlを合わせればimage表示可能-->
+ <%= link_to (image_tag(book['medium_image_url'])), book['item_url'] %>
+ <%= link_to "レビュー投稿する", public_book_path(book) %>
+
+
+
 <%= book.title %>
 <%= book.author %>
 
