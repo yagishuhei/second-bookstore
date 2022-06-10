@@ -9,13 +9,13 @@ class Public::ReviewsController < ApplicationController
   def create
 
     @review = current_end_user.reviews.new(review_params)
-
     @review.save
     redirect_to public_review_path(@review)
   end
 
   def show
     @review = Review.find(params[:id])
+    @review_comment = ReviewComment.new
   end
 
   def edit

@@ -37,10 +37,11 @@
 
 <h2>お気に入り本の本棚</h2>
 
-<% @books.each do |book| %>
-  <%= link_to public_book_path(book) do %>
+<% @reviews.each do |review| %>
+  <%= link_to public_book_path(review.book) do %>
   <!--楽天のitem_urlを合わせればimage表示可能-->
-   <%= link_to (image_tag (book['medium_image_url'])), book['item_url'] %>
-    <%= book.title %>
+   <%= link_to (image_tag (review.book['medium_image_url'])), review.book['item_url'] %>
+    <%= review.book.title %>
+    <p><%= link_to "この本のレビュー詳細を見てみる", public_review_path(review.book) %></p>
   <% end %>
 <% end %>
