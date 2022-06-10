@@ -12,7 +12,19 @@
 
   <body>
     <header>
-      <% if end_user_signed_in? %>
+      <% if admin_signed_in? %>
+        <p>管理者用</p>
+        <li>
+          <%= link_to "ユーザー一覧", admin_end_users_path %>
+        </li>
+        <li>
+          <%= link_to "レビュー一覧", admin_reviews_path %>
+        </li>
+        <li>
+          <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+        </li>
+
+      <% elsif end_user_signed_in? %>
         <p>ようこそ<%= current_end_user.last_name %><%= current_end_user.first_name %>さん</p>
 
         <li>

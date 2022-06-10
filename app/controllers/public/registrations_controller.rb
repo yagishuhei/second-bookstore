@@ -5,23 +5,6 @@ class Public::RegistrationsController < Devise::RegistrationsController
   #会員登録前にconfigure_permittd_parametersメソッドを実行。
   before_action :configure_permited_parameters, if: :devise_controller?
 
-  #会員登録後のパス指定
-  def after_sign_up_path_for(resource)
-    public_book_reviews_path(resource)
-  end
-  #会員登録後のパス指定
-  def after_sign_out_path_for(resource)
-    public_root_path(resource)
-  end
-
-  #publicのregistration内で使用するため
-  protected
-  #devise_parameter_sanitizer.permitメソッドで会員登録時、以下のデータ操作を許可。
-  def configure_permited_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys:[:last_name, :first_name, :last_name_kana, :first_name_kana, :nickname, :postal_code, :address, :telephone_number])
-  end
-
-
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -59,7 +42,17 @@ class Public::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  #会員登録後のパス指定
+  def after_sign_up_path_for(resource)
+    public_books_path
+  end
+  #会員ログアウト後のパス指定
+  def after_sign_out_path_for(resource)
+    public_books_path
+  end
+
+  #publicのregistration内で使用するため
+  protected
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
@@ -80,4 +73,9 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  #devise_parameter_sanitizer.permitメソッドで会員登録時、以下のデータ操作を許可。
+  def configure_permited_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys:[:last_name, :first_name, :last_name_kana, :first_name_kana, :nickname, :postal_code, :address, :telephone_number])
+  end
 end

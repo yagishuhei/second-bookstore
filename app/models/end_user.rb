@@ -5,6 +5,7 @@ class EndUser < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :books, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 
   #profile_imageカラムが追加されたように扱える
   has_one_attached :profile_image

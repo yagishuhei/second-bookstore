@@ -1,6 +1,6 @@
 class Public::ReviewsController < ApplicationController
  #ログインしているか確認、ログイン状態ではない場合ログインページに移動
-  before_action :authenticate_end_user!
+ before_action :authenticate_end_user!
 
   def index
     @reviews = current_end_user.reviews
@@ -10,9 +10,8 @@ class Public::ReviewsController < ApplicationController
     @book = Book.find(params[:book_id])
     @review = Review.new(review_params)
     @review.end_user_id = current_end_user.id
-    @review.book_id = @book.id
     @review.save
-    redirect_to public_books_path
+    redirect_to public_book_review_path(@book.id)
   end
 
   def show
