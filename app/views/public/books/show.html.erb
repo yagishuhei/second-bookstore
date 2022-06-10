@@ -1,5 +1,6 @@
 <h2>楽天Booksから選んだ持っている本の詳細ページ</h2>
-<%= image_tag @book.get_book_iamge("200x200") %>
+<!--楽天のitem_urlを合わせればimage表示可能-->
+<%= link_to (image_tag(@book['medium_image_url'])), @book['item_url'] %>
 <%= @book.title %>
 <%= @book.author %>
 

@@ -1,4 +1,7 @@
 class Public::EndUsersController < ApplicationController
+  #ログインしているか確認、ログイン状態ではない場合ログインページに移動
+  before_action :authenticate_end_user!
+
   def index
     @end_users = EndUser.all
   end
@@ -6,7 +9,7 @@ class Public::EndUsersController < ApplicationController
   def show
     @end_user = EndUser.find(params[:id])
     #複数の本＝会員の本全部
-    @books = @end_user.books
+    @books = current_end_user.books
   end
 
 

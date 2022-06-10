@@ -117,7 +117,7 @@ ActiveRecord::Schema.define(version: 2022_06_07_074157) do
   create_table "reviews", force: :cascade do |t|
     t.integer "end_user_id", null: false
     t.integer "book_id", null: false
-    t.integer "category_id", null: false
+    t.integer "category_id"
     t.string "heading"
     t.text "blog"
     t.float "score"

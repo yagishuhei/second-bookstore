@@ -1,4 +1,6 @@
 class Public::BooksController < ApplicationController
+   #ログインしているか確認、ログイン状態ではない場合ログインページに移動
+  before_action :authenticate_end_user!
 
   def rakuten_result
     #楽天ブックス
@@ -18,7 +20,7 @@ class Public::BooksController < ApplicationController
 
   def index
     @book =Book.new
-    @books = Book.all
+    @books = current_end_user.books
   end
 
   def create
@@ -37,7 +39,7 @@ class Public::BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :author, :publisher_name, :item_price, :item_url, :large_image_url, :medium_image_url)
+    params.require(:book).permit(:isbn, :title, :author, :publisher_name, :item_price, :item_url, :large_image_url, :medium_image_url)
 
   end
 end
