@@ -10,8 +10,11 @@ class Public::BooksController < ApplicationController
       @books = RakutenWebService::Books::Total.search(keyword: params[:keyword], orFlag: 1)
       #検証用
       #binding.pry
+      @book = Book.new
     end
   end
+
+
 
   def index
     @book =Book.new
@@ -23,18 +26,18 @@ class Public::BooksController < ApplicationController
     #カラの中にまずend_user_idがログインした会員idを入れる
     @book.end_user_id = current_end_user.id
     @book.save
-    redirect_to request.referer
+    redirect_to public_book_path(@book)
   end
 
    def show
      @book = Book.find(params[:id])
-    # @review =Review.new
+     @review =Review.new
    end
 
   private
 
   def book_params
-    params.require(:book).permit(:title, :author,)
+    params.require(:book).permit(:title, :author, :publisher_name, :item_price, :item_url, :large_image_url, :medium_image_url)
 
   end
 end

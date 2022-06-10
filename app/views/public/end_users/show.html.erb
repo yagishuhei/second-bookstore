@@ -38,6 +38,8 @@
 <h2>お気に入り本の本棚</h2>
 
 <% @books.each do |book| %>
-<%= image_tag book.get_book_iamge("100x100") %>
-<%= book.title %>
+  <%= link_to public_book_path(book) do %>
+    <%= image_tag book.get_book_iamge("100x100") %>
+    <%= book.title %>
+  <% end %>
 <% end %>

@@ -2,4 +2,5 @@
 <%= image_tag @book.get_book_iamge("200x200") %>
 <%= @book.title %>
 <%= @book.author %>
-<%#= render "public/reviews/form", review: @review, book: @book %>
+
+<%= render "public/reviews/form", review: @review, book: @book %>

@@ -28,6 +28,8 @@ Rails.application.routes.draw do
 
     resources :categories
     resources :items
+  
+    
     resources :order_details
     resources :orders
     resources :addresses

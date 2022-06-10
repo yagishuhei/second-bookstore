@@ -1,12 +1,14 @@
 class Public::ReviewsController < ApplicationController
   def index
+    
   end
 
   def create
     @book = Book.find(params[:book_id])
-    @review = current_end_user.reviews.new(review_params)
+    @review = Review.new(review_params)
+    @review.end_user_id = current_end_user.id
     @review.book_id = @book.id
-    review.save
+    @review.save
     redirect_to public_books_path
   end
 
@@ -18,6 +20,6 @@ class Public::ReviewsController < ApplicationController
 
   private
   def review_params
-    params.require(:review).permit(:blog)
+    params.require(:review).permit(:blog,)
   end
 end
