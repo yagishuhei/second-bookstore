@@ -1,6 +1,7 @@
 class Book < ApplicationRecord
 
   belongs_to :end_user
+  
   #book_imageカラムが追加されたように扱える
   has_one_attached :book_image
 

@@ -1,10 +1,5 @@
-<%= form_with model: @books, url: public_books_path, method: :post do |f| %>
-<%= f.label :tite %>
-<%= f.text_field :title %>
-<%= f.label :author %>
-<%= f.text_field :author %>
-<%= f.submit "投稿する" %>
-<% end %>
+
+
 
 <h2>ユーザーのレビューする本</h2>
 <% @books.each do |book| %>

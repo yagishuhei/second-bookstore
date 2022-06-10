@@ -1,7 +1,29 @@
 <P> この本に関する関するレビューを書く</P>
 
-<%= form_with model:[book, review], url: public_book_reviews_path, method: :post do |f| %>
+<%= form_with model:[book, review], url: public_book_reviews_path(book.id), method: :post do |f| %>
+
+<%= f.select :category_id, options_from_collection_for_select(Category.all, :id, :name), prompt: "--選択して下さい--" %>
+
+
+<%= f.label :heading %>
+<%= f.text_field :heading %>
+
+<%= f.label :blog %>
 <%= f.text_area :blog %>
+
+<%= f.label :score %>
+<div class="main-rating">
+    <div class="ratings">
+        <span class="far fa-star" id= "star"></span>
+        <span class="far fa-star" id= "star"></span>
+        <span class="far fa-star" id= "star"></span>
+        <span class="far fa-star" id= "star"></span>
+        <span class="far fa-star" id= "star"></span>
+    </div>
+</div>
+
+<%= f.hidden_field :score %>
+
 <%= f.submit %>
 <% end %>
 

@@ -1,10 +1,30 @@
 <h1>楽天Books検索結果一覧</h1>
 <h4>気になる本を自分のページに追加できます。</h4>
-<% @books.each do |book| %>
-<div class = "rakuten-book">
-<%= link_to (image_tag(book.medium_image_url)), book.item_url %>
-<p><%= book.title %></p>
-<%= link_to "気になる本として追加する", 
-</div>
+<!--楽天ブックス検索結果一覧を表示-->
+<!--カラムに関してはエラーを出さないように、オブジェクトではなくハッシュを使い表示、格納するよう設定-->
 
+<% @books.each do |book| %>
+  <div class = "rakuten-book">
+    <!--楽天のitem_urlを合わせればimage表示可能-->
+    <%= link_to (image_tag(book['medium_image_url'])), book['item_url'] %>
+    <p><%= book['title'] %></p>
+    <!--著者名がないと表示されないのでifで条件分岐-->
+     <% if book['author'] == '' %>
+       <p>不明</p>
+      <% else %>
+       <p><%= book['author'] %></p>
+      <% end %>
+
+      <!--表示された本ごとの情報をレビューを書くように、hidden_fieldでbookテーブルに格納-->
+    <%= form_with model: @book, url: public_books_path, method: :post do |f| %>
+      <%= f.hidden_field :title, :value => book['title'] %>
+      <%= f.hidden_field :author, :value => book['author'] %>
+      <%= f.hidden_field :publisher_name,:value => book['publisher_name'] %>
+      <%= f.hidden_field :item_price, :value => book['item_price'] %>
+      <%= f.hidden_field :item_url, :value => book['item_url'] %>
+      <%= f.hidden_field :large_image_url, :value => book['large_image_url'] %>
+      <%= f.hidden_field :medium_image_url, :value => book['medium_image_url'] %>
+      <%= f.submit "My本棚に追加" %>
+    <% end %>
+  </div>
 <% end %>
