@@ -10,11 +10,13 @@ class Public::ReviewsController < ApplicationController
     @book = Book.find(params[:book_id])
     @review = Review.new(review_params)
     @review.end_user_id = current_end_user.id
+    @review.book_id = @book.id
     @review.save
-    redirect_to public_book_review_path(@book.id)
+    redirect_to public_book_review_path(@book, @review)
   end
 
   def show
+    @review = Review.find(params[:id])
   end
 
   def edit
@@ -22,6 +24,6 @@ class Public::ReviewsController < ApplicationController
 
   private
   def review_params
-    params.require(:review).permit(:blog,)
+    params.require(:review).permit(:blog, :heading, :category_id, :score)
   end
 end
