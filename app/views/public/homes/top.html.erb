@@ -9,3 +9,15 @@
 　自分の所持している本に関して、アウトプットをしたい人や、考察してそこから読み取ったことを発信していきたい時。</br>
 　加えて中古の本を誰かに譲りたい、または、本好きな人の持っている本を読んでみたい、自分とは違うジャンルでも読んでみたいと思う時。</br>
 </h6>
+
+<% @reviews.each do |review| %>
+<div class="end_user">
+<%= image_tag review.end_user.get_profile_image("100x100") %>
+<%= review.end_user.nickname %>
+</div>
+
+<%= link_to (image_tag(review.book['medium_image_url'])), review.book['item_url'] %>
+<%= review.book.title %>
+<%= link_to "この本のレビュー詳細を見てみる", public_review_path(review) %>
+
+<% end %>
