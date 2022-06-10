@@ -1,16 +1,7 @@
-
-
-
-<h2>ユーザーのレビューする本</h2>
+<h1>Public::Books#index</h1>
 <% @books.each do |book| %>
 
-<!--楽天のitem_urlを合わせればimage表示可能-->
- <%= link_to (image_tag(book['medium_image_url'])), book['item_url'] %>
- <%= link_to "レビュー投稿する", public_book_path(book) %>
-
-
-
+<%= link_to (image_tag(book.medium_image_url)), book.item_url %>
 <%= book.title %>
-<%= book.author %>
 
 <% end %>

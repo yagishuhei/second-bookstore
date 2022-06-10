@@ -16,10 +16,7 @@ class Public::BooksController < ApplicationController
     end
   end
 
-
-
   def index
-    @book =Book.new
     @books = current_end_user.books
   end
 

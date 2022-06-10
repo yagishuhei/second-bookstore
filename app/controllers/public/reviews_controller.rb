@@ -3,7 +3,7 @@ class Public::ReviewsController < ApplicationController
   before_action :authenticate_end_user!
 
   def index
-    @review = Review.all
+    @reviews = current_end_user.reviews
   end
 
   def create
