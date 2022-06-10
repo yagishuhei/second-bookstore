@@ -1,0 +1,13 @@
+<h1>ユーザーのレビュー一覧</h1>
+<% @reviews.each do |review| %>
+<%= link_to admin_end_user_path(review.end_user) do %>
+    <%= review.end_user.last_name %>
+    <%= review.end_user.first_name %>
+  <% end %>
+  
+  <%= link_to admin_review_path(review) do %>
+  <%= review.heading %>
+  <% end %>
+  <%= review.blog %>
+  <%= review.score %>
+<% end %>

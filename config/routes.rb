@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+    get 'reviews/index'
+    get 'reviews/show'
+  end
+  namespace :admin do
+    get 'end_users/index'
+    get 'end_users/show'
+  end
 #会員側
 # URL /end_users/sign_in...
 #会員側のコントローラーがどこに存在するかを指定
