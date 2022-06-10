@@ -9,7 +9,7 @@ class Public::EndUsersController < ApplicationController
   def show
     @end_user = EndUser.find(params[:id])
     #複数の本＝会員の本全部
-    @books = current_end_user.books
+    @reviews = @end_user.reviews
   end
 
 

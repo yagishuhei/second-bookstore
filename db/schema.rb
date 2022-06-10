@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_10_051331) do
+ActiveRecord::Schema.define(version: 2022_06_10_150422) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2022_06_10_051331) do
   end
 
   create_table "addresses", force: :cascade do |t|
-    t.integer "end_user_id"
+    t.integer "end_user_id", null: false
     t.string "name"
     t.string "postal_code"
     t.string "address"
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 2022_06_10_051331) do
   end
 
   create_table "books", force: :cascade do |t|
-    t.integer "end_user_id"
+    t.integer "end_user_id", null: false
     t.bigint "isbn"
     t.string "title"
     t.string "author"
@@ -78,8 +78,8 @@ ActiveRecord::Schema.define(version: 2022_06_10_051331) do
   end
 
   create_table "cart_items", force: :cascade do |t|
-    t.integer "sale_id"
-    t.integer "end_user_id"
+    t.integer "sale_id", null: false
+    t.integer "end_user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["end_user_id"], name: "index_cart_items_on_end_user_id"
@@ -115,8 +115,8 @@ ActiveRecord::Schema.define(version: 2022_06_10_051331) do
   end
 
   create_table "order_details", force: :cascade do |t|
-    t.integer "order_id"
-    t.integer "sale_id"
+    t.integer "order_id", null: false
+    t.integer "sale_id", null: false
     t.integer "price"
     t.integer "shipping_status"
     t.datetime "created_at", precision: 6, null: false
@@ -126,7 +126,7 @@ ActiveRecord::Schema.define(version: 2022_06_10_051331) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "end_user_id"
+    t.integer "end_user_id", null: false
     t.string "postal_code"
     t.string "address"
     t.string "name"
@@ -150,9 +150,9 @@ ActiveRecord::Schema.define(version: 2022_06_10_051331) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer "end_user_id"
-    t.integer "book_id"
-    t.integer "category_id"
+    t.integer "end_user_id", null: false
+    t.integer "book_id", null: false
+    t.integer "category_id", null: false
     t.string "heading"
     t.text "blog"
     t.float "score"
@@ -164,8 +164,8 @@ ActiveRecord::Schema.define(version: 2022_06_10_051331) do
   end
 
   create_table "sales", force: :cascade do |t|
-    t.integer "book_id"
-    t.integer "category_id"
+    t.integer "book_id", null: false
+    t.integer "category_id", null: false
     t.text "introduction"
     t.integer "price"
     t.boolean "is_active"

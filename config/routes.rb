@@ -35,16 +35,16 @@ Rails.application.routes.draw do
   namespace :public do
 
     resources :categories
-    resources :items
-
-
-    resources :order_details
-    resources :orders
-    resources :addresses
+    # resources :sales
+    # resources :order_details
+    # resources :orders
+    # resources :addresses
     resources :books, only: [:index, :create, :show] do
       get 'rakuten_result', to: "books#rakuten_result", as: "rakuten_result"
     end
-    resources :reviews
+    resources :reviews do
+      resources :review_comments, only: [:create, :destroy]
+    end
 
     resources :end_users
 
@@ -54,7 +54,7 @@ Rails.application.routes.draw do
    namespace :admin do
 
     resources :categories
-    # resources :items
+    # resources :sales
     # resources :order_details
     # resources :orders
     # resources :addresses
