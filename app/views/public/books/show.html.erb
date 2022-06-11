@@ -5,5 +5,5 @@
 <%= @book.author %>
 <%= @book.publisher_name %>
 
-
-<%= render "public/reviews/form", review: @review, book: @book %>
+<P> この本に関するレビューを書く</P>
+<%= render "public/reviews/form", book: @book, review: @review %>

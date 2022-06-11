@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_10_150422) do
+ActiveRecord::Schema.define(version: 2022_06_10_175230) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -114,6 +114,15 @@ ActiveRecord::Schema.define(version: 2022_06_10_150422) do
     t.index ["reset_password_token"], name: "index_end_users_on_reset_password_token", unique: true
   end
 
+  create_table "favorites", force: :cascade do |t|
+    t.integer "end_user_id", null: false
+    t.integer "review_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["end_user_id"], name: "index_favorites_on_end_user_id"
+    t.index ["review_id"], name: "index_favorites_on_review_id"
+  end
+
   create_table "order_details", force: :cascade do |t|
     t.integer "order_id", null: false
     t.integer "sale_id", null: false
@@ -181,6 +190,8 @@ ActiveRecord::Schema.define(version: 2022_06_10_150422) do
   add_foreign_key "books", "end_users"
   add_foreign_key "cart_items", "end_users"
   add_foreign_key "cart_items", "sales"
+  add_foreign_key "favorites", "end_users"
+  add_foreign_key "favorites", "reviews"
   add_foreign_key "order_details", "orders"
   add_foreign_key "order_details", "sales"
   add_foreign_key "orders", "end_users"

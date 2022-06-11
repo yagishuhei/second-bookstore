@@ -1,7 +1,7 @@
 <P> この本に関するレビューを書く</P>
 
 <div class="rating-box">
-    <%= form_with model: review, url: public_reviews_path, method: :post do |f| %>
+    <%= form_with model:[book, review], url: public_reviews_path(book.id), method: :post do |f| %>
     <%= f.label :score %>
     <div class="main-rating">
         <div class="ratings">
@@ -13,9 +13,9 @@
         </div>
         <div class="rating-value-display"><span id="rating-value-display">0</span>/5</div>
     </div>
-    <%= f.hidden_field :book_id, value: book.id %>
+    <%= f.hidden_field :book_id, value: book.id %> 
     <%= f.hidden_field :score, id: "rating-value" %>
-
+    
     <%= f.select :category_id, options_from_collection_for_select(Category.all, :id, :name), prompt: "--選択して下さい--" %>
 
 
@@ -26,7 +26,7 @@
     <%= f.text_area :blog %>
 
     <%= f.submit"レビューを保存する" %>
-   
+    <%= link_to "他のレビューを見る", public_reviews_path %>
     <% end %>
 
 </div>
