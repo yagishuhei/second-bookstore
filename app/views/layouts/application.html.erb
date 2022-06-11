@@ -25,6 +25,7 @@
         <p>ようこそ<%= current_end_user.last_name %><%= current_end_user.first_name %>さん</p>
 
         <li><%= link_to "ホーム", root_path %></li>
+        <li><%= link_to "マイページ", public_end_user_path(current_end_user) %></li>
         <li><%= link_to "ユーザー一覧", public_end_users_path %></li>
         <li><%= link_to "レビューする本一覧", public_books_path %></li>
         <li><%= link_to "レビュー一覧", public_reviews_path %></li>
