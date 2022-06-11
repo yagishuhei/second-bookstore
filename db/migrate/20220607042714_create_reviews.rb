@@ -4,7 +4,6 @@ class CreateReviews < ActiveRecord::Migration[6.1]
 
       t.references:end_user, null: false, foreign_key: true
       t.references:book, null: false, foreign_key: true
-      t.references:category, null: false, foreign_key: true
       t.string :heading
       t.text :blog
       t.float :score

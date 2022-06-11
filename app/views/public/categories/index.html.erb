@@ -1,12 +1,10 @@
-<p>カテゴリー追加</p>
-
-<%= form_with model: [:public, @category], local: true do |f| %>
+<%= form_with model: @category, url: public_categories_path, method: :post do |f| %>
 <%= f.label :name %>
 <%= f.text_field :name %>
-<%= f.submit %>
+<%= f.submit "カテゴリーを追加する" %>
 <% end %>
-<p>カテゴリー一覧</p>
 
+<h1>カテゴリー一覧</h1>
 <% @categories.each do |category| %>
 <%= category.name %>
 <% end %>

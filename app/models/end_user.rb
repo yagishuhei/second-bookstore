@@ -6,6 +6,7 @@ class EndUser < ApplicationRecord
 
   has_many :books, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_many :cart_items, dependent: :destroy
   has_many :review_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
 

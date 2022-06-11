@@ -16,8 +16,7 @@
     <%= f.hidden_field :book_id, value: book.id %> 
     <%= f.hidden_field :score, id: "rating-value" %>
     
-    <%= f.select :category_id, options_from_collection_for_select(Category.all, :id, :name), prompt: "--選択して下さい--" %>
-
+    
 
     <%= f.label :heading %>
     <%= f.text_field :heading %>
