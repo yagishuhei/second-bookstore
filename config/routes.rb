@@ -43,6 +43,8 @@ Rails.application.routes.draw do
       get 'rakuten_result', to: "books#rakuten_result", as: "rakuten_result"
     end
     resources :reviews do
+      #会員1人につき1イイね
+      resource :favorites, only: [:create, :destroy]
       resources :review_comments, only: [:create, :destroy]
     end
 
