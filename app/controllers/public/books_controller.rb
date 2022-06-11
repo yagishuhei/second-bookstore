@@ -25,7 +25,8 @@ class Public::BooksController < ApplicationController
     #カラの中にまずend_user_idがログインした会員idを入れる
     @book.end_user_id = current_end_user.id
     @book.save
-    redirect_to public_book_path(@book)
+
+    redirect_to public_book_path( @book)
   end
 
    def show
@@ -36,7 +37,7 @@ class Public::BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:isbn, :title, :author, :publisher_name, :item_price, :item_url, :large_image_url, :medium_image_url)
+    params.require(:book).permit(:isbn, :title, :author, :publisher_name, :category_id, :item_price, :item_url, :large_image_url, :medium_image_url)
 
   end
 end

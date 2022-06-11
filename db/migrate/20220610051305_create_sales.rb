@@ -3,10 +3,9 @@ class CreateSales < ActiveRecord::Migration[6.1]
     create_table :sales do |t|
 
       t.references :book, null: false, foreign_key: true
-      t.references :category, null: false, foreign_key: true
       t.text :introduction
       t.integer :price
-      t.boolean :is_active
+      t.boolean :is_active, default: false
 
       t.timestamps
     end

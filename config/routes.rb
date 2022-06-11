@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  namespace :public do
+    get 'sales/index'
+    get 'sales/show'
+    get 'sales/edit'
+  end
   namespace :admin do
     get 'reviews/index'
     get 'reviews/show'
@@ -35,10 +40,10 @@ Rails.application.routes.draw do
   namespace :public do
 
     resources :categories
-     resources :sales
-     resources :order_details
-     resources :orders
-    # resources :addresses
+    resources :sales
+    resources :order_details
+    resources :orders
+    resources :addresses
     resources :books, only: [:index, :create, :show] do
       get 'rakuten_result', to: "books#rakuten_result", as: "rakuten_result"
     end

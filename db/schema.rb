@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 2022_06_10_175230) do
 
   create_table "books", force: :cascade do |t|
     t.integer "end_user_id", null: false
+    t.integer "category_id", null: false
     t.bigint "isbn"
     t.string "title"
     t.string "author"
@@ -74,6 +75,7 @@ ActiveRecord::Schema.define(version: 2022_06_10_175230) do
     t.string "medium_image_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_books_on_category_id"
     t.index ["end_user_id"], name: "index_books_on_end_user_id"
   end
 
@@ -161,32 +163,29 @@ ActiveRecord::Schema.define(version: 2022_06_10_175230) do
   create_table "reviews", force: :cascade do |t|
     t.integer "end_user_id", null: false
     t.integer "book_id", null: false
-    t.integer "category_id", null: false
     t.string "heading"
     t.text "blog"
     t.float "score"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["book_id"], name: "index_reviews_on_book_id"
-    t.index ["category_id"], name: "index_reviews_on_category_id"
     t.index ["end_user_id"], name: "index_reviews_on_end_user_id"
   end
 
   create_table "sales", force: :cascade do |t|
     t.integer "book_id", null: false
-    t.integer "category_id", null: false
     t.text "introduction"
     t.integer "price"
-    t.boolean "is_active"
+    t.boolean "is_active", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["book_id"], name: "index_sales_on_book_id"
-    t.index ["category_id"], name: "index_sales_on_category_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "end_users"
+  add_foreign_key "books", "categories"
   add_foreign_key "books", "end_users"
   add_foreign_key "cart_items", "end_users"
   add_foreign_key "cart_items", "sales"
@@ -198,8 +197,6 @@ ActiveRecord::Schema.define(version: 2022_06_10_175230) do
   add_foreign_key "review_comments", "end_users"
   add_foreign_key "review_comments", "reviews"
   add_foreign_key "reviews", "books"
-  add_foreign_key "reviews", "categories"
   add_foreign_key "reviews", "end_users"
   add_foreign_key "sales", "books"
-  add_foreign_key "sales", "categories"
 end
