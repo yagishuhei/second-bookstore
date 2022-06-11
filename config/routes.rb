@@ -35,9 +35,9 @@ Rails.application.routes.draw do
   namespace :public do
 
     resources :categories
-    # resources :sales
-    # resources :order_details
-    # resources :orders
+     resources :sales
+     resources :order_details
+     resources :orders
     # resources :addresses
     resources :books, only: [:index, :create, :show] do
       get 'rakuten_result', to: "books#rakuten_result", as: "rakuten_result"
