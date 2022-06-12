@@ -4,7 +4,42 @@
   <%= link_to end_user_path(end_user) do %>
     <%= image_tag end_user.get_profile_image("100x100") %>
     <%= end_user.nickname %>
-    <%= end_user.introduction %>
   <% end %>
+  <%= end_user.introduction %>
+  <% end_user.reviews.each do |review| %></br>
+
+  <%= link_to (image_tag(review.book.medium_image_url)), review.book.item_url %></br>
   
+  <%= link_to review_path(review) do %>
+  <%= review.book.title %></br>
+  <%= review.heading %></br>
+  <% end %>
+  <p><%= link_to "#{review.review_comments.count}コメント", review_path(review) %></>
+  <p><i class="fas fa-heart"></i><%= review.favorites.count %>イイね</p>
+  <!--レビュー５段階評価-->
+
+<div id="score"></div></br>
+
+<script>
+
+  $('#score').raty({
+    //imageを表示
+    starOff: '<%= asset_path('star-off.png') %>',
+    starOn: '<%= asset_path('star-on.png') %>',
+    starHalf: '<%= asset_path('star-half.png') %>',
+    //半値も表示できる
+    half: true,
+    //固定して表示できる
+    readOnly: true,
+    //呼び出したいカラムデータ
+    score: <%= review.score %>,
+  });
+
+</script>
+
+<!--/レビュー５段階評価-->
+  <% end %>
+
 <% end %>
+
+  

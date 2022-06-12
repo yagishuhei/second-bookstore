@@ -37,12 +37,14 @@ Rails.application.routes.draw do
     get root to: 'homes#top'
     resources :categories, only: [:index, :show]
     resources :sales
+    resources :cart_items, only: [:index, :create, :destroy]
+    delete 'cart_items/destroy_all', to: 'cart_items#destroy_all', as: 'destroy_all_cart_items'
     resources :order_details
     resources :orders
     resources :addresses, only: [:index, :create]
     resources :end_users, only: [:index, :show, :edit, :update]
     resources :books, only: [:index, :destroy, :create, :show] do
-      get 'rakuten_result', to: "books#rakuten_result", as: "rakuten_result"
+      get 'rakuten_result', to: 'books#rakuten_result', as: 'rakuten_result'
     end
     resources :reviews, only: [:index, :create, :show, :edit, :update, :destroy] do
       #会員1人につき1イイね
