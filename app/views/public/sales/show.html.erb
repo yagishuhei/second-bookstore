@@ -1,7 +1,18 @@
- <h1>購入する予定の本詳細</h1>
 
+ <h1>出品したユーザー</h1>
+<%= link_to public_end_user_path(@sale) do  %>
+  <%= image_tag @sale.end_user.get_profile_image("100x100") %>
+  <%= @sale.end_user.nickname %>
+  <% end %>
+
+ <h1>出品本の詳細</h1>
+ <h4>出品本イメージ</h4>
   <%= link_to (image_tag(@sale.book['large_image_url'])), @sale.book['item_url'] %>
-  <%= @sale.book.title %>
-  <%= @sale.price %>
+   <%= @sale.book.title %>
+   <h4>ユーザーの本</h4>
+  <%= image_tag @sale.get_sale_iamge("100x200") %>
+
+  <%= @sale.price %>円
   <%= @sale.introduction %>
   <%= @sale.is_active ? "出品中" : "出品不可" %>
+  <%= link_to "出品内容を変更する", edit_public_sale_path(@sale) %>
