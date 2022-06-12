@@ -2,7 +2,7 @@
 
 <% @books.each do |book| %>
 
-<%= link_to (image_tag(book['large_image_url'])), book['item_url'] %>
+<%= link_to (image_tag(book['medium_image_url'])), book['item_url'] %>
 <strong><%= book.category.name %></strong>
 <%= book.title %>
 
@@ -19,8 +19,10 @@
 <% end %>
 <h1>出品した本一覧</h1>
 <% @sales.each do |sale| %>
-  
+  <%= link_to (image_tag(sale.book['large_image_url'])), sale.book['item_url'] %>
+  <%= sale.book.title %>
   <%= sale.introduction %>
   <%= sale.price %>
   <%= sale.is_active ? "出品中" : "出品不可" %>
+  <%= link_to "購入します", 
 <% end %>

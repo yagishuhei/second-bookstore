@@ -1,22 +1,24 @@
 <P> この本に関するレビューを書く</P>
 
-<div class="rating-box">
-    <%= form_with model:[book, review], url: public_reviews_path(book.id), method: :post do |f| %>
+
+    <%= form_with model: review, url: public_reviews_path(book_id: book.id), method: :post do |f| %>
     <%= f.label :score %>
-    <div class="main-rating">
-        <div class="ratings">
-            <span class="far fa-star" id= "star"></span>
-            <span class="far fa-star" id= "star"></span>
-            <span class="far fa-star" id= "star"></span>
-            <span class="far fa-star" id= "star"></span>
-            <span class="far fa-star" id= "star"></span>
-        </div>
-        <div class="rating-value-display"><span id="rating-value-display">0</span>/5</div>
+
+    <div id="score">
+            <%= f.label :score,'評価 ', class:'col-md-3 col-form-label' %>
+            <%= f.hidden_field :score, id: :review_star %>
     </div>
-    <%= f.hidden_field :book_id, value: book.id %> 
-    <%= f.hidden_field :score, id: "rating-value" %>
-    
-    
+
+    <script>
+    $('#score').raty({
+        size: 36,
+        starOff:  '<%= asset_path('star-off.png') %>',
+        starOn : '<%= asset_path('star-on.png') %>',
+        starHalf: '<%= asset_path('star-half.png') %>',
+        scoreName: 'review[score]',
+        half: true,
+    });
+    </script>
 
     <%= f.label :heading %>
     <%= f.text_field :heading %>
@@ -27,5 +29,3 @@
     <%= f.submit"レビューを保存する" %>
     <%= link_to "他のレビューを見る", public_reviews_path %>
     <% end %>
-
-</div>

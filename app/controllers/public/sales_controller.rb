@@ -2,13 +2,11 @@ class Public::SalesController < ApplicationController
   def index
     @books= current_end_user.books
     @sale = Sale.new
-    @sales = @books.sales
+    @sales = Sale.all
   end
 
   def create
-
     @sale = Sale.new(sale_params)
-
     @sale.save
     redirect_to request.referer
   end

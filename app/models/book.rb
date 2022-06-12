@@ -1,8 +1,9 @@
 class Book < ApplicationRecord
 
   belongs_to :end_user
-  has_many :reviews, dependent: :destroy
   belongs_to :category
+  has_many :reviews, dependent: :destroy
+   has_many :sales, dependent: :destroy
 
   #book_imageカラムが追加されたように扱える
   has_one_attached :book_image
