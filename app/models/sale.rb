@@ -2,6 +2,7 @@ class Sale < ApplicationRecord
 
   belongs_to :end_user
   belongs_to :book
+  
 
 
   #sale_imageカラムが追加されたように扱える
@@ -17,5 +18,5 @@ class Sale < ApplicationRecord
     end
     sale_image.variant(resize:size).processed
   end
-
+  
 end

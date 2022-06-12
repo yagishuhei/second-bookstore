@@ -17,6 +17,7 @@ class Public::SalesController < ApplicationController
 
   def show
     @sale = Sale.find(params[:id])
+    @cart_item = CartItem.new
   end
 
   def edit

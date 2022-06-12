@@ -10,7 +10,7 @@
  <!--イイね機能-->
     <% if @review.favorited_by?(current_end_user) %>
       <p>
-        <%= link_toreview_favorites_path(@review), method: :delete do %>
+        <%= link_to review_favorites_path(@review), method: :delete do %>
           <i class="fas fa-heart"></i><%= @review.favorites.count %>イイね
         <% end %>
       </p>
