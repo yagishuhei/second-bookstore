@@ -20,8 +20,8 @@
 
 <%= link_to (image_tag(review.book['medium_image_url'])), review.book['item_url'] %>
 <%= review.book.title %>
-<p><%= link_to "#{review.review_comments.count}コメント", public_review_path(review) %></>
+<p><%= link_to "#{review.review_comments.count}コメント", review_path(review) %></>
 <p><i class="fas fa-heart"></i><%= review.favorites.count %>イイね</p>
 <%= review.heading %>
-<p><%= link_to "この本のレビュー詳細を見てみる", public_review_path(review) %></p>
+<p><%= link_to "この本のレビュー詳細を見てみる", review_path(review) %></p>
 <% end %>

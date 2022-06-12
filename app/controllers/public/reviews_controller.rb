@@ -10,7 +10,7 @@ class Public::ReviewsController < ApplicationController
     @review = current_end_user.reviews.new(review_params)
     @review.book_id = params[:book_id]
     @review.save
-    redirect_to public_review_path(@review.id)
+    redirect_to review_path(@review.id)
   end
 
   def show
@@ -27,7 +27,7 @@ class Public::ReviewsController < ApplicationController
     @review = current_end_user.reviews.find(params[:id])
     @review.book_id = params[:book_id]
     @review.update(review_params)
-    redirect_to public_review_path(@review.id)
+    redirect_to review_path(@review.id)
   end
 
   private

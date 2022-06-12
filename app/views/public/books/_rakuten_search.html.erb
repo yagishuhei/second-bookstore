@@ -1,5 +1,5 @@
 <!--楽天ブックス検索機能。（データベースに保存しないためURL指定）-->
-<%= form_with url: public_book_rakuten_result_path(:book_id), method: :get, local: true do |f| %>
+<%= form_with url: book_rakuten_result_path(:book_id), method: :get, local: true do |f| %>
 <%= f.text_field :keyword %>
 <%= f.submit "レビューする本を検索" %>
 <% end %>

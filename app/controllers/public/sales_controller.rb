@@ -28,7 +28,7 @@ class Public::SalesController < ApplicationController
     @sale = current_end_user.sales.find(params[:id])
     @sale.book_id = params[:book_id]
     @sale.update(sale_params)
-    redirect_to public_sale_path(@sale)
+    redirect_to sale_path(@sale)
   end
 
   private

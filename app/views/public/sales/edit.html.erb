@@ -1,5 +1,5 @@
 <h1>出品した本を編集する</h1>
-<%= form_with model: @sale, url: public_sale_path(book_id: @book), method: :patch do |f| %>
+<%= form_with model: @sale, url: sale_path(book_id: @book), method: :patch do |f| %>
 
 <div>
   <%= f.label :sale_image, "本の詳細画像" %>

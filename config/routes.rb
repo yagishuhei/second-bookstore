@@ -1,27 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :public do
-    get 'sales/index'
-    get 'sales/show'
-    get 'sales/edit'
-  end
-  namespace :admin do
-    get 'reviews/index'
-    get 'reviews/show'
-  end
-  namespace :admin do
-    get 'end_users/index'
-    get 'end_users/show'
-  end
-#会員側
-# URL /end_users/sign_in...
-#会員側のコントローラーがどこに存在するかを指定
-  devise_for :end_users, controllers: {
-    registrations: "public/registrations",
-    sessions: "public/sessions"
-  }
-
-
 #管理者側
 # URL /admin/sign_in...
 #管理者側のコントローラーがどこに存在するかを指定
@@ -31,34 +9,8 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
-  #URLはそのまま、ファイル構成だけ指定のパス
-  scope module: :public do
-     get root to: 'homes#top'
-  end
-
-#URLはpublicをつけて、ファイル構成も指定
-  namespace :public do
-
-    resources :categories
-    resources :sales
-    resources :order_details
-    resources :orders
-    resources :addresses
-    resources :books, only: [:index, :create, :show] do
-      get 'rakuten_result', to: "books#rakuten_result", as: "rakuten_result"
-    end
-    resources :reviews do
-      #会員1人につき1イイね
-      resource :favorites, only: [:create, :destroy]
-      resources :review_comments, only: [:create, :destroy]
-    end
-
-    resources :end_users
-
-  end
-
-#URLはadminをつけて、ファイル構成も指定
-   namespace :admin do
+  #URLはadminをつけて、ファイル構成も指定
+  namespace :admin do
 
     resources :categories
     # resources :sales
@@ -71,7 +23,34 @@ Rails.application.routes.draw do
 
   end
 
+  #会員側
+  # URL /end_users/sign_in...
+  #会員側のコントローラーがどこに存在するかを指定
+  devise_for :end_users, controllers: {
+    registrations: "public/registrations",
+    sessions: "public/sessions"
+  }
 
+  #URLはそのまま、ファイル構成だけ指定のパス
+  scope module: :public do
+
+    get root to: 'homes#top'
+    resources :categories, only: [:index, :show]
+    resources :sales
+    resources :order_details
+    resources :orders
+    resources :addresses, only: [:index, :create]
+    resources :end_users, only: [:index, :show, :edit, :update]
+    resources :books, only: [:index, :destroy, :create, :show] do
+      get 'rakuten_result', to: "books#rakuten_result", as: "rakuten_result"
+    end
+    resources :reviews, only: [:index, :create, :show, :edit, :update, :destroy] do
+      #会員1人につき1イイね
+      resource :favorites, only: [:create, :destroy]
+      resources :review_comments, only: [:create, :destroy]
+    end
+
+  end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -1,5 +1,5 @@
 <h1>本の出品をする</h1>
-<%= form_with model: @sale, url: public_sales_path, method: :post do |f| %>
+<%= form_with model: @sale, url: sales_path, method: :post do |f| %>
 <div>
 <% @books.each do |book| %>
   <%= link_to (image_tag(book['medium_image_url'])), book['item_url'] %>
@@ -31,6 +31,6 @@
   <%= sale.book.title %>
   <%= sale.price %>円
   <%= sale.is_active ? "出品中" : "出品不可" %>
-  <%= link_to "編集する",  edit_public_sale_path(sale) %>
+  <%= link_to "編集する",  edit_sale_path(sale) %>
 
 <% end %>

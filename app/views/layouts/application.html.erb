@@ -25,10 +25,10 @@
         <p>ようこそ<%= current_end_user.last_name %><%= current_end_user.first_name %>さん</p>
 
         <li><%= link_to "ホーム", root_path %></li>
-        <li><%= link_to "ユーザー一覧", public_end_users_path %></li>
-        <li><%= link_to "私の本棚", public_books_path %></li>
-         <li><%= link_to "本を買いたい", public_sales_path %></li>
-        <li><%= link_to "レビュー一覧", public_reviews_path %></li>
+        <li><%= link_to "ユーザー一覧", end_users_path %></li>
+        <li><%= link_to "私の本棚", books_path %></li>
+         <li><%= link_to "本を買いたい", sales_path %></li>
+        <li><%= link_to "レビュー一覧", reviews_path %></li>
         <li><%= link_to "ログアウト", destroy_end_user_session_path, method: :delete %></li>
 
         <%= render "public/books/rakuten_search" %>

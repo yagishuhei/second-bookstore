@@ -1,6 +1,6 @@
 
  <h1>出品したユーザー</h1>
-<%= link_to public_end_user_path(@sale) do  %>
+<%= link_to end_user_path(@sale) do  %>
   <%= image_tag @sale.end_user.get_profile_image("100x100") %>
   <%= @sale.end_user.nickname %>
   <% end %>
@@ -15,4 +15,4 @@
   <%= @sale.price %>円
   <%= @sale.introduction %>
   <%= @sale.is_active ? "出品中" : "出品不可" %>
-  <%= link_to "出品内容を変更する", edit_public_sale_path(@sale) %>
+  <%= link_to "出品内容を変更する", edit_sale_path(@sale) %>

@@ -1,7 +1,7 @@
 <P> この本に関するレビューを書く</P>
 
 
-    <%= form_with model: review, url: public_reviews_path(book_id: book.id), method: :post do |f| %>
+    <%= form_with model: review, url: reviews_path(book_id: book.id), method: :post do |f| %>
     <%= f.label :score %>
     <!--idを持たせて一意性をつける-->
     <div id="score">
@@ -37,5 +37,5 @@
     <%= f.text_area :blog %>
 
     <%= f.submit"レビューを保存する" %>
-    <%= link_to "他のレビューを見る", public_reviews_path %>
+    <%= link_to "他のレビューを見る", reviews_path %>
     <% end %>

@@ -6,7 +6,7 @@
 <%= @review.book.publisher_name %>
 
 
-<%= form_with model: @review, url: public_review_path(book_id: @book), method: :patch do |f| %>
+<%= form_with model: @review, url: review_path(book_id: @book), method: :patch do |f| %>
 
  <!--idを持たせて一意性をつける-->
     <div id="score">
@@ -39,5 +39,5 @@
     <%= f.text_area :blog %>
 
     <%= f.submit"レビューを保存する" %>
-    <%= link_to "他のレビューを見る",  public_reviews_path %>
+    <%= link_to "他のレビューを見る", reviews_path %>
     <% end %>

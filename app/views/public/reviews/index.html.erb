@@ -6,8 +6,8 @@
 <%= review.book.title %>
 <%= review.heading %>
 <%= review.blog %>
-<%= link_to"レビューの詳細を見る", public_review_path(review) %>
-<%= link_to "#{review.review_comments.count}コメント", public_review_path(review) %>
+<%= link_to"レビューの詳細を見る", review_path(review) %>
+<%= link_to "#{review.review_comments.count}コメント", review_path(review) %>
 </div>
 <% end %>
 

@@ -8,7 +8,7 @@ class Public::CategoriesController < ApplicationController
     @category = Category.new(category_params)
     @category.save
 
-    redirect_to public_categories_path
+    redirect_to categories_path
   end
 
   def edit
