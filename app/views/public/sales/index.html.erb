@@ -2,29 +2,27 @@
 
 <% @books.each do |book| %>
 
-<%= link_to (image_tag(book['medium_image_url'])), book['item_url'] %>
-<strong><%= book.category.name %></strong>
-<%= book.title %>
-
-<%= form_with model: @sale, url: public_sales_path, method: :post do |f| %>
-<%= f.hidden_field :book_id, value: book.id %>
-<%= f.label :introduction %>
-<%= f.text_area :introduction %>
-<%= f.label :price %>
-<%= f.text_field :price %>
-<%= f.label :is_active %>
-<%= f.select :is_active, [['出品中', true], ['出品不可', false]], prompt: "--選択してください--" %>
-<%= f.submit"出品する" %>
-<% end %>
+  <%= link_to (image_tag(book['medium_image_url'])), book['item_url'] %>
+  <strong><%= book.category.name %></strong>
+  <%= book.title %>
+  
+  <%= form_with model: @sale, url: public_sales_path, method: :post do |f| %>
+    <%= f.hidden_field :book_id, value: book.id %>
+    <%= f.label :introduction %>
+    <%= f.text_area :introduction %>
+    <%= f.label :price %>
+    <%= f.text_field :price %>
+    <%= f.label :is_active %>
+    <%= f.select :is_active, [['出品中', true], ['出品不可', false]], prompt: "--選択してください--" %>
+    <%= f.submit"出品する" %>
+  <% end %>
 <% end %>
 <h1>出品した本一覧</h1>
 <% @sales.each do |sale| %>
 
   <%= link_to (image_tag(sale.book['medium_image_url'])), sale.book['item_url'] %>
-
   <%= sale.book.title %>
-  <%= sale.introduction %>
   <%= sale.price %>
   <%= sale.is_active ? "出品中" : "出品不可" %>
-  <%= link_to "購入します", 
+  <%= link_to "購入します", public_sale_path(sale.book) %>
 <% end %>

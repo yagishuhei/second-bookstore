@@ -33,17 +33,21 @@
 
 <div id="score"></div>
 
-
 <script>
+
   $('#score').raty({
-    size: 36,
+    //imageを表示
     starOff: '<%= asset_path('star-off.png') %>',
     starOn: '<%= asset_path('star-on.png') %>',
     starHalf: '<%= asset_path('star-half.png') %>',
-    scoreName: 'review[score]',
+    //半値も表示できる
     half: true,
+    //固定して表示できる
     readOnly: true,
+    //呼び出したいカラムデータ
+    score: <%= @review.score %>,
   });
+
 </script>
 
 <!--/レビュー５段階評価-->

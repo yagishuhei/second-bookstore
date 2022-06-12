@@ -25,8 +25,9 @@ class Public::ReviewsController < ApplicationController
 
   def update
     @review = current_end_user.reviews.find(params[:id])
+    @review.book_id = params[:book_id]
     @review.update(review_params)
-    redirect_to public_review_path(@review)
+    redirect_to public_review_path(@review.id)
   end
 
   private

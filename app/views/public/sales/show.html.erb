@@ -1,2 +1,7 @@
-<h1>Public::Sales#show</h1>
-<p>Find me in app/views/public/sales/show.html.erb</p>
+ <h1>購入する予定の本詳細</h1>
+
+  <%= link_to (image_tag(@sale.book['large_image_url'])), @sale.book['item_url'] %>
+  <%= @sale.book.title %>
+  <%= @sale.price %>
+  <%= @sale.introduction %>
+  <%= @sale.is_active ? "出品中" : "出品不可" %>
