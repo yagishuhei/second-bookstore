@@ -7,8 +7,6 @@
 <%= @review.book.author %>
 <%= @review.book.publisher_name %>
 
-
-
  <!--イイね機能-->
     <% if @review.favorited_by?(current_end_user) %>
       <p>
@@ -17,25 +15,43 @@
         <% end %>
       </p>
     <% else %>
-    
+
       <p>
         <%= link_to public_review_favorites_path(@review), method: :post do %>
           <i class="far fa-heart"></i><%= @review.favorites.count %>イイね
         <% end %>
       </p>
     <% end %>
-
+ <!--/イイね機能-->
 
 
 <p>レビュー投稿日<%= @review.created_at.strftime('%Y/%m/%d') %></p>
 <p>レビュー更新日<%= @review.updated_at.strftime('%Y/%m/%d') %></p>
 <p><%= @review.heading %></p>
 <%= @review.blog %>
+<!--レビュー５段階評価-->
+<div class="ra"id="score"></div>
+
+<script>
+  $('#score').raty({
+    size: 36,
+    starOff: '<%= asset_path('star-off.png') %>',
+    starOn: '<%= asset_path('star-on.png') %>',
+    starHalf: '<%= asset_path('star-half.png') %>',
+    scoreName: 'review[score]',
+    half: true,
+    readOnly: true,
+  });
+</script>
+
+<!--/レビュー５段階評価-->
+
 <li><%= link_to "編集する", edit_public_review_path(@review) %></li>
 
 <li><%= link_to "他の投稿したレビューの一覧を見てみる", public_reviews_path %></li>
 
 <!-- レビューへのコメント機能-->
+
 
   <div class="review-comment-all">
     <p>コメント件数: <%= @review.review_comments.count %></p>
@@ -57,4 +73,5 @@
       <%= f.submit "送信する" %>
       <% end %>
     </div>
+<!-- /レビューへのコメント機能-->
 

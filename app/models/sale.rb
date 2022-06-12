@@ -1,3 +1,4 @@
 class Sale < ApplicationRecord
-  has_many :cart_items, dependent: :destroy
+  belongs_to :end_user
+  belongs_to :book
 end

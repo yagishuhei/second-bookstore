@@ -2,7 +2,7 @@ class Public::SalesController < ApplicationController
   def index
     @books= current_end_user.books
     @sale = Sale.new
-    @sales = @books.sales
+    @sales = current_end_user.sales
   end
 
   def create

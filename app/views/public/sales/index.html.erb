@@ -19,7 +19,8 @@
 <% end %>
 <h1>出品した本一覧</h1>
 <% @sales.each do |sale| %>
-  
+  <%= link_to (image_tag(sale.book['medium_image_url'])), sale.book['item_url'] %>
+  <%= sale.book.title %>
   <%= sale.introduction %>
   <%= sale.price %>
   <%= sale.is_active ? "出品中" : "出品不可" %>

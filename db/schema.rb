@@ -173,6 +173,7 @@ ActiveRecord::Schema.define(version: 2022_06_10_175230) do
   end
 
   create_table "sales", force: :cascade do |t|
+    t.integer "end_user_id", null: false
     t.integer "book_id", null: false
     t.text "introduction"
     t.integer "price"
@@ -180,6 +181,7 @@ ActiveRecord::Schema.define(version: 2022_06_10_175230) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["book_id"], name: "index_sales_on_book_id"
+    t.index ["end_user_id"], name: "index_sales_on_end_user_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -199,4 +201,5 @@ ActiveRecord::Schema.define(version: 2022_06_10_175230) do
   add_foreign_key "reviews", "books"
   add_foreign_key "reviews", "end_users"
   add_foreign_key "sales", "books"
+  add_foreign_key "sales", "end_users"
 end
