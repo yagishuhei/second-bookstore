@@ -20,7 +20,7 @@ class Public::ReviewsController < ApplicationController
 
   def edit
      @review =Review.find(params[:id])
-
+     @book = Book.find(params[:id])
   end
 
   def update

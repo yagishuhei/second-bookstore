@@ -1,7 +1,7 @@
 <h1>レビューの編集ページ</h1>
 
 <%= link_to (image_tag(@review.book['large_image_url'])), @review.book['item_url'] %>
-<<%= @review.book.title %>
+<%= @review.book.title %>,</br>
 <%= @review.book.author %>
 <%= @review.book.publisher_name %>
 
@@ -31,11 +31,6 @@
     });
     </script>
 <!--/javascriptの入力ルール-->
-
-
-
-    <%= f.select :category_id, options_from_collection_for_select(Category.all, :id, :name), prompt: "--選択して下さい--" %>
-
 
     <%= f.label :heading %>
     <%= f.text_field :heading %>

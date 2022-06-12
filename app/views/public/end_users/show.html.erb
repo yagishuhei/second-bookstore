@@ -17,7 +17,6 @@
 <p>Introduction</p>
 <%= @end_user.introduction %>
 
-
 <p>Email</p>
 <%= @end_user.email %>
 
@@ -36,7 +35,7 @@
 <%= link_to "プロフィールを編集", edit_public_end_user_path(@end_user) %>
 
 <h2>出品内容を見てみる</h2>
-<%= link_to "出品一覧", public_sales_path %>
+<%= link_to "出品一覧", new_public_sale_path %>
 <h2>配送先</h2>
 <%= link_to "配送先一覧", public_addresses_path %>
 
@@ -49,4 +48,14 @@
     <%= review.book.title %>
     <p><%= link_to "この本のレビュー詳細を見てみる", public_review_path(review.book) %></p>
   <% end %>
+<% end %>
+
+<h2>出品中の本一覧</h2>
+<% @sales.each do |sale| %>
+ <%= link_to public_sale_path(sale) do %>
+ <%= image_tag sale.get_sale_iamge("100x200") %>
+ <%= sale.book.title %>
+ <%= sale.price %>円
+ <% end %>
+ 
 <% end %>

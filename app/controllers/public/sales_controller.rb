@@ -1,13 +1,16 @@
 class Public::SalesController < ApplicationController
-  def index
+  def new
     @books= current_end_user.books
     @sale = Sale.new
     @sales = current_end_user.sales
-
+  end
+  def index
+    @sales = Sale.all
   end
 
   def create
     @sale = current_end_user.sales.new(sale_params)
+    @sale.book_id = params[:book_id]
     @sale.save
     redirect_to request.referer
   end
@@ -18,11 +21,19 @@ class Public::SalesController < ApplicationController
 
   def edit
     @sale = Sale.find(params[:id])
+    @book = Book.find(params[:id])
+  end
+
+  def update
+    @sale = current_end_user.sales.find(params[:id])
+    @sale.book_id = params[:book_id]
+    @sale.update(sale_params)
+    redirect_to public_sale_path(@sale)
   end
 
   private
   def sale_params
-    params.require(:sale).permit(:book_id, :category_id, :introduction, :price, :is_active)
+    params.require(:sale).permit(:sale_image, :introduction, :price, :is_active)
   end
 
 end
