@@ -9,6 +9,7 @@ class EndUser < ApplicationRecord
   has_many :cart_items, dependent: :destroy
   has_many :review_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :sales, dependent: :destroy
 
   #profile_imageカラムが追加されたように扱える
   has_one_attached :profile_image
