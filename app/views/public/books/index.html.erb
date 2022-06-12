@@ -1,8 +1,8 @@
-<h1>Public::Books#index</h1>
+<h1>私の持っている本</h1>
 <% @books.each do |book| %>
 
 <%= link_to (image_tag(book.medium_image_url)), book.item_url %>
 <%= book.title %>
-<%= link_to "レビューを書く", public_book_path(book) %>
+<%= link_to "レビューを書く", book_path(book) %>
 
 <% end %>

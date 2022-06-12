@@ -1,4 +1,4 @@
-<h1>Public::EndUsers#show</h1>
+<h1>詳細ページ</h1>
 
 <p>Profile Image</p>
 <%= image_tag @end_user.get_profile_image("100x100") %>
@@ -17,7 +17,6 @@
 <p>Introduction</p>
 <%= @end_user.introduction %>
 
-
 <p>Email</p>
 <%= @end_user.email %>
 
@@ -33,14 +32,30 @@
 <p>Status</p>
 <%= @end_user.is_deleted ? "退会" : "有効" %>
 
-<%= link_to "プロフィールを編集", edit_public_end_user_path(@end_user) %>
+<%= link_to "プロフィールを編集", edit_end_user_path(@end_user) %>
+
+<h2>出品内容を見てみる</h2>
+<%= link_to "出品一覧", new_sale_path %>
+<h2>配送先</h2>
+<%= link_to "配送先一覧", addresses_path %>
 
 <h2>お気に入り本の本棚</h2>
 
-<% @books.each do |book| %>
-  <%= link_to public_book_path(book) do %>
+<% @reviews.each do |review| %>
+  <%= link_to book_path(review.book) do %>
   <!--楽天のitem_urlを合わせればimage表示可能-->
-   <%= link_to (image_tag (book['medium_image_url'])), book['item_url'] %>
-    <%= book.title %>
+   <%= link_to (image_tag (review.book['medium_image_url'])), review.book['item_url'] %>
+    <%= review.book.title %>
+    <p><%= link_to "この本のレビュー詳細を見てみる", review_path(review.book) %></p>
   <% end %>
+<% end %>
+
+<h2>出品中の本一覧</h2>
+<% @sales.each do |sale| %>
+ <%= link_to sale_path(sale) do %>
+ <%= image_tag sale.get_sale_iamge("100x200") %>
+ <%= sale.book.title %>
+ <%= sale.price %>円
+ <% end %>
+ 
 <% end %>

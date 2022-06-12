@@ -1,8 +1,83 @@
+
+<h2>レビュー詳細</h2>
+
+
 <%= link_to (image_tag(@review.book['large_image_url'])), @review.book['item_url'] %>
 <%= @review.book.title %>
 <%= @review.book.author %>
 <%= @review.book.publisher_name %>
-<%= @review.heading %>
-<%= @review.blog %>
 
-<%= link_to "他の投稿したレビューの一覧を見てみる", public_reviews_path %>
+ <!--イイね機能-->
+    <% if @review.favorited_by?(current_end_user) %>
+      <p>
+        <%= link_toreview_favorites_path(@review), method: :delete do %>
+          <i class="fas fa-heart"></i><%= @review.favorites.count %>イイね
+        <% end %>
+      </p>
+    <% else %>
+
+      <p>
+        <%= link_to review_favorites_path(@review), method: :post do %>
+          <i class="far fa-heart"></i><%= @review.favorites.count %>イイね
+        <% end %>
+      </p>
+    <% end %>
+ <!--/イイね機能-->
+
+
+<p>レビュー投稿日<%= @review.created_at.strftime('%Y/%m/%d') %></p>
+<p>レビュー更新日<%= @review.updated_at.strftime('%Y/%m/%d') %></p>
+<p><%= @review.heading %></p>
+<%= @review.blog %>
+<!--レビュー５段階評価-->
+
+<div id="score"></div>
+
+<script>
+
+  $('#score').raty({
+    //imageを表示
+    starOff: '<%= asset_path('star-off.png') %>',
+    starOn: '<%= asset_path('star-on.png') %>',
+    starHalf: '<%= asset_path('star-half.png') %>',
+    //半値も表示できる
+    half: true,
+    //固定して表示できる
+    readOnly: true,
+    //呼び出したいカラムデータ
+    score: <%= @review.score %>,
+  });
+
+</script>
+
+<!--/レビュー５段階評価-->
+
+<li><%= link_to "編集する", edit_review_path(@review) %></li>
+
+<li><%= link_to "他の投稿したレビューの一覧を見てみる", reviews_path %></li>
+
+<!-- レビューへのコメント機能-->
+
+
+  <div class="review-comment-all">
+    <p>コメント件数: <%= @review.review_comments.count %></p>
+    <!--コメント一覧-->
+      <% @review.review_comments.each do |review_comment| %>
+        <p>
+          <%= image_tag review_comment.end_user.get_profile_image("50x50") %>
+          <%= review_comment.end_user.nickname %>
+          <%= review_comment.created_at.strftime('%Y/%m/%d') %>
+          <%= review_comment.comment %>
+        </p>
+      <% end %>
+  </div>
+  <!--コメント投稿フォーム-->
+    <div class="review-comment-form">
+      <!--routingがネストしているため、親と子のインスタンス変数が必要-->
+      <%= form_with model: [@review, @review_comment], url: review_review_comments_path(@review.id), method: :post do |f| %>
+      <%= f.text_area :comment, rows: '5', placeholder: "コメント" %>
+      <%= f.submit "送信する" %>
+      <% end %>
+    </div>
+<!-- /レビューへのコメント機能-->
+

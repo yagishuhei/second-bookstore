@@ -25,6 +25,7 @@
       <%= f.hidden_field :item_url, :value => book['item_url'] %>
       <%= f.hidden_field :large_image_url, :value => book['large_image_url'] %>
       <%= f.hidden_field :medium_image_url, :value => book['medium_image_url'] %>
+      <%= f.select :category_id, options_from_collection_for_select(Category.all, :id, :name), prompt: "--選択して下さい--" %>
       <%= f.submit "My本棚に追加" %>
     <% end %>
   </div>

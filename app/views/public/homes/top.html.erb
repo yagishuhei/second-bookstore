@@ -10,6 +10,8 @@
 　加えて中古の本を誰かに譲りたい、または、本好きな人の持っている本を読んでみたい、自分とは違うジャンルでも読んでみたいと思う時。</br>
 </h6>
 
+<h2>それぞれのユーザーのレビュー一覧</h2>
+
 <% @reviews.each do |review| %>
 <div class="end_user">
 <%= image_tag review.end_user.get_profile_image("100x100") %>
@@ -18,6 +20,8 @@
 
 <%= link_to (image_tag(review.book['medium_image_url'])), review.book['item_url'] %>
 <%= review.book.title %>
-<%= link_to "この本のレビュー詳細を見てみる", public_review_path(review) %>
-
+<p><%= link_to "#{review.review_comments.count}コメント", review_path(review) %></>
+<p><i class="fas fa-heart"></i><%= review.favorites.count %>イイね</p>
+<%= review.heading %>
+<p><%= link_to "この本のレビュー詳細を見てみる", review_path(review) %></p>
 <% end %>

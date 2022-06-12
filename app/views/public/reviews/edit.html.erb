@@ -1,2 +1,43 @@
-<h1>Public::Reviews#edit</h1>
-<p>Find me in app/views/public/reviews/edit.html.erb</p>
+<h1>レビューの編集ページ</h1>
+
+<%= link_to (image_tag(@review.book['large_image_url'])), @review.book['item_url'] %>
+<%= @review.book.title %>,</br>
+<%= @review.book.author %>
+<%= @review.book.publisher_name %>
+
+
+<%= form_with model: @review, url: review_path(book_id: @book), method: :patch do |f| %>
+
+ <!--idを持たせて一意性をつける-->
+    <div id="score">
+        <%= f.label :score,'評価 ' %>
+        <%= f.hidden_field :score, id: :review_star %>
+    </div>
+    <!--idを持たせて一意性をつける-->
+    
+<!--javascriptの入力内容（javascriptルール）-->
+    <script>
+    // javascript > jquery > raty関数
+    // raty({obj}) //obj size startOff StarOn Event
+    $('#score').raty({
+        size: 36,
+        starOff:  '<%= asset_path('star-off.png') %>',
+        starOn : '<%= asset_path('star-on.png') %>',
+        starHalf: '<%= asset_path('star-half.png') %>',
+        //モデル、カラムを指定している
+        scoreName: 'review[score]',
+        //半値も入力できる
+        half: true,
+    });
+    </script>
+<!--/javascriptの入力ルール-->
+
+    <%= f.label :heading %>
+    <%= f.text_field :heading %>
+
+    <%= f.label :blog %>
+    <%= f.text_area :blog %>
+
+    <%= f.submit"レビューを保存する" %>
+    <%= link_to "他のレビューを見る", reviews_path %>
+    <% end %>

@@ -13,7 +13,10 @@ import "popper.js";
 import "bootstrap";
 import "../stylesheets/application"
 import '@fortawesome/fontawesome-free/js/all'
-
+//jQueryを呼び出す
+window.$ = window.jQuery = require('jquery');
+//ratyを呼び出すときに必要
+require('packs/raty')
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()

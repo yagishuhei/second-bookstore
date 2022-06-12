@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_10_051331) do
+ActiveRecord::Schema.define(version: 2022_06_10_175230) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2022_06_10_051331) do
   end
 
   create_table "addresses", force: :cascade do |t|
-    t.integer "end_user_id"
+    t.integer "end_user_id", null: false
     t.string "name"
     t.string "postal_code"
     t.string "address"
@@ -63,7 +63,8 @@ ActiveRecord::Schema.define(version: 2022_06_10_051331) do
   end
 
   create_table "books", force: :cascade do |t|
-    t.integer "end_user_id"
+    t.integer "end_user_id", null: false
+    t.integer "category_id", null: false
     t.bigint "isbn"
     t.string "title"
     t.string "author"
@@ -74,12 +75,13 @@ ActiveRecord::Schema.define(version: 2022_06_10_051331) do
     t.string "medium_image_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_books_on_category_id"
     t.index ["end_user_id"], name: "index_books_on_end_user_id"
   end
 
   create_table "cart_items", force: :cascade do |t|
-    t.integer "sale_id"
-    t.integer "end_user_id"
+    t.integer "sale_id", null: false
+    t.integer "end_user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["end_user_id"], name: "index_cart_items_on_end_user_id"
@@ -114,9 +116,18 @@ ActiveRecord::Schema.define(version: 2022_06_10_051331) do
     t.index ["reset_password_token"], name: "index_end_users_on_reset_password_token", unique: true
   end
 
+  create_table "favorites", force: :cascade do |t|
+    t.integer "end_user_id", null: false
+    t.integer "review_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["end_user_id"], name: "index_favorites_on_end_user_id"
+    t.index ["review_id"], name: "index_favorites_on_review_id"
+  end
+
   create_table "order_details", force: :cascade do |t|
-    t.integer "order_id"
-    t.integer "sale_id"
+    t.integer "order_id", null: false
+    t.integer "sale_id", null: false
     t.integer "price"
     t.integer "shipping_status"
     t.datetime "created_at", precision: 6, null: false
@@ -126,7 +137,7 @@ ActiveRecord::Schema.define(version: 2022_06_10_051331) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "end_user_id"
+    t.integer "end_user_id", null: false
     t.string "postal_code"
     t.string "address"
     t.string "name"
@@ -150,45 +161,45 @@ ActiveRecord::Schema.define(version: 2022_06_10_051331) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer "end_user_id"
-    t.integer "book_id"
-    t.integer "category_id"
+    t.integer "end_user_id", null: false
+    t.integer "book_id", null: false
     t.string "heading"
     t.text "blog"
     t.float "score"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["book_id"], name: "index_reviews_on_book_id"
-    t.index ["category_id"], name: "index_reviews_on_category_id"
     t.index ["end_user_id"], name: "index_reviews_on_end_user_id"
   end
 
   create_table "sales", force: :cascade do |t|
-    t.integer "book_id"
-    t.integer "category_id"
+    t.integer "end_user_id", null: false
+    t.integer "book_id", null: false
     t.text "introduction"
     t.integer "price"
-    t.boolean "is_active"
+    t.boolean "is_active", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["book_id"], name: "index_sales_on_book_id"
-    t.index ["category_id"], name: "index_sales_on_category_id"
+    t.index ["end_user_id"], name: "index_sales_on_end_user_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "end_users"
+  add_foreign_key "books", "categories"
   add_foreign_key "books", "end_users"
   add_foreign_key "cart_items", "end_users"
   add_foreign_key "cart_items", "sales"
+  add_foreign_key "favorites", "end_users"
+  add_foreign_key "favorites", "reviews"
   add_foreign_key "order_details", "orders"
   add_foreign_key "order_details", "sales"
   add_foreign_key "orders", "end_users"
   add_foreign_key "review_comments", "end_users"
   add_foreign_key "review_comments", "reviews"
   add_foreign_key "reviews", "books"
-  add_foreign_key "reviews", "categories"
   add_foreign_key "reviews", "end_users"
   add_foreign_key "sales", "books"
-  add_foreign_key "sales", "categories"
+  add_foreign_key "sales", "end_users"
 end

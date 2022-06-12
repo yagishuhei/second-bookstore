@@ -1,23 +1,34 @@
 <P> この本に関するレビューを書く</P>
 
-<div class="rating-box">
-    <%= form_with model: review, url: public_reviews_path, method: :post do |f| %>
+
+    <%= form_with model: review, url: reviews_path(book_id: book.id), method: :post do |f| %>
     <%= f.label :score %>
-    <div class="main-rating">
-        <div class="ratings">
-            <span class="far fa-star" id= "star"></span>
-            <span class="far fa-star" id= "star"></span>
-            <span class="far fa-star" id= "star"></span>
-            <span class="far fa-star" id= "star"></span>
-            <span class="far fa-star" id= "star"></span>
-        </div>
-        <div class="rating-value-display"><span id="rating-value-display">0</span>/5</div>
+    <!--idを持たせて一意性をつける-->
+    <div id="score">
+            <%= f.label :score,'評価 ', class:'col-md-3 col-form-label' %>
+            <%= f.hidden_field :score, id: :review_star %>
     </div>
-    <%= f.hidden_field :book_id, value: book.id %>
-    <%= f.hidden_field :score, id: "rating-value" %>
-
-    <%= f.select :category_id, options_from_collection_for_select(Category.all, :id, :name), prompt: "--選択して下さい--" %>
-
+    <!--idを持たせて一意性をつける-->
+    
+   <!--javascriptの入力内容（javascriptルール）-->
+    <script>
+   
+    
+    // javascript > jquery > raty関数 
+    // raty({obj}) //obj size startOff StarOn Event
+    // イベントが発生したとき、ID:ScoreのreviewのDOMオブジェクトのValueの値を変更する
+    $('#score').raty({
+        //imageを表示
+        starOff:  '<%= asset_path('star-off.png') %>',
+        starOn : '<%= asset_path('star-on.png') %>',
+        starHalf: '<%= asset_path('star-half.png') %>',
+        //モデル、カラムを指定している
+        scoreName: 'review[score]',
+        //半値も入力できる
+        half: true,
+    });
+    </script>
+<!--/javascriptの入力ルール-->
 
     <%= f.label :heading %>
     <%= f.text_field :heading %>
@@ -26,7 +37,5 @@
     <%= f.text_area :blog %>
 
     <%= f.submit"レビューを保存する" %>
-   
+    <%= link_to "他のレビューを見る", reviews_path %>
     <% end %>
-
-</div>

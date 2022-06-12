@@ -15,28 +15,32 @@ class Public::BooksController < ApplicationController
       @book = Book.new
     end
   end
-
-  def index
-    @books = current_end_user.books
-  end
-
+  
   def create
     @book = Book.new(book_params)
     #カラの中にまずend_user_idがログインした会員idを入れる
     @book.end_user_id = current_end_user.id
     @book.save
-    redirect_to public_book_path(@book)
+    redirect_to book_path( @book)
   end
 
-   def show
+  def index
+    @books = current_end_user.books
+  end
+  
+  def destroy
+  end 
+  
+  
+  def show
      @book = Book.find(params[:id])
      @review =Review.new
-   end
+  end
 
   private
 
   def book_params
-    params.require(:book).permit(:isbn, :title, :author, :publisher_name, :item_price, :item_url, :large_image_url, :medium_image_url)
+    params.require(:book).permit(:isbn, :title, :author, :publisher_name, :category_id, :item_price, :item_url, :large_image_url, :medium_image_url)
 
   end
 end

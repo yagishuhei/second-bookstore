@@ -9,7 +9,8 @@ class Public::EndUsersController < ApplicationController
   def show
     @end_user = EndUser.find(params[:id])
     #複数の本＝会員の本全部
-    @books = current_end_user.books
+    @reviews = @end_user.reviews
+    @sales = @end_user.sales
   end
 
 
@@ -20,7 +21,7 @@ class Public::EndUsersController < ApplicationController
   def update
     @end_user = EndUser.find(params[:id])
     @end_user.update(end_user_params)
-    redirect_to public_end_user_path(@end_user)
+    redirect_to end_user_path(@end_user)
   end
   private
 
