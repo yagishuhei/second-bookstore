@@ -4,12 +4,6 @@ class Public::CategoriesController < ApplicationController
     @categories = Category.all
   end
 
-  def create
-    @category = Category.new(category_params)
-    @category.save
-    redirect_to categories_path
-  end
-
   def show
     @category = Category.find(params[:id])
   end

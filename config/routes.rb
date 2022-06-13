@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   #URLはadminをつけて、ファイル構成も指定
   namespace :admin do
 
-    resources :categories
+    resources :categories, only: [:index, :create, :destroy, :show]
     # resources :sales
     # resources :order_details
     # resources :orders
@@ -42,7 +42,7 @@ Rails.application.routes.draw do
   scope module: :public do
 
     get root to: 'homes#top'
-    resources :categories, only: [:index, :show, :create]
+    resources :categories, only: [:index, :show,]
     resources :sales
     #先にdestroy_allを置く
     delete 'cart_items/destroy_all', to: 'cart_items#destroy_all', as: 'destroy_all_cart_items'
