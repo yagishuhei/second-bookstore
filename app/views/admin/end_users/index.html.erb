@@ -14,6 +14,4 @@
 <p>Status</p>
 
 <%= end_user.is_deleted ? "退会" : "有効" %>
-<%= link_to "アカウント削除", admin_end_user_path(end_user), method: :delete, data: { confirm: "本当に削除しますか？"} %>
-
 <% end %>

@@ -1,10 +1,12 @@
 <h1>ユーザーのレビュー一覧</h1>
 <% @reviews.each do |review| %>
+
 <%= link_to admin_end_user_path(review.end_user) do %>
+    <%= image_tag review.end_user.get_profile_image("100x100") %>
     <%= review.end_user.last_name %>
     <%= review.end_user.first_name %>
   <% end %>
-  
+
   <%= link_to admin_review_path(review) do %>
   <%= review.heading %>
   <% end %>
