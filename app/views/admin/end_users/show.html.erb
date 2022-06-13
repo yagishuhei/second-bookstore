@@ -1,47 +1,51 @@
 <h1>ユーザー詳細</h1>
+<div>
+  <p>プロフィール画像</p>
+  <%= image_tag @end_user.get_profile_image("100x100") %>
 
-<p>Profile Image</p>
-<%= image_tag @end_user.get_profile_image("100x100") %>
+  <p>氏名</p>
+  <%= @end_user.last_name %>
+  <%= @end_user.first_name %>
 
-<p>Name</p>
-<%= @end_user.last_name %>
-<%= @end_user.first_name %>
+  <p>氏名（カナ）</p>
+  <%= @end_user.last_name_kana %>
+  <%= @end_user.first_name_kana %>
 
-<p>Name_kana</p>
-<%= @end_user.last_name_kana %>
-<%= @end_user.first_name_kana %>
+  <p>ニックネーム</p>
+  <%= @end_user.nickname %>
 
-<p>Nickname</p>
-<%= @end_user.nickname %>
-
-<p>Introduction</p>
-<%= @end_user.introduction %>
-
-
-<p>Email</p>
-<%= @end_user.email %>
-
-<p>Telephone_number</p>
-<%= @end_user.telephone_number %>
-
-<p>Postal_code</p>
-<%= @end_user.postal_code %>
-
-<p>Address</p>
-<%= @end_user.address %>
-
-<p>Status</p>
-<%= @end_user.is_deleted ? "退会" : "有効" %>
+  <p>自己紹介文</p>
+  <%= @end_user.introduction %>
 
 
-<% @reviews.each do |review| %>
-  <%= link_to book_path(review.book) do %>
-    <!--楽天のitem_urlを合わせればimage表示可能-->
-    <%= link_to (image_tag (review.book['medium_image_url'])), review.book['item_url'] %>
-    <%= review.book.title %>
+  <p>Eメール</p>
+  <%= @end_user.email %>
+
+  <p>電話番号</p>
+  <%= @end_user.telephone_number %>
+
+  <p>郵便番号</p>
+  <%= @end_user.postal_code %>
+
+  <p>住所</p>
+  <%= @end_user.address %>
+
+  <p>会員ステータス</p>
+  <%= @end_user.is_deleted ? "退会" : "有効" %>
+</div>
+
+<div>
+  <% @reviews.each do |review| %>
+    <%= link_to book_path(review.book) do %>
+      <!--楽天のitem_urlを合わせればimage表示可能-->
+      <%= link_to (image_tag (review.book['medium_image_url'])), review.book['item_url'] %>
+      <%= review.book.title %>
+    <% end %>
+
+    <%= link_to admin_review_path(review.book) do %>
+      <%= review.heading %>
+    <% end %>
   <% end %>
+</div>
 
-  <%= link_to admin_review_path(review.book) do %>
-    <%= review.heading %>
-  <% end %>
-<% end %>
+<p><%= link_to "アカウント削除", admin_end_user_path(@end_user), method: :delete, data: { confirm: "本当に削除しますか？"} %></p>
