@@ -1,0 +1,18 @@
+<h1>カート内商品一覧</h1>
+<%= link_to destroy_all_cart_items_path, method: :delete do  %><p>カート内を空にする</p><% end %>
+<div>
+  
+<% @cart_items.each do |cart_item| %>
+    <%= image_tag cart_item.sale.get_sale_iamge("200x200") %>
+    <%= cart_item.sale.book.title %>
+    <%= cart_item.sale.price %>円
+    <%= link_to "カート内から削除", cart_item_path(cart_item), method: :delete %>
+
+<% end %>
+</div>
+<%#= @total.to_s(:delimited) %>
+
+<!--質問内容、商品合計が出せていない-->
+  <%#= total = 0 %>
+  <!--to_s(:delimited)-->
+  <%#= total += cart_item.price %>

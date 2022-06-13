@@ -1,5 +1,5 @@
 <h1>本の出品をする</h1>
-<%= form_with model: @sale, url: sales_path, method: :post do |f| %>
+<%= form_with model: @sale, url: sales_path(book_id: @book), method: :post do |f| %>
 <div>
 <% @books.each do |book| %>
   <%= link_to (image_tag(book['medium_image_url'])), book['item_url'] %>

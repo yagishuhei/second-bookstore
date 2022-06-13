@@ -9,9 +9,13 @@ class Public::SalesController < ApplicationController
   end
 
   def create
+    #エラーが発生
+    #ActiveRecord::RecordInvalid in Public::SalesController#create
+    #Validation failed: Book must exist
+    
     @sale = current_end_user.sales.new(sale_params)
     @sale.book_id = params[:book_id]
-    @sale.save
+    @sale.save!
     redirect_to request.referer
   end
 
@@ -34,7 +38,7 @@ class Public::SalesController < ApplicationController
 
   private
   def sale_params
-    params.require(:sale).permit(:sale_image, :introduction, :price, :is_active)
+    params.require(:sale).permit(:book_id, :sale_image, :introduction, :price, :is_active)
   end
 
 end
