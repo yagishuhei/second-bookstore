@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   namespace :public do
-   
+
   end
 #管理者側
 # URL /admin/sign_in...
@@ -43,10 +43,10 @@ Rails.application.routes.draw do
     #先にdestroy_allを置く
     delete 'cart_items/destroy_all', to: 'cart_items#destroy_all', as: 'destroy_all_cart_items'
     resources :cart_items, only: [:index, :create, :destroy]
-    
+
     resources :order_details
     resources :orders
-    resources :addresses, only: [:index, :create]
+    resources :addresses, only: [:index, :create, :destroy, :edit, :update]
     resources :end_users, only: [:index, :show, :edit, :update]
     resources :books, only: [:index, :destroy, :create, :show] do
       get 'rakuten_result', to: 'books#rakuten_result', as: 'rakuten_result'
