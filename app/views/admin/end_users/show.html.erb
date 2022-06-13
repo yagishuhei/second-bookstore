@@ -33,3 +33,15 @@
 <p>Status</p>
 <%= @end_user.is_deleted ? "退会" : "有効" %>
 
+
+<% @reviews.each do |review| %>
+  <%= link_to book_path(review.book) do %>
+    <!--楽天のitem_urlを合わせればimage表示可能-->
+    <%= link_to (image_tag (review.book['medium_image_url'])), review.book['item_url'] %>
+    <%= review.book.title %>
+  <% end %>
+
+  <%= link_to admin_review_path(review.book) do %>
+    <%= review.heading %>
+  <% end %>
+<% end %>

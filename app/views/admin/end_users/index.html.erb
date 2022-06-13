@@ -3,6 +3,7 @@
 
 <p>Name</p>
 <%= link_to admin_end_user_path(end_user) do %>
+<%= image_tag end_user.get_profile_image("100x100") %>
 <%= end_user.last_name %>
 <%= end_user.first_name %>
 <% end %>
