@@ -15,7 +15,7 @@
   ￥<%= @sale.price %>円
   <%= @sale.introduction %>
   <% @sale.is_active ? "販売中" : "販売不可" %>
-  
+
   <% if @sale.is_active == true %>
   <% if end_user_signed_in? %>
    <%= form_with model: [@sale, @cart_item], url: cart_items_path, method: :post do |f| %>

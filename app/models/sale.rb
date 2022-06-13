@@ -2,9 +2,7 @@ class Sale < ApplicationRecord
 
   belongs_to :end_user
   belongs_to :book
-  
-
-
+  has_many :cart_items, dependent: :destroy
   #sale_imageカラムが追加されたように扱える
   has_one_attached :sale_image
 

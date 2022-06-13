@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  namespace :public do
+   
+  end
 #管理者側
 # URL /admin/sign_in...
 #管理者側のコントローラーがどこに存在するかを指定
@@ -35,10 +38,12 @@ Rails.application.routes.draw do
   scope module: :public do
 
     get root to: 'homes#top'
-    resources :categories, only: [:index, :show]
+    resources :categories, only: [:index, :show, :create]
     resources :sales
-    resources :cart_items, only: [:index, :create, :destroy]
+    #先にdestroy_allを置く
     delete 'cart_items/destroy_all', to: 'cart_items#destroy_all', as: 'destroy_all_cart_items'
+    resources :cart_items, only: [:index, :create, :destroy]
+    
     resources :order_details
     resources :orders
     resources :addresses, only: [:index, :create]
