@@ -17,6 +17,9 @@
 <p>自己紹介文</p>
 <%= @end_user.introduction %>
 
+<p>Status</p>
+<%= @end_user.is_deleted ? "退会" : "有効" %>
+
 <h2>出品内容を見てみる</h2>
 <%= link_to "出品一覧", new_sale_path %>
 <h2>配送先</h2>

@@ -52,7 +52,8 @@ Rails.application.routes.draw do
     resources :orders
     resources :addresses, only: [:index, :create, :destroy, :edit, :update]
     get 'end_users/mypage', to: 'end_users#mypage', as: 'mypage'
-    patch 'end_users/withdrow', to: 'end_users#withdraw', as: 'withdraw_end_user'
+    get 'end_users/unsubscribe', to: 'end_users#unsubscribe', as: 'confirm_unsubscribe'
+    patch 'end_users/withdraw', to: 'end_users#withdraw', as: 'withdraw_end_user'
     resources :end_users, only: [:index, :show, :edit, :update]
     resources :books, only: [:index, :destroy, :create, :show] do
       get 'rakuten_result', to: 'books#rakuten_result', as: 'rakuten_result'

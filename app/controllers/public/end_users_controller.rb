@@ -22,6 +22,15 @@ class Public::EndUsersController < ApplicationController
     @end_user = current_end_user
   end
 
+  def withdraw
+    end_user = current_end_user
+    end_user.is_deleted = true
+    end_user.save
+    #ログイン情報をリセット
+    reset_session
+    redirect_to root_path
+  end
+
   def update
     @end_user = EndUser.find(params[:id])
     @end_user.update(end_user_params)
