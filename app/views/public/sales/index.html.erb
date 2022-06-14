@@ -5,6 +5,8 @@
     <%= sale.book.title %>
     <%= sale.price %>円
     <%= sale.is_active ? "出品中" : "出品不可" %>
+
+  <%= link_to "削除する", sale_path(sale), method: :delete %>
   <% end %>
 <% end %>
 
