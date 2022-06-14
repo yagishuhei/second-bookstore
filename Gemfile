@@ -61,3 +61,6 @@ gem 'devise'
 
 #楽天ブックスAPIを活用
 gem 'rakuten_web_service'
+
+#enumを導入
+gem "enum_help"

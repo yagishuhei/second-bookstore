@@ -18,5 +18,10 @@ module SecondBookstore
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    #日本語化対応のための記述
+    #ja.ymlファイルを元に日本語化
+    config.i18n.default_locale = :ja
+    config.i18n.load_path += Dir[Rails.root.join('config/locales/*.yml').to_s]
   end
 end
