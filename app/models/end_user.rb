@@ -11,6 +11,7 @@ class EndUser < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :sales, dependent: :destroy
   has_many :addresses, dependent: :destroy
+  has_many :orders, dependent: :destroy
 
   #profile_imageカラムが追加されたように扱える
   has_one_attached :profile_image

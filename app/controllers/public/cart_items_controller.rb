@@ -18,8 +18,9 @@ class Public::CartItemsController < ApplicationController
 
   def index
     @cart_items = CartItem.all
+   
   end
-  
+
   def destroy_all
     #ログインしている会員のカート商品全て
     @cart_items = current_end_user.cart_items
@@ -28,15 +29,15 @@ class Public::CartItemsController < ApplicationController
     redirect_to cart_items_path
     flash[:notice] = "カート商品を全て削除しました"
   end
-  
-  
+
+
   def destroy
     cart_item = CartItem.find(params[:id])
     cart_item.destroy
     redirect_to cart_items_path
     flash[:notice] = "カート商品を削除しました"
   end
-  
+
   private
   def cart_item_params
     params.require(:cart_item).permit(:sale_id)
