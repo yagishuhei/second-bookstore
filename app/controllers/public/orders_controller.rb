@@ -5,6 +5,8 @@ class Public::OrdersController < ApplicationController
   
   def create
     @order = current_end_user.orders.new(order_params)
+    @order.save
+    redirect_to order_path(@order)
   end
   def index
   
