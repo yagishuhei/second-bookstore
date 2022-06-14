@@ -1,7 +1,4 @@
-<P> この本に関するレビューを書く</P>
-
-
-    <%= form_with model: review, url: reviews_path(book_id: book.id), method: :post do |f| %>
+  <%= form_with model: review, url: reviews_path(book_id: book.id), method: :post do |f| %>
     <%= f.label :score %>
     <!--idを持たせて一意性をつける-->
     <div id="score">
@@ -30,10 +27,10 @@
     </script>
 <!--/javascriptの入力ルール-->
 
-    <%= f.label :heading %>
+    <%= f.label :heading,'レビュータイトル' %>
     <%= f.text_field :heading %>
 
-    <%= f.label :blog %>
+    <%= f.label :blog,'レビュー内容' %>
     <%= f.text_area :blog %>
 
     <%= f.submit"レビューを保存する" %>

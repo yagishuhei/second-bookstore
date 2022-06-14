@@ -4,7 +4,10 @@ class Public::EndUsersController < ApplicationController
 
   def index
     @end_users = EndUser.all
-    
+
+  end
+  def mypage
+    @end_user = current_end_user
   end
 
   def show
@@ -16,7 +19,16 @@ class Public::EndUsersController < ApplicationController
 
 
   def edit
-    @end_user = EndUser.find(params[:id])
+    @end_user = current_end_user
+  end
+
+  def withdraw
+    end_user = current_end_user
+    end_user.is_deleted = true
+    end_user.save
+    #ログイン情報をリセット
+    reset_session
+    redirect_to root_path
   end
 
   def update

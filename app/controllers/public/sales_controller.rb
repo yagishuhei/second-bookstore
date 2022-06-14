@@ -12,9 +12,9 @@ class Public::SalesController < ApplicationController
     #エラーが発生
     #ActiveRecord::RecordInvalid in Public::SalesController#create
     #Validation failed: Book must exist
-    
+
     @sale = current_end_user.sales.new(sale_params)
-    @sale.book_id = params[:book_id]
+    @sale.book_id = params[:sale][:book_id]
     @sale.save!
     redirect_to request.referer
   end

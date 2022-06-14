@@ -44,11 +44,11 @@ class Public::RegistrationsController < Devise::RegistrationsController
 
   #会員登録後のパス指定
   def after_sign_up_path_for(resource)
-    books_path
+    mypage_path
   end
   #会員ログアウト後のパス指定
   def after_sign_out_path_for(resource)
-    books_path
+    root_path
   end
 
   #publicのregistration内で使用するため
