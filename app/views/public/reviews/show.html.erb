@@ -30,23 +30,10 @@
 
 <!--/レビュー５段階評価-->
 
- <!--イイね機能-->
-    <% if @review.favorited_by?(current_end_user) %>
-      <p>
-        <%= link_to review_favorites_path(@review), method: :delete do %>
-          <i class="fas fa-heart"></i><%= @review.favorites.count %>イイね
-        <% end %>
-      </p>
-    <% else %>
-
-      <p>
-        <%= link_to review_favorites_path(@review), method: :post do %>
-          <i class="far fa-heart"></i><%= @review.favorites.count %>イイね
-        <% end %>
-      </p>
-    <% end %>
- <!--/イイね機能-->
-
+<div id="favorite-btn">
+ <%= render 'public/favorites/favorite-btn', review: @review %>
+ <%#= Dir.glob("app/views/public/favorites/*") %>
+</div>
 
 <p>レビュー投稿日<%= @review.created_at.strftime('%Y/%m/%d') %></p>
 <p>レビュー更新日<%= @review.updated_at.strftime('%Y/%m/%d') %></p>
