@@ -16,17 +16,16 @@
 <p>支払い方法</p>
 <%= @order.payment_method_i18n %>
 <p>配送先</p>
-<%= @order.postal_code %>
+〒<%= @order.postal_code %>
 <%= @order.shipping_address %>
 <%= @order.shipping_name %>
 
 <h4>商品合計</h4>
 ¥<%= @cart_item_price %>円
-<% @total_payment == @cart_item_price += @sipping_cost %>
 <%= @total_payment %>
 
 <%= form_with model: @order, url: orders_path, method: :post do |f| %>
-  <%= f.hidden_field :postal_code, :value => @order.postal_cpde %>
+  <%= f.hidden_field :postal_code, :value => @order.postal_code %>
   <%= f.hidden_field :shipping_address, :value => @order.shipping_address %>
   <%= f.hidden_field :shipping_name, :value => @order.shipping_name %>
   <%= f.hidden_field :payment_method, :value => @order.payment_method %>
