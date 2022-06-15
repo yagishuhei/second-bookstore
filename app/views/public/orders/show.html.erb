@@ -1,7 +1,23 @@
 <h1>注文情報詳細</h1>
 
+<p>注文情報</p>
 
-<%= @order.payment_method %>
-<%= @order.postalcode %>
+<%= @order.payment_method_i18n %>
+<%= @order.postal_code %>
 <%= @order.address %>
 <%= @order.name %>
+
+<h1>カート内商品一覧</h1>
+<%= link_to destroy_all_cart_items_path, method: :delete do  %><p>カート内を空にする</p><% end %>
+<div>
+   <% total = 0 %>
+<% @cart_items.each do |cart_item| %>
+    <%= image_tag cart_item.sale.get_sale_iamge("100x100") %>
+    <%= cart_item.sale.book.title %>
+    ¥<%= cart_item.sale.price %>円
+   <% @cart_item_price = total += cart_item.sale.price %>
+<% end %>
+</div>
+
+  <h4>商品合計</h4>
+  ¥<%= @cart_item_price %>円

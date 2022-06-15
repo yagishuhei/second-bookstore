@@ -29,7 +29,7 @@ class Public::SalesController < ApplicationController
   end
 
   def update
-   
+
     @sale = current_end_user.sales.find(params[:id])
     @sale.update!(sale_params)
     redirect_to sale_path(@sale)

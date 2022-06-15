@@ -15,12 +15,7 @@ class Public::CartItemsController < ApplicationController
 
       end
   end
-
-  def index
-    @cart_items = CartItem.all
-   
-  end
-
+  
   def destroy_all
     #ログインしている会員のカート商品全て
     @cart_items = current_end_user.cart_items
@@ -28,6 +23,12 @@ class Public::CartItemsController < ApplicationController
     @cart_items.destroy_all
     redirect_to cart_items_path
     flash[:notice] = "カート商品を全て削除しました"
+  end
+
+
+  def index
+    @cart_items = CartItem.all
+   
   end
 
 

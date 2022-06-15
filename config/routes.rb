@@ -1,20 +1,23 @@
 Rails.application.routes.draw do
 
-  namespace :admin do
-    get 'categories/index'
-    get 'categories/edit'
-  end
-  namespace :public do
-
-  end
 #管理者側
 # URL /admin/sign_in...
 #管理者側のコントローラーがどこに存在するかを指定
 #新規登録、パスワード変更はしないためskip オプションで削除
 #加えてapp/views/admin/shared/_links.html.erbの余分な記述を削除
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
-    sessions: "admin/sessions"
+    sessions: 'admin/sessions',
   }
+
+
+  #会員側
+  # URL /end_users/sign_in...
+  #会員側のコントローラーがどこに存在するかを指定
+  devise_for :end_users, controllers: {
+    sessions: 'public/sessions',
+    registrations: 'public/registrations',
+  }
+
 
   #URLはadminをつけて、ファイル構成も指定
   namespace :admin do
@@ -30,14 +33,6 @@ Rails.application.routes.draw do
 
   end
 
-  #会員側
-  # URL /end_users/sign_in...
-  #会員側のコントローラーがどこに存在するかを指定
-  devise_for :end_users, controllers: {
-    registrations: "public/registrations",
-    sessions: "public/sessions"
-  }
-
   #URLはそのまま、ファイル構成だけ指定のパス
   scope module: :public do
 
@@ -49,6 +44,8 @@ Rails.application.routes.draw do
     resources :cart_items, only: [:index, :create, :destroy]
 
     resources :order_details
+    post 'orders/order_confirm', to: 'orders#order_confirm', as: 'order_confirm'
+    get 'orders/thanks', to: 'orders#thanks', as: 'thanks'
     resources :orders
     resources :addresses, only: [:index, :create, :destroy, :edit, :update]
     get 'end_users/mypage', to: 'end_users#mypage', as: 'mypage'
