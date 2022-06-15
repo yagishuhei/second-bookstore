@@ -15,7 +15,7 @@ class Public::SalesController < ApplicationController
 
     @sale = current_end_user.sales.new(sale_params)
     @sale.book_id = params[:sale][:book_id]
-    @sale.save!
+    @sale.save
     redirect_to request.referer
   end
 
@@ -26,13 +26,12 @@ class Public::SalesController < ApplicationController
 
   def edit
     @sale = Sale.find(params[:id])
-    @book = Book.find(params[:id])
   end
 
   def update
+
     @sale = current_end_user.sales.find(params[:id])
-    @sale.book_id = params[:book_id]
-    @sale.update(sale_params)
+    @sale.update!(sale_params)
     redirect_to sale_path(@sale)
   end
 
