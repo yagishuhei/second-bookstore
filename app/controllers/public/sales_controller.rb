@@ -18,6 +18,12 @@ class Public::SalesController < ApplicationController
     @sale.save
     redirect_to request.referer
   end
+  
+  def destroy
+    sale = current_end_user.sales.find(params[:id])
+    sale.destroy
+    redirect_to request.referer
+  end 
 
   def show
     @sale = Sale.find(params[:id])
