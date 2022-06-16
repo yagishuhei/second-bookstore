@@ -43,8 +43,8 @@ class Public::OrdersController < ApplicationController
 
 
   def show
-   # @order = Order.find(params[:id])
-    #@cart_items = CartItem.all
+    @order = Order.find(params[:id])
+    @cart_items = CartItem.all
   end
 
   def edit

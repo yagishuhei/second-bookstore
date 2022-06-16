@@ -32,5 +32,5 @@ class EndUser < ApplicationRecord
       profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
     profile_image.variant(resize:size).processed
-  end
+  end 
 end
