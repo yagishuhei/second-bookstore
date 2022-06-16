@@ -6,6 +6,7 @@ class Public::EndUsersController < ApplicationController
   def index
     @end_users = EndUser.all
 
+
   end
   def mypage
     @end_user = current_end_user
@@ -14,7 +15,7 @@ class Public::EndUsersController < ApplicationController
   def show
     @end_user = EndUser.find(params[:id])
     #複数の本＝会員の本全部
-    @reviews = @end_user.reviews
+    @review = @end_user.reviews.last
     @sales = @end_user.sales
   end
 
@@ -45,8 +46,8 @@ class Public::EndUsersController < ApplicationController
 
   def ensure_guest_user
     @end_user = EndUser.find(params[:id])
-    if @end_user.last_name != "ゲストユーザー"
-      redirect_to root_path, notice: 'ゲストユーザーはマイページに遷移できません。'
+    if @end_user.last_name == "ゲストユーザー"
+      redirect_to root_path , notice: 'ゲストユーザーはプロフィール編集画面へ遷移できません。'
     end
   end
 end
