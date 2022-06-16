@@ -17,7 +17,11 @@ Rails.application.routes.draw do
     sessions: 'public/sessions',
     registrations: 'public/registrations',
   }
-
+  
+  devise_scope :end_user do
+    post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
+  end
+  
 
   #URLはadminをつけて、ファイル構成も指定
   namespace :admin do
