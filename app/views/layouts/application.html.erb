@@ -14,9 +14,8 @@
     <%= render 'layouts/header' %>
     <!--{}とフラッシュメッセージの部分が出る-->
     <%= render 'layouts/flash_messages' %>
-    <%= render "public/books/rakuten_search" %>
-
-    <p><%= flash[:alert] %></p>
+    <%= render 'public/books/rakuten_search' %>
     <%= yield %>
+    <%= render "layouts/footer" %>
   </body>
 </html>
