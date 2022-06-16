@@ -4,6 +4,7 @@ class Public::ReviewsController < ApplicationController
 
   def index
     @reviews = current_end_user.reviews
+    @categories = Category.all
   end
 
   def create

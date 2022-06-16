@@ -1,5 +1,5 @@
-<h1>カテゴリー一覧</h1>
-<% @categories.each do |category| %>
+
+<% categories.each do |category| %>
 <%= link_to category_path(category) do %>
 <%= category.name %>
 <% end %>
