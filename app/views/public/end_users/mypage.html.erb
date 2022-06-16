@@ -1,39 +1,40 @@
 <h1>マイページ</h1>
 
-<p>Profile Image</p>
+<p>プロフィール画像</p>
 <%= image_tag @end_user.get_profile_image("100x100") %>
 
-<p>Name</p>
+<p>氏名</p>
 <%= @end_user.last_name %>
 <%= @end_user.first_name %>
 
-<p>Name_kana</p>
+<p>氏名（フリガナ）</p>
 <%= @end_user.last_name_kana %>
 <%= @end_user.first_name_kana %>
 
-<p>Nickname</p>
+<p>ニックネーム</p>
 <%= @end_user.nickname %>
 
-<p>Introduction</p>
+<p>自己紹介</p>
 <%= @end_user.introduction %>
 
-<p>Email</p>
+<p>メールアドレス</p>
 <%= @end_user.email %>
 
-<p>Telephone_number</p>
+<p>電話番号</p>
 <%= @end_user.telephone_number %>
 
-<p>Postal_code</p>
+<p>郵便番号</p>
 <%= @end_user.postal_code %>
 
-<p>Address</p>
+<p>住所</p>
 <%= @end_user.address %>
 
-<p>Status</p>
+<p>会員ステータス</p>
 <%= @end_user.is_deleted ? "退会" : "有効" %>
 
+<% if @end_user.last_name != "ゲストユーザー" %>
 <%= link_to "プロフィールを編集", edit_end_user_path(@end_user) %>
-
+<% end %>
 <%= link_to "退会する", confirm_unsubscribe_path %>
 
 <h2>出品内容を見てみる</h2>

@@ -1,2 +1,16 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+ //max-width
+ .mw_md {
+   max-width: 576px;
+ }
+
+//「ログイン」完了等のフラッシュメッセージスタイル
+.alert-notice {
+  @extend.alert-info;
+}
+
+.alert-alert{
+  @extend.alert-danger;
+}

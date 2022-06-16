@@ -27,7 +27,7 @@
 <% end %>
 <h1>出品した本一覧</h1>
 <% @sales.each do |sale| %>
-  <%= image_tag sale.get_sale_iamge("100x150") %>
+  <%= image_tag sale.get_sale_iamge("200x200") %>
   <%= sale.book.title %>
   <%= sale.price %>円
   <%= sale.is_active ? "出品中" : "出品不可" %>

@@ -64,3 +64,8 @@ gem 'rakuten_web_service'
 
 #enumを導入
 gem "enum_help"
+#日本語化
+# 日本語化
+gem 'rails-i18n', '~> 6.0'
+gem 'devise-i18n'
+

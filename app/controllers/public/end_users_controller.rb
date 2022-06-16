@@ -1,6 +1,7 @@
 class Public::EndUsersController < ApplicationController
   #ログインしているか確認、ログイン状態ではない場合ログインページに移動
   before_action :authenticate_end_user!
+  before_action :ensure_guest_user, only: [:edit]
 
   def index
     @end_users = EndUser.all
@@ -42,4 +43,10 @@ class Public::EndUsersController < ApplicationController
     params.require(:end_user).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :nickname, :introduction, :postal_code, :address, :telephone_number, :profile_image)
   end
 
+  def ensure_guest_user
+    @end_user = EndUser.find(params[:id])
+    if @end_user.last_name != "ゲストユーザー"
+      redirect_to root_path, notice: 'ゲストユーザーはマイページに遷移できません。'
+    end
+  end
 end
