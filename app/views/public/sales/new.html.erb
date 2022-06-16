@@ -5,9 +5,10 @@
   <%= link_to (image_tag(book['medium_image_url'])), book['item_url'] %>
   <%= book.category.name %>
   <%= book.title %>
+
 <!--本の情報をデータに入れるためラジオボタンを活用-->
-  <%= f.radio_button(:book_id, book.id ) %>
-  <%= f.label(:book_id, book.id, value: book.id ) %>
+  <%= f.radio_button :book_id, :value => book.id%>
+
 <!--/本の情報をデータに入れるためラジオボタンを活用-->
 <% end %>
 </div>
@@ -27,7 +28,9 @@
 <% end %>
 <h1>出品した本一覧</h1>
 <% @sales.each do |sale| %>
+<div>
   <%= image_tag sale.get_sale_iamge("200x200") %>
+</div>
   <%= sale.book.title %>
   <%= sale.price %>円
   <%= sale.is_active ? "出品中" : "出品不可" %>

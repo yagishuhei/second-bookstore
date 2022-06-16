@@ -10,8 +10,9 @@
   <%= link_to (image_tag(@sale.book['large_image_url'])), @sale.book['item_url'] %>
    <%= @sale.book.title %>
    <h4>ユーザーの本</h4>
+   <p>
   <%= image_tag @sale.get_sale_iamge("100x200") %>
-
+  </p>
   ￥<%= @sale.price %>円
   <%= @sale.introduction %>
   <% @sale.is_active ? "販売中" : "販売不可" %>

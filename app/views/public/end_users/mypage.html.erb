@@ -1,7 +1,9 @@
 <h1>マイページ</h1>
 
 <p>プロフィール画像</p>
-<%= image_tag @end_user.get_profile_image("100x100") %>
+<div>
+  <%= image_tag @end_user.get_profile_image("100x100") %>
+</div>
 
 <p>氏名</p>
 <%= @end_user.last_name %>
