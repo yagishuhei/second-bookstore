@@ -4,7 +4,7 @@
 <!--カラムに関してはエラーを出さないように、オブジェクトではなくハッシュを使い表示、格納するよう設定-->
 
 <% @books.each do |book| %>
-  <div class = "rakuten-book">
+  <div class = "rakuten-books">
     <!--楽天のitem_urlを合わせればimage表示可能-->
     <%= link_to (image_tag(book['medium_image_url'])), book['item_url'] %>
     <p><%= book['title'] %></p>

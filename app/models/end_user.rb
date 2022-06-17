@@ -19,22 +19,30 @@ class EndUser < ApplicationRecord
   has_many :following_end_user, through: :follower, source: :followed
   #自分がフォローされている人
   has_many :follower_end_user, through: :follower, source: :follower
-  
+
   #ユーザーをフォロー
   def follow(end_user_id)
     follower.create(followed_id: end_user_id)
   end
-  
+
   #ユーザーのフォローを外す
   def unfollow(end_user_id)
     follower.find_by(followed_id: end_user_id).destroy
   end
-  
+
   def following?(end_user)
     following_end_user.include?(end_user)
   end
   
-  
+  #検索機能部分一致
+  def self.looks(search, word)
+    if search == "partial_match"
+      @end_user = EndUser.where("name LIKE?", "%#{word}%")
+    else
+      @end_user = EndUser.all
+    end
+  end
+
   #ゲストログイン用にアカウントを用意
   def self.guest
     find_or_create_by!(last_name: 'ゲストユーザー', email: 'guest@example.com') do |end_user|

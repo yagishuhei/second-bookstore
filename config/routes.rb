@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   scope module: :public do
 
     get root to: 'homes#top'
+    get 'searchs/search', to: 'searchs#search', as: 'search'
     resources :categories, only: [:index, :show,]
     resources :sales
     #先にdestroy_allを置く

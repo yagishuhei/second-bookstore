@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 2022_06_17_013633) do
   create_table "books", force: :cascade do |t|
     t.integer "end_user_id", null: false
     t.integer "category_id", null: false
-    t.integer "isbn"
+    t.bigint "isbn"
     t.string "title"
     t.string "author"
     t.string "publisher_name"
