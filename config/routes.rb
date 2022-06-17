@@ -17,11 +17,11 @@ Rails.application.routes.draw do
     sessions: 'public/sessions',
     registrations: 'public/registrations',
   }
-  
+
   devise_scope :end_user do
     post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
   end
-  
+
 
   #URLはadminをつけて、ファイル構成も指定
   namespace :admin do
@@ -55,7 +55,12 @@ Rails.application.routes.draw do
     get 'end_users/mypage', to: 'end_users#mypage', as: 'mypage'
     get 'end_users/unsubscribe', to: 'end_users#unsubscribe', as: 'confirm_unsubscribe'
     patch 'end_users/withdraw', to: 'end_users#withdraw', as: 'withdraw_end_user'
-    resources :end_users, only: [:index, :show, :edit, :update]
+    resources :end_users, only: [:index, :show, :edit, :update] do
+      member do
+        get :follows, :followers
+      end
+      resource :relationships, only: [:create, :destroy]
+    end
     resources :books, only: [:index, :destroy, :create, :show] do
       get 'rakuten_result', to: 'books#rakuten_result', as: 'rakuten_result'
     end

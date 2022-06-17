@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_10_175230) do
+ActiveRecord::Schema.define(version: 2022_06_17_013633) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 2022_06_10_175230) do
   create_table "books", force: :cascade do |t|
     t.integer "end_user_id", null: false
     t.integer "category_id", null: false
-    t.bigint "isbn"
+    t.integer "isbn"
     t.string "title"
     t.string "author"
     t.string "publisher_name"
@@ -150,6 +150,15 @@ ActiveRecord::Schema.define(version: 2022_06_10_175230) do
     t.index ["end_user_id"], name: "index_orders_on_end_user_id"
   end
 
+  create_table "relationships", force: :cascade do |t|
+    t.integer "follower_id", null: false
+    t.integer "followed_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["followed_id"], name: "index_relationships_on_followed_id"
+    t.index ["follower_id"], name: "index_relationships_on_follower_id"
+  end
+
   create_table "review_comments", force: :cascade do |t|
     t.integer "end_user_id", null: false
     t.integer "review_id", null: false
@@ -196,6 +205,8 @@ ActiveRecord::Schema.define(version: 2022_06_10_175230) do
   add_foreign_key "order_details", "orders"
   add_foreign_key "order_details", "sales"
   add_foreign_key "orders", "end_users"
+  add_foreign_key "relationships", "end_users", column: "followed_id"
+  add_foreign_key "relationships", "end_users", column: "follower_id"
   add_foreign_key "review_comments", "end_users"
   add_foreign_key "review_comments", "reviews"
   add_foreign_key "reviews", "books"
