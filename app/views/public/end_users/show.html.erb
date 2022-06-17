@@ -5,14 +5,12 @@
       <h1 class="text-dark bg-light p-4 md-0">プロフィール</h1>
       <div class = "card-list-container py-1 col-12">
        <p class="d-flex justify-content-end">
-        <% if current_end_user != @end_user %>
-         <% if current_end_user.following?(@end_user) %>
-          <%= link_to 'フォロー外す', end_user_relationships_path(@end_user), method: :delete,class: "btn btn-sm btn-danger" %>
-         <% else %>
-          <%= link_to 'フォローする', end_user_relationships_path(@end_user), method: :post, class: "btn btn_sm btn-success" %>
-         <% end %>
+
+        <div id="follow">
+         <%= render 'public/relationships/follow', end_user: @end_user %>
+        </div>
        </p>
-       <% end %>
+
           <div class= "card mx-auto mt-1 shadow-lg">
             <div class= "card-body">
               <div class = "row">
@@ -21,7 +19,7 @@
 
                 <%= link_to follows_end_user_path(@end_user) do %>
                 <p>フォロー<%= @following_users %><p>
-                <% end %>&nbsp;&nbsp;
+                <% end %>
                 <%= link_to followers_end_user_path(@end_user) do %>
                 <p>フォロワー<%= @follower_users %></p>
                 <% end %>
@@ -69,14 +67,10 @@
                  </table>
                   </div>
 
-
-
-
-
             </div>
             <div class="row">
              <div class= "col-12">
-              <p>プロフィール</p>
+              <h4>プロフィール</h4>
                   <%= @end_user.introduction %>
              </div>
             </div>
@@ -93,8 +87,8 @@
 
 <%= link_to "配送先一覧", addresses_path, class: "btn btn-lg px-4 btn-info" %>
 
-<h2>お気に入り本の本棚</h2>
-  <%= link_to book_path(@review.book) do %>
+<h3>最新のレビュー</h3>
+<% if @review.present? %>
   <!--楽天のitem_urlを合わせればimage表示可能-->
    <%= link_to (image_tag (@review.book['medium_image_url'])), @review.book['item_url'] %>
     <%= @review.book.title %>
@@ -123,9 +117,11 @@
 
      <p><%= link_to "#{@review.review_comments.count}コメント", review_path(@review) %></>
   <p><i class="fas fa-heart"></i><%= @review.favorites.count %>イイね</p>
+<% else %>
+<p>ご登録の本はございません。</p>
+<% end%>
 
 
-<% end %>
 
 <h2>出品中の本一覧</h2>
 <% @sales.each do |sale| %>

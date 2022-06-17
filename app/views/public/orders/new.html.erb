@@ -17,10 +17,12 @@
   <%= f.radio_button :address, "1" , checked: true %>
   <%= f.label :address, "ご自身のご住所" %>
 
-  <%= f.radio_button :address, "2" %>
-  <%= f.label :address, "ご登録されたご住所" %>
-
-  <%= f.select :address_id, options_from_collection_for_select(current_end_user.addresses, :id, :address_display) %>
+  <!-- 住所登録がある場合-->
+  <% if current_end_user.addresses.ids.present? %>
+    <%= f.radio_button :address, "2" %>
+    <%= f.label :address, "ご登録されたご住所" %>
+    <%= f.select :address_id, options_from_collection_for_select(current_end_user.addresses, :id, :address_display) %>
+  <% end %>
 
   <%= f.radio_button :address, "3" %>
   <%= f.label :address, "新規ご住所" %>
