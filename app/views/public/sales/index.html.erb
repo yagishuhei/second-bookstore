@@ -1,15 +1,18 @@
 <h1>全ての出品本一覧</h1>
-<% @sales.each do |sale| %>
-  <%= link_to sale_path(sale) do %>
-    <%= image_tag sale.get_sale_iamge("200x200") %>
-    <%= sale.book.title %>
-    <%= sale.price %>円
-    <%= sale.is_active ? "出品中" : "出品不可" %>
+<% if @sale.present? %>
+  <% @sales.each do |sale| %>
+    <%= link_to sale_path(sale) do %>
+      <%= image_tag sale.get_sale_iamge("200x200") %>
+      <%= sale.book.title %>
+      <%= sale.price %>円
+      <%= sale.is_active ? "出品中" : "出品不可" %>
+      <% end %>
+    <% if @end_user == current_end_user %>
+    <%= link_to "削除", sale_path(sale), method: :delete %>
     <% end %>
-  <% if @end_user == current_end_user %>
-  <%= link_to "削除", sale_path(sale), method: :delete %>
   <% end %>
-
+<% else %>
+  <p>出品されている本はございません。</p>
 <% end %>
 
 
