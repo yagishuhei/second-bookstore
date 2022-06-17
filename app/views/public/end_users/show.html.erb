@@ -1,44 +1,110 @@
-<h1>詳細ページ</h1>
 
-<p>プロフィール画像</p>
-<%= image_tag @end_user.get_profile_image("150x150") %>
+<div class= "container px-5 px-sm-0">
+  <div class="row">
 
-<p>氏名</p>
-<%= @end_user.last_name %>
-<%= @end_user.first_name %>
+      <h1 class="text-dark bg-light p-4 md-0">プロフィール</h1>
+      <div class = "card-list-container py-1 col-12">
+       <p class="d-flex justify-content-end">
+        <% if current_end_user != @end_user %>
+         <% if current_end_user.following?(@end_user) %>
+          <%= link_to 'フォロー外す', end_user_relationships_path(@end_user), method: :delete,class: "btn btn-sm btn-danger" %>
+         <% else %>
+          <%= link_to 'フォローする', end_user_relationships_path(@end_user), method: :post, class: "btn btn_sm btn-success" %>
+         <% end %>
+       </p>
+       <% end %>
+          <div class= "card mx-auto mt-1 shadow-lg">
+            <div class= "card-body">
+              <div class = "row">
+                <div class="col-2">
+                 <%= image_tag @end_user.get_profile_image("100x100") %>
 
-<p>フリガナ</p>
-<%= @end_user.last_name_kana %>
-<%= @end_user.first_name_kana %>
+                <%= link_to follows_end_user_path(@end_user) do %>
+                <p>フォロー<%= @following_users %><p>
+                <% end %>&nbsp;&nbsp;
+                <%= link_to followers_end_user_path(@end_user) do %>
+                <p>フォロワー<%= @follower_users %></p>
+                <% end %>
 
-<p>ニックネーム</p>
-<%= @end_user.nickname %>
+                </div>
+                <div class="col-10">
 
-<p>自己紹介文</p>
-<%= @end_user.introduction %>
+                 <table class= "profile">
+                  <thead>
 
-<p>Status</p>
-<%= @end_user.is_deleted ? "退会" : "有効" %>
+                    <th>
+                     氏名
+                    </th>
+                    <th>
+                     フリガナ
+                    </th>
+                    <th>
+                     ニックネーム
+                    </th>
+                    <th>
+                     ステータス
+                    </th>
 
-<h2>出品内容を見てみる</h2>
-<%= link_to "出品一覧", new_sale_path %>
-<h2>配送先</h2>
-<%= link_to "配送先一覧", addresses_path %>
+
+                  </thead>
+                  <tbody>
+                   <td>
+                     <%= @end_user.last_name %>
+                  <%= @end_user.first_name %>
+                   </td>
+                   <td>
+                     <%= @end_user.last_name_kana %>
+                  <%= @end_user.first_name_kana %>
+
+                   </td>
+                   <td>
+                    <%= @end_user.nickname %>
+
+                   </td>
+                   <td>
+                   <%= @end_user.is_deleted ? "退会" : "有効" %>
+                   </td>
+
+                  </tbody>
+                 </table>
+                  </div>
+
+
+
+
+
+            </div>
+            <div class="row">
+             <div class= "col-12">
+              <p>プロフィール</p>
+                  <%= @end_user.introduction %>
+             </div>
+            </div>
+
+
+      </div>
+    </div>
+ </div>
+</div>
+
+
+
+<%= link_to "出品一覧", new_sale_path, class: "btn btn-lg px-4 btn-info" %>
+
+<%= link_to "配送先一覧", addresses_path, class: "btn btn-lg px-4 btn-info" %>
 
 <h2>お気に入り本の本棚</h2>
-
-<% @reviews.each do |review| %>
-  <%= link_to book_path(review.book) do %>
+  <%= link_to book_path(@review.book) do %>
   <!--楽天のitem_urlを合わせればimage表示可能-->
-   <%= link_to (image_tag (review.book['medium_image_url'])), review.book['item_url'] %>
-    <%= review.book.title %>
-    <p><%= link_to "この本のレビュー詳細を見てみる", review_path(review.book) %></p>
+   <%= link_to (image_tag (@review.book['medium_image_url'])), @review.book['item_url'] %>
+    <%= @review.book.title %>
+    <p><%= link_to "この本のレビュー詳細を見てみる", review_path(@review.book) %></p>
       　<div id="score"></div></br>
-      　<%= review.score %>
+      　<%= @review.score %>
        <!--レビュー５段階評価-->
-       
+
         <script>
-        
+
           $('#score').raty({
             //imageを表示
             starOff: '<%= asset_path('star-off.png') %>',
@@ -49,16 +115,16 @@
             //固定して表示できる
             readOnly: true,
             //呼び出したいカラムデータ
-            score: <%= review.score %>,
+            score: <%= @review.score %>,
           });
-        
+
         </script>
       <!--/レビュー５段階評価-->
-   
-     <p><%= link_to "#{review.review_comments.count}コメント", review_path(review) %></>
-  <p><i class="fas fa-heart"></i><%= review.favorites.count %>イイね</p>
- 
-  <% end %>
+
+     <p><%= link_to "#{@review.review_comments.count}コメント", review_path(@review) %></>
+  <p><i class="fas fa-heart"></i><%= @review.favorites.count %>イイね</p>
+
+
 <% end %>
 
 <h2>出品中の本一覧</h2>
@@ -70,3 +136,10 @@
  <% end %>
 
 <% end %>
+
+</div>
+
+
+
+
+

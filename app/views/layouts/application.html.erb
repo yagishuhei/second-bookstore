@@ -11,11 +11,14 @@
   </head>
 
   <body class="d-flex flex-column vh-100">
+ 
     <%= render 'layouts/header' %>
     <!--{}とフラッシュメッセージの部分が出る-->
-    <%= render 'layouts/flash_messages' %>
-    <%= render 'public/books/rakuten_search' %>
-    <%= yield %>
+  
+      <%= render 'layouts/flash_messages' %>
+      <%= render 'public/books/rakuten_search' %>
+      <%= yield %>
+  
     <%= render "layouts/footer" %>
   </body>
 </html>
