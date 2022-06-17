@@ -15,7 +15,7 @@ class Public::CartItemsController < ApplicationController
 
       end
   end
-  
+
   def destroy_all
     #ログインしている会員のカート商品全て
     @cart_items = current_end_user.cart_items
@@ -27,8 +27,8 @@ class Public::CartItemsController < ApplicationController
 
 
   def index
-    @cart_items = CartItem.all
-   
+    @cart_items = current_end_user.cart_items
+
   end
 
 
