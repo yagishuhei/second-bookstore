@@ -3,82 +3,8 @@
   <div class="row">
 
       <h1 class="text-dark bg-light p-4 md-0">プロフィール</h1>
-      <div class = "card-list-container py-1 col-12">
-       <p class="d-flex justify-content-end">
-
-        <div id="follow">
-         <%= render 'public/relationships/follow', end_user: @end_user %>
-        </div>
-       </p>
-
-          <div class= "card mx-auto mt-1 shadow-lg">
-            <div class= "card-body">
-              <div class = "row">
-                <div class="col-2">
-                 <%= image_tag @end_user.get_profile_image("100x100") %>
-
-                <%= link_to follows_end_user_path(@end_user) do %>
-                <p>フォロー<%= @following_users %><p>
-                <% end %>
-                <%= link_to followers_end_user_path(@end_user) do %>
-                <p>フォロワー<%= @follower_users %></p>
-                <% end %>
-
-                </div>
-                <div class="col-10">
-
-                 <table class= "profile">
-                  <thead>
-
-                    <th>
-                     氏名
-                    </th>
-                    <th>
-                     フリガナ
-                    </th>
-                    <th>
-                     ニックネーム
-                    </th>
-                    <th>
-                     ステータス
-                    </th>
-
-
-                  </thead>
-                  <tbody>
-                   <td>
-                     <%= @end_user.last_name %>
-                  <%= @end_user.first_name %>
-                   </td>
-                   <td>
-                     <%= @end_user.last_name_kana %>
-                  <%= @end_user.first_name_kana %>
-
-                   </td>
-                   <td>
-                    <%= @end_user.nickname %>
-
-                   </td>
-                   <td>
-                   <%= @end_user.is_deleted ? "退会" : "有効" %>
-                   </td>
-
-                  </tbody>
-                 </table>
-                  </div>
-
-            </div>
-            <div class="row">
-             <div class= "col-12">
-              <h4>プロフィール</h4>
-                  <%= @end_user.introduction %>
-             </div>
-            </div>
-
-
-      </div>
-    </div>
- </div>
+      <%= render 'public/end_users/profile', end_user: @end_user, following_users: @following_users, follower_users: @follower_users %>
+   
 </div>
 
 

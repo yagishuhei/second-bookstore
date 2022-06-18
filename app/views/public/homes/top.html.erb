@@ -1,3 +1,33 @@
+<% if end_user_signed_in? %>
+  <div class= "container px-5 px-sm-0">
+  <div class="row">
+    <div class= "col-md-8 offset-md-1">
+       <h2>レビューする本を探す。</h2>
+       <div class="col-md-8 offset-md-1 py-3">
+    <%= render 'public/books/rakuten_search' %>
+    </div>
+      <h2 class="text-dark p-4 md-0">レビュー一覧</h2>
+      <div class = "card-list-container py-1 col-12">
+        <%= render "public/reviews/index", reviews: @reviews %>
+      </div>
+    </div>
+    <div class= "col-md-3">
+      <%= render 'public/books/rakuten_search' %>
+
+    <div class= "mt-3">
+      <h3>カテゴリー</h3>
+      <%= render 'public/categories/index', categories: @categories %>
+    </div>
+    <div>
+      <%= render 'public/searchs/search' %>
+    </div>
+  </div>
+  </div>
+</div>
+
+
+
+<% else %>
 <h1>ようこそsecond-bookstoreへ</h1>
 <h2>ここでは本好きが集まれるサイトとなっております</h2>
 <h4>利用の仕方</h4>
@@ -10,20 +40,6 @@
 　加えて中古の本を誰かに譲りたい、または、本好きな人の持っている本を読んでみたい、自分とは違うジャンルでも読んでみたいと思う時。</br>
 </h6>
 
-<h2>それぞれのユーザーのレビュー一覧</h2>
-
-<% @reviews.each do |review| %>
-<div class="end_user">
-<%= image_tag review.end_user.get_profile_image("100x100") %>
-<%= review.end_user.nickname %>
-</div>
-
-<%= link_to (image_tag(review.book['medium_image_url'])), review.book['item_url'] %>
-<%= review.book.title %>
-<p><%= link_to "#{review.review_comments.count}コメント", review_path(review) %></>
-<p><i class="fas fa-heart"></i><%= review.favorites.count %>イイね</p>
-<%= review.heading %>
-<p><%= link_to "この本のレビュー詳細を見てみる", review_path(review) %></p>
 <% end %>
 
 
