@@ -1,3 +1,4 @@
+
 class Public::OrdersController < ApplicationController
   def index
 
@@ -31,15 +32,18 @@ class Public::OrdersController < ApplicationController
     if params[:order][:address] == "1"
       @order.postal_code = current_end_user.postal_code
       @order.shipping_address = current_end_user.address
-      @order.sipping_name = current_end_user.last_name + current_end_user.first_name
+      @order.shipping_name = current_end_user.last_name + current_end_user.first_name
+    elsif params[:order][:address] =="2"
 
-    elsif params[:order][:address] = "2"
       @address = Address.find(params[:order][:address_id])
       @order.postal_code = @address.postal_code
       @order.shipping_address = @address.address
       @order.shipping_name = @address.name
+
     end
   end
+
+
 
 
   def show

@@ -1,5 +1,5 @@
 <h1>注文情報入力</h1>
-<%= form_with model: @order, url: order_confirm_path, metod: :post do |f| %>
+<%= form_with model: @order, url: order_confirm_path(address_id: @order.id), metod: :post do |f| %>
 
   <h2>支払い方法</h2>
 
@@ -25,12 +25,11 @@
   <% end %>
 
   <%= f.radio_button :address, "3" %>
-  <%= f.label :address, "新規ご住所" %>
   <%= f.label :postal_code, "郵便番号" %>
   <%= f.text_field :postal_code %>
-  <%= f.label :address, "住所" %>
-  <%= f.text_field :address %>
-  <%= f.label :name, "宛名" %>
-  <%= f.text_field :name %>
+  <%= f.label :shipping_address, "住所" %>
+  <%= f.text_field :shipping_address %>
+  <%= f.label :shipping_name, "宛名" %>
+  <%= f.text_field :shipping_name %>
   <%= f.submit "登録" %>
 <% end %>
