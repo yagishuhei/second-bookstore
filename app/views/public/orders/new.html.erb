@@ -1,5 +1,5 @@
 <h1>注文情報入力</h1>
-<%= form_with model: @order, url: order_confirm_path(address_id: @order.id), metod: :post do |f| %>
+<%= form_with model: @order, url: order_confirm_path, metod: :post do |f| %>
 
   <h2>支払い方法</h2>
 
