@@ -82,7 +82,7 @@
 </div>
 
 
-
+<%= link_to "登録した本", books_path(end_user_id: @end_user.id), class: "btn btn-lg px-4 btn-info" %>
 <%= link_to "出品一覧", new_sale_path, class: "btn btn-lg px-4 btn-info" %>
 
 <%= link_to "配送先一覧", addresses_path, class: "btn btn-lg px-4 btn-info" %>

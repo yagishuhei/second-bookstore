@@ -15,7 +15,7 @@ class Public::BooksController < ApplicationController
       @book = Book.new
     end
   end
-  
+
   def create
     @book = Book.new(book_params)
     #カラの中にまずend_user_idがログインした会員idを入れる
@@ -25,13 +25,17 @@ class Public::BooksController < ApplicationController
   end
 
   def index
-    @books = current_end_user.books
+    @end_user = EndUser.find(params[:end_user_id])
+    @books = @end_user.books
   end
-  
+
   def destroy
-  end 
-  
-  
+    book = current_end_user.books.find(params[:id])
+    book.destroy
+    redirect_to books_path
+  end
+
+
   def show
      @book = Book.find(params[:id])
      @review =Review.new
