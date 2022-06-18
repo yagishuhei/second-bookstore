@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_10_175230) do
+ActiveRecord::Schema.define(version: 2022_06_17_013633) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -139,8 +139,8 @@ ActiveRecord::Schema.define(version: 2022_06_10_175230) do
   create_table "orders", force: :cascade do |t|
     t.integer "end_user_id", null: false
     t.string "postal_code"
-    t.string "address"
-    t.string "name"
+    t.string "shipping_address"
+    t.string "shipping_name"
     t.integer "shipping_cost"
     t.integer "total_payment"
     t.integer "payment_method"
@@ -148,6 +148,15 @@ ActiveRecord::Schema.define(version: 2022_06_10_175230) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["end_user_id"], name: "index_orders_on_end_user_id"
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "follower_id", null: false
+    t.integer "followed_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["followed_id"], name: "index_relationships_on_followed_id"
+    t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
   create_table "review_comments", force: :cascade do |t|
@@ -166,6 +175,7 @@ ActiveRecord::Schema.define(version: 2022_06_10_175230) do
     t.string "heading"
     t.text "blog"
     t.float "score"
+    t.integer "review_status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["book_id"], name: "index_reviews_on_book_id"
@@ -196,6 +206,8 @@ ActiveRecord::Schema.define(version: 2022_06_10_175230) do
   add_foreign_key "order_details", "orders"
   add_foreign_key "order_details", "sales"
   add_foreign_key "orders", "end_users"
+  add_foreign_key "relationships", "end_users", column: "followed_id"
+  add_foreign_key "relationships", "end_users", column: "follower_id"
   add_foreign_key "review_comments", "end_users"
   add_foreign_key "review_comments", "reviews"
   add_foreign_key "reviews", "books"

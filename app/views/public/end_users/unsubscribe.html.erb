@@ -1,0 +1,18 @@
+<h1>
+  <strong>
+    本当に退会されてもよろしいですか？
+  </strong>
+</h1>
+<p>
+  退会された場合、投稿したレビュー、出品した本、購入履歴、</br>
+  が閲覧できなくなります。</br>
+  退会される場合は、『退会する』をクリックしてください。</br>
+</p>
+
+<li>
+  <%= link_to "退会しない", mypage_path %>
+</li>
+
+<li>
+  <%= link_to "退会する", withdraw_end_user_path, method: :patch, data: {confirm: "本当に退会してもよろしいですか？"} %>
+</li>

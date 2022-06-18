@@ -14,7 +14,7 @@
         <%= f.hidden_field :score, id: :review_star %>
     </div>
     <!--idを持たせて一意性をつける-->
-    
+
 <!--javascriptの入力内容（javascriptルール）-->
     <script>
     // javascript > jquery > raty関数
@@ -37,6 +37,9 @@
 
     <%= f.label :blog %>
     <%= f.text_area :blog %>
+
+    <%= f.select :review_status, Review.review_statuses.keys.map {|k| [t("enums.review.review_status.#{k}"),k]},{},{class: "custom-select w-25"} %>
+
 
     <%= f.submit"レビューを保存する" %>
     <%= link_to "他のレビューを見る", reviews_path %>

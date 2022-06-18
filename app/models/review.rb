@@ -4,6 +4,7 @@ class Review < ApplicationRecord
   has_many :review_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
+  enum review_status: {published: 0, draft: 1}
 
   #Favoriteテーブルにend_userIDが存在するか？
   def favorited_by?(end_user)

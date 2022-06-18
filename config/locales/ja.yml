@@ -1,0 +1,12 @@
+#yml==ハッシュと同じデータ構造を表現
+ja: #日本語設定
+  enums: #enumの設定
+    order: #model
+      payment_method: #colmn
+        credit_card: "クレジットカード"
+        transfer: "銀行振込"
+
+    review:
+      review_status:
+        published: "公開する"
+        draft: "下書きする"

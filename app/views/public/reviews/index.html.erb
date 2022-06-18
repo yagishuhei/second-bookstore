@@ -1,15 +1,22 @@
-<h1>投稿したレビュー一覧</h1>
+<div class= "container px-5 px-sm-0">
+  <div class="row">
+    <div class= "col-md-8 offset-md-1">
+      <h1 class="text-dark p-4 md-0">投稿したレビュー一覧</h1>
+      <div class = "card-list-container py-1 col-12">
+        <%= render "public/reviews/index", reviews: @reviews %>
+      </div>
+    </div>
+    <div class= "col-md-3">
+      <%= render 'public/books/rakuten_search' %>
 
-<% @reviews.each do |review| %>
-<div></div>
-<%= link_to (image_tag(review.book.medium_image_url)), review.book.item_url %>
-<%= review.book.title %>
-<%= review.heading %>
-<%= review.blog %>
-<%= link_to"レビューの詳細を見る", review_path(review) %>
-<%= link_to "#{review.review_comments.count}コメント", review_path(review) %>
+    <div class= "mt-3">
+      <h3>カテゴリー</h3>
+      <%= render 'public/categories/index', categories: @categories %>
+    </div>
+    <div>
+      <%= render 'public/searchs/search' %>
+    </div>
+  </div>
+  </div>
 </div>
-<% end %>
-
-
 

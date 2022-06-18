@@ -7,6 +7,7 @@ class CreateReviews < ActiveRecord::Migration[6.1]
       t.string :heading
       t.text :blog
       t.float :score
+      t.integer :review_status
 
       t.timestamps
     end

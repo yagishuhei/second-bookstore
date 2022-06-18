@@ -10,10 +10,42 @@ class EndUser < ApplicationRecord
   has_many :review_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :sales, dependent: :destroy
+  has_many :addresses, dependent: :destroy
+  has_many :orders, dependent: :destroy
+  #外部キーも指定
+  #has_many :relationships, dependent: :destroy
+  has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  #自分がフォローしている人=自分にフォロされた人(source)
+  has_many :following_end_user, through: :follower, source: :followed
+  #自分がフォローされている人=自分をフォロした人(source)
+  has_many :follower_end_user, through: :followed, source: :follower
+  
+  
+  def following?(end_user)
+    following_end_user.include?(end_user)
+  end
+
+  #ゲストログイン用にアカウントを用意
+  def self.guest
+    find_or_create_by!(last_name: 'ゲストユーザー', email: 'guest@example.com') do |end_user|
+      end_user.password = SecureRandom.urlsafe_base64
+      end_user.last_name = 'ゲストユーザー'
+    end
+  end
+  
+    def self.guest
+    find_or_create_by!(last_name: 'ゲスト', first_name: 'ユーザー', email: 'guest@example.com') do |end_user|
+      end_user.password = SecureRandom.urlsafe_base64
+      end_user.last_name = 'ゲスト'
+      end_user.first_name = 'ユーザー'
+    end
+  end
+
+
 
   #profile_imageカラムが追加されたように扱える
   has_one_attached :profile_image
-
 
   #profile_imageが設定されない時、no-image.jpgをデフォルト画像としてActiveStorageに格納、その後表示。
   #サイズの変更も行う。

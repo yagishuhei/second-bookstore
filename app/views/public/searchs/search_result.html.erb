@@ -1,0 +1,17 @@
+<h1>本の検索結果一覧</h1>
+
+<% @records.each do |book| %>
+  <div >
+    <%= image_tag book.end_user.get_profile_image("100x100") %>
+  </div>
+  <%= link_to (image_tag(book.medium_image_url)), book.item_url %>
+  
+    <%= book.title %>
+    <%= book.author %>
+    <% book.reviews.each do |review| %>
+    <%= link_to review_path(review) do %>
+      <%= review.heading %>
+    <% end %>
+  <% end %>
+
+<% end %>

@@ -6,32 +6,10 @@
 <%= @review.book.title %>
 <%= @review.book.author %>
 <%= @review.book.publisher_name %>
-
- <!--イイね機能-->
-    <% if @review.favorited_by?(current_end_user) %>
-      <p>
-        <%= link_toreview_favorites_path(@review), method: :delete do %>
-          <i class="fas fa-heart"></i><%= @review.favorites.count %>イイね
-        <% end %>
-      </p>
-    <% else %>
-
-      <p>
-        <%= link_to review_favorites_path(@review), method: :post do %>
-          <i class="far fa-heart"></i><%= @review.favorites.count %>イイね
-        <% end %>
-      </p>
-    <% end %>
- <!--/イイね機能-->
-
-
-<p>レビュー投稿日<%= @review.created_at.strftime('%Y/%m/%d') %></p>
-<p>レビュー更新日<%= @review.updated_at.strftime('%Y/%m/%d') %></p>
-<p><%= @review.heading %></p>
-<%= @review.blog %>
 <!--レビュー５段階評価-->
 
 <div id="score"></div>
+<%= @review.score %>
 
 <script>
 
@@ -52,32 +30,30 @@
 
 <!--/レビュー５段階評価-->
 
+<div id="favorite-btn">
+ <%= render 'public/favorites/favorite-btn', review: @review %>
+ <%#= Dir.glob("app/views/public/favorites/*") %>
+</div>
+
+<p>レビュー投稿日<%= @review.created_at.strftime('%Y/%m/%d') %></p>
+<p>レビュー更新日<%= @review.updated_at.strftime('%Y/%m/%d') %></p>
+<p><%= @review.heading %></p>
+<%= @review.blog %>
+<% if @review.end_user == current_end_user %>
 <li><%= link_to "編集する", edit_review_path(@review) %></li>
+<li><%= link_to "削除", review_path(@review), method: :delete, data: {confirm: "本当に削除しますか？"} %></li>
+<% end %>
 
 <li><%= link_to "他の投稿したレビューの一覧を見てみる", reviews_path %></li>
 
 <!-- レビューへのコメント機能-->
 
+<div id="comment">
+  <%= render 'public/review_comments/comment', review: @review, review_comment: @review_comment %>
+</div>
 
-  <div class="review-comment-all">
-    <p>コメント件数: <%= @review.review_comments.count %></p>
-    <!--コメント一覧-->
-      <% @review.review_comments.each do |review_comment| %>
-        <p>
-          <%= image_tag review_comment.end_user.get_profile_image("50x50") %>
-          <%= review_comment.end_user.nickname %>
-          <%= review_comment.created_at.strftime('%Y/%m/%d') %>
-          <%= review_comment.comment %>
-        </p>
-      <% end %>
-  </div>
-  <!--コメント投稿フォーム-->
-    <div class="review-comment-form">
-      <!--routingがネストしているため、親と子のインスタンス変数が必要-->
-      <%= form_with model: [@review, @review_comment], url: review_review_comments_path(@review.id), method: :post do |f| %>
-      <%= f.text_area :comment, rows: '5', placeholder: "コメント" %>
-      <%= f.submit "送信する" %>
-      <% end %>
-    </div>
+
+
+
 <!-- /レビューへのコメント機能-->
 

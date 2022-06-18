@@ -9,31 +9,41 @@ class Public::SalesController < ApplicationController
   end
 
   def create
+    #エラーが発生
+    #ActiveRecord::RecordInvalid in Public::SalesController#create
+    #Validation failed: Book must exist
+
     @sale = current_end_user.sales.new(sale_params)
-    @sale.book_id = params[:book_id]
+    @sale.book_id = params[:sale][:book_id]
     @sale.save
     redirect_to request.referer
   end
+  
+  def destroy
+    sale = current_end_user.sales.find(params[:id])
+    sale.destroy
+    redirect_to request.referer
+  end 
 
   def show
     @sale = Sale.find(params[:id])
+    @cart_item = CartItem.new
   end
 
   def edit
     @sale = Sale.find(params[:id])
-    @book = Book.find(params[:id])
   end
 
   def update
+
     @sale = current_end_user.sales.find(params[:id])
-    @sale.book_id = params[:book_id]
-    @sale.update(sale_params)
+    @sale.update!(sale_params)
     redirect_to sale_path(@sale)
   end
 
   private
   def sale_params
-    params.require(:sale).permit(:sale_image, :introduction, :price, :is_active)
+    params.require(:sale).permit(:book_id, :sale_image, :introduction, :price, :is_active)
   end
 
 end

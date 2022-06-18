@@ -1,54 +1,53 @@
-<h1>詳細ページ</h1>
 
-<p>Profile Image</p>
-<%= image_tag @end_user.get_profile_image("100x100") %>
+<div class= "container px-5 px-sm-0">
+  <div class="row">
 
-<p>Name</p>
-<%= @end_user.last_name %>
-<%= @end_user.first_name %>
+      <h1 class="text-dark bg-light p-4 md-0">プロフィール</h1>
+      <%= render 'public/end_users/profile', end_user: @end_user, following_users: @following_users, follower_users: @follower_users %>
+   
+</div>
 
-<p>Name_kana</p>
-<%= @end_user.last_name_kana %>
-<%= @end_user.first_name_kana %>
 
-<p>Nickname</p>
-<%= @end_user.nickname %>
+<%= link_to "登録した本", books_path(end_user_id: @end_user.id), class: "btn btn-lg px-4 btn-info" %>
+<%= link_to "出品一覧", new_sale_path, class: "btn btn-lg px-4 btn-info" %>
 
-<p>Introduction</p>
-<%= @end_user.introduction %>
+<%= link_to "配送先一覧", addresses_path, class: "btn btn-lg px-4 btn-info" %>
 
-<p>Email</p>
-<%= @end_user.email %>
-
-<p>Telephone_number</p>
-<%= @end_user.telephone_number %>
-
-<p>Postal_code</p>
-<%= @end_user.postal_code %>
-
-<p>Address</p>
-<%= @end_user.address %>
-
-<p>Status</p>
-<%= @end_user.is_deleted ? "退会" : "有効" %>
-
-<%= link_to "プロフィールを編集", edit_end_user_path(@end_user) %>
-
-<h2>出品内容を見てみる</h2>
-<%= link_to "出品一覧", new_sale_path %>
-<h2>配送先</h2>
-<%= link_to "配送先一覧", addresses_path %>
-
-<h2>お気に入り本の本棚</h2>
-
-<% @reviews.each do |review| %>
-  <%= link_to book_path(review.book) do %>
+<h3>最新のレビュー</h3>
+<% if @review.present? %>
   <!--楽天のitem_urlを合わせればimage表示可能-->
-   <%= link_to (image_tag (review.book['medium_image_url'])), review.book['item_url'] %>
-    <%= review.book.title %>
-    <p><%= link_to "この本のレビュー詳細を見てみる", review_path(review.book) %></p>
-  <% end %>
-<% end %>
+   <%= link_to (image_tag (@review.book['medium_image_url'])), @review.book['item_url'] %>
+    <%= @review.book.title %>
+    <p><%= link_to "この本のレビュー詳細を見てみる", review_path(@review.book) %></p>
+      　<div id="score"></div></br>
+      　<%= @review.score %>
+       <!--レビュー５段階評価-->
+
+        <script>
+
+          $('#score').raty({
+            //imageを表示
+            starOff: '<%= asset_path('star-off.png') %>',
+            starOn: '<%= asset_path('star-on.png') %>',
+            starHalf: '<%= asset_path('star-half.png') %>',
+            //半値も表示できる
+            half: true,
+            //固定して表示できる
+            readOnly: true,
+            //呼び出したいカラムデータ
+            score: <%= @review.score %>,
+          });
+
+        </script>
+      <!--/レビュー５段階評価-->
+
+     <p><%= link_to "#{@review.review_comments.count}コメント", review_path(@review) %></>
+  <p><i class="fas fa-heart"></i><%= @review.favorites.count %>イイね</p>
+<% else %>
+<p>ご登録の本はございません。</p>
+<% end%>
+
+
 
 <h2>出品中の本一覧</h2>
 <% @sales.each do |sale| %>
@@ -57,5 +56,12 @@
  <%= sale.book.title %>
  <%= sale.price %>円
  <% end %>
- 
+
 <% end %>
+
+</div>
+
+
+
+
+

@@ -1,8 +1,6 @@
 <h1>私の持っている本</h1>
 <% @books.each do |book| %>
-
 <%= link_to (image_tag(book.medium_image_url)), book.item_url %>
 <%= book.title %>
-<%= link_to "レビューを書く", book_path(book) %>
-
+<%= link_to "削除", book_path(book), method: :delete, data: {confirm: "本当に削除しますか？"} %>
 <% end %>
