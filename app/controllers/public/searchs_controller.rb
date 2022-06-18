@@ -1,12 +1,6 @@
 class Public::SearchsController < ApplicationController
-  def search
-    @renge = params[:range]
-
-    if @renge == "end_user"
-      @end_users = EndUser.looks(params[:search], params[:word])
-    else
-      @books = Book.looks(params[:search], params[:word])
-    end
+  def search_result
+    @records = Book.where('title LIKE ?', "%#{params[:search]}") if params[:search].present?
   end
 
 end

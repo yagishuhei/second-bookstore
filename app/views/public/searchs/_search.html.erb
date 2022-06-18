@@ -1,10 +1,5 @@
-<% if end_user_signed_in? %>
-  <div class="search_form">
-    <%= form_with url: search_path, local: true, method: :get do |f| %>
-      <%= f.text_field :word %>
-      <%= f.serect :renge, options_from_collection_for_select([['yu '],['rr']]) %>
-      <%= f.serect :renge, options_from_collection_for_select([['一部検索']]) %>
-      <%= f.submit "検索", class: "btn btn-primary" %>
-    <% end %>
-  </div>
-<% end %>
+<%= form_with url: search_result_path, method: :get, local: true do |f| %>
+ <%= f.label :title, "タイトル名" %>
+ <%= f.text_field :search, placeholder: "タイトル検索" %>
+ <%= button_tag '<i class="fa fa-search"></i>'.html_safe, :type => "submit", :class => "btn btn-success" %>
+ <% end %>

@@ -13,34 +13,26 @@ class EndUser < ApplicationRecord
   has_many :addresses, dependent: :destroy
   has_many :orders, dependent: :destroy
   #外部キーも指定
+  #has_many :relationships, dependent: :destroy
   has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
-  has_many :follored, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
-  #自分がフォローしている人
+  has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  #自分がフォローしている人=自分にフォロされた人(source)
   has_many :following_end_user, through: :follower, source: :followed
-  #自分がフォローされている人
-  has_many :follower_end_user, through: :follower, source: :follower
+  #自分がフォローされている人=自分をフォロした人(source)
+  has_many :follower_end_user, through: :followed, source: :follower
 
-  #ユーザーをフォロー
-  def follow(end_user_id)
-    follower.create(followed_id: end_user_id)
-  end
+  # #ユーザーをフォロー
+  # def follow(end_user_id)
+  #   follower.create(followed_id: end_user_id)
+  # end
 
-  #ユーザーのフォローを外す
-  def unfollow(end_user_id)
-    follower.find_by(followed_id: end_user_id).destroy
-  end
+  # #ユーザーのフォローを外す
+  # def unfollow(end_user_id)
+  #   follower.find_by(followed_id: end_user_id).destroy
+  # end
 
   def following?(end_user)
     following_end_user.include?(end_user)
-  end
-  
-  #検索機能部分一致
-  def self.looks(search, word)
-    if search == "partial_match"
-      @end_user = EndUser.where("name LIKE?", "%#{word}%")
-    else
-      @end_user = EndUser.all
-    end
   end
 
   #ゲストログイン用にアカウントを用意

@@ -1,5 +1,5 @@
 <h1>本の出品をする</h1>
-<% if current_end_user.sales.ids.present? %>
+<% if current_end_user.books.ids.present? %>
   <%= form_with model: @sale, url: sales_path(book_id: @book), method: :post do |f| %>
     <div>
       <% @books.each do |book| %>
@@ -8,7 +8,8 @@
         <%= book.title %>
 
       <!--本の情報をデータに入れるためラジオボタンを活用-->
-        <%= f.radio_button :book_id, :value => book.id%>
+         <%= f.radio_button(:book_id, book.id ) %>
+         <%= f.label(:book_id, book.id, value: book.id ) %>
 
       <!--/本の情報をデータに入れるためラジオボタンを活用-->
       <% end %>
@@ -27,9 +28,7 @@
       <%= f.submit"出品する" %>
     </div>
   <% end %>
-<% else %>
- <p>ご登録された本はございません。</p>
-<% end %>
+
 <h1>出品した本一覧</h1>
 <% @sales.each do |sale| %>
 <div>
@@ -39,5 +38,8 @@
   <%= sale.price %>円
   <%= sale.is_active ? "出品中" : "出品不可" %>
   <%= link_to "編集する", edit_sale_path(sale) %>
+<% end %>
 
+<% else %>
+ <p>ご登録された本はございません。</p>
 <% end %>

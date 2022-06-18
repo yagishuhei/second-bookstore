@@ -11,7 +11,6 @@
         <ul class = "navbar-nav ml-auto">
           <% if admin_signed_in? %>
 
-
             <li class= "nav-item active">
               <%= link_to "ユーザー一覧", admin_end_users_path, class: 'nav-link text-dark' %>
             </li>
@@ -24,11 +23,8 @@
             <li class= "nav-item active">
               <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' %>
             </li>
-  
 
           <% elsif end_user_signed_in? %>
-
-
 
             <li class= "nav-item active">
               <%= link_to "ホーム", root_path, class: 'nav-link text-dark' %>
@@ -49,11 +45,14 @@
             <li class= "nav-item active">
               <%= link_to "レビュー", reviews_path, class: 'nav-link text-dark' %>
             </li>
+             <li class= "nav-item active">
+              <%= link_to "レビュー下書き", review_confirm_reviews_path, class: 'nav-link text-dark' %>
+            </li>
             <!--エラーが出たためdeleteからgetに修正-->
             <li class= "nav-item active">
               <%= link_to "ログアウト", destroy_end_user_session_path, class: 'nav-link text-dark' %>
             </li>
-            
+
           <% else %>
 
             <li class= "nav-item active">

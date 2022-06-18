@@ -41,7 +41,7 @@ Rails.application.routes.draw do
   scope module: :public do
 
     get root to: 'homes#top'
-    get 'searchs/search', to: 'searchs#search', as: 'search'
+    get 'searchs/search_result', to: 'searchs#search_result', as: 'search_result'
     resources :categories, only: [:index, :show,]
     resources :sales
     #先にdestroy_allを置く
@@ -69,6 +69,10 @@ Rails.application.routes.draw do
       #会員1人につき1イイね
       resource :favorites, only: [:create, :destroy]
       resources :review_comments, only: [:create, :destroy]
+      #下書きページのためurlがつかない
+      collection do
+        get 'review_confirm', as: 'review_confirm'
+      end
     end
 
   end
