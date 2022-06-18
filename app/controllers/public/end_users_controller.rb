@@ -10,6 +10,8 @@ class Public::EndUsersController < ApplicationController
   end
   def mypage
     @end_user = current_end_user
+    @following_end_users = @end_user.following_end_user
+    @followers_end_users = @end_user.follower_end_user
   end
 
   def show
@@ -61,7 +63,7 @@ class Public::EndUsersController < ApplicationController
 
   def ensure_guest_user
     @end_user = EndUser.find(params[:id])
-    if @end_user.last_name == "ゲストユーザー"
+    if @end_user.last_name == "ゲスト" && @end_user.first_name == "ユーザー"
       redirect_to root_path , notice: 'ゲストユーザーはプロフィール編集画面へ遷移できません。'
     end
   end

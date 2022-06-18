@@ -20,17 +20,8 @@ class EndUser < ApplicationRecord
   has_many :following_end_user, through: :follower, source: :followed
   #自分がフォローされている人=自分をフォロした人(source)
   has_many :follower_end_user, through: :followed, source: :follower
-
-  # #ユーザーをフォロー
-  # def follow(end_user_id)
-  #   follower.create(followed_id: end_user_id)
-  # end
-
-  # #ユーザーのフォローを外す
-  # def unfollow(end_user_id)
-  #   follower.find_by(followed_id: end_user_id).destroy
-  # end
-
+  
+  
   def following?(end_user)
     following_end_user.include?(end_user)
   end
@@ -42,6 +33,15 @@ class EndUser < ApplicationRecord
       end_user.last_name = 'ゲストユーザー'
     end
   end
+  
+    def self.guest
+    find_or_create_by!(last_name: 'ゲスト', first_name: 'ユーザー', email: 'guest@example.com') do |end_user|
+      end_user.password = SecureRandom.urlsafe_base64
+      end_user.last_name = 'ゲスト'
+      end_user.first_name = 'ユーザー'
+    end
+  end
+
 
 
   #profile_imageカラムが追加されたように扱える
