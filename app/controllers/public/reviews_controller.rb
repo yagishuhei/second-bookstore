@@ -3,7 +3,12 @@ class Public::ReviewsController < ApplicationController
  before_action :authenticate_end_user!
 
   def index
-    @reviews = current_end_user.reviews
+    @reviews = current_end_user.reviews.published
+    @categories = Category.all
+  end
+
+  def review_confirm
+    @reviews = current_end_user.reviews.draft
     @categories = Category.all
   end
 
@@ -12,6 +17,12 @@ class Public::ReviewsController < ApplicationController
     @review.book_id = params[:book_id]
     @review.save
     redirect_to review_path(@review.id)
+  end
+  
+  def destroy
+    review = current_end_user.reviews.find(params[:id])
+    review.destroy
+    redirect_to reviews_path
   end
 
   def show
@@ -33,6 +44,6 @@ class Public::ReviewsController < ApplicationController
 
   private
   def review_params
-    params.require(:review).permit(:blog, :heading, :score)
+    params.require(:review).permit(:blog, :heading, :score, :review_status)
   end
 end

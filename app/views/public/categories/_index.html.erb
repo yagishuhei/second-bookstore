@@ -1,6 +1,7 @@
 
 <% categories.each do |category| %>
-<%= link_to category_path(category) do %>
-<%= category.name %>
-<% end %>
+<p><%= link_to category_path(category) do %>
+  <%= button_tag category.name, class: "btn btn-lg btn-warning" %>
+  <% end %>
+</p>
 <% end %>

@@ -175,6 +175,7 @@ ActiveRecord::Schema.define(version: 2022_06_17_013633) do
     t.string "heading"
     t.text "blog"
     t.float "score"
+    t.integer "review_status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["book_id"], name: "index_reviews_on_book_id"

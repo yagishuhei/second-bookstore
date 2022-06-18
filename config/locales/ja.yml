@@ -5,3 +5,8 @@ ja: #日本語設定
       payment_method: #colmn
         credit_card: "クレジットカード"
         transfer: "銀行振込"
+
+    review:
+      review_status:
+        published: "公開する"
+        draft: "下書きする"

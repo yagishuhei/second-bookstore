@@ -1,5 +1,5 @@
 <h1>全ての出品本一覧</h1>
-<% if @sale.present? %>
+<% if @sales.present? %>
   <% @sales.each do |sale| %>
     <%= link_to sale_path(sale) do %>
       <%= image_tag sale.get_sale_iamge("200x200") %>

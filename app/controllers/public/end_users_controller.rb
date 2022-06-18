@@ -22,6 +22,8 @@ class Public::EndUsersController < ApplicationController
   end
 
 
+
+
   def edit
     @end_user = current_end_user
   end
@@ -40,6 +42,17 @@ class Public::EndUsersController < ApplicationController
     @end_user.update(end_user_params)
     redirect_to end_user_path(@end_user)
   end
+
+  def follows
+    end_user = EndUser.find(params[:id])
+    @end_users = end_user.following_end_user.all.reverse_order
+  end
+
+  def followers
+    end_user = EndUser.find(params[:id])
+    @end_users = end_user.follower_end_user.all.reverse_order
+  end
+
   private
 
   def end_user_params
