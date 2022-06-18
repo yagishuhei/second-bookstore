@@ -25,12 +25,11 @@
   <% end %>
 
   <%= f.radio_button :address, "3" %>
-  <%= f.label :address, "新規ご住所" %>
   <%= f.label :postal_code, "郵便番号" %>
   <%= f.text_field :postal_code %>
-  <%= f.label :address, "住所" %>
-  <%= f.text_field :address %>
-  <%= f.label :name, "宛名" %>
-  <%= f.text_field :name %>
+  <%= f.label :shipping_address, "住所" %>
+  <%= f.text_field :shipping_address %>
+  <%= f.label :shipping_name, "宛名" %>
+  <%= f.text_field :shipping_name %>
   <%= f.submit "登録" %>
 <% end %>
