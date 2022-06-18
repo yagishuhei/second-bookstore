@@ -5,20 +5,19 @@
     <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="d-flex flex-column vh-100">
- 
+  <body>
+
     <%= render 'layouts/header' %>
-    <!--{}とフラッシュメッセージの部分が出る-->
-  
+    <div class="main-container">
       <%= render 'layouts/flash_messages' %>
       <%= render 'public/books/rakuten_search' %>
       <%= yield %>
-  
+    </div>
     <%= render "layouts/footer" %>
   </body>
 </html>
