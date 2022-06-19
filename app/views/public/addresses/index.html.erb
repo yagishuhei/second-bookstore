@@ -1,11 +1,21 @@
+<!--エラーメッセージ-->
+<% if @address.errors.any? %>
+  <%= @address.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @address.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <h1>配送先情報入力</h1>
 <%= form_with model: @address, url: addresses_path, method: :post do |f| %>
 <%= f.label :postal_code, "郵便番号" %>
-<%= f.text_field :postal_code %>
+<%= f.text_field :postal_code, required: true %>
 <%= f.label :address, "住所" %>
-<%= f.text_field :address %>
+<%= f.text_field :address, required: true %>
 <%= f.label :name, "宛名" %>
-<%= f.text_field :name %>
+<%= f.text_field :name, required: true %>
 <%= f.submit"配送先を追加" %>
 <% end %>
 

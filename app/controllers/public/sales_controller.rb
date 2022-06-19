@@ -9,21 +9,23 @@ class Public::SalesController < ApplicationController
   end
 
   def create
-    #エラーが発生
-    #ActiveRecord::RecordInvalid in Public::SalesController#create
-    #Validation failed: Book must exist
-
     @sale = current_end_user.sales.new(sale_params)
     @sale.book_id = params[:sale][:book_id]
-    @sale.save
-    redirect_to request.referer
+    if @sale.save
+      redirect_to request.referer, notice: "出品が完了しました。"
+    else
+      @books= current_end_user.books
+      @sale = Sale.new
+      @sales = current_end_user.sales
+      render :new
+    end
   end
-  
+
   def destroy
     sale = current_end_user.sales.find(params[:id])
     sale.destroy
     redirect_to request.referer
-  end 
+  end
 
   def show
     @sale = Sale.find(params[:id])

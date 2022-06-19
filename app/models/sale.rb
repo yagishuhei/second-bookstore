@@ -3,10 +3,14 @@ class Sale < ApplicationRecord
   belongs_to :end_user
   belongs_to :book
   has_many :cart_items, dependent: :destroy
+
+
+  validates :introduction, presence: true
+  validates :price, presence: true
+
+
   #sale_imageカラムが追加されたように扱える
   has_one_attached :sale_image
-
-
   #sale_imageが設定されない時、book-no-image.jpgをデフォルト画像としてActiveStorageに格納、その後表示。
   #サイズの変更も行う。
   def get_sale_iamge(size)
@@ -16,5 +20,5 @@ class Sale < ApplicationRecord
     end
     sale_image.variant(resize:size).processed
   end
-  
+
 end

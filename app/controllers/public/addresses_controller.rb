@@ -1,4 +1,5 @@
 class Public::AddressesController < ApplicationController
+  before_action :authenticate_end_user!
   def index
     @address = Address.new
     @addresses = current_end_user.addresses
@@ -6,14 +7,19 @@ class Public::AddressesController < ApplicationController
 
   def create
     @address = current_end_user.addresses.new(address_params)
-    @address.save
-    redirect_to addresses_path
+    if @address.save
+      redirect_to addresses_path, notice: "住所の登録が完了しました。"
+    else
+      @addresses = current_end_user.addresses
+      render :index
+    end
+
   end
 
   def destroy
     @address = Address.find(params[:id])
     @address.destroy
-    redirect_to addresses_path
+    redirect_to addresses_path, notice: "登録住所の削除が完了しました。"
   end
 
   def edit

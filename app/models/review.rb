@@ -6,6 +6,10 @@ class Review < ApplicationRecord
 
   enum review_status: {published: 0, draft: 1}
 
+  validates :heading, presence: true
+  validates :blog, presence: true
+  validates :score, presence: true
+
   #Favoriteテーブルにend_userIDが存在するか？
   def favorited_by?(end_user)
     favorites.exists?(end_user_id: end_user.id)
