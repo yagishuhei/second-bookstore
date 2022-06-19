@@ -2,6 +2,7 @@ class Public::BooksController < ApplicationController
    #ログインしているか確認、ログイン状態ではない場合ログインページに移動
   before_action :authenticate_end_user!
 
+
   def rakuten_result
     #楽天ブックス
     #RakutenWebService::Books::Bookにsearchメソッド使いタイトル検索結果表示。

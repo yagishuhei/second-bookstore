@@ -20,27 +20,30 @@ class EndUser < ApplicationRecord
   has_many :following_end_user, through: :follower, source: :followed
   #自分がフォローされている人=自分をフォロした人(source)
   has_many :follower_end_user, through: :followed, source: :follower
-  
-  
+
+
   def following?(end_user)
     following_end_user.include?(end_user)
   end
 
   #ゲストログイン用にアカウントを用意
+
   def self.guest
-    find_or_create_by!(last_name: 'ゲストユーザー', email: 'guest@example.com') do |end_user|
-      end_user.password = SecureRandom.urlsafe_base64
-      end_user.last_name = 'ゲストユーザー'
-    end
-  end
-  
-    def self.guest
     find_or_create_by!(last_name: 'ゲスト', first_name: 'ユーザー', email: 'guest@example.com') do |end_user|
       end_user.password = SecureRandom.urlsafe_base64
       end_user.last_name = 'ゲスト'
       end_user.first_name = 'ユーザー'
     end
   end
+
+  validates :last_name, presence: true
+  validates :first_name, presence: true
+  validates :last_name_kana, presence: true
+  validates :first_name_kana, presence: true
+  validates :nickname, presence: true
+  validates :postal_code, presence: true
+  validates :address, presence: true
+  validates :telephone_number, presence: true
 
 
 

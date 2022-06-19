@@ -3,6 +3,7 @@ class Public::ReviewsController < ApplicationController
  before_action :authenticate_end_user!
 
   def index
+    @review =Review.new
     @reviews = current_end_user.reviews.published
     @categories = Category.all
   end
@@ -15,10 +16,15 @@ class Public::ReviewsController < ApplicationController
   def create
     @review = current_end_user.reviews.new(review_params)
     @review.book_id = params[:book_id]
-    @review.save
-    redirect_to review_path(@review.id)
+    if @review.save
+      redirect_to review_path(@review.id), notice: "レビューを登録しました。"
+    else
+      @book = Book.find(params[:id])
+      render 'public/books/show'
+      @review =Review.new
+    end
   end
-  
+
   def destroy
     review = current_end_user.reviews.find(params[:id])
     review.destroy
