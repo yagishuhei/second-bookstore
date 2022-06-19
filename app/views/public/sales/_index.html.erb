@@ -1,0 +1,19 @@
+<div class="row row-cols-1 row-cols-md-5 g-5">
+    <% @sales.each do |sale| %>
+      <div class="col">
+        <div class="card h-100">
+            <%= link_to sale_path(sale) do %>
+            <%= image_tag sale.get_sale_iamge("200x200") %>
+            <% end %>
+          <div class="card-body">
+            <h5 class="card-title"> <%= sale.book.title %></h5>
+            <p class="card-text"><%= sale.price %>円</p>
+            <p class= "card-info"><%= sale.is_active ? "出品中" : "出品不可" %></p>
+          </div>
+          <% if @end_user == current_end_user %>
+            <%= link_to "削除", sale_path(sale), method: :delete %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+ </div>
