@@ -1,7 +1,7 @@
 
 class Public::OrdersController < ApplicationController
   def index
-
+    @orders = current_end_user.orders
   end
 
   def new
@@ -10,7 +10,15 @@ class Public::OrdersController < ApplicationController
 
   def create
     @order = current_end_user.orders.new(order_params)
-    @order.save
+      # if params[:sale][:is_active] == false
+      #   redirect_to cart_items_path
+      # elsif OrderDetail.where([:sale_id]).present?
+      #   redirect_to cart_items_path
+      # elsif OrderDetail.where(shipping_status: now_buying,shipping) == true
+      #   redirect_to cart_items_path
+      # else
+      #   @order.save
+      # end
     @cart_items = current_end_user.cart_items
     #cart_itemの情報を渡す
     @cart_items.each do |cart_item|
@@ -18,6 +26,8 @@ class Public::OrdersController < ApplicationController
       @order_details = OrderDetail.new
       @order_details.order_id = @order.id
       @order_details.sale_id = cart_item.sale.id
+      @order_details.shipping_status = "now_buying"
+      @order_details.price = cart_item.sale.price
       @order_details.save
     end
 
@@ -48,6 +58,7 @@ class Public::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    @order_detail = OrderDetail.new
     @cart_items = CartItem.all
   end
 
