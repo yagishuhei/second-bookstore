@@ -19,9 +19,8 @@ class Public::ReviewsController < ApplicationController
     if @review.save
       redirect_to review_path(@review.id), notice: "レビューを登録しました。"
     else
-      @book = Book.find(params[:id])
+      @book = Book.find(params[:book_id])
       render 'public/books/show'
-      @review =Review.new
     end
   end
 

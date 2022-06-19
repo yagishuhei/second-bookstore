@@ -15,7 +15,6 @@ class Public::SalesController < ApplicationController
       redirect_to request.referer, notice: "出品が完了しました。"
     else
       @books= current_end_user.books
-      @sale = Sale.new
       @sales = current_end_user.sales
       render :new
     end

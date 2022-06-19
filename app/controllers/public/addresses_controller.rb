@@ -6,11 +6,15 @@ class Public::AddressesController < ApplicationController
   end
 
   def create
+    #binding.pry
     @address = current_end_user.addresses.new(address_params)
     if @address.save
       redirect_to addresses_path, notice: "住所の登録が完了しました。"
     else
+      #binding.pry
+      #@address = Address.find(params[:id])
       @addresses = current_end_user.addresses
+
       render :index
     end
 
