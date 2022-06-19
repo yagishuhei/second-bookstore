@@ -1,5 +1,6 @@
 
 <h1>本の出品をする</h1>
+
 <% if current_end_user.books.ids.present? %>
   <%= form_with model: @sale, url: sales_path(book_id: @book), method: :post do |f| %>
 
@@ -29,7 +30,17 @@
 
     <div class="form-body p-4">
       <div class= "input-group md-3 mt-4">
-
+          <p>
+            <!--エラーメッセージ-->
+            <% if @sale.errors.any? %>
+              <%= @sale.errors.count %>件のエラーが発生しました
+              <ul>
+                <% @sale.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            <% end %>
+          </p>
          <div class="col-12">
         <%= f.label :sale_image, "本の詳細画像" %>
         <%= f.file_field :sale_image, placeholder: "出品する本の画像", accept: "image/*" %>

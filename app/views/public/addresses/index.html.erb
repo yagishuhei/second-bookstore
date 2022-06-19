@@ -21,10 +21,13 @@
 
 <h1>配送先一覧</h1>
 <% @addresses.each do |address| %>
+<!--idがnilだったらかどうかを判定 nextが次のeachにいく-->
+<% next if address.id.nil? %>
 <%= address.postal_code %>
 <%= address.address %>
 <%= address.name %>
-<%= link_to "編集する", edit_address_path(address) %>
-<%= link_to "削除する", address_path(address), method: :delete, data: {confirm: "本当に削除しますか？"} %>
+<%= link_to "編集する", edit_address_path(id: address.id) %>
+<%= link_to "削除する", address_path(id: address.id), method: :delete, data: {confirm: "本当に削除しますか？"} %>
+
 <% end %>
 

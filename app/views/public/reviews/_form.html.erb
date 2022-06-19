@@ -1,3 +1,12 @@
+<!--エラーメッセージ-->
+<% if @review.errors.any? %>
+  <%= @review.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @review.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <div class= "no-gutters">
  <div class= "col-md-5 col-sm-12 mx-1 mx-sm-auto bg-light rounded px-0 my-5">
@@ -8,7 +17,7 @@
 
         <!--idを持たせて一意性をつける-->
         <div class="col-12" id="score">
-          <%= f.label :score,'評価 ', class:'col-md-3 col-form-label' %>
+          <%= f.label :score,'評価 ', class: 'col-md-3 col-form-label' %>
           <%= f.hidden_field :score, id: :review_star %>
         </div>
         <!--idを持たせて一意性をつける-->
