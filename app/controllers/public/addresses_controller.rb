@@ -11,10 +11,7 @@ class Public::AddressesController < ApplicationController
     if @address.save
       redirect_to addresses_path, notice: "住所の登録が完了しました。"
     else
-      #binding.pry
-      #@address = Address.find(params[:id])
       @addresses = current_end_user.addresses
-
       render :index
     end
 

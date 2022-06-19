@@ -1,10 +1,10 @@
+
 <h1>本の出品をする</h1>
 
 <% if current_end_user.books.ids.present? %>
   <%= form_with model: @sale, url: sales_path(book_id: @book), method: :post do |f| %>
 
-<div class="row row-cols-1 mx-auto row-cols-md-5 py-3 g-5">
-
+<div class="row row-cols-1 mx-auto row-cols-md-5 g-5">
     <% @books.each do |book| %>
       <div class="col">
         <div class="card h-100">
@@ -41,7 +41,6 @@
               </ul>
             <% end %>
           </p>
-
          <div class="col-12">
         <%= f.label :sale_image, "本の詳細画像" %>
         <%= f.file_field :sale_image, placeholder: "出品する本の画像", accept: "image/*" %>
@@ -61,7 +60,6 @@
         <%= f.submit"出品する", class: "btn btn-lg btn-block btn-info mt-4" %>
       </div>
        </div>
-
     </div>
     <% end %>
 </div>

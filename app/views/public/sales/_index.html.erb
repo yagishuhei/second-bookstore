@@ -1,4 +1,5 @@
 <div class="row row-cols-1 row-cols-md-5 g-5">
+
     <% sales.each do |sale| %>
     <!--idがnilだったらかどうかを判定 nextが次のeachにいく-->
     <% next if sale.id.nil? %>
@@ -12,6 +13,7 @@
               <p class= "card-info"><%= sale.is_active ? "出品中" : "出品不可" %></p>
             </div>
           <% end %>
+          
           <% if @end_user == current_end_user %>
             <%= link_to "削除", sale_path(sale), method: :delete %>
           <% end %>
