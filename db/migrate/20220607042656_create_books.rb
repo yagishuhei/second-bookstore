@@ -1,10 +1,10 @@
 class CreateBooks < ActiveRecord::Migration[6.1]
   def change
- 
+
     create_table :books do |t|
-      
-      t.references :end_user, null: false, foreign_key: true
-      t.references:category, null: false, foreign_key: true
+
+      t.references :end_user, null: false, foreign_key: true, type: :integer
+      t.references :category, null: false, foreign_key: true, type: :integer
       t.bigint :isbn
       t.string :title
       t.string :author
