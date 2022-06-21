@@ -15,7 +15,7 @@
           <P>¥<%= order_detail.price %>円</P>
           <P><%= order_detail.shipping_status_i18n %></P>
           <%= form_with model: @order_detail, url: order_detail_path(order_detail), method: :patch do |f| %>
-          <%= f.select :shipping_status,['now_buying','cancel'] %>
+          <%= f.select :shipping_status,['購入中','キャンセル'] %>
           <%= f.submit "変更" %>
           <% end %>
           <% end %>

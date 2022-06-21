@@ -18,12 +18,12 @@
   <div class="row mx-auto w-50">
     <table class= "table-hover col-12 bg-light has_border">
       <thead class = "py-5">
-        <th scope= "col mx-2">カテゴリー</th>
+        <th scope= "col">カテゴリー</th>
       </thead>
       <tbody>
         <% @categories.each do |category| %>
           <tr>
-            <td><%= category.name %></td>
+            <td class="py-2"><%= category.name %></td>
             <td>
               <%= link_to "削除", admin_category_path(category),
               method: :delete, class: "btn btn-sm px-4 btn-danger",

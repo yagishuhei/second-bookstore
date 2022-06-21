@@ -26,10 +26,15 @@ class Public::OrdersController < ApplicationController
         @order_details.shipping_status = "now_buying"
         @order_details.price = cart_item.sale.price
         @order_details.save
-        #買ったら一覧から消したい
-        # @update_sale = cart_item.sale.id
+        # 買ったら一覧から消したい
+        @update_sale = cart_item.sale
+
+        # saveの場合
         # @update_sale.status = "buying"
-        # @update_sale.update(sale_params)
+        # @update_sale.save
+
+        # updateの場合
+        @update_sale.update(status: "buying")
       end
 
 
