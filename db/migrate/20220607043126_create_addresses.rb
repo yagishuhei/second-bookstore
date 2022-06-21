@@ -2,7 +2,7 @@ class CreateAddresses < ActiveRecord::Migration[6.1]
   def change
     create_table :addresses do |t|
 
-      t.references :end_user, null: false, foreign_key: true, type: :integer
+      t.integer :end_user_id
       t.string :name
       t.string :postal_code
       t.string :address

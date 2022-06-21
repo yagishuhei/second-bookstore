@@ -41,13 +41,12 @@ ActiveRecord::Schema.define(version: 2022_06_17_013633) do
   end
 
   create_table "addresses", force: :cascade do |t|
-    t.integer "end_user_id", null: false
+    t.integer "end_user_id"
     t.string "name"
     t.string "postal_code"
     t.string "address"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["end_user_id"], name: "index_addresses_on_end_user_id"
   end
 
   create_table "admins", force: :cascade do |t|
@@ -63,9 +62,9 @@ ActiveRecord::Schema.define(version: 2022_06_17_013633) do
   end
 
   create_table "books", force: :cascade do |t|
-    t.integer "end_user_id", null: false
-    t.integer "category_id", null: false
-    t.integer "isbn"
+    t.integer "end_user_id"
+    t.integer "category_id"
+    t.bigint "isbn"
     t.string "title"
     t.string "author"
     t.string "publisher_name"
@@ -75,17 +74,13 @@ ActiveRecord::Schema.define(version: 2022_06_17_013633) do
     t.string "medium_image_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "index_books_on_category_id"
-    t.index ["end_user_id"], name: "index_books_on_end_user_id"
   end
 
   create_table "cart_items", force: :cascade do |t|
-    t.integer "sale_id", null: false
-    t.integer "end_user_id", null: false
+    t.integer "end_user_id"
+    t.integer "sale_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["end_user_id"], name: "index_cart_items_on_end_user_id"
-    t.index ["sale_id"], name: "index_cart_items_on_sale_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -117,27 +112,23 @@ ActiveRecord::Schema.define(version: 2022_06_17_013633) do
   end
 
   create_table "favorites", force: :cascade do |t|
-    t.integer "end_user_id", null: false
-    t.integer "review_id", null: false
+    t.integer "end_user_id"
+    t.integer "review_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["end_user_id"], name: "index_favorites_on_end_user_id"
-    t.index ["review_id"], name: "index_favorites_on_review_id"
   end
 
   create_table "order_details", force: :cascade do |t|
-    t.integer "order_id", null: false
-    t.integer "sale_id", null: false
+    t.integer "order_id"
+    t.integer "sale_id"
     t.integer "price"
     t.integer "shipping_status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["order_id"], name: "index_order_details_on_order_id"
-    t.index ["sale_id"], name: "index_order_details_on_sale_id"
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "end_user_id", null: false
+    t.integer "end_user_id"
     t.string "postal_code"
     t.string "shipping_address"
     t.string "shipping_name"
@@ -147,72 +138,45 @@ ActiveRecord::Schema.define(version: 2022_06_17_013633) do
     t.integer "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["end_user_id"], name: "index_orders_on_end_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|
-    t.integer "follower_id", null: false
-    t.integer "followed_id", null: false
+    t.integer "follower_id"
+    t.integer "followed_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["followed_id"], name: "index_relationships_on_followed_id"
-    t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
   create_table "review_comments", force: :cascade do |t|
-    t.integer "end_user_id", null: false
-    t.integer "review_id", null: false
+    t.integer "end_user_id"
+    t.integer "review_id"
     t.text "comment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["end_user_id"], name: "index_review_comments_on_end_user_id"
-    t.index ["review_id"], name: "index_review_comments_on_review_id"
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer "end_user_id", null: false
-    t.integer "book_id", null: false
+    t.integer "end_user_id"
+    t.integer "book_id"
     t.string "heading"
     t.text "blog"
     t.float "score"
     t.integer "review_status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["book_id"], name: "index_reviews_on_book_id"
-    t.index ["end_user_id"], name: "index_reviews_on_end_user_id"
   end
 
   create_table "sales", force: :cascade do |t|
-    t.integer "end_user_id", null: false
-    t.integer "book_id", null: false
+    t.integer "end_user_id"
+    t.integer "book_id"
     t.string "title"
     t.text "introduction"
     t.integer "price"
     t.integer "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["book_id"], name: "index_sales_on_book_id"
-    t.index ["end_user_id"], name: "index_sales_on_end_user_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "addresses", "end_users"
-  add_foreign_key "books", "categories"
-  add_foreign_key "books", "end_users"
-  add_foreign_key "cart_items", "end_users"
-  add_foreign_key "cart_items", "sales"
-  add_foreign_key "favorites", "end_users"
-  add_foreign_key "favorites", "reviews"
-  add_foreign_key "order_details", "orders"
-  add_foreign_key "order_details", "sales"
-  add_foreign_key "orders", "end_users"
-  add_foreign_key "relationships", "end_users", column: "followed_id"
-  add_foreign_key "relationships", "end_users", column: "follower_id"
-  add_foreign_key "review_comments", "end_users"
-  add_foreign_key "review_comments", "reviews"
-  add_foreign_key "reviews", "books"
-  add_foreign_key "reviews", "end_users"
-  add_foreign_key "sales", "books"
-  add_foreign_key "sales", "end_users"
 end
