@@ -1,11 +1,12 @@
 class Sale < ApplicationRecord
+  enum status: {on_sale: 0, buying: 1}
 
   belongs_to :end_user
   belongs_to :book
   has_many :order_details, dependent: :destroy
   has_many :cart_items, dependent: :destroy
 
-
+  validates :title, presence: true
   validates :introduction, presence: true
   validates :price, presence: true
 
