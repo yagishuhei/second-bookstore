@@ -44,7 +44,7 @@ class Public::SalesController < ApplicationController
 
   private
   def sale_params
-    params.require(:sale).permit(:book_id, :sale_image, :introduction, :price, :is_active)
+    params.require(:sale).permit(:book_id, :sale_image, :introduction, :price, :status)
   end
 
 end

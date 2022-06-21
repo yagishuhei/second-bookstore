@@ -1,15 +1,37 @@
-
-<h1>カテゴリー新規作成</h1>
-<%= form_with model: @category, url: admin_categories_path, method: :post do |f| %>
-<%= f.label :name %>
-<%= f.text_field :name %>
-<%= f.submit "カテゴリーを追加する" %>
-<% end %>
-
-<h1>カテゴリー一覧</h1>
-<% @categories.each do |category| %>
-  <%= link_to admin_category_path(category) do %>
-    <%= category.name %>
-  <% end %>
-  <%= link_to "削除", admin_category_path(category), method: :delete, data: { confirm: "本当に削除しますか"} %>
-<% end %>
+<div class = "container py-1">
+  <div class= "row w-50 mx-auto py-3  my-3 bg-light shadow-lg">
+    <h3 class= "col-12 my-auto">カテゴリー追加</h3>
+    <%= form_with model: @category, url: admin_categories_path, method: :post do |f| %>
+      <div class="form-body p-4">
+        <div class="col-12 my-2">
+          <%= f.label :name, "カテゴリー" %>
+        </div>
+        <div class="col-12 my-2">
+          <%= f.text_field :name, required: true, class: "form-control"%>
+        </div>
+        <div class="col-12 my-2">
+          <%= f.submit "カテゴリー追加", class: "btn btn-sm btn-success" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="row mx-auto w-50">
+    <table class= "table-hover col-12 bg-light has_border">
+      <thead class = "py-5">
+        <th scope= "col mx-2">カテゴリー</th>
+      </thead>
+      <tbody>
+        <% @categories.each do |category| %>
+          <tr>
+            <td><%= category.name %></td>
+            <td>
+              <%= link_to "削除", admin_category_path(category),
+              method: :delete, class: "btn btn-sm px-4 btn-danger",
+              data: { confirm: "本当に削除しますか"} %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

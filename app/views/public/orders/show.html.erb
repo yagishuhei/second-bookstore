@@ -11,11 +11,11 @@
         <div class = "col-5 mx-4">
            <% @order.order_details.each do |order_detail| %>
            <P class="row-cols-3 row-cols-md-3">
-          <%= image_tag order_detail.sale.get_sale_iamge("100x100") %></P>
+          <%= image_tag order_detail.sale.get_sale_iamge("200x200") %></P>
           <P>¥<%= order_detail.price %>円</P>
           <P><%= order_detail.shipping_status_i18n %></P>
           <%= form_with model: @order_detail, url: order_detail_path(order_detail), method: :patch do |f| %>
-          <%= f.select :shipping_status, OrderDetail.shipping_statuses.keys.map {|k| [I18n.t("enums.order_detail.shipping_status.#{k}"), k]} %>
+          <%= f.select :shipping_status,['now_buying','cancel'] %>
           <%= f.submit "変更" %>
           <% end %>
           <% end %>
@@ -35,6 +35,10 @@
           <p><%= @order.payment_method_i18n %></p>
           <h6></h6>
            <p><%= @order.status_i18n %></p>
+           <%= form_with model: @order, url: order_path(@order), method: :patch do |f| %>
+          <%= f.select :status,['incomplete', 'complete'] %>
+          <%= f.submit "変更" %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -42,25 +46,3 @@
 
 </div>
 </div>
-<p>注文情報</p>
-
-<%= @order.payment_method_i18n %>
-<%= @order.postal_code %>
-<%= @order.shipping_address %>
-<%= @order.shipping_name %>
-
-<h1>カート内商品一覧</h1>
-
-<div>
-
-   <% total = 0 %>
-<% @cart_items.each do |cart_item| %>
-    <%= image_tag cart_item.sale.get_sale_iamge("100x100") %>
-    <%= cart_item.sale.book.title %>
-    ¥<%= cart_item.sale.price %>円
-   <% @cart_item_price = total += cart_item.sale.price %>
-<% end %>
-</div>
-
-  <h4>商品合計</h4>
-  ¥<%= @cart_item_price %>円

@@ -1,51 +1,61 @@
-<h1>ユーザー詳細</h1>
-<div>
-  <p>プロフィール画像</p>
-  <%= image_tag @end_user.get_profile_image("100x100") %>
-
-  <p>氏名</p>
-  <%= @end_user.last_name %>
-  <%= @end_user.first_name %>
-
-  <p>氏名（カナ）</p>
-  <%= @end_user.last_name_kana %>
-  <%= @end_user.first_name_kana %>
-
-  <p>ニックネーム</p>
-  <%= @end_user.nickname %>
-
-  <p>自己紹介文</p>
-  <%= @end_user.introduction %>
-
-
-  <p>Eメール</p>
-  <%= @end_user.email %>
-
-  <p>電話番号</p>
-  <%= @end_user.telephone_number %>
-
-  <p>郵便番号</p>
-  <%= @end_user.postal_code %>
-
-  <p>住所</p>
-  <%= @end_user.address %>
-
-  <p>会員ステータス</p>
-  <%= @end_user.is_deleted ? "退会" : "有効" %>
+<div class= "container">
+  <div class ="row">
+    <div class = "card-list-container col-12">
+       <h2 class="text-dark  mt-5">マイページ</h2>
+      <div class= "card mx-auto mt-1 shadow-lg">
+        <div class= "card-body">
+          <div class = "row">
+            <div class="col-2">
+              <%= image_tag @end_user.get_profile_image("100x100") %>
+            </div>
+            <div class="col-10">
+              <table class= "profile">
+                <thead>
+                  <th class="col-2 py-1">氏名</th>
+                  <th class="col-2 py-1">フリガナ</th>
+                  <th class="col-2 py-1">ニックネーム</th>
+                  <th class="col-2 py-1">ステータス</th>
+                </thead>
+                <tbody>
+                  <td class="col-2 py-1"><%= @end_user.last_name %><%= @end_user.first_name %></td>
+                  <td class="col-2 py-1"><%=@end_user.last_name_kana %><%= @end_user.first_name_kana %> </td>
+                  <td class="col-2 py-1"><%= @end_user.nickname %> </td>
+                  <td class="col-2 py-1"><%= @end_user.is_deleted ? "退会" : "有効" %></td>
+                </tbody>
+              </table>
+              <div class="row">
+                <div class="col-12">
+                  <table class= "profile">
+                    <thead>
+                      <th class="col-2 py-1">メールアドレス</th>
+                      <th class="col-2 py-1">電話番号</th>
+                      <th class="col-2 py-1">郵便番号</th>
+                      <th class="col-2 py-1">住所</th>
+                    </thead>
+                    <tbody>
+                      <td class="col-2 py-1"><%= @end_user.email %></td>
+                      <td class="col-2 py-1"><%= @end_user.telephone_number %></td>
+                      <td class="col-2 py-1"><%= @end_user.postal_code %></td>
+                      <td class="col-2 py-1"><%= @end_user.address %></td>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="row col-12">
+                <div class= "col-12 py-2">
+                  <h4>プロフィール</h4>
+                  <div class="col-12"><%= @end_user.introduction %></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class ="col-4"><%= link_to "アカウント削除", admin_end_user_path(@end_user), method: :delete, data: { confirm: "本当に削除しますか？"}, class: "btn btn-lg px-4 btn-danger" %></p>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div>
-  <% @reviews.each do |review| %>
-    <%= link_to book_path(review.book) do %>
-      <!--楽天のitem_urlを合わせればimage表示可能-->
-      <%= link_to (image_tag (review.book['medium_image_url'])), review.book['item_url'] %>
-      <%= review.book.title %>
-    <% end %>
 
-    <%= link_to admin_review_path(review.book) do %>
-      <%= review.heading %>
-    <% end %>
-  <% end %>
-</div>
 
-<p><%= link_to "アカウント削除", admin_end_user_path(@end_user), method: :delete, data: { confirm: "本当に削除しますか？"} %></p>
+

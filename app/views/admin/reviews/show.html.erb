@@ -1,35 +1,31 @@
-<h2>レビュー詳細</h2>
 
-
-<%= link_to (image_tag(@review.book['large_image_url'])), @review.book['item_url'] %>
-<%= @review.book.title %>
-<%= @review.book.author %>
-<%= @review.book.publisher_name %>
-
-<h2>レビュー内容</h2>
-<%= @review.heading %>
-<%= @review.blog %>
-<!--レビュー５段階評価-->
-<div id="score"></div>
-<%= @review.score %>
-
-<script>
-
-  $('#score').raty({
-    //imageを表示
-    starOff: '<%= asset_path('star-off.png') %>',
-    starOn: '<%= asset_path('star-on.png') %>',
-    starHalf: '<%= asset_path('star-half.png') %>',
-    //半値も表示できる
-    half: true,
-    //固定して表示できる
-    readOnly: true,
-    //呼び出したいカラムデータ
-    score: <%= @review.score %>,
-  });
-
-</script>
-
-<!--/レビュー５段階評価-->
-
-<%= link_to "このレビューを削除する", admin_review_path(@review), method: :delete, date: {confirm: "本当に削除しますか？"} %>
+<div class="container">
+<h2 class= "col-6 py-5 mx-auto">詳細</h2>
+  <div class= "row w-80 mx-auto my-2 bg-light shadow-lg">
+    <div class="col-2 px-0">
+      <%= link_to (image_tag(@review.book['large_image_url'])), @review.book['item_url'] %>
+      <div id="score"><%= render 'public/reviews/score', review: @review %></div><%= @review.score %>
+    </div>
+    <div class="col-2 px-0">
+      <h5 class="title col-12 py-1">タイトル</h5>
+      <h5 class="title col-12 py-1">著者</h5>
+      <h5 class="title col-12 py-1">出版社</h5>
+    </div>
+    <div class="col-8">
+      <p><%= @review.book.title %></p>
+      <p><%= @review.book.author %></p>
+      <p><%= @review.book.publisher_name %></p>
+    </div>
+  </div>
+  <div class="row w-80 mx-auto my-2 bg-light shadow-lg">
+    <div class="col">
+      <h5 class="title col-12">テーマ</h5>
+      <p><%= @review.heading %></p>
+      <h5 class="title col-12">批評</h5></h5>
+      <p><%= @review.blog %></p>
+    </div>
+  </div>
+  <div>
+    <%= link_to "このレビューを削除する", admin_review_path(@review),
+    method: :delete, class: "btn btn-lg btn-danger",date: {confirm: "本当に削除しますか？"} %>
+  </div>

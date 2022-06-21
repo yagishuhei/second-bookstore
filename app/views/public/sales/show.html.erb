@@ -15,15 +15,14 @@
   </p>
   ￥<%= @sale.price %>円
   <%= @sale.introduction %>
-  <% @sale.is_active ? "販売中" : "販売不可" %>
+  <%= @sale.status %>
 
-  <% if @sale.is_active == true %>
+
   <% if end_user_signed_in? %>
    <%= form_with model: [@sale, @cart_item], url: cart_items_path, method: :post do |f| %>
     <%= f.hidden_field :sale_id, :value => @sale.id %>
     <%= f.submit"カートに入れる" %>
     <% end %>
-  <% end %>
   <% end %>
   <% if @end_user == current_end_user %>
   <%= link_to "出品内容を変更する", edit_sale_path(@sale) %>

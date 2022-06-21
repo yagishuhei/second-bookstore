@@ -4,9 +4,10 @@ class CreateSales < ActiveRecord::Migration[6.1]
 
       t.references :end_user, null: false, foreign_key: true, type: :integer
       t.references :book, null: false, foreign_key: true, type: :integer
+      t.string :title
       t.text :introduction
       t.integer :price
-      t.boolean :is_active, default: false
+      t.integer :status
 
       t.timestamps
     end

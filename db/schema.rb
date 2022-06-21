@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 2022_06_17_013633) do
   create_table "books", force: :cascade do |t|
     t.integer "end_user_id", null: false
     t.integer "category_id", null: false
-    t.bigint "isbn"
+    t.integer "isbn"
     t.string "title"
     t.string "author"
     t.string "publisher_name"
@@ -129,7 +129,7 @@ ActiveRecord::Schema.define(version: 2022_06_17_013633) do
     t.integer "order_id", null: false
     t.integer "sale_id", null: false
     t.integer "price"
-    t.integer "shipping_status"
+    t.integer "shipping_status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["order_id"], name: "index_order_details_on_order_id"
@@ -185,9 +185,10 @@ ActiveRecord::Schema.define(version: 2022_06_17_013633) do
   create_table "sales", force: :cascade do |t|
     t.integer "end_user_id", null: false
     t.integer "book_id", null: false
+    t.string "title"
     t.text "introduction"
     t.integer "price"
-    t.boolean "is_active", default: false
+    t.integer "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["book_id"], name: "index_sales_on_book_id"

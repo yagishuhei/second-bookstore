@@ -10,29 +10,34 @@ class Public::OrdersController < ApplicationController
 
   def create
     @order = current_end_user.orders.new(order_params)
-      # if params[:sale][:is_active] == false
-      #   redirect_to cart_items_path
-      # elsif OrderDetail.where([:sale_id]).present?
-      #   redirect_to cart_items_path
-      # elsif OrderDetail.where(shipping_status: now_buying,shipping) == true
-      #   redirect_to cart_items_path
-      # else
-      #   @order.save
-      # end
-    @cart_items = current_end_user.cart_items
-    #cart_itemの情報を渡す
-    @cart_items.each do |cart_item|
-      #カラ箱を用意する
-      @order_details = OrderDetail.new
-      @order_details.order_id = @order.id
-      @order_details.sale_id = cart_item.sale.id
-      @order_details.shipping_status = "now_buying"
-      @order_details.price = cart_item.sale.price
-      @order_details.save
-    end
 
-    @cart_items.destroy_all
-    redirect_to thanks_path
+    # sale_ids = JSON.parse(params[:cart_items][:sale_ids])
+    # buyable_items = OrderDetail.includes(:sale).where(sale: { is_active: true }).where(sale_id: sale_ids, shipping_status: :cancel)
+    # if buyable_items.present?
+    @order.save
+
+      @cart_items = current_end_user.cart_items
+      #cart_itemの情報を渡す
+      @cart_items.each do |cart_item|
+      #カラ箱を用意する
+        @order_details = OrderDetail.new
+        @order_details.order_id = @order.id
+        @order_details.sale_id = cart_item.sale.id
+        @order_details.shipping_status = "now_buying"
+        @order_details.price = cart_item.sale.price
+        @order_details.save
+        #買ったら一覧から消したい
+        # @update_sale = cart_item.sale.id
+        # @update_sale.status = "buying"
+        # @update_sale.update(sale_params)
+      end
+
+
+      @cart_items.destroy_all
+      redirect_to thanks_path
+    # else
+      # redirect_to cart_items_path, notice: "既に購入されています。"
+    # end
   end
 
   def order_confirm
@@ -62,11 +67,26 @@ class Public::OrdersController < ApplicationController
     @cart_items = CartItem.all
   end
 
-  def edit
+  def update
+    @order = Order.find(params[:id])
+    @order.update(order_params)
+    redirect_to order_path(@order)
   end
 
   private
   def order_params
-    params.require(:order).permit(:postal_code, :shipping_address, :shipping_name, :shipping_cost, :total_payment, :payment_method, :status)
+    params.require(:order).permit(
+      :postal_code,
+      :shipping_address,
+      :shipping_name,
+      :shipping_cost,
+      :total_payment,
+      :payment_method,
+      :status
+      )
+  end
+
+  def sale_params
+    params.require(:sale).permit(:status)
   end
 end

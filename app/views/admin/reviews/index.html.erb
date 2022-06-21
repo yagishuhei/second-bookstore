@@ -1,15 +1,25 @@
-<h1>ユーザーのレビュー一覧</h1>
-<% @reviews.each do |review| %>
+<div class="container">
+  <h2 class= "col-6 py-5 mx-auto">レビュー一覧</h2>
 
-<%= link_to admin_end_user_path(review.end_user) do %>
-    <%= image_tag review.end_user.get_profile_image("100x100") %>
-    <%= review.end_user.last_name %>
-    <%= review.end_user.first_name %>
-  <% end %>
-
-  <%= link_to admin_review_path(review) do %>
-  <%= review.heading %>
-  <% end %>
-  <%= review.blog %>
-  <%= review.score %>
+   <% @reviews.each do |review| %>
+  <div class= "row w-90 mx-auto mt-1 bg-light shadow-lg">
+        <div class="col-2">
+        <%= link_to (image_tag(review.book.medium_image_url)), review.book.item_url %>
+        </div>
+        <div class="col-2">
+          <%= image_tag review.end_user.get_profile_image("100x100"), class:"mt-3 rounded-circle"; %>
+          <p><%= review.end_user.last_name %><%= review.end_user.first_name %></p>
+        </div>
+        <div class="col-8">
+          <p >
+            <%= review.book.title %>
+          </p>
+          <P>
+            <%= review.heading %>
+         </p>
+          <P><%= link_to "詳細", admin_review_path(review), class: "btn btn-sm btn-info" %>
+        </div>
+  </div>
 <% end %>
+</div>
+
