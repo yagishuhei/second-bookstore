@@ -10,10 +10,10 @@ ja: #日本語設定
         incomplete: "未完了"
         complete: "完了"
 
-    order_detail:
-      shipping_status:
-        shipping: "発送中"
-        now_buying: "購入中"
+    sale:
+      status:
+        on_sale: "出品中"
+        buying: "購入中"
         cancel: "キャンセル"
 
     review:

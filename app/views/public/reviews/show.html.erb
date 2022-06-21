@@ -1,59 +1,48 @@
 
-<h2>レビュー詳細</h2>
+<div class="container">
+<h2 class= "col-6 py-5 mx-auto">詳細</h2>
+  <div class= "row w-80 mx-auto my-2 bg-light shadow-lg">
+    <div class="col-2 px-0">
+      <%= link_to (image_tag(@review.book['large_image_url'])), @review.book['item_url'] %>
+      <div id="score"><%= render 'public/reviews/score', review: @review %></div><%= @review.score %>
+    </div>
+    <div class="col-2 px-0">
+      <h5 class="title col-12 py-1">タイトル</h5>
+      <h5 class="title col-12 py-1">著者</h5>
+      <h5 class="title col-12 py-1">出版社</h5>
+    </div>
+    <div class="col-8">
+      <p><%= @review.book.title %></p>
+      <p><%= @review.book.author %></p>
+      <p><%= @review.book.publisher_name %></p>
+    </div>
+  </div>
+  <div class="row w-80 mx-auto my-2 bg-light shadow-lg">
+    <div class="col-3">
+      <p>レビュー投稿日<%= @review.created_at.strftime('%Y/%m/%d') %></p>
+      <p>レビュー更新日<%= @review.updated_at.strftime('%Y/%m/%d') %></p>
+    </div>
+      <div class="col-3 pt-4" id="favorite-btn">
+        <%= render 'public/favorites/favorite-btn', review: @review %>
+        <%#= Dir.glob("app/views/public/favorites/*") %>
+      </div>
+      <h5 class="title col-12">テーマ</h5>
+      <p class-"col-10 "><%= @review.heading %></p>
+      <h5 class="title col-12">批評</h5>
+      <p class-"col-12"><%= @review.blog %></p>
+      <% if @review.end_user == current_end_user %>
+      <div class="col-12 py-1">
+        <%= link_to "編集する", edit_review_path(@review), class: "btn btn-sm btn-success" %>
+        <%= link_to "削除", review_path(@review), method: :delete, class: "btn btn-sm btn-danger", data: {confirm: "本当に削除しますか？"} %>
+      </div>
+       <% end %>
+
+  </div>
 
 
-<%= link_to (image_tag(@review.book['large_image_url'])), @review.book['item_url'] %>
-<%= @review.book.title %>
-<%= @review.book.author %>
-<%= @review.book.publisher_name %>
-<!--レビュー５段階評価-->
-
-<div id="score"></div>
-<%= @review.score %>
-
-<script>
-
-  $('#score').raty({
-    //imageを表示
-    starOff: '<%= asset_path('star-off.png') %>',
-    starOn: '<%= asset_path('star-on.png') %>',
-    starHalf: '<%= asset_path('star-half.png') %>',
-    //半値も表示できる
-    half: true,
-    //固定して表示できる
-    readOnly: true,
-    //呼び出したいカラムデータ
-    score: <%= @review.score %>,
-  });
-
-</script>
-
-<!--/レビュー５段階評価-->
-
-<div id="favorite-btn">
- <%= render 'public/favorites/favorite-btn', review: @review %>
- <%#= Dir.glob("app/views/public/favorites/*") %>
-</div>
-
-<p>レビュー投稿日<%= @review.created_at.strftime('%Y/%m/%d') %></p>
-<p>レビュー更新日<%= @review.updated_at.strftime('%Y/%m/%d') %></p>
-<p><%= @review.heading %></p>
-<%= @review.blog %>
-<% if @review.end_user == current_end_user %>
-<li><%= link_to "編集する", edit_review_path(@review) %></li>
-<li><%= link_to "削除", review_path(@review), method: :delete, data: {confirm: "本当に削除しますか？"} %></li>
-<% end %>
-
-<li><%= link_to "他の投稿したレビューの一覧を見てみる", reviews_path %></li>
-
+<%= link_to "他の投稿したレビューの一覧を見てみる", reviews_path, class: "btn btn-lg btn-info" %>
 <!-- レビューへのコメント機能-->
-
 <div id="comment">
   <%= render 'public/review_comments/comment', review: @review, review_comment: @review_comment %>
 </div>
-
-
-
-
 <!-- /レビューへのコメント機能-->
-

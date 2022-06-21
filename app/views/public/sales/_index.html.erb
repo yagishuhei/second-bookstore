@@ -1,6 +1,6 @@
 <div class="row row-cols-1 row-cols-md-5 g-5">
-  <%# if sales.statuses == 'on_sale' %>
-    <% sales.each do |sale| %>
+  <% sales.each do |sale| %>
+    <% if sale.status == 'on_sale' %>
     <!--idがnilだったらかどうかを判定 nextが次のeachにいく-->
     <% next if sale.id.nil? %>
       <div class="col">
@@ -10,8 +10,7 @@
             <div class="card-body">
               <h5 class="card-title"> <%= sale.book.title %></h5>
               <p class="card-text"><%= sale.price %>円</p>
-              <p class= "card-info"><%= sale.status %></p>
-              <%= sale.order_details.shipping_statuses %>
+              <p class= "card-info"><%= sale.status_i18n %></p>
             </div>
            <% end %>
           <% if @end_user == current_end_user %>
@@ -20,5 +19,5 @@
         </div>
       </div>
     <% end %>
-  <%# end %>
+  <% end %>
 </div>

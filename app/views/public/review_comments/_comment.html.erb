@@ -1,11 +1,11 @@
 <!-- レビューへのコメント機能-->
 
 
-  <div class="review-comment-all">
+  <div class="row review-comment">
     <p>コメント件数: <%= review.review_comments.count %></p>
     <!--コメント一覧-->
       <% review.review_comments.each do |review_comment| %>
-        <p>
+      <p class="col-12">
           <%= image_tag review_comment.end_user.get_profile_image("50x50") %>
           <%= review_comment.end_user.nickname %>
           <%= review_comment.created_at.strftime('%Y/%m/%d') %>
@@ -17,12 +17,15 @@
       <% end %>
   </div>
   <!--コメント投稿フォーム-->
-    <div class="review-comment-form">
+    <div class="row review-comment-form">
+      <div class="col-12 p-4 form-body">
+
       <!--routingがネストしているため、親と子のインスタンス変数が必要-->
       <%= form_with model: [review, review_comment], url: review_review_comments_path(review.id), method: :post, local: false do |f| %>
-      <%= f.text_area :comment, rows: '5', placeholder: "コメント" %>
-      <%= f.submit "送信する" %>
-      <% end %>
+      <%= f.text_area :comment, required: true, rows: '5', placeholder: "コメント", class: "form-control" %>
+      <%= f.submit "送信", class: "btn btn-sm btn-success" %>
+
+       </div>
+        <% end %>
     </div>
 <!-- /レビューへのコメント機能-->
-
