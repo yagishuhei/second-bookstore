@@ -19,25 +19,7 @@
         </div>
         <!--idを持たせて一意性をつける-->
 
-        <!--javascriptの入力内容（javascriptルール）-->
-        <script>
-
-
-        // javascript > jquery > raty関数
-        // raty({obj}) //obj size startOff StarOn Event
-        // イベントが発生したとき、ID:ScoreのreviewのDOMオブジェクトのValueの値を変更する
-        $('#score').raty({
-            //imageを表示
-            starOff:  '<%= asset_path('star-off.png') %>',
-            starOn : '<%= asset_path('star-on.png') %>',
-            starHalf: '<%= asset_path('star-half.png') %>',
-            //モデル、カラムを指定している
-            scoreName: 'review[score]',
-            //半値も入力できる
-            half: true,
-        });
-        </script>
-        <!--/javascriptの入力ルール-->
+       <div id="score"><%= render 'public/reviews/score', review: @review %></div><%= @review.score %>
         <div class="col-12">
           <%= f.label :heading,'レビュータイトル' %>
           <%= f.text_field :heading, required: true, class: "form-control" %>

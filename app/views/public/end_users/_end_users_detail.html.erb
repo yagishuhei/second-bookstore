@@ -1,11 +1,19 @@
-<h1>ユーザー一覧</h1>
-<p>本好きメンバー</p>
-<% end_users.each do |end_user| %>
-<div>
-  <%= link_to end_user_path(end_user) do %>
-    <%= image_tag end_user.get_profile_image("100x100") %>
-    <%= end_user.nickname %>
-  <% end %>
-  <%= end_user.introduction %>
-</div>
-<% end %>
+<div class = "card-list-container py-3 px-5 col-12">
+  <h2>ユーザー一覧</h2>
+  <p>本好きメンバー</p>
+  <div class="row row-cols-1 row-cols-md-6 g-6">
+    <% @end_users.each do |end_user| %>
+      <div class="col">
+        <div class="card h-100">
+          <%= link_to end_user_path(end_user) do %>
+            <%= image_tag end_user.get_profile_image("100x100") %>
+          <% end %>
+          <div class="card-body">
+            <h5 class="card-title"><%= end_user.nickname %></h5>
+            <p class="card-text"><%= end_user.introduction %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+   </div>
+ </div>

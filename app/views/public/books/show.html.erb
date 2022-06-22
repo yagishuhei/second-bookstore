@@ -1,12 +1,23 @@
 
-<h2>楽天Booksから選んだ持っている本の詳細ページ</h2>
 <div class= "container">
-<!--楽天のitem_urlを合わせればimage表示可能-->
-<%= link_to (image_tag(@book['large_image_url'])), @book['item_url'] %>
-<%= @book.title %>
-<%= @book.author %>
-<%= @book.publisher_name %>
-
-
-<P> この本に関するレビューを書く</P>
-<%= render "public/reviews/form", book: @book, review: @review %>
+  <div="row">
+    <h2>楽天Booksから選んだ持っている本の詳細ページ</h2>
+    <div class="col-12 bg-light px-0" >
+      <!--楽天のitem_urlを合わせればimage表示可能-->
+   
+      <%= link_to (image_tag(@book['large_image_url'])), @book['item_url'] %>
+     
+      
+      <div class="col-8 px-5">
+      <%= @book.title %>
+      <%= @book.author %>
+      <%= @book.publisher_name %>
+      </div>
+      </div>
+    
+  </div>
+  <div= "row">
+    
+    <%= render "public/reviews/form", book: @book, review: @review %>
+  </div>
+</div>
