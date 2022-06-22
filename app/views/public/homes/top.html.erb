@@ -1,8 +1,8 @@
 <% if end_user_signed_in? %>
-  <div class= "container px-5 px-sm-0">
+  <div class= "container px-sm-0">
   <div class="row">
-    <div class= "col-md-8 offset-md-1">
-       <h2>レビューする本を探す。</h2>
+    <div class= "col-md-7 py-4 offset-md-1">
+       <h2>レビューする本を探す</h2>
        <div class="col-md-8 offset-md-1 py-3">
     <%= render 'public/books/rakuten_search' %>
     </div>
@@ -11,14 +11,14 @@
         <%= render "public/reviews/index", reviews: @reviews %>
       </div>
     </div>
-    <div class= "col-md-3">
+    <div class= "col-md-4 py-4">
       <%= render 'public/books/rakuten_search' %>
 
-    <div class= "mt-3">
+    <div class= "mt-4">
       <h3>カテゴリー</h3>
       <%= render 'public/categories/index', categories: @categories %>
     </div>
-    <div>
+    <div class="py-3">
       <%= render 'public/searchs/search' %>
     </div>
   </div>
@@ -26,19 +26,23 @@
 </div>
 
 
-
 <% else %>
-<h1>ようこそsecond-bookstoreへ</h1>
-<h2>ここでは本好きが集まれるサイトとなっております</h2>
-<h4>利用の仕方</h4>
-<h6>
-  自分のおすすめ本を紹介できる、またお気に入りになる本を調べられる。</br>
-　本に関してのおすすめポイントをまとめることができ、自分の趣味嗜好について考えられる。</br>
-　インターネット上にMy.本棚として管理できるようにする。</br>
-　他の人がどんな本を持っているのか、お気に入り要録している本を閲覧できる。</br>
-　自分の所持している本に関して、アウトプットをしたい人や、考察してそこから読み取ったことを発信していきたい時。</br>
-　加えて中古の本を誰かに譲りたい、または、本好きな人の持っている本を読んでみたい、自分とは違うジャンルでも読んでみたいと思う時。</br>
-</h6>
+<div class="container">
+  <div class="row">
+    <div class="col text-center py-4">
+      <h1 class="text-center"><strong>ようこそsecond-bookstoreへ</strong></h1>
+        <h2 class="text-center">ここでは本好きが集まれるサイトとなっております</h2>
+        <h4 class="py-2">利用の仕方</h4>
+        <h6 class="text-center">
+          自分のおすすめ本を紹介できる　またお気に入りになる本を調べられる</br>
+        　本に関してのおすすめポイントをまとめられる</br>
+        　インターネット上にMy.本棚として管理</br>
+        　発信していきたい時</br>
+        　本好きな人と繋がりたい時</br>
+        </h6>
+    </div>
+  </div>
+</div>
 
 <% end %>
 

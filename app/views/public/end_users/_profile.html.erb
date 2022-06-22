@@ -1,74 +1,46 @@
- <div class = "card-list-container py-1 col-12">
-       <p class="d-flex justify-content-end">
-
-        <div id="follow">
-         <%= render 'public/relationships/follow', end_user: end_user %>
-        </div>
-       </p>
-
-          <div class= "card mx-auto mt-1 shadow-lg">
-            <div class= "card-body">
-              <div class = "row">
-                <div class="col-2">
-                 <%= image_tag end_user.get_profile_image("100x100") %>
-
-                <%= link_to follows_end_user_path(end_user) do %>
-                <p>フォロー<%= following_users %><p>
-                <% end %>
-                <%= link_to followers_end_user_path(end_user) do %>
-                <p>フォロワー<%= follower_users %></p>
-                <% end %>
-
-                </div>
-                <div class="col-10">
-
-                 <table class= "profile">
-                  <thead>
-                    <th class="col-2 py-1">
-                     氏名
-                    </th>
-                    <th class="col-2 py-1">
-                     フリガナ
-                    </th>
-                    <th class="col-2 py-1">
-                     ニックネーム
-                    </th>
-                    <th class="col-2 py-1">
-                     ステータス
-                    </th>
-                  </thead>
-                  <tbody>
-                   <td class="col-2 py-1">
-                     <%= end_user.last_name %>
-                  <%= end_user.first_name %>
-                   </td>
-                   <td class="col-2 py-1">
-                     <%= end_user.last_name_kana %>
-                  <%= end_user.first_name_kana %>
-
-                   </td>
-                   <td class="col-2 py-1">
-                    <%= end_user.nickname %>
-
-                   </td>
-                   <td class="col-2 py-1">
-                   <%= end_user.is_deleted ? "退会" : "有効" %>
-                   </td>
-
-                  </tbody>
-                 </table>
-                 <div class="row col-12">
-                  <div class= "col-12 py-2">
-              <h4>プロフィール</h4>
-                  <%= end_user.introduction %>
-             </div>
-
-                 </div>
-                  </div>
-
-            </div>
-
-
-      </div>
+<div class = "card-list-container py-1 col-12">
+  <div class="d-flex justify-content-end" id="follow">
+  <%= render 'public/relationships/follow', end_user: end_user %>
+  </div>
+  <div class= "card mx-auto mt-1 shadow-lg">
+   <div class= "card-body">
+    <div class = "row">
+    <div class="col-2">
+     <%= image_tag end_user.get_profile_image("100x100") %>
+     <%= link_to follows_end_user_path(end_user) do %>
+      <p>フォロー<%= following_users %><%= end_user.follower.count %> <p>
+     <% end %>
+     <%= link_to followers_end_user_path(end_user) do %>
+      <p>フォロワー<%= follower_users %><%= end_user.followed.count %></p>
+     <% end %>
     </div>
- </div>
+    <div class="col-10">
+     <table class= "profile">
+      <thead>
+       <th class="col-2 py-1">氏名</th>
+       <th class="col-2 py-1">フリガナ</th>
+       <th class="col-2 py-1">ニックネーム</th>
+       <th class="col-2 py-1">ステータス</th>
+      </thead>
+      <tbody>
+       <td class="col-2 py-1">
+       <%= end_user.last_name %><%= end_user.first_name %>
+       </td>
+       <td class="col-2 py-1">
+       <%= end_user.last_name_kana %><%= end_user.first_name_kana %>
+       </td>
+       <td class="col-2 py-1"><%= end_user.nickname %></td>
+       <td class="col-2 py-1"><%= end_user.is_deleted ? "退会" : "有効" %></td>
+      </tbody>
+     </table>
+     <div class="row col-12">
+      <div class= "col-12 py-2">
+       <h5>自己紹介</h5>
+       <%= end_user.introduction %>
+      </div>
+     </div>
+    </div>
+    </div>
+   </div>
+  </div>
+</div>

@@ -1,51 +1,48 @@
-<h1>マイページ</h1>
-<div class= "container">
+<div class= "container px-5 px-sm-0">
   <div class="row">
-
-      <h1 class="text-dark bg-light p-4 md-0">プロフィール</h1>
-      <%= render 'public/end_users/profile', end_user: @end_user, following_users: @following_users, follower_users: @follower_users %>
-
-</div>
-<div class ="row">
- <div class = "card-list-container col-12">
-     <div class= "card w-70 mx-auto mt-1 shadow-lg">
-
-    <div class= "card-body">
-      <div class = "row">
-        <div class="col-6 py-1">
-          <p>メールアドレス</p>
-            <%= @end_user.email %>
-
-          <p>電話番号</p>
-            <%= @end_user.telephone_number %>
-
-          <p>郵便番号</p>
-            <%= @end_user.postal_code %>
-
-          <p>住所</p>
-            <%= @end_user.address %>
-        </div>
-
-        <div class="col-6 py-1">
-
-          <% if @end_user.last_name!= "ゲスト" && @end_user.first_name!= "ユーザー" %>
-<%= link_to "プロフィールを編集", edit_end_user_path(@end_user) %>
-<% end %>
-<%= link_to "退会する", confirm_unsubscribe_path %>
-
-<h4>出品内容を見てみる</h4>
-<%= link_to "出品一覧", new_sale_path %>
-<h4>配送先</h4>
-<%= link_to "配送先一覧", addresses_path %>
-
-
+    <h2 class="text-dark p-4 md-0">プロフィール</h2>
+      <%= render 'public/end_users/profile', end_user: @end_user,
+      following_users: @following_users, follower_users: @follower_users %>
+  </div>
+  <div class ="row">
+    <div class = "card-list-container col-12">
+      <div class= "card w-70 mx-auto mt-1 shadow-lg">
+        <div class= "card-body">
+          <div class = "row">
+            <div class="col-6 py-1">
+              <p>メールアドレス</p>
+              <%= @end_user.email %>
+              <p>電話番号</p>
+              <%= @end_user.telephone_number %>
+              <p>郵便番号</p>
+              <%= @end_user.postal_code %>
+              <p>住所</p>
+              <%= @end_user.address %>
+            </div>
+            <div class="col-6 py-1">
+              <div class="col-12 py-1">
+                <%= link_to "出品一覧", new_sale_path, class: "btn btn-lg btn-info" %>
+              </div>
+              <div class="col-12 py-1">
+                <%= link_to "配送先一覧", addresses_path, class: "btn btn-lg btn-info" %>
+              </div>
+              <div class="col-12 py-1">
+                <%= link_to "登録した本", books_path(end_user_id: @end_user.id), class: "btn btn-lg px-4 btn-info" %>
+              </div>
+              <% if @end_user.last_name!= "ゲスト" && @end_user.first_name!= "ユーザー" %>
+                <div class="col-12 py-1">
+                  <%= link_to "プロフィールを編集", edit_end_user_path(@end_user), class: "btn btn-lg btn-success" %>
+                </div>
+              <% end %>
+              <div class="col-12 py-1">
+                <%= link_to "退会する", confirm_unsubscribe_path, class: "btn btn-lg btn-danger" %>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-</div>
-
 </div>
 
 

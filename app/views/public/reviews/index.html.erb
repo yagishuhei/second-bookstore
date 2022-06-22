@@ -1,7 +1,7 @@
 <div class= "container px-5 px-sm-0">
   <div class="row">
-    <div class= "col-md-8 offset-md-1">
-      <h1 class="text-dark p-4 md-0">投稿したレビュー一覧</h1>
+    <div class= "col-md-7 offset-md-1">
+      <h3 class="text-dark py-4 md-0">投稿したレビュー一覧</h3>
               <!--エラーメッセージ-->
         <% if @review.errors.any? %>
           <%= @review.errors.count %>件のエラーが発生しました
@@ -15,17 +15,16 @@
         <%= render "public/reviews/index", reviews: @reviews %>
       </div>
     </div>
-    <div class= "col-md-3">
+    <div class= "col-md-4 py-4">
       <%= render 'public/books/rakuten_search' %>
 
-    <div class= "mt-3">
+    <div class= "mt-4">
       <h3>カテゴリー</h3>
       <%= render 'public/categories/index', categories: @categories %>
     </div>
-    <div>
+    <div class="py-3">
       <%= render 'public/searchs/search' %>
     </div>
   </div>
   </div>
 </div>
-

@@ -7,58 +7,52 @@
     <% end %>
   </ul>
 <% end %>
-
 <div class= "no-gutters">
- <div class= "col-md-5 col-sm-12 mx-1 mx-sm-auto bg-light rounded px-0 my-5">
-   <div class="form-body p-4">
-    <%= form_with model: review, url: reviews_path(book_id: book.id), method: :post do |f| %>
-      <div class= "input-group md-3 mt-4">
-
-
-        <!--idを持たせて一意性をつける-->
-        <div class="col-12" id="score">
-          <%= f.label :score,'評価 ', class: 'col-md-3 col-form-label' %>
-          <%= f.hidden_field :score, id: :review_star %>
+  <div class= "col-md-5 col-sm-12 mx-1 mx-sm-auto bg-light rounded my-5">
+    <P> この本に関するレビューを書く</P>
+    <div class="form-body p-4">
+      <%= form_with model: review, url: reviews_path(book_id: book.id), method: :post do |f| %>
+        <div class= "input-group md-3 mt-4">
+          <!--idを持たせて一意性をつける-->
+          <div class="col-12" id="score">
+            <%= f.label :score,'評価 ', class:'col-md-3 col-form-label' %>
+            <%= f.hidden_field :score, id: :review_star %>
+          </div>
+          <!--idを持たせて一意性をつける-->
+          <!--javascriptの入力内容（javascriptルール）-->
+          <script>
+            // javascript > jquery > raty関数
+            // raty({obj}) //obj size startOff StarOn Event
+            // イベントが発生したとき、ID:ScoreのreviewのDOMオブジェクトのValueの値を変更する
+            $('#score').raty({
+              //imageを表示
+              starOff:  '<%= asset_path('star-off.png') %>',
+              starOn : '<%= asset_path('star-on.png') %>',
+              starHalf: '<%= asset_path('star-half.png') %>',
+              //モデル、カラムを指定している
+              scoreName: 'review[score]',
+              //半値も入力できる
+              half: true,
+            });
+          </script>
+          <!--/javascriptの入力ルール-->
+          <div class="col-12">
+            <%= f.label :heading,'レビュータイトル' %>
+            <%= f.text_field :heading, required: true, class: "form-control" %>
+          </div>
+          <div class="col-12">
+            <%= f.label :blog,'レビュー内容' %>
+            <%= f.text_area :blog, required: true, class: "form-control" %>
+          </div>
+          <div class="col-12">
+            <%= f.select :review_status, Review.review_statuses.keys.map {|k| [t("enums.review.review_status.#{k}"),k]},{},{class: "custom-select w-30"} %>
+          </div>
         </div>
-        <!--idを持たせて一意性をつける-->
-
-        <!--javascriptの入力内容（javascriptルール）-->
-        <script>
-
-
-        // javascript > jquery > raty関数
-        // raty({obj}) //obj size startOff StarOn Event
-        // イベントが発生したとき、ID:ScoreのreviewのDOMオブジェクトのValueの値を変更する
-        $('#score').raty({
-            //imageを表示
-            starOff:  '<%= asset_path('star-off.png') %>',
-            starOn : '<%= asset_path('star-on.png') %>',
-            starHalf: '<%= asset_path('star-half.png') %>',
-            //モデル、カラムを指定している
-            scoreName: 'review[score]',
-            //半値も入力できる
-            half: true,
-        });
-        </script>
-        <!--/javascriptの入力ルール-->
-        <div class="col-12">
-          <%= f.label :heading,'レビュータイトル' %>
-          <%= f.text_field :heading, required: true, class: "form-control" %>
-        </div>
-        <div class="col-12">
-          <%= f.label :blog,'レビュー内容' %>
-          <%= f.text_area :blog, required: true, class: "form-control" %>
-        </div>
-        <div class="col-12">
-          <%= f.select :review_status, Review.review_statuses.keys.map {|k| [t("enums.review.review_status.#{k}"),k]},{},{class: "custom-select w-30"} %>
-        </div>
-      </div>
-      <%= f.submit"レビューを保存する", class: "btn btn-lg btn-block btn-info mt-4" %>
-      <%= link_to "他のレビューを見る", reviews_path %>
-    <% end %>
-
-   </div>
- </div>
+        <%= f.submit"レビューを保存する", class: "btn btn-lg btn-block btn-info mt-4" %>
+        <%= link_to "他のレビューを見る", reviews_path %>
+      <% end %>
+    </div>
+  </div>
 </div>
 
 
