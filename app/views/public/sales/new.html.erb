@@ -4,27 +4,47 @@
 <% if current_end_user.books.ids.present? %>
   <%= form_with model: @sale, url: sales_path(book_id: @book), method: :post do |f| %>
 
-<div class="row row-cols-1 mx-auto row-cols-md-5 g-5">
-    <% @books.each do |book| %>
-      <div class="col">
-        <div class="card h-100">
-            <%= link_to (image_tag(book.medium_image_url)), book.item_url %>
-          <div class="card-body">
-            <h5 class="card-title"><%= book.title %></h5>
-            <p class="card-text"><%= book.category.name %></p>
-            <p class= "card-info">
+
+
+<div class = "card-list-container py-1 col-12">
+
+  <div class="row row-cols-1 w-50 mx-auto mt-1 shadow-lg bg-light mx-auto row-cols-md-5 g-5">
+
+
+ <div class="table-responsive-sm">
+  <table>
+    <tbody>
+      <tr>
+         <% @books.each do |book| %>
+        <td>
+           <div class="col-12">
+             <div class"col-6">
+               <%= link_to (image_tag(book.medium_image_url)), book.item_url %>
+             </div>
+             <div class"col-6">
+               <%= book.title %>
+               <%= book.category.name %>
+
               <!--本の情報をデータに入れるためラジオボタンを活用-->
               <%= f.radio_button :book_id, book.id, checked: true %>
               <!--/本の情報をデータに入れるためラジオボタンを活用-->
-            </p>
-          </div>
+             </div>
 
-        </div>
-      </div>
-    <% end %>
+
+
+             </div>
+
+        </td>
+          <% end %>
+      </tr>
+
+    </tbody>
+  </table>
+
+    </div>
  </div>
 
-<div class = "card-list-container py-1 col-12">
+
 
  <div class= "card w-50 mx-auto mt-1 shadow-lg">
 
