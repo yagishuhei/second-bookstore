@@ -1,3 +1,4 @@
+<div class= "container">
 <!--エラーメッセージ-->
 <% if @address.errors.any? %>
   <%= @address.errors.count %>件のエラーが発生しました
@@ -7,18 +8,35 @@
     <% end %>
   </ul>
 <% end %>
-
-<h1>配送先情報入力</h1>
+<div class="row py-4">
+<div class= "card w-50 mx-auto mt-1 shadow-lg">
+  <h1>配送先情報入力</h1>
 <%= form_with model: @address, url: addresses_path, method: :post do |f| %>
-<%= f.label :postal_code, "郵便番号" %>
-<%= f.text_field :postal_code, required: true %>
-<%= f.label :address, "住所" %>
-<%= f.text_field :address, required: true %>
-<%= f.label :name, "宛名" %>
-<%= f.text_field :name, required: true %>
-<%= f.submit"配送先を追加" %>
-<% end %>
 
+    <div class="form-body p-4">
+      <div class= "input-group md-3 mt-4">
+
+         <div class="col-12">
+        <%= f.label :postal_code, "郵便番号" %>
+<%= f.text_field :postal_code, required: true, class: "form-control" %>
+        </div>
+         <div class="col-12">
+       <%= f.label :address, "住所" %>
+<%= f.text_field :address, required: true, class: "form-control" %>
+        </div>
+         <div class="col-12">
+      <%= f.label :name, "宛名" %>
+<%= f.text_field :name, required: true, class: "form-control" %>
+        </div>
+         <div class="col-12">
+       <%= f.submit"配送先を追加", class: "btn btn-lg btn-block btn-info mt-4" %>
+        </div>
+      </div>
+       </div>
+    </div>
+    <% end %>
+</div>
+</div>
 <h1>配送先一覧</h1>
 <% @addresses.each do |address| %>
 <!--idがnilだったらかどうかを判定 nextが次のeachにいく-->
@@ -31,3 +49,4 @@
 
 <% end %>
 
+</div>
