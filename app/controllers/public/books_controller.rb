@@ -21,8 +21,11 @@ class Public::BooksController < ApplicationController
     @book = Book.new(book_params)
     #カラの中にまずend_user_idがログインした会員idを入れる
     @book.end_user_id = current_end_user.id
-    @book.save
-    redirect_to book_path( @book)
+    if @book.save
+      redirect_to book_path( @book)
+    else
+      render rakuten_result_path()
+    end
   end
 
   def index

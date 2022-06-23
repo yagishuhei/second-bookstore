@@ -13,10 +13,6 @@
             <p class="card-text"><%= end_user.introduction %></p>
             <p class="card-text">レビュー投稿件数:<%= end_user.reviews.count %></p>
             <p class="card-text">
-              好きなジャンル:
-              <%= end_user.books.each do |book| %>
-              <%= book %>
-              <% end %>
             </p>
           </div>
         </div>
