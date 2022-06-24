@@ -1,93 +1,74 @@
 <div class="container">
-    <h2 class="col-12 py-4">本の出品をする</h2>
-<% if current_end_user.books.ids.present? %>
-  <%= form_with model: @sale, url: sales_path(book_id: @book), method: :post do |f| %>
+  <h2 class="col-12 py-4">本の出品をする</h2>
+  <% if current_end_user.books.ids.present? %>
+    <%= form_with model: @sale, url: sales_path(book_id: @book), method: :post do |f| %>
+      <div class="row mt-1 mx-auto row-cols-md-4 g-4">
+        <% @books.each do |book| %>
+          <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <%= link_to (image_tag(book.medium_image_url)), book.item_url %>
+                <p class="pl-4 pt-3">
+                  <!--本の情報をデータに入れるためラジオボタンを活用-->
+                  <%= f.radio_button :book_id, book.id, checked: true %>
+                </p>
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h6 class="card-title"><%= book.title %></h6>
+                  <p class="card-text"><%= book.category.name %></p>
 
-
-
-<div class = "card-list-container py-1 col-12">
-
-  <div class="row row-cols-1 w-50 mx-auto mt-1 shadow-lg bg-light mx-auto row-cols-md-5 g-5">
-
-
- <div class="table-responsive-sm">
-  <table>
-    <tbody>
-      <tr>
-         <% @books.each do |book| %>
-        <td>
-           <div class="col-12">
-             <div class"col-6">
-               <%= link_to (image_tag(book.medium_image_url)), book.item_url %>
-             </div>
-             <div class"col-6">
-               <%= book.title %>
-               <%= book.category.name %>
-
-              <!--本の情報をデータに入れるためラジオボタンを活用-->
-              <%= f.radio_button :book_id, book.id, checked: true %>
-              <!--/本の情報をデータに入れるためラジオボタンを活用-->
-             </div>
-
-
-
-             </div>
-
-        </td>
-          <% end %>
-      </tr>
-
-    </tbody>
-  </table>
-
-    </div>
- </div>
-
-
-
- <div class= "card w-50 mx-auto mt-1 shadow-lg">
-
-    <div class="form-body p-4">
-      <div class= "input-group md-3 mt-4">
-          <p>
-            <!--エラーメッセージ-->
-            <% if @sale.errors.any? %>
-              <%= @sale.errors.count %>件のエラーが発生しました
-              <ul>
-                <% @sale.errors.full_messages.each do |message| %>
-                  <li><%= message %></li>
-                <% end %>
-              </ul>
-            <% end %>
-          </p>
-         <div class="col-12">
-        <%= f.label :sale_image, "本の詳細画像" %>
-        <%= f.file_field :sale_image, placeholder: "出品する本の画像", accept: "image/*" %>
-        </div>
-         <div class="col-12">
-        <%= f.label :title,"商品名" %>
-        <%= f.text_field :title, required: true, class: "form-control" %>
-        </div>
-         <div class="col-12">
-        <%= f.label :introduction,"商品説明" %>
-        <%= f.text_area :introduction, required: true, class: "form-control" %>
-        </div>
-         <div class="col-12">
-        <%= f.label :price,"出品価格" %>
-        <%= f.text_field :price, required: true, class: "form-control" %>
-        </div>
-        <%= f.hidden_field :status, {:value => "on_sale"} %>
-        <%= f.submit"出品する", class: "btn btn-lg btn-block btn-info mt-4" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
       </div>
-       </div>
-    </div>
+      <%= paginate @books %>
+
+    <div class = "card-list-container py-1 col-12">
+      <div class= "card w-50 mx-auto mt-1 shadow-lg">
+        <div class="form-body p-4">
+          <div class= "input-group md-3 mt-4">
+            <p>
+              <!--エラーメッセージ-->
+              <% if @sale.errors.any? %>
+                <%= @sale.errors.count %>件のエラーが発生しました
+                <ul>
+                  <% @sale.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              <% end %>
+            </p>
+            <div class="col-12">
+              <%= f.label :sale_image, "本の詳細画像" %>
+              <%= f.file_field :sale_image, placeholder: "出品する本の画像", accept: "image/*" %>
+            </div>
+            <div class="col-12">
+              <%= f.label :title,"商品名" %>
+              <%= f.text_field :title, required: true, class: "form-control" %>
+            </div>
+            <div class="col-12">
+              <%= f.label :introduction,"商品説明" %>
+              <%= f.text_area :introduction, required: true, class: "form-control" %>
+            </div>
+            <div class="col-12">
+              <%= f.label :price,"出品価格" %>
+              <%= f.text_field :price, required: true, class: "form-control" %>
+            </div>
+              <%= f.hidden_field :status, {:value => "on_sale"} %>
+              <%= f.submit"出品する", class: "btn btn-lg btn-block btn-info mt-4" %>
     <% end %>
-</div>
+          </div>
+        </div>
+      </div>
+      <div class="col text-center py-2">
+        <%= link_to "出品本一覧", sales_path, class: "btn btn-lg btn-info" %>
+      </div>
+    </div>
 
-
-<h1>出品した本一覧</h1>
-  <%= render 'public/sales/index', sales: @sales %>
-<% else %>
-    <p>ご登録された本はございません。</p>
-<% end %>
+  <% else %>
+    <p>登録されている本はございません</p>
+  <% end %>
 </div>

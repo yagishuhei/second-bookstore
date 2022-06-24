@@ -1,1 +1,5 @@
-<%= render 'end_users_detail', end_users: @end_users %>
+<% if @records.present? %>
+  <%= render 'end_users_detail', end_users: @end_users %>
+<% else %>
+  <p>フォロワーはおりません</p>
+<% end %>

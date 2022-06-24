@@ -8,7 +8,4 @@ class Public::OrderDetailsController < ApplicationController
 
   private
 
-  def order_detail_params
-    params.require(:order_detail).permit(:shipping_status)
-  end
 end
