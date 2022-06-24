@@ -2,27 +2,27 @@
   <div class="row no-gutters ">
     <div class="col-md-8 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
       <h5 class="text-dark bg-light p-4 mb-0">新規登録</h5>
-      
+
       <div class="form-body p-4">
         <%= form_with model: @end_user, url: end_user_registration_path do |f| %>
           <%= render "public/shared/error_messages", resource: resource %>
           <div class="input-group mb-3 mt-4">
-            
+
             <div class="field col-6">
               <%= f.label :last_name, "姓" %><br/>
               <%= f.text_field :last_name, class: "form-control" %>
             </div>
-            
+
             <div class="field col-6">
               <%= f.label :first_name, "名" %><br/>
               <%= f.text_field :first_name, class: "form-control" %>
             </div>
-            
+
             <div class="field col-6">
               <%= f.label :last_name_kana, "姓（カナ）" %><br/>
               <%= f.text_field :last_name_kana, class: "form-control" %>
             </div>
-            
+
             <div class="field col-6">
               <%= f.label :first_name_kana, "名（カナ）" %><br/>
               <%= f.text_field :first_name_kana, class: "form-control" %>
@@ -54,10 +54,7 @@
             </div>
 
             <div class="field col-12">
-              <%= f.label :password, "パスワード" %>
-              <% if @minimum_password_length %>
-              <em>(<%= @minimum_password_length %> characters minimum)</em>
-              <% end %><br />
+              <%= f.label :password, "パスワード(6桁以上)" %><br />
               <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
             </div>
 
@@ -65,7 +62,7 @@
               <%= f.label :password_confirmation, "パスワード（確認用）" %><br />
               <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
             </div>
-            
+
             <div class="field col-12">
               <%= f.submit "新規登録", class: "btn btn-lg btn-block btn-success mt-4" %>
             </div>
