@@ -1,6 +1,5 @@
-
-<h1>本の出品をする</h1>
-
+<div class="container">
+    <h2 class="col-12 py-4">本の出品をする</h2>
 <% if current_end_user.books.ids.present? %>
   <%= form_with model: @sale, url: sales_path(book_id: @book), method: :post do |f| %>
 
@@ -91,3 +90,4 @@
 <% else %>
     <p>ご登録された本はございません。</p>
 <% end %>
+</div>

@@ -4,7 +4,7 @@
     <!--idがnilだったらかどうかを判定 nextが次のeachにいく-->
     <% next if sale.id.nil? %>
       <div class="col">
-        <div class="card ">
+        <div class="card">
           <%= link_to sale_path(sale) do %>
             <%= image_tag sale.get_sale_iamge("200x200") %>
             <div class="card-body">
