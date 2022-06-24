@@ -1,7 +1,7 @@
 
 <% categories.each do |category| %>
 <p><%= link_to category_path(category) do %>
-  <%= button_tag category.name, class: "btn btn-lg btn-warning" %>
+  <%= button_tag category.name, class: "btn btn-sm btn-info" %>
   <% end %>
 </p>
 <% end %>

@@ -33,7 +33,10 @@
               <%= link_to "マイページ", mypage_path, class: 'nav-link text-dark' %>
             </li>
             <li class= "nav-item active">
-              <%= link_to "ユーザー", end_users_path, class: 'nav-link text-dark' %>
+              <%= link_to "レビュー", reviews_path, class: 'nav-link text-dark' %>
+            </li>
+             <li class= "nav-item active">
+              <%= link_to "レビュー下書き", review_confirm_reviews_path, class: 'nav-link text-dark' %>
             </li>
             <li class= "nav-item active">
               <%= link_to "出品", new_sale_path, class: 'nav-link text-dark' %>
@@ -43,10 +46,7 @@
               <%= link_to "購入", sales_path, class: 'nav-link text-dark' %>
             </li>
             <li class= "nav-item active">
-              <%= link_to "レビュー", reviews_path, class: 'nav-link text-dark' %>
-            </li>
-             <li class= "nav-item active">
-              <%= link_to "レビュー下書き", review_confirm_reviews_path, class: 'nav-link text-dark' %>
+              <%= link_to "ユーザー", end_users_path, class: 'nav-link text-dark' %>
             </li>
             <!--エラーが出たためdeleteからgetに修正-->
             <li class= "nav-item active">
