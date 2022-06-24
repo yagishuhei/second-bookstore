@@ -13,11 +13,8 @@
            <P class="row-cols-3 row-cols-md-3">
           <%= image_tag order_detail.sale.get_sale_iamge("200x200") %></P>
           <P>¥<%= order_detail.price %>円</P>
-          <P><%= order_detail.shipping_status_i18n %></P>
-          <%= form_with model: @order_detail, url: order_detail_path(order_detail), method: :patch do |f| %>
-          <%= f.select :shipping_status,['購入中','キャンセル'] %>
-          <%= f.submit "変更" %>
-          <% end %>
+           <P><%= order_detail.sale.title %></P>
+          <P><%= order_detail.sale.status_i18n %></P>
           <% end %>
         </div>
         <div class ="col-5 px-4">
@@ -36,7 +33,7 @@
           <h6></h6>
            <p><%= @order.status_i18n %></p>
            <%= form_with model: @order, url: order_path(@order), method: :patch do |f| %>
-          <%= f.select :status,['incomplete', 'complete'] %>
+          <%= f.select :status,['未完了', '完了'] %>
           <%= f.submit "変更" %>
           <% end %>
         </div>

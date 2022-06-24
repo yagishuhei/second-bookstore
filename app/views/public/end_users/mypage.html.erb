@@ -29,6 +29,9 @@
               <div class="col-12 py-1">
                 <%= link_to "注文履歴一覧", orders_path, class: "btn btn-lg btn-info" %>
               </div>
+              <div class="col-12 py-1">
+                <%= link_to "配送先", addresses_path, class: "btn btn-lg btn-info" %>
+              </div>
               <% if @end_user.last_name!= "ゲスト" && @end_user.first_name!= "ユーザー" %>
                 <div class="col-12 py-1">
                   <%= link_to "プロフィールを編集", edit_end_user_path(@end_user), class: "btn btn-lg btn-success" %>

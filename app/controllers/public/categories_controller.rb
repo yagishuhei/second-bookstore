@@ -1,7 +1,7 @@
 class Public::CategoriesController < ApplicationController
   def index
     @category = Category.new
-    @categories = Category.all
+    @categories = Category.page(params[:page])
   end
 
   def show

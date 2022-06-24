@@ -5,12 +5,14 @@ class Public::ReviewsController < ApplicationController
   def index
     @review =Review.new
     @reviews = current_end_user.reviews.published
-    @categories = Category.all
+    @reviews =  @reviews.page(params[:page])
+    @categories = Category.page(params[:page])
   end
 
   def review_confirm
     @reviews = current_end_user.reviews.draft
-    @categories = Category.all
+    @reviews =  @reviews.page(params[:page])
+    @categories = Category.page(params[:page])
   end
 
   def create
