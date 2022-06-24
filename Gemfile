@@ -66,6 +66,8 @@ gem 'rakuten_web_service'
 gem "enum_help"
 # 日本語化
 gem 'rails-i18n', '~> 6.0'
+# ページネーション
+gem 'kaminari','~> 1.2.1'
 gem 'devise-i18n'
 
 gem 'dotenv-rails'

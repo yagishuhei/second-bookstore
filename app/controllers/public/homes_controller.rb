@@ -1,7 +1,7 @@
 class Public::HomesController < ApplicationController
   def top
-    @reviews = Review.all
-    @categories = Category.all
+    @reviews = Review.page(params[:page])
+    @categories = Category.page(params[:page])
   end
 
 end

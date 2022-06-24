@@ -3,6 +3,7 @@ class Public::AddressesController < ApplicationController
   def index
     @address = Address.new
     @addresses = current_end_user.addresses
+    @addresses = @addresses.page(params[:page])
   end
 
   def create

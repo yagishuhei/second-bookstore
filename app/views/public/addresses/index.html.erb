@@ -1,52 +1,73 @@
 <div class= "container">
-<!--エラーメッセージ-->
-<% if @address.errors.any? %>
-  <%= @address.errors.count %>件のエラーが発生しました
-  <ul>
-    <% @address.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+    <!--エラーメッセージ-->
+    <% if @address.errors.any? %>
+        <%= @address.errors.count %>件のエラーが発生しました
+        <ul>
+            <% @address.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+        </ul>
     <% end %>
-  </ul>
-<% end %>
-<div class="row py-4">
-<div class= "card w-50 mx-auto mt-1 shadow-lg">
-  <h1>配送先情報入力</h1>
-<%= form_with model: @address, url: addresses_path, method: :post do |f| %>
 
-    <div class="form-body p-4">
-      <div class= "input-group md-3 mt-4">
 
-         <div class="col-12">
-        <%= f.label :postal_code, "郵便番号" %>
-<%= f.text_field :postal_code, required: true, class: "form-control" %>
+
+    <div class="row py-4">
+        <div class="col-12 w-50 mx-auto mt-1">
+            <h2 class="col-12 w-50 mx-auto mt-1">配送先追加</h2>
         </div>
-         <div class="col-12">
-       <%= f.label :address, "住所" %>
-<%= f.text_field :address, required: true, class: "form-control" %>
+        <div class= "card w-50 mx-auto mt-1 shadow-lg">
+            <%= form_with model: @address, url: addresses_path, method: :post do |f| %>
+
+                <div class="form-body p-4">
+                    <div class= "input-group md-3 mt-4">
+
+                        <div class="col-12">
+                            <%= f.label :postal_code, "郵便番号" %>
+                            <%= f.text_field :postal_code, required: true, class: "form-control" %>
+                        </div>
+                        <div class="col-12">
+                            <%= f.label :address, "住所" %>
+                            <%= f.text_field :address, required: true, class: "form-control" %>
+                        </div>
+                        <div class="col-12">
+                            <%= f.label :name, "宛名" %>
+                            <%= f.text_field :name, required: true, class: "form-control" %>
+                        </div>
+                        <div class="col-12">
+                            <%= f.submit"配送先を追加", class: "btn btn-lg btn-block btn-info mt-4" %>
+                        </div>
+                    </div>
+                </div>
+
+            <% end %>
         </div>
-         <div class="col-12">
-      <%= f.label :name, "宛名" %>
-<%= f.text_field :name, required: true, class: "form-control" %>
-        </div>
-         <div class="col-12">
-       <%= f.submit"配送先を追加", class: "btn btn-lg btn-block btn-info mt-4" %>
-        </div>
-      </div>
-       </div>
     </div>
-    <% end %>
-</div>
-</div>
-<h1>配送先一覧</h1>
-<% @addresses.each do |address| %>
-<!--idがnilだったらかどうかを判定 nextが次のeachにいく-->
-<% next if address.id.nil? %>
-<%= address.postal_code %>
-<%= address.address %>
-<%= address.name %>
-<%= link_to "編集する", edit_address_path(id: address.id) %>
-<%= link_to "削除する", address_path(id: address.id), method: :delete, data: {confirm: "本当に削除しますか？"} %>
+    <h2>配送先一覧</h2>
 
-<% end %>
+
+    <% @addresses.each do |address| %>
+        <div class= "card w-90 mx-auto mt-1 shadow-lg">
+            <div class= "row card-body">
+                    <!--idがnilだったらかどうかを判定 nextが次のeachにいく-->
+                <% next if address.id.nil? %>
+                <div class="col-2">
+                    〒<%= address.postal_code %>
+                </div>
+                <div class="col-4">
+                    <%= address.address %>
+                </div>
+                <div class="col-3">
+                    <%= address.name %>
+                </div>
+                <div class="col-2">
+                    <%= link_to "編集", edit_address_path(id: address.id), class: "btn btn-sm btn-success mt-4" %>
+                    <%= link_to "削除", address_path(id: address.id), method: :delete,
+                    class: "btn btn-sm btn-danger mt-4", data: {confirm: "本当に削除しますか？"} %>
+                </div>
+            </div>
+        </div>
+    <% end %>
+
+    <%= paginate @addresses %>
 
 </div>
