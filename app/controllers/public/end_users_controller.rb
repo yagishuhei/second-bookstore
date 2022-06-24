@@ -4,9 +4,7 @@ class Public::EndUsersController < ApplicationController
   before_action :ensure_guest_user, only: [:edit]
 
   def index
-    @end_users = EndUser.all
-
-
+    @end_users = EndUser.page(params[:page])
   end
   def mypage
     @end_user = current_end_user
@@ -18,7 +16,7 @@ class Public::EndUsersController < ApplicationController
     @end_user = EndUser.find(params[:id])
     #複数の本＝会員の本全部
     @review = @end_user.reviews.last
-    @sales = @end_user.sales
+
     @following_end_users = @end_user.following_end_user
     @followers_end_users = @end_user.follower_end_user
   end
@@ -47,11 +45,13 @@ class Public::EndUsersController < ApplicationController
   def follows
     end_user = EndUser.find(params[:id])
     @end_users = end_user.following_end_user.all.reverse_order
+    @end_users =  @end_users.page(params[:page])
   end
 
   def followers
     end_user = EndUser.find(params[:id])
     @end_users = end_user.follower_end_user.all.reverse_order
+    @end_users =  @end_users.page(params[:page])
   end
 
   private

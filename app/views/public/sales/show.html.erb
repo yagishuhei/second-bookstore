@@ -1,30 +1,53 @@
 
- <h1>出品したユーザー</h1>
-<%= link_to end_user_path(@sale) do  %>
-  <%= image_tag @sale.end_user.get_profile_image("100x100") %>
-  <%= @sale.end_user.nickname %>
-  <% end %>
 
- <h1>出品本の詳細</h1>
- <h4>出品本イメージ</h4>
+
+<div class="container">
+<h2 class= "col-6 py-2 mx-auto">詳細</h2>
+<h4>イメージ</h4>
+<div class= "row w-80 mx-auto my-2 bg-light shadow-lg">
+ <div class ="col-4 py-2">
   <%= link_to (image_tag(@sale.book['large_image_url'])), @sale.book['item_url'] %>
-   <%= @sale.book.title %>
-   <h4>ユーザーの本</h4>
-   <p>
-  <%= image_tag @sale.get_sale_iamge("100x200") %>
-  </p>
-  ￥<%= @sale.price %>円
-  <%= @sale.introduction %>
-  <%= @sale.status %>
+  </div>
+  <div class ="col-6">
+
+      <p><%= @sale.book.title %></p>
+      <p><%= @sale.book.author %></p>
+      <p><%= @sale.book.publisher_name %></p>
+
+
+  </div>
+</div>
+
+  <div class= "row w-80 mx-auto my-2 bg-light shadow-lg">
+    <div class="col-2 py-2 px-2">
+
+     <%= link_to end_user_path(@sale) do  %>
+      <%= image_tag @sale.end_user.get_profile_image("100x100") %>
+       <p><%= @sale.end_user.nickname %></p>
+        <% end %>
+    </div>
+
+    <div class="col-2 py-2 px-2">
+
+      <p><%= image_tag @sale.get_sale_iamge("100x100") %></p>
+    </div>
+    <div class="col-5">
+      <p>￥<%= @sale.price %>円</p>
+      <p><%= @sale.title %></p>
+      <p><%= @sale.introduction %></p>
+      <p><%= @sale.status_i18n %></p>
+    </div>
+  </div>
 
 
   <% if end_user_signed_in? %>
    <%= form_with model: [@sale, @cart_item], url: cart_items_path, method: :post do |f| %>
     <%= f.hidden_field :sale_id, :value => @sale.id %>
-    <%= f.submit"カートに入れる" %>
+    <%= f.submit"カートに入れる", class: "btn btn-lg btn-success" %>
     <% end %>
   <% end %>
   <% if @end_user == current_end_user %>
   <%= link_to "出品内容を変更する", edit_sale_path(@sale) %>
  <% end %>
 
+ </div>

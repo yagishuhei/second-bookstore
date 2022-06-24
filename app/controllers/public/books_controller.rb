@@ -31,6 +31,7 @@ class Public::BooksController < ApplicationController
   def index
     @end_user = EndUser.find(params[:end_user_id])
     @books = @end_user.books
+    @books = @books.page(params[:page])
   end
 
   def destroy

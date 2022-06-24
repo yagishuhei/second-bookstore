@@ -1,11 +1,14 @@
 class Public::SalesController < ApplicationController
   def new
-    @books= current_end_user.books
+    @books = current_end_user.books
+    @books = @books.page(params[:page])
     @sale = Sale.new
     @sales = current_end_user.sales
+    @sales = @sales.page(params[:page])
   end
+
   def index
-    @sales = Sale.all
+    @sales = Sale.page(params[:page])
   end
 
   def create
@@ -15,7 +18,9 @@ class Public::SalesController < ApplicationController
       redirect_to request.referer, notice: "出品が完了しました。"
     else
       @books= current_end_user.books
+      @books = @books.page(params[:page])
       @sales = current_end_user.sales
+      @sales = @sales.page(params[:page])
       render :new
     end
   end

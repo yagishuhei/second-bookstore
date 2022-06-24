@@ -1,23 +1,28 @@
-
 <div class= "container">
   <div="row">
-    <h2>楽天Booksから選んだ持っている本の詳細ページ</h2>
-    <div class="col-12 bg-light px-0" >
-      <!--楽天のitem_urlを合わせればimage表示可能-->
-   
-      <%= link_to (image_tag(@book['large_image_url'])), @book['item_url'] %>
-     
-      
-      <div class="col-8 px-5">
-      <%= @book.title %>
-      <%= @book.author %>
-      <%= @book.publisher_name %>
+    <h2>楽天Booksから登録した本の詳細</h2>
+    <div class= "col-md-6 col-sm-12 mx-sm-auto bg-light rounded my-5">
+      <div class="row g-0">
+        <div class="col-md-4 py-2">
+          <%= link_to (image_tag(@book.large_image_url)), @book.item_url %>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <p class="card-text"><%= @book.title %></p>
+            <p class="card-text"><%= @book.author %></p>
+            <p><%= @book.publisher_name %></p>
+          </div>
+        </div>
+
       </div>
-      </div>
-    
+      <div class="mx-sm-auto pb-2">
+      <%= link_to "登録本一覧", books_path(end_user_id: current_end_user.id), class: "btn btn-sm btn-info" %>
+    </div>
+    </div>
+
   </div>
+
   <div= "row">
-    
     <%= render "public/reviews/form", book: @book, review: @review %>
   </div>
 </div>
