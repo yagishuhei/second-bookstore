@@ -12,15 +12,15 @@
 <%= link_to "出品一覧", new_sale_path, class: "btn btn-lg px-4 btn-info" %>
 
 <h3>最新のレビュー</h3>
-<% if @review.present? %>
+<%if @review.present? %>
   <!--楽天のitem_urlを合わせればimage表示可能-->
-   <%= link_to (image_tag (@review.book['medium_image_url'])), @review.book['item_url'] %>
-    <%= @review.book.title %>
-    <p><%= link_to "この本のレビュー詳細を見てみる", review_path(@review.book) %></p>
-    <div id="score"><%= render 'public/reviews/score', review: @review %></div><%= @review.score %>
+   <%#= link_to (image_tag (@review.book['medium_image_url'])), @review.book['item_url'] %>
+    <%#= @review.book.title %>
+    <p><%#= link_to "この本のレビュー詳細を見てみる", review_path(id: @review.id) %></p>
+    <div id="score"><%#= render 'public/reviews/score', review: @review %></div><%#= @review.score %>
 
-     <p><%= link_to "#{@review.review_comments.count}コメント", review_path(@review) %></>
-  <p><i class="fas fa-heart"></i><%= @review.favorites.count %>イイね</p>
+     <p><%#= link_to "#{@review.review_comments.count}コメント", review_path(@review) %></>
+  <p class="text-danger"><i class="fas fa-heart"></i><%#= @review.favorites.count %>イイね</p>
 <% else %>
 <p>ご登録の本はございません。</p>
 <% end%>

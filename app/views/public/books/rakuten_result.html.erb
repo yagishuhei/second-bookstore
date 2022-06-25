@@ -3,7 +3,7 @@
 <h4>気になる本を自分のページに追加できます</h4>
 <!--楽天ブックス検索結果一覧を表示-->
 <!--カラムに関してはエラーを出さないように、オブジェクトではなくハッシュを使い表示、格納するよう設定-->
-<div class="row row-cols-4 row-cols-md-4 g-4">
+<div class="row row-cols-4 row-cols-sm-1 g-1 row-cols-4 row-cols-md-4 g-4">
   <% @books.each do |book| %>
     <div class="col py-3">
       <div class="card h-100">
@@ -20,7 +20,7 @@
 
           <!--表示された本ごとの情報をレビューを書くように、hidden_fieldでbookテーブルに格納-->
           <%= form_with model: @book, url: books_path, method: :post do |f| %>
-            <%= f.hidden_field :isbn, :value => book['title'] %>
+            <%= f.hidden_field :isbn, :value => book['isbn'] %>
             <%= f.hidden_field :title, :value => book['title'] %>
             <%= f.hidden_field :author, :value => book['author'] %>
             <%= f.hidden_field :publisher_name,:value => book['publisher_name'] %>
@@ -28,7 +28,17 @@
             <%= f.hidden_field :item_url, :value => book['item_url'] %>
             <%= f.hidden_field :large_image_url, :value => book['large_image_url'] %>
             <%= f.hidden_field :medium_image_url, :value => book['medium_image_url'] %>
-            <%= f.select :category_id, options_from_collection_for_select(Category.all, :id, :name), prompt: "--選択して下さい--" %>
+           
+             
+            
+            <!--選択されていない状況を回避するためにhtmlで記述-->
+            <select required class="form_control" name="book[category_id]" id="book_category_id">
+              <option value="">--選択して下さい--</option>
+              <% Category.all.each do |category| %>
+                <option value="<%= category.id %>"><%= category.name %></option>
+              <% end %>
+            </select>
+             <!--/選択されていない状況を回避するためにhtmlで記述-->
             <%= f.submit "My本棚に追加", class: "btn btn-sm btn-success" %>
           <% end %>
         </div>

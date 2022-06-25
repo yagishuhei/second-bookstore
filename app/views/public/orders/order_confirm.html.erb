@@ -1,41 +1,49 @@
-<h1>注文情報確認</h1>
 
-<h1>カート内商品一覧</h1>
-<div>
-    <% total = 0 %>
-  <% @cart_items.each do |cart_item| %>
-    <%= image_tag cart_item.sale.get_sale_iamge("100x100") %>
-    <%= cart_item.sale.book.title %>
-    ¥<%= cart_item.sale.price %>円
-    <% @cart_item_price = total += cart_item.sale.price %>
+
+
+<div class="container">
+<h2 class= "col-6 py-5 mx-auto">注文情報確認</h2>
+  <div class="row w-80 mx-auto my-2 bg-light shadow-lg">
+      <h5 class="title col-12">カート内商品一覧</h5>
+      <div class="col-6">
+      <p class="col-12">支払い方法</p>
+      <%= @order.payment_method_i18n %>
+      </div>
+      <div class="col-6">
+      <p class="col-12">配送先</p>
+      <p class="h6">郵便番号</p>
+      <p>〒<%= @order.postal_code %></p>
+      <p class="h6">ご住所</p>
+      <p><%= @order.shipping_address %></p>
+      <p class="h6">宛名</p>
+      <p><%= @order.shipping_name %></p>
+      </div>
+  </div>
+   <div class="row w-80 mx-auto my-2 bg-light shadow-lg">
+      <h5 class="title col-12">注文情報</h5>
+      <% total = 0 %>
+      <% @cart_items.each do |cart_item| %>
+      <p class-"col-10 "> <%= image_tag cart_item.sale.get_sale_iamge("100x100") %></p>
+      <h5 class="title col-12"><%= cart_item.sale.book.title %></h5>
+      <p class-"col-12">¥<%= cart_item.sale.price %>円</p>
+      <% @cart_item_price = total += cart_item.sale.price %>
+       <% end %>
+  </div>
+   <div class="row w-80 mx-auto my-2 bg-light shadow-lg">
+    <h4>商品合計</h4>
+    ¥<%= @cart_item_price %>円
+  </div>
+  <%= form_with model: @order, url: orders_path, method: :post do |f| %>
+    <%= f.hidden_field :postal_code, :value => @order.postal_code %>
+    <%= f.hidden_field :shipping_address, :value => @order.shipping_address %>
+    <%= f.hidden_field :shipping_name, :value => @order.shipping_name %>
+    <%= f.hidden_field :payment_method, :value => @order.payment_method %>
+    <%= f.hidden_field :total_payment, :value => @cart_item_price %>
+    <%= f.hidden_field :shipping_cost, :value => @order.shipping_cost %>
+    <%= f.hidden_field :status, :value => "incomplete" %>
+    <%#= fields_for :cart_items do |c| %>
+      <%#= c.hidden_field :sale_ids, :value => @cart_items.ids.to_json %>
+    <%# end %>
+    <%= f.submit "注文を確定する", class: "btn btn-lg btn-success" %>
   <% end %>
 </div>
-
-
-<p>注文情報</p>
-<p>支払い方法</p>
-<%= @order.payment_method_i18n %>
-<p>配送先</p>
-〒<%= @order.postal_code %>
-<%= @order.shipping_address %>
-<%= @order.shipping_name %>
-
-<h4>商品合計</h4>
-¥<%= @cart_item_price %>円
-
-
-<%= form_with model: @order, url: orders_path, method: :post do |f| %>
-  <%= f.hidden_field :postal_code, :value => @order.postal_code %>
-  <%= f.hidden_field :shipping_address, :value => @order.shipping_address %>
-  <%= f.hidden_field :shipping_name, :value => @order.shipping_name %>
-  <%= f.hidden_field :payment_method, :value => @order.payment_method %>
-  <%= f.hidden_field :total_payment, :value => @cart_item_price %>
-  <%= f.hidden_field :shipping_cost, :value => @order.shipping_cost %>
-  <%= f.hidden_field :status, :value => "incomplete" %>
-  <%#= fields_for :cart_items do |c| %>
-    <%#= c.hidden_field :sale_ids, :value => @cart_items.ids.to_json %>
-  <%# end %>
-  <%= f.submit "注文を確定する" %>
-<% end %>
-
-

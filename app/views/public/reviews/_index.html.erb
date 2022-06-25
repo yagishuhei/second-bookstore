@@ -1,4 +1,4 @@
-<% reviews.each do |review| %>
+<% reviews.each_with_index do |review,index| %>
   <div class= "card w-90 mx-auto mt-1 shadow-lg">
     <div class= "row card-body">
 
@@ -11,10 +11,10 @@
         <div class="col-6">
 
             <%= review.book.title %>
-            <div id="score"><%= render 'public/reviews/score', review: review %></div><%= review.score %>
+            <div id="score_<%= index %>"><%= render 'public/reviews/score', review: review, index: index %></div><%= review.score %>
 
           <P>
-            <%= link_to review_path(review) do %>
+            <%= link_to review_path(review, hoge: index) do %>
             <%= review.heading %>
             <% end %>
           </P>
