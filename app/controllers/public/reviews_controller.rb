@@ -35,6 +35,7 @@ class Public::ReviewsController < ApplicationController
   def show
     @review = Review.find(params[:id])
     @review_comment = ReviewComment.new
+    @index = params[:hoge]
   end
 
   def edit

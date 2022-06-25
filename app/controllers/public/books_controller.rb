@@ -24,7 +24,8 @@ class Public::BooksController < ApplicationController
     if @book.save
       redirect_to book_path( @book)
     else
-      render rakuten_result_path
+      @books = RakutenWebService::Books::Total.search(keyword: params[:keyword], orFlag: 1)
+      render :rakuten_result
     end
   end
 

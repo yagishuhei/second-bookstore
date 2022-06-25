@@ -51,7 +51,9 @@ Rails.application.routes.draw do
     resources :order_details
     post 'orders/order_confirm', to: 'orders#order_confirm', as: 'order_confirm'
     get 'orders/thanks', to: 'orders#thanks', as: 'thanks'
-    resources :orders
+    #order_confirmのページでリロードするとshowに遷移するためidを数字のみにする
+    resources :orders, :constraints => { :id => /[0-9|]+/ }
+
     resources :addresses, only: [:index, :create, :destroy, :edit, :update]
     get 'end_users/mypage', to: 'end_users#mypage', as: 'mypage'
     get 'end_users/unsubscribe', to: 'end_users#unsubscribe', as: 'confirm_unsubscribe'

@@ -18,8 +18,8 @@
                   <p class="card-text">レビュー投稿件数:<%= end_user.reviews.count %></p>
                   <p class="card-text"><%= link_to "詳細", end_user_path(end_user), class: "btn btn-sm btn-info" %></p>
                   <p class="card-text">投稿ジャンル:
-                    <% end_user.books.each do |book| %>
-                      <p class="bg-secondary text-light text-center rounded-pill"><%= book.category.name %></p>
+                    <% fuga(end_user).each do |book| %>
+                      <p class="bg-secondary text-light text-center rounded-pill"><%= book %></p>
                     <% end %>
                   </p>
 
