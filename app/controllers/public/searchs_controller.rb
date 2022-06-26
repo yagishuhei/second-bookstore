@@ -4,5 +4,5 @@ class Public::SearchsController < ApplicationController
     @records = Book.where('title LIKE ?', "%#{params[:search]}%") if params[:search].present?
     @records = @records.page(params[:page])
   end
-
+  
 end

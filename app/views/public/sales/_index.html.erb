@@ -1,5 +1,6 @@
 <div class="row row-cols-1 row-cols-md-5 g-5">
   <% sales.each do |sale| %>
+   <% if sale.end_user != current_end_user %>
     <% if sale.status == 'on_sale' %>
       <!--idがnilだったらかどうかを判定 nextが次のeachにいく-->
       <% next if sale.id.nil? %>
@@ -19,6 +20,7 @@
       <% if @end_user == current_end_user %>
         <%= link_to "削除", sale_path(sale), method: :delete %>
       <% end %>
+    <% end %>
     <% end %>
   <% end %>
 </div>

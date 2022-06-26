@@ -1,6 +1,6 @@
 <h1>注文情報詳細</h1>
 
-<h1>注文履歴一覧</h1>
+
 <p>購入した本</p>
 <div class= "container px-5 px-sm-0">
   <div class= "row">
@@ -22,18 +22,18 @@
           <p><%= @order.postal_code %></p>
           <h6>配送先住所</h6>
            <p><%= @order.shipping_address %></p>
-           <h6></h6>
+           <h6>宛名</h6>
            <p><%= @order.shipping_name %></p>
-           <h6></h6>
+           <h6>送料</h6>
            <p><%= @order.shipping_cost %></p>
-           <h6></h6>
+           <h6>請求金額</h6>
            <p><%= @order.total_payment %></p>
-           <h6></h6>
+           <h6>支払い方法</h6>
           <p><%= @order.payment_method_i18n %></p>
-          <h6></h6>
+          <h6>ステータス</h6>
            <p><%= @order.status_i18n %></p>
-           <%= form_with model: @order, url: order_path(@order), method: :patch do |f| %>
-          <%= f.select :status,['未完了', '完了'] %>
+          <%= form_with model: @order, url: order_path(@order), method: :patch do |f| %>
+          <%= f.select :status,{'未完了': 'incomplete', '完了': 'complete' }%>
           <%= f.submit "変更" %>
           <% end %>
         </div>

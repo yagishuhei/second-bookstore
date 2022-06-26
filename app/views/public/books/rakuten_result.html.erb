@@ -14,9 +14,10 @@
           <p class="card-text"><!--著者名がないと表示されないのでifで条件分岐-->
           <% if book['author'] == '' %>
             <p>不明</p>
-          <% else %>            <p><%= book['author'] %></p>
+          <% else %>
+            <p><%= book['author'] %></p>
           <% end %>
-           <p><%= book['item_caption'] %></p>
+
 
           <!--表示された本ごとの情報をレビューを書くように、hidden_fieldでbookテーブルに格納-->
           <%= form_with model: @book, url: books_path, method: :post do |f| %>

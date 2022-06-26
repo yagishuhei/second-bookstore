@@ -2,34 +2,38 @@
 <div class= "container px-5 px-sm-0">
   <div class= "row">
     <h2 class= "col-12 w-40 mx-auto mt-1">注文履歴一覧</h2>
-    <p>購入した本</p>
 
-  <div class= "card w-40 mx-auto mt-1 shadow-lg">
-    <div class= "card-body">
-      <div class = "row">
-        <% @orders.each do |order| %>
-        <div class "col-5 mx-4">
-           <% order.order_details.each do |order_detail| %>
-           <P>
-          <%= image_tag order_detail.sale.get_sale_iamge("100x100") %></P>
-          <P>¥<%= order_detail.price %>円</P>
-          <P><%= order_detail.sale.title %></P>
-          <P><%= order_detail.sale.status_i18n %></P>
-          <% end %>
+    <% if @orders.ids.present? %>
+    <p>購入した本</p>
+      <% @orders.each do |order| %>
+        <div class= "card w-40 mx-auto mt-1 shadow-lg">
+          <div class= "card-body">
+            <div class = "row">
+              <div class "col-5 mx-4">
+                <% order.order_details.each do |order_detail| %>
+                <P><%= image_tag order_detail.sale.get_sale_iamge("100x100") %></P>
+                <P>¥<%= order_detail.price %>円</P>
+                <P><%= order_detail.sale.title %></P>
+                <P><%= order_detail.sale.status_i18n %></P>
+                <% end %>
+              </div>
+              <div class "col-5 px-4">
+                <h6>請求金額</h6>
+                <p><%= order.total_payment %></p>
+                <h6>支払い方法</h6>
+                <p><%= order.payment_method_i18n %></p>
+                <h6>ステータス</h6>
+                <p><%= order.status_i18n %></p>
+                <%= link_to"詳細確認", order_path(order) %>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class "col-5 px-4">
-           <h6>請求金額</h6>
-           <p><%= order.total_payment %></p>
-           <h6>支払い方法</h6>
-          <p><%= order.payment_method_i18n %></p>
-          <h6>ステータス</h6>
-           <p><%= order.status_i18n %></p>
-           <%= link_to"詳細確認", order_path(order) %>
-        </div>
-      </div>
-    </div>
+      <% end %>
+    <% else %>
+      <p>購入された本はございません</p>
+    <% end %>
   </div>
-<% end %>
 </div>
-</div>
+
 <%= paginate @orders %>

@@ -51,9 +51,8 @@ Rails.application.routes.draw do
     resources :order_details
     #order_confirmのページでリロードするとshowに遷移するためidを数字のみにする
     resources :orders, :constraints => { :id => /[0-9|]+/ }
-
+    get 'orders/order_confirm', to: 'orders#order_404'
     post 'orders/order_confirm', to: 'orders#order_confirm', as: 'order_confirm'
-
     get 'orders/thanks', to: 'orders#thanks', as: 'thanks'
 
 
@@ -82,6 +81,5 @@ Rails.application.routes.draw do
 
   end
 
-   get '*not_found', to: 'orders#order_404'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

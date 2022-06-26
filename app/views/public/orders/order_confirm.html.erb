@@ -39,11 +39,7 @@
     <%= f.hidden_field :shipping_name, :value => @order.shipping_name %>
     <%= f.hidden_field :payment_method, :value => @order.payment_method %>
     <%= f.hidden_field :total_payment, :value => @cart_item_price %>
-    <%= f.hidden_field :shipping_cost, :value => @order.shipping_cost %>
     <%= f.hidden_field :status, :value => "incomplete" %>
-    <%#= fields_for :cart_items do |c| %>
-      <%#= c.hidden_field :sale_ids, :value => @cart_items.ids.to_json %>
-    <%# end %>
     <%= f.submit "注文を確定する", class: "btn btn-lg btn-success" %>
   <% end %>
 </div>
