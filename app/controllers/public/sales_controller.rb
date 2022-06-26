@@ -15,7 +15,7 @@ class Public::SalesController < ApplicationController
     @sale = current_end_user.sales.new(sale_params)
     @sale.book_id = params[:sale][:book_id]
     if @sale.save
-      redirect_to request.referer, notice: "出品が完了しました。"
+      redirect_to sale_path(@sale), notice: "出品が完了しました。"
     else
       @books= current_end_user.books
       @books = @books.page(params[:page])

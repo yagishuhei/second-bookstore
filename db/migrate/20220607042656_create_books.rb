@@ -9,7 +9,7 @@ class CreateBooks < ActiveRecord::Migration[6.1]
       t.string :title
       t.string :author
       t.string :publisher_name
-      t.string :item_price
+      t.text :item_caption
       t.string :item_url
       t.string :large_image_url
       t.string :medium_image_url

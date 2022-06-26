@@ -49,10 +49,13 @@ Rails.application.routes.draw do
     resources :cart_items, only: [:index, :create, :destroy]
 
     resources :order_details
-    post 'orders/order_confirm', to: 'orders#order_confirm', as: 'order_confirm'
-    get 'orders/thanks', to: 'orders#thanks', as: 'thanks'
     #order_confirmのページでリロードするとshowに遷移するためidを数字のみにする
     resources :orders, :constraints => { :id => /[0-9|]+/ }
+
+    post 'orders/order_confirm', to: 'orders#order_confirm', as: 'order_confirm'
+
+    get 'orders/thanks', to: 'orders#thanks', as: 'thanks'
+
 
     resources :addresses, only: [:index, :create, :destroy, :edit, :update]
     get 'end_users/mypage', to: 'end_users#mypage', as: 'mypage'
@@ -79,5 +82,6 @@ Rails.application.routes.draw do
 
   end
 
+   get '*not_found', to: 'orders#order_404'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -63,6 +63,9 @@ class Public::OrdersController < ApplicationController
     end
   end
 
+  def order_404
+  end
+
 
 
 

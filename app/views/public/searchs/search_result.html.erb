@@ -1,20 +1,36 @@
-<h1>本の検索結果一覧</h1>
+
 <% if @records.present? %>
-  <% @records.each do |book| %>
-    <div >
-      <%= image_tag book.end_user.get_profile_image("100x100") %>
+
+   <div class="container">
+
+<h4 class="text-center">本の検索結果一覧</h4>
+<% @records.each do |book| %>
+  <div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+       <%= link_to (image_tag(book.medium_image_url)), book.item_url %>
     </div>
-    <%= link_to (image_tag(book.medium_image_url)), book.item_url %>
+    <div class="col-md-8">
+      <div class="card-body">
+        <p class="card-text"><%= book.title %></p>
+          <p class="card-text"><%= book.author %></p>
+          <p><%= book.publisher_name %></p>
+          </div>
+      </div>
+    </div>
+    <div class="row">
+          <p class= "col-4 mx-2">
+          <%= link_to "詳細", review_path(book), class: "btn btn-sm btn-info" %>
+          </p>
+  </div>
+   </div>
 
-      <%= book.title %>
-      <%= book.author %>
-      <% book.reviews.each do |review| %>
-      <%= link_to review_path(review) do %>
-        <%= review.heading %>
-      <% end %>
-    <% end %>
+<% end %>
 
-  <% end %>
+      </div>
+    </div>
+
+<%= paginate @records %>
 <% else %>
   <p>ご登録されている本はございません</p>
 <% end %>
