@@ -22,7 +22,7 @@ class Public::BooksController < ApplicationController
     #カラの中にまずend_user_idがログインした会員idを入れる
     @book.end_user_id = current_end_user.id
     if @book.save
-      redirect_to book_path( @book)
+      redirect_to book_path( @book), notice: "本の登録が完了しました。"
     else
       @books = RakutenWebService::Books::Total.search(keyword: params[:keyword], orFlag: 1)
       render :rakuten_result
@@ -38,7 +38,7 @@ class Public::BooksController < ApplicationController
   def destroy
     book = current_end_user.books.find(params[:id])
     book.destroy
-    redirect_to books_path
+    redirect_to books_path, notice: "登録本の削除が完了しました。"
   end
 
 
@@ -50,7 +50,16 @@ class Public::BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:isbn, :title, :author, :publisher_name, :category_id, :item_caption, :item_url, :large_image_url, :medium_image_url)
-
+    params.require(:book).permit(
+      :isbn,
+      :title,
+      :author,
+      :publisher_name,
+      :category_id,
+      :item_caption,
+      :item_url,
+      :large_image_url,
+      :medium_image_url
+      )
   end
 end

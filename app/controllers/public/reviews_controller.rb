@@ -19,7 +19,7 @@ class Public::ReviewsController < ApplicationController
     @review = current_end_user.reviews.new(review_params)
     @review.book_id = params[:book_id]
     if @review.save
-      redirect_to review_path(@review.id), notice: "レビューを登録しました。"
+      redirect_to review_path(@review.id), notice: "レビューの登録が完了しました。"
     else
       @book = Book.find(params[:book_id])
       render 'public/books/show'
@@ -29,7 +29,7 @@ class Public::ReviewsController < ApplicationController
   def destroy
     review = current_end_user.reviews.find(params[:id])
     review.destroy
-    redirect_to reviews_path
+    redirect_to reviews_path, notice: "登録されたレビューの削除が完了しました。"
   end
 
   def show
@@ -48,7 +48,7 @@ class Public::ReviewsController < ApplicationController
     @review = current_end_user.reviews.find(params[:id])
     @review.book_id = params[:book_id]
     @review.update(review_params)
-    redirect_to review_path(@review.id)
+    redirect_to review_path(@review.id), notice: "登録されたレビューの編集が完了しました。"
   end
 
   private

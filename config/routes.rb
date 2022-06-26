@@ -69,6 +69,7 @@ Rails.application.routes.draw do
     resources :books, only: [:index, :destroy, :create, :show] do
       get 'rakuten_result', to: 'books#rakuten_result', as: 'rakuten_result'
     end
+    get 'favorites/index', to: 'favorites#index'
     resources :reviews, only: [:index, :create, :show, :edit, :update, :destroy] do
       #会員1人につき1イイね
       resource :favorites, only: [:create, :destroy]

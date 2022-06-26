@@ -28,7 +28,7 @@ class Public::SalesController < ApplicationController
   def destroy
     sale = current_end_user.sales.find(params[:id])
     sale.destroy
-    redirect_to request.referer
+    redirect_to request.referer, notice: "出品内容の削除が完了しました。"
   end
 
   def show
@@ -44,12 +44,19 @@ class Public::SalesController < ApplicationController
 
     @sale = current_end_user.sales.find(params[:id])
     @sale.update!(sale_params)
-    redirect_to sale_path(@sale)
+    redirect_to sale_path(@sale), notice: "出品内容の編集が完了しました。"
   end
 
   private
   def sale_params
-    params.require(:sale).permit(:book_id, :sale_image, :introduction, :price, :status, :title)
+    params.require(:sale).permit(
+      :book_id,
+      :sale_image,
+      :introduction,
+      :price,
+      :status,
+      :title
+      )
   end
 
 end

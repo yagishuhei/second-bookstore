@@ -15,9 +15,8 @@ class Public::EndUsersController < ApplicationController
 
   def show
     @end_user = EndUser.find(params[:id])
-    #複数の本＝会員の本全部
-    #review = @end_user.reviews.last
-
+    @reviews = @end_user.reviews
+    @reviews = @reviews.page(params[:page])
     @following_end_users = @end_user.following_end_user
     @followers_end_users = @end_user.follower_end_user
   end
@@ -40,7 +39,7 @@ class Public::EndUsersController < ApplicationController
 
   def update
     current_end_user.update(end_user_params)
-    redirect_to mypage_path
+    redirect_to mypage_path, notice: "プロフィール内容の編集が完了しました。"
   end
 
   def follows

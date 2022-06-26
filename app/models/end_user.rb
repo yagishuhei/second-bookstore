@@ -9,6 +9,7 @@ class EndUser < ApplicationRecord
   has_many :cart_items, dependent: :destroy
   has_many :review_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :favorited_end_users, through: :favorites, source: :review
   has_many :sales, dependent: :destroy
   has_many :addresses, dependent: :destroy
   has_many :orders, dependent: :destroy
