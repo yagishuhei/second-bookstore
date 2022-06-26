@@ -41,6 +41,7 @@ class Public::ReviewsController < ApplicationController
   def edit
      @review =Review.find(params[:id])
      @book = Book.find(params[:id])
+     @index = params[:hoge]
   end
 
   def update
