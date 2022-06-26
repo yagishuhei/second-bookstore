@@ -1,5 +1,5 @@
 class Sale < ApplicationRecord
-  enum status: {on_sale: 0, buying: 1}
+  enum status: {on_sale: 0, buying: 1, shipping: 2}
 
   belongs_to :end_user
   belongs_to :book

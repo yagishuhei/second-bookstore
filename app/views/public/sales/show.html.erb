@@ -26,9 +26,7 @@
        <p><%= @sale.end_user.nickname %></p>
         <% end %>
     </div>
-
     <div class="col-2 py-2 px-2">
-
       <p><%= image_tag @sale.get_sale_iamge("100x100") %></p>
     </div>
     <div class="col-5">
@@ -36,6 +34,12 @@
       <p><%= @sale.title %></p>
       <p><%= @sale.introduction %></p>
       <p><%= @sale.status_i18n %></p>
+      <p>
+       <%= form_with model: @sale, url: sale_path(@sale), method: :patch do |f| %>
+       <%= f.select :status, {'発送中': 'shipping', '出品中': 'on_sale'} %>
+       <%= f.submit "変更" %>
+       <% end %>
+      </p>
     </div>
   </div>
 
@@ -46,7 +50,8 @@
     <%= f.submit"カートに入れる", class: "btn btn-lg btn-success" %>
     <% end %>
   <% end %>
-  <% if @end_user == current_end_user %>
+
+  <% if  @sale.end_user == current_end_user %>
   <%= link_to "出品内容を変更する", edit_sale_path(@sale) %>
  <% end %>
 

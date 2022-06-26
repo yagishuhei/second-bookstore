@@ -2,19 +2,20 @@
   <h2 class="col-12 py-4">本の出品をする</h2>
   <% if current_end_user.books.ids.present? %>
     <%= form_with model: @sale, url: sales_path(book_id: @book), method: :post do |f| %>
-      <div class="row mt-1 mx-auto row-cols-md-4 g-4">
+    <div class="d-flex flex-row bd-higlight md-3">
+      <div class="row mx-auto row-cols-md-1 g-1">
         <% @books.each do |book| %>
-          <div class="card mb-3" style="max-width: 540px;">
+         <div class="mb-3" style="max-width: 440px;">
             <div class="row g-0">
-              <div class="col-md-4">
+              <div class="col-md-4 pt-2 bg-light">
                 <%= link_to (image_tag(book.medium_image_url)), book.item_url %>
-                <p class="pl-4 pt-3">
+                <p class="pl-4 py-0">
                   <!--本の情報をデータに入れるためラジオボタンを活用-->
                   <%= f.radio_button :book_id, book.id, checked: true %>
                 </p>
               </div>
-              <div class="col-md-8">
-                <div class="card-body">
+              <div class="col-md-8  bg-light">
+                <div class="card-body px-0">
                   <h6 class="card-title"><%= book.title %></h6>
                   <p class="card-text"><%= book.category.name %></p>
 
@@ -22,23 +23,25 @@
               </div>
             </div>
           </div>
-        <% end %>
-      </div>
-      <%= paginate @books %>
 
-    <div class = "card-list-container py-1 col-12">
-      <div class= "card w-50 mx-auto mt-1 shadow-lg">
+
+
+
+        <% end %>
+        <%= paginate @books %>
+      </div>
+      <div class= "card mx-auto mt-1 shadow-lg" style="max-width: 420px;">
         <div class="form-body p-4">
           <div class= "input-group md-3 mt-4">
             <p>
               <!--エラーメッセージ-->
               <% if @sale.errors.any? %>
-                <%= @sale.errors.count %>件のエラーが発生しました
-                <ul>
-                  <% @sale.errors.full_messages.each do |message| %>
-                    <li><%= message %></li>
-                  <% end %>
-                </ul>
+              <%= @sale.errors.count %>件のエラーが発生しました
+              <ul>
+                <% @sale.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
               <% end %>
             </p>
             <div class="col-12">
@@ -63,8 +66,34 @@
           </div>
         </div>
       </div>
-      <div class="col text-center py-2">
-        <%= link_to "出品本一覧", sales_path, class: "btn btn-lg btn-info" %>
+    </div>
+    <div class = "card-list-container py-1 col-12">
+      <div class="raw py-2">
+        <h2 class="col-12 py-4">ユーザーの出品本一覧</h2>
+        <div class="row mt-1 mx-auto row-cols-md-4 g-0">
+          <% @sales.each do |sale| %>
+            <!--idがnilだったらかどうかを判定 nextが次のeachにいく-->
+            <% next if sale.id.nil? %>
+            <div class="card mb-3" style="max-width: 540px;">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <%= image_tag sale.get_sale_iamge("100x100") %>
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h6 class="card-title"><%= sale.title %></h6>
+                    <p class="card-text"><%= sale.price %>円</p>
+                    <p class="card-text"><%= sale.status_i18n %></p>
+                    <p class= "card-info"><%= link_to "詳細",sale_path(sale), class: "btn btn-sm btn-info" %></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% if @end_user == current_end_user %>
+              <%= link_to "削除", sale_path(sale), method: :delete %>
+            <% end %>
+          <% end %>
+        </div>
       </div>
     </div>
 

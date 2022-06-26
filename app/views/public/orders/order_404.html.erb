@@ -1,1 +1,13 @@
-っっっっっs
+
+<body class="order_confirm_error-page">
+  <!-- This file lives in public/404.html -->
+  <div class="dialog py-5">
+    <div>
+      <h1 class="text-center">現在のページを取得することができませんでした</h1>
+      <p class="text-center">ご購入される商品の選択をやり直すか、注文情報入力ページに再度移動して頂けると幸いです</p>
+    </div>
+    <p class="text-center"><%= link_to "商品選択をやり直す際はこちら", cart_items_path, class: "btn btn-info" %></p>
+    <p class="text-center"><%= link_to "注文情報入力はこちらから", new_order_path, class: "btn btn-info" %></p>
+  </div>
+</body>
+</html>

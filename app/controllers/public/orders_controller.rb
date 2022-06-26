@@ -24,7 +24,6 @@ class Public::OrdersController < ApplicationController
         @order_details = OrderDetail.new
         @order_details.order_id = @order.id
         @order_details.sale_id = cart_item.sale.id
-        @order_details.shipping_status = "now_buying"
         @order_details.price = cart_item.sale.price
         @order_details.save
         # 買ったら一覧から消したい
@@ -49,7 +48,6 @@ class Public::OrdersController < ApplicationController
   def order_confirm
     @order = current_end_user.orders.new(order_params)
     @cart_items = current_end_user.cart_items
-    @order.shipping_cost = 800
     if params[:order][:address] == "1"
       @order.postal_code = current_end_user.postal_code
       @order.shipping_address = current_end_user.address
