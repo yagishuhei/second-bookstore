@@ -23,5 +23,7 @@
       <% end %>
     <% end %>
   <% end %>
+  <% if sales.statuses == 'on_sale' %>
   <%= paginate sales %>
+  <% end %>
 </div>

@@ -47,9 +47,7 @@ class Public::CartItemsController < ApplicationController
   end
 
   def ensure_correct_end_user
-    @cart_item = CartItem.find(params[:id])
-    @end_user = @cart_item.end_user
-    unless @end_user == current_end_user
+    unless @end_user != current_end_user
       redirect_to root_path, alert: "他のユーザー情報を変更することはできません。"
     end
   end

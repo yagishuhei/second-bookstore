@@ -2,7 +2,7 @@
   <h2 class="col-12 py-4 text-center">カート内商品</h2>
   <% if @cart_items.ids.present? %>
     <p class="d-flex justify-content-end">
-      <%= link_to "カート内を空にする", destroy_all_cart_items_path, method: :delete, class: "btn btn-lg btn-danger" %>
+      <%= link_to "カート内を空にする", destroy_all_cart_items_path(id: @cart_items.ids), method: :delete, class: "btn btn-lg btn-danger" %>
     </p>
   <% end %>
     <% total = 0 %>
