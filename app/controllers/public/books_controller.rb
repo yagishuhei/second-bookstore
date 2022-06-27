@@ -21,10 +21,12 @@ class Public::BooksController < ApplicationController
 
   def create
     @book = Book.new(book_params)
+    #isbn(書籍のコード)を取り出す
     @book_isbn = @book.isbn
     #カラの中にまずend_user_idがログインした会員idを入れる
     @book.end_user_id = current_end_user.id
-    if @book_isbn != Book.find_by(isbn: :isbn)
+    #既にisbnがあったら保存できないようにする
+    if @book_isbn != Book.find_by(isbn: @book.isbn)&.isbn
       @book.save
       redirect_to book_path( @book), notice: "本の登録が完了しました。"
     else
