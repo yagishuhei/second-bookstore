@@ -9,7 +9,6 @@ Rails.application.routes.draw do
     sessions: 'admin/sessions',
   }
 
-
   #会員側
   # URL /end_users/sign_in...
   #会員側のコントローラーがどこに存在するかを指定
