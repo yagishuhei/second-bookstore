@@ -1,8 +1,13 @@
 <div class="container">
   <h2 class= "col-6 py-5 mx-auto">レビュー一覧</h2>
+  <div class= "row w-90 mx-auto mt-1 bg-light shadow-lg">
+    <div class="h6 col-2"><strong>投稿本</strong></div>
+    <div class="h6 col-2"><strong>ユーザー</strong></div>
+    <div class="h6 col-8"><strong>内容</strong></div>
+  </div>
 
    <% @reviews.each do |review| %>
-  <div class= "row w-90 mx-auto mt-1 bg-light shadow-lg">
+  <div class= "row w-90 mx-auto bg-light">
         <div class="col-2">
         <%= link_to (image_tag(review.book.medium_image_url)), review.book.item_url %>
         </div>

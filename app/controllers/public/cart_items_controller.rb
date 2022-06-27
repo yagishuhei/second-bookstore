@@ -1,4 +1,7 @@
 class Public::CartItemsController < ApplicationController
+  before_action :authenticate_end_user!
+  before_action :ensure_correct_end_user, only: [:destroy_all, :destroy]
+
   def create
     @update_cart_item = current_end_user.cart_items.new(cart_item_params)
     #find_byでカート内に同じものがあるか確認
@@ -38,7 +41,16 @@ class Public::CartItemsController < ApplicationController
   end
 
   private
+
   def cart_item_params
     params.require(:cart_item).permit(:sale_id)
+  end
+
+  def ensure_correct_end_user
+    @cart_item = CartItem.find(params[:id])
+    @end_user = @cart_item.end_user
+    unless @end_user == current_end_user
+      redirect_to root_path, alert: "他のユーザー情報を変更することはできません。"
+    end
   end
 end

@@ -1,5 +1,5 @@
-<div class= "container px-sm-0">
-  <div class="row py-4">
+
+  <div class="row py-0">
     <div class= "col-md-7 offset-md-1">
       <h3 class="text-dark py-4 md-0">下書き</h3>
           </ul>
@@ -8,16 +8,19 @@
         <%= render "public/reviews/index", reviews: @reviews %>
       </div>
     </div>
-    <div class= "col-md-4 py-4 bg-light h-100">
+     <div class= "col-md-4 py-4 my-0 bg-light">
       <%= render 'public/books/rakuten_search' %>
+
     <div class="py-3">
       <%= render 'public/searchs/search' %>
     </div>
     <div class= "mt-4">
-      <h3>カテゴリー</h3>
       <%= render 'public/categories/index', categories: @categories %>
+    </div>
+    <div class="py-3 text-center">
+      <%= render 'public/favorites/index', favorite_ranking: @favorite_ranking %>
     </div>
 
   </div>
   </div>
-</div>
+

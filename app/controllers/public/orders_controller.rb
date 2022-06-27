@@ -1,5 +1,7 @@
 
 class Public::OrdersController < ApplicationController
+  before_action :authenticate_end_user!
+  
   def index
     @orders = current_end_user.orders
     @orders = @orders.page(params[:page])
@@ -71,6 +73,7 @@ class Public::OrdersController < ApplicationController
   end
 
   private
+  
   def order_params
     params.require(:order).permit(
       :postal_code,

@@ -1,18 +1,24 @@
 class Public::ReviewsController < ApplicationController
  #ログインしているか確認、ログイン状態ではない場合ログインページに移動
  before_action :authenticate_end_user!
+ before_action :ensure_correct_end_user, only: [:update, :edit, :destroy]
+
 
   def index
     @review =Review.new
     @reviews = current_end_user.reviews.published
     @reviews =  @reviews.page(params[:page])
     @categories = Category.page(params[:page])
+    @favorite_ranking = Review.includes(:favorited_end_users).sort {|a,b| b.favorited_end_users.size <=> a.favorited_end_users.size }
+    @favorite_ranking = Kaminari.paginate_array(@favorite_ranking).page(params[:page]).per(4)
   end
 
   def review_confirm
     @reviews = current_end_user.reviews.draft
     @reviews =  @reviews.page(params[:page])
     @categories = Category.page(params[:page])
+    @favorite_ranking = Review.includes(:favorited_end_users).sort {|a,b| b.favorited_end_users.size <=> a.favorited_end_users.size }
+    @favorite_ranking = Kaminari.paginate_array(@favorite_ranking).page(params[:page]).per(4)
   end
 
   def create
@@ -40,7 +46,6 @@ class Public::ReviewsController < ApplicationController
 
   def edit
      @review =Review.find(params[:id])
-     @book = Book.find(params[:id])
      @index = params[:hoge]
   end
 
@@ -52,7 +57,16 @@ class Public::ReviewsController < ApplicationController
   end
 
   private
+
   def review_params
     params.require(:review).permit(:blog, :heading, :score, :review_status)
+  end
+
+  def ensure_correct_end_user
+    @review = Review.find(params[:id])
+    @end_user = @review.end_user
+    unless @end_user == current_end_user
+      redirect_to root_path, alert: "他のユーザー情報を変更することはできません。"
+    end
   end
 end

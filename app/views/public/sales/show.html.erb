@@ -48,7 +48,9 @@
   <% end %>
 
   <% if  @sale.end_user == current_end_user %>
-  <%= link_to "出品内容編集", edit_sale_path(@sale), class: "btn btn-sm btn-success" %>
+  <%= link_to "編集", edit_sale_path(@sale), class: "btn btn-sm btn-success" %>
+  <%= link_to "削除", sale_path(@sale), method: :delete,
+  data: {confirm: "本当に削除しますか？"}, class: "btn btn-sm btn-danger" %>
  <% end %>
 
  </div>

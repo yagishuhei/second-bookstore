@@ -1,5 +1,7 @@
 class Public::AddressesController < ApplicationController
   before_action :authenticate_end_user!
+  before_action :ensure_correct_end_user, only: [:update, :edit, :destroy]
+
   def index
     @address = Address.new
     @addresses = current_end_user.addresses
@@ -34,7 +36,18 @@ class Public::AddressesController < ApplicationController
     redirect_to addresses_path, notice: "住所の変更が完了しました。"
   end
 
+  private
+
   def address_params
     params.require(:address).permit(:postal_code, :address, :name)
   end
+
+  def ensure_correct_end_user
+    @address = Address.find(params[:id])
+    @end_user = @address.end_user
+    unless @end_user == current_end_user
+      redirect_to root_path, alert: "他のユーザー情報を変更することはできません。"
+    end
+  end
+
 end
