@@ -19,7 +19,7 @@
     <div class="col-12 p-4 form-body">
       <!--routingがネストしているため、親と子のインスタンス変数が必要-->
       <%= form_with model: [review, review_comment], url: review_review_comments_path(review.id), method: :post, local: false do |f| %>
-        <%= f.text_area :comment, required: true, rows: '5', placeholder: "コメント", class: "form-control" %>
+        <%= f.text_area :comment, required: true, placeholder: "コメント", size: "1x1", class: "form-control" %>
         <%= f.submit "送信", class: "btn btn-sm btn-success" %>
       <% end %>
     </div>

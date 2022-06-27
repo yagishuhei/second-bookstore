@@ -1,6 +1,6 @@
 <div class= "container">
   <div="row">
-    <h2 class="text-center">楽天Booksから登録した本の詳細</h2>
+    <h2 class="text-center">本の詳細</h2>
     <div class= "col-md-6 col-sm-12 mx-sm-auto bg-light rounded my-5">
       <div class="row g-0">
         <div class="col-md-4 py-2">
@@ -21,7 +21,7 @@
         <% end %>
       </div>
       <div class="mx-sm-auto pb-2">
-        <%= link_to "登録本一覧", books_path(end_user_id: current_end_user.id), class: "btn btn-sm btn-info" %>
+        <%= link_to "自身の登録本一覧", books_path(end_user_id: current_end_user.id), class: "btn btn-sm btn-info" %>
       </div>
       <% if @book.reviews.ids.present? %>
         <div class="mx-sm-auto pb-2">
