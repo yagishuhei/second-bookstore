@@ -12,6 +12,7 @@ class Public::BooksController < ApplicationController
       # 引数に , page: ページ数を入れると次の30件が取得できる
       # orFlag: 1で複数検索可能
       @books = RakutenWebService::Books::Total.search(keyword: params[:keyword], orFlag: 1, hits: 12)
+
       #検証用
       #binding.pry
       @book = Book.new
@@ -20,13 +21,14 @@ class Public::BooksController < ApplicationController
 
   def create
     @book = Book.new(book_params)
+    @book_isbn = @book.isbn
     #カラの中にまずend_user_idがログインした会員idを入れる
     @book.end_user_id = current_end_user.id
-    if @book.save
+    if @book_isbn != Book.find_by(isbn: :isbn)
+      @book.save
       redirect_to book_path( @book), notice: "本の登録が完了しました。"
     else
-      @books = RakutenWebService::Books::Total.search(keyword: params[:keyword], orFlag: 1)
-      render :rakuten_result
+      redirect_to books_path(end_user_id: current_end_user.id), alert: "選択された本はすでにご登録されています。"
     end
   end
 

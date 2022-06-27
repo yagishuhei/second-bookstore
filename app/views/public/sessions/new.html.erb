@@ -1,10 +1,8 @@
-
 <div class="container">
   <div class="row no-gutters ">
     <div class="col-md-8 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
       <h5 class="text-dark bg-light p-4 mb-0">ログイン</h5>
       <div class="form-body p-4">
-
 
         <%= form_with model: @end_user, url: end_user_session_path do |f| %>
           <%= render "public/shared/error_messages", resource: resource %>

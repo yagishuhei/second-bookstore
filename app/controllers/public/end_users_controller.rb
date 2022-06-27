@@ -25,9 +25,6 @@ class Public::EndUsersController < ApplicationController
     @followers_end_users = @end_user.follower_end_user
   end
 
-
-
-
   def edit
     @end_user = current_end_user
   end

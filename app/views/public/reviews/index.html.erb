@@ -1,23 +1,22 @@
 
-  <div class="row py-0">
-    <div class= "col-md-7 offset-md-1">
-      <h3 class="text-dark py-4 md-0">投稿レビュー</h3>
-              <!--エラーメッセージ-->
-        <% if @review.errors.any? %>
-          <%= @review.errors.count %>件のエラーが発生しました
-          <ul>
-            <% @review.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
-        <% end %>
-      <div class = "card-list-container py-1 col-12">
-        <%= render "public/reviews/index", reviews: @reviews %>
-      </div>
+<div class="row py-0">
+  <div class= "col-md-7 offset-md-1">
+    <h3 class="text-dark py-4 md-0">投稿レビュー</h3>
+    <!--エラーメッセージ-->
+      <% if @review.errors.any? %>
+        <%= @review.errors.count %>件のエラーが発生しました
+        <ul>
+          <% @review.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    <div class = "card-list-container py-1 col-12">
+      <%= render "public/reviews/index", reviews: @reviews %>
     </div>
-   <div class= "col-md-4 py-4 my-0 bg-light">
-      <%= render 'public/books/rakuten_search' %>
-
+  </div>
+  <div class= "col-md-4 py-4 my-0 bg-light">
+    <%= render 'public/books/rakuten_search' %>
     <div class="py-3">
       <%= render 'public/searchs/search' %>
     </div>
@@ -27,7 +26,5 @@
     <div class="py-3 text-center">
       <%= render 'public/favorites/index', favorite_ranking: @favorite_ranking %>
     </div>
-
   </div>
-  </div>
-
+</div>

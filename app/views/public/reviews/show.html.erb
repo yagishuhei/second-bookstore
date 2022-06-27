@@ -1,47 +1,45 @@
-
 <div class="container">
-<h2 class= "col-6 py-5 mx-auto">詳細</h2>
-  <div class= "row w-80 mx-auto my-2 bg-light shadow-lg">
-    <div class="col-2 px-0">
-      <%= link_to (image_tag(@review.book['large_image_url'])), @review.book['item_url'] %>
-      <div id="score_<%= @index %>"><%= render 'public/reviews/score', review: @review, index: @index %></div><%= @review.score %>
-    </div>
-    <div class="col-2 px-0">
-      <h5 class="title col-12 py-1">タイトル</h5>
-      <h5 class="title col-12 py-1">著者</h5>
-      <h5 class="title col-12 py-1">出版社</h5>
-    </div>
-    <div class="col-8">
-      <p><%= @review.book.title %></p>
-      <p><%= @review.book.author %></p>
-      <p><%= @review.book.publisher_name %></p>
-    </div>
-  </div>
-  <div class="row w-80 mx-auto my-2 bg-light shadow-lg">
-    <div class="col-3">
-      <p>レビュー投稿日<%= @review.created_at.strftime('%Y/%m/%d') %></p>
-      <p>レビュー更新日<%= @review.updated_at.strftime('%Y/%m/%d') %></p>
-    </div>
-      <div class="col-3 pt-4" id="favorite-btn">
-        <%= render 'public/favorites/favorite-btn', review: @review %>
-
+  <h2 class= "col-6 py-5 mx-auto">詳細</h2>
+    <div class= "row w-80 mx-auto my-2 bg-light shadow-lg">
+      <div class="col-2 px-0">
+        <%= link_to (image_tag(@review.book['large_image_url'])), @review.book['item_url'] %>
+        <div id="score_<%= @index %>"><%= render 'public/reviews/score', review: @review, index: @index %></div><%= @review.score %>
       </div>
-      <h5 class="title col-12 text-center">テーマ</h5>
-      <p class="h6 mx-auto center-block"><%= @review.heading %></p>
-      <h5 class="title col-12 text-center">批評</h5>
-      <p class="h6 mx-auto center-block"><%= @review.blog %></p>
-      <% if @review.end_user == current_end_user %>
-      <div class="col-12 py-1">
-        <%= link_to "編集する", edit_review_path(@review), class: "btn btn-sm btn-success" %>
-        <%= link_to "削除", review_path(@review), method: :delete, class: "btn btn-sm btn-danger", data: {confirm: "本当に削除しますか？"} %>
+      <div class="col-2 px-0">
+        <h5 class="title col-12 py-1">タイトル</h5>
+        <h5 class="title col-12 py-1">著者</h5>
+        <h5 class="title col-12 py-1">出版社</h5>
       </div>
-       <% end %>
+      <div class="col-8">
+        <p><%= @review.book.title %></p>
+        <p><%= @review.book.author %></p>
+        <p><%= @review.book.publisher_name %></p>
+      </div>
+    </div>
+    <div class="row w-80 mx-auto my-2 bg-light shadow-lg">
+      <div class="col-3">
+        <p>レビュー投稿日<%= @review.created_at.strftime('%Y/%m/%d') %></p>
+        <p>レビュー更新日<%= @review.updated_at.strftime('%Y/%m/%d') %></p>
+      </div>
+        <div class="col-3 pt-4" id="favorite-btn">
+          <%= render 'public/favorites/favorite-btn', review: @review %>
+
+        </div>
+        <h5 class="title col-12 text-center">テーマ</h5>
+        <p class="h6 mx-auto center-block"><%= @review.heading %></p>
+        <h5 class="title col-12 text-center">批評</h5>
+        <p class="h6 mx-auto center-block"><%= @review.blog %></p>
+        <% if @review.end_user == current_end_user %>
+          <div class="col-12 py-1">
+            <%= link_to "編集する", edit_review_path(@review), class: "btn btn-sm btn-success" %>
+            <%= link_to "削除", review_path(@review), method: :delete, class: "btn btn-sm btn-danger", data: {confirm: "本当に削除しますか？"} %>
+          </div>
+         <% end %>
+    </div>
+  <%= link_to "他の投稿したレビューの一覧を見てみる", root_path, class: "btn btn-lg btn-info" %>
+  <!-- レビューへのコメント機能-->
+  <div id="comment">
+    <%= render 'public/review_comments/comment', review: @review, review_comment: @review_comment %>
   </div>
-
-
-<%= link_to "他の投稿したレビューの一覧を見てみる", root_path, class: "btn btn-lg btn-info" %>
-<!-- レビューへのコメント機能-->
-<div id="comment">
-  <%= render 'public/review_comments/comment', review: @review, review_comment: @review_comment %>
+  <!-- /レビューへのコメント機能-->
 </div>
-<!-- /レビューへのコメント機能-->

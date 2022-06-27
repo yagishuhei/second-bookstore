@@ -4,7 +4,6 @@ class Public::FavoritesController < ApplicationController
     @review = Review.find(params[:review_id])
     favorite = current_end_user.favorites.new(review_id: @review.id)
     favorite.save
-
   end
 
   def destroy

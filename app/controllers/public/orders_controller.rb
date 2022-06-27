@@ -1,7 +1,7 @@
 
 class Public::OrdersController < ApplicationController
   before_action :authenticate_end_user!
-  
+
   def index
     @orders = current_end_user.orders
     @orders = @orders.page(params[:page])
@@ -13,10 +13,6 @@ class Public::OrdersController < ApplicationController
 
   def create
     @order = current_end_user.orders.new(order_params)
-
-    # sale_ids = JSON.parse(params[:cart_items][:sale_ids])
-    # buyable_items = OrderDetail.includes(:sale).where(sale: { is_active: true }).where(sale_id: sale_ids, shipping_status: :cancel)
-    # if buyable_items.present?
     @order.save
 
       @cart_items = current_end_user.cart_items
@@ -30,21 +26,12 @@ class Public::OrdersController < ApplicationController
         @order_details.save
         # 買ったら一覧から消したい
         @update_sale = cart_item.sale
-
-        # saveの場合
-        # @update_sale.status = "buying"
-        # @update_sale.save
-
-        # updateの場合
         @update_sale.update(status: "buying")
       end
 
 
       @cart_items.destroy_all
       redirect_to thanks_path
-    # else
-      # redirect_to cart_items_path, notice: "既に購入されています。"
-    # end
   end
 
   def order_confirm
@@ -73,7 +60,7 @@ class Public::OrdersController < ApplicationController
   end
 
   private
-  
+
   def order_params
     params.require(:order).permit(
       :postal_code,

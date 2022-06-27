@@ -17,11 +17,11 @@
           </div>
         </div>
         <h4>お届け先</h4>
-          <div class= "input-group md-3 mt-4">
-            <div class="col-12">
-              <%= f.radio_button :address, "1" , checked: true %>
-              <%= f.label :address, "ご自身のご住所" %>
-            </div>
+        <div class= "input-group md-3 mt-4">
+          <div class="col-12">
+            <%= f.radio_button :address, "1" , checked: true %>
+            <%= f.label :address, "ご自身のご住所" %>
+          </div>
           <div class="col-12">
             <!-- 住所登録がある場合-->
             <% if current_end_user.addresses.ids.present? %>
@@ -49,6 +49,6 @@
           </div>
         </div>
       </div>
-  <% end %>
+    <% end %>
   </div>
 </div>

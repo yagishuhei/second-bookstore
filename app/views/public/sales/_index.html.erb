@@ -1,27 +1,27 @@
 <div class="row row-cols-1 row-cols-md-5 g-5">
   <% sales.each do |sale| %>
-   <% if sale.end_user != current_end_user %>
-    <% if sale.status == 'on_sale' %>
-      <!--idがnilだったらかどうかを判定 nextが次のeachにいく-->
-      <% next if sale.id.nil? %>
+    <% if sale.end_user != current_end_user %>
+      <% if sale.status == 'on_sale' %>
+        <!--idがnilだったらかどうかを判定 nextが次のeachにいく-->
+        <% next if sale.id.nil? %>
         <div class="row bg-light py-2 mx-2 g-0">
-                <div class="col-md-4">
-                  <%= image_tag sale.get_sale_iamge("100x100") %>
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h6 class="card-title"><%= sale.title %></h6>
-                    <p class="card-text"><%= sale.price %>円</p>
-                    <p class="card-text"><%= sale.status_i18n %></p>
-                    <p class= "card-info"><%= link_to "詳細",sale_path(sale), class: "btn btn-sm btn-info" %></p>
-                  </div>
-                </div>
+          <div class="col-md-4">
+            <%= image_tag sale.get_sale_iamge("100x100") %>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h6 class="card-title"><%= sale.title %></h6>
+              <p class="card-text"><%= sale.price %>円</p>
+              <p class="card-text"><%= sale.status_i18n %></p>
+              <p class= "card-info"><%= link_to "詳細",sale_path(sale), class: "btn btn-sm btn-info" %></p>
+            </div>
+          </div>
         </div>
-      <% if @end_user == current_end_user %>
-        <%= link_to "削除", sale_path(sale), method: :delete %>
+        <% if @end_user == current_end_user %>
+          <%= link_to "削除", sale_path(sale), method: :delete %>
+        <% end %>
       <% end %>
     <% end %>
-    <% end %>
   <% end %>
+  <%= paginate sales %>
 </div>
-<%= paginate sales %>

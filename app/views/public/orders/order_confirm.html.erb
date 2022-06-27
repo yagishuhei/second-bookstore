@@ -1,15 +1,12 @@
-
-
-
 <div class="container">
 <h2 class= "col-6 py-5 mx-auto">注文情報確認</h2>
   <div class="row w-80 mx-auto my-2 bg-light shadow-lg">
       <h5 class="title col-12">カート内商品一覧</h5>
-      <div class="col-6">
+    <div class="col-6">
       <p class="col-12">支払い方法</p>
       <%= @order.payment_method_i18n %>
-      </div>
-      <div class="col-6">
+    </div>
+    <div class="col-6">
       <p class="col-12">配送先</p>
       <p class="h6">郵便番号</p>
       <p>〒<%= @order.postal_code %></p>
@@ -17,26 +14,26 @@
       <p><%= @order.shipping_address %></p>
       <p class="h6">宛名</p>
       <p><%= @order.shipping_name %></p>
-      </div>
+    </div>
   </div>
-   <div class="row w-80 mx-auto my-2 bg-light shadow-lg">
-      <h5 class="title col-12">注文情報</h5>
-      <% total = 0 %>
-      <% @cart_items.each do |cart_item| %>
+  <div class="row w-80 mx-auto my-2 bg-light shadow-lg">
+    <h5 class="title col-12">注文情報</h5>
+    <% total = 0 %>
+    <% @cart_items.each do |cart_item| %>
       <p class-"col-10 "> <%= image_tag cart_item.sale.get_sale_iamge("100x100") %></p>
       <h5 class="title col-12"><%= cart_item.sale.book.title %></h5>
       <p class-"col-12">¥<%= cart_item.sale.price %>円</p>
       <% @cart_item_price = total += cart_item.sale.price %>
-       <% end %>
+    <% end %>
   </div>
-   <div class="col-md-4 bg-light my-3">
-      <div class="card-body  px-0">
-          <div class="col">
-          <h5 class="py-2">商品合計</h5>
-          <p class="h4 py-2"><strong>¥<%= @cart_item_price %>円</strong></p>
-        </div>
-       </div>
+  <div class="col-md-4 bg-light my-3">
+    <div class="card-body  px-0">
+      <div class="col">
+        <h5 class="py-2">商品合計</h5>
+        <p class="h4 py-2"><strong>¥<%= @cart_item_price %>円</strong></p>
+      </div>
     </div>
+  </div>
   <%= form_with model: @order, url: orders_path, method: :post do |f| %>
     <%= f.hidden_field :postal_code, :value => @order.postal_code %>
     <%= f.hidden_field :shipping_address, :value => @order.shipping_address %>
