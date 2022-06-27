@@ -7,9 +7,9 @@
     <div class="d-flex flex-row bd-higlight md-3">
       <div class="row mx-auto row-cols-md-1 g-1">
         <% @books.each do |book| %>
-          <div class="mb-3" style="max-width: 440px;">
+          <div class="py-1" style="max-width: 440px;">
             <div class="row g-0">
-              <div class="col-md-4 pt-2 bg-light">
+              <div class="col-md-4 bg-light">
                 <%= link_to (image_tag(book.medium_image_url)), book.item_url %>
                 <p class="pl-4 py-0">
                   <!--本の情報をデータに入れるためラジオボタンを活用-->
@@ -64,7 +64,7 @@
       </div>
     </div>
    <% end %>
-    <div class = "card-list-container py-1 col-12">
+    <div class = "card-list-container col-12">
       <div class="raw py-2">
         <div class= "col-12">
           <h2 class="col-12 py-4 text-center">ユーザーの出品本一覧</h2>
