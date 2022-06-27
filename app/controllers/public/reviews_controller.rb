@@ -50,8 +50,7 @@ class Public::ReviewsController < ApplicationController
 
   def update
     @review = current_end_user.reviews.find(params[:id])
-    @review.book_id = params[:book_id]
-    @review.update(review_params)
+    @review.update!(review_params)
     redirect_to review_path(@review.id), notice: "登録されたレビューの編集が完了しました。"
   end
 
