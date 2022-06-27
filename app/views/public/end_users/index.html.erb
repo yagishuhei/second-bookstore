@@ -1,30 +1,30 @@
 <div class="container">
-    <h2 class="col-12 py-4">ユーザー一覧</h2>
-  <p>本好きメンバー</p>
-  <div class="row ">
-    <% @end_users.each do |end_user| %>
-      <div class="row bg-light mx-2 my-2 g-0">
-        <div class="col-md-4">
-          <%= image_tag end_user.get_profile_image("100x100") %>
-          <p><%= end_user.nickname %>
-
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h6 class="card-title"></h6>
-            <p class="card-text"><%= end_user.introduction %></p>
-            <p class="card-text">レビュー投稿件数:<%= end_user.reviews.count %></p>
-            <p class="card-text"><%= link_to "詳細", end_user_path(end_user), class: "btn btn-sm btn-info" %></p>
-            <p class="card-text">投稿ジャンル:
-              <% fuga(end_user).each do |book| %>
-                <p class="bg-secondary text-light text-center rounded-pill"><%= book %></p>
+  <h2 class="col-12 py-4">ユーザー一覧</h2>
+    <p>本好きメンバー</p>
+    <div class="row ">
+      <% @end_users.each do |end_user| %>
+        <div class="row bg-light mx-2 my-2 g-0">
+          <div class="col-md-4">
+            <%= image_tag end_user.get_profile_image("100x100") %>
+            <p><%= end_user.nickname %>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h6 class="card-title"></h6>
+              <p class="card-text"><%= end_user.introduction %></p>
+              <p class="card-text">レビュー投稿件数:<%= end_user.reviews.count %></p>
+              <p class="card-text">
+                <%= link_to "詳細", end_user_path(end_user), class: "btn btn-sm btn-info" %>
+              </p>
+              <p class="card-text">投稿ジャンル:
+              <% book_category(end_user).each do |book| %>
+              <p class="bg-secondary text-light text-center rounded-pill"><%= book %></p>
               <% end %>
-            </p>
-
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-    <% end %>
-  </div>
- <%= paginate @end_users %>
+      <% end %>
+    </div>
+  <%= paginate @end_users %>
 </div>

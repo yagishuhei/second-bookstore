@@ -17,12 +17,7 @@ class Admin::CategoriesController < ApplicationController
     @category.destroy
     redirect_to admin_categories_path
   end
-
-  def show
-    @category = Category.find(params[:id])
-  end
-
-
+  
   private
 
   def category_params

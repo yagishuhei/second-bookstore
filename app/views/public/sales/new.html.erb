@@ -5,7 +5,7 @@
     <div class="d-flex flex-row bd-higlight md-3">
       <div class="row mx-auto row-cols-md-1 g-1">
         <% @books.each do |book| %>
-         <div class="mb-3" style="max-width: 440px;">
+          <div class="mb-3" style="max-width: 440px;">
             <div class="row g-0">
               <div class="col-md-4 pt-2 bg-light">
                 <%= link_to (image_tag(book.medium_image_url)), book.item_url %>
@@ -18,15 +18,10 @@
                 <div class="card-body px-0">
                   <h6 class="card-title"><%= book.title %></h6>
                   <p class="card-text"><%= book.category.name %></p>
-
                 </div>
               </div>
             </div>
           </div>
-
-
-
-
         <% end %>
         <%= paginate @books %>
       </div>
@@ -60,13 +55,13 @@
               <%= f.label :price,"出品価格" %>
               <%= f.text_field :price, required: true, class: "form-control" %>
             </div>
-              <%= f.hidden_field :status, {:value => "on_sale"} %>
-              <%= f.submit"出品する", class: "btn btn-lg btn-block btn-info mt-4" %>
-    <% end %>
+            <%= f.hidden_field :status, {:value => "on_sale"} %>
+            <%= f.submit"出品する", class: "btn btn-lg btn-block btn-info mt-4" %>
           </div>
         </div>
       </div>
     </div>
+   <% end %>
     <div class = "card-list-container py-1 col-12">
       <div class="raw py-2">
         <h2 class="col-12 py-4">ユーザーの出品本一覧</h2>
@@ -96,7 +91,6 @@
         </div>
       </div>
     </div>
-
   <% else %>
     <p>登録されている本はございません</p>
   <% end %>

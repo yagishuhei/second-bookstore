@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row mx-auto w-80">
-     <h2 class= "col-6 py-5 mx-auto">ユーザー一覧</h2>
+    <h2 class= "col-6 py-5 mx-auto">ユーザー一覧</h2>
     <table class= "table-hover col-12 bg-light has_border">
       <thead class = "py-5">
         <th scope= "col mx-2">会員ID</th>
@@ -23,6 +23,7 @@
       </tbody>
     </table>
   </div>
+  <%= paginate @end_users %>
 </div>
 
 

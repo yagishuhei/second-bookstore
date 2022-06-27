@@ -1,5 +1,4 @@
 <div class="container">
-
   <div class="row py-4">
     <div class="col-12 w-50 mx-auto mt-1">
       <h2 class="col-12 w-50 mx-auto mt-1">配送先編集</h2>
@@ -8,7 +7,6 @@
       <%= form_with model: @address, url: address_path, method: :patch do |f| %>
         <div class="form-body p-4">
           <div class= "input-group md-3 mt-4">
-
             <div class="col-12">
               <%= f.label :postal_code, "郵便番号" %>
               <%= f.text_field :postal_code, required: true, class: "form-control" %>
@@ -26,7 +24,6 @@
             </div>
           </div>
         </div>
-
       <% end %>
     </div>
   </div>

@@ -13,27 +13,23 @@
             <p><%= @book.publisher_name %></p>
           </div>
         </div>
-
-        <div class="col-md-12">
-          <% if @book.item_caption.present? %>
-          <h6>要約</h6>
-          <P class="text-center"><%= @book.item_caption %></P>
-        </div>
+        <% if @book.item_caption.present? %>
+          <div class="col-md-12">
+            <h6>要約</h6>
+            <P class="text-center"><%= @book.item_caption %></P>
+          </div>
         <% end %>
-
       </div>
       <div class="mx-sm-auto pb-2">
-      <%= link_to "登録本一覧", books_path(end_user_id: current_end_user.id), class: "btn btn-sm btn-info" %>
+        <%= link_to "登録本一覧", books_path(end_user_id: current_end_user.id), class: "btn btn-sm btn-info" %>
+      </div>
+      <% if @book.reviews.ids.present? %>
+        <div class="mx-sm-auto pb-2">
+          <%= link_to "レビュー詳細", review_path(review_id: @book.reviews.ids), class: "btn btn-sm btn-info" %>
+        </div>
+      <% end %>
     </div>
-    <% if @book.reviews.ids.present? %>
-    <div class="mx-sm-auto pb-2">
-      <%= link_to "レビュー詳細", review_path(review_id: @book.reviews.ids), class: "btn btn-sm btn-info" %>
-    </div>
-    <% end %>
-    </div>
-
   </div>
-
   <div= "row">
     <%= render "public/reviews/form", book: @book, review: @review %>
   </div>
