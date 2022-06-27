@@ -45,3 +45,4 @@
 
 ## 使用素材
 - 楽天API https://webservice.rakuten.co.jp/
+
