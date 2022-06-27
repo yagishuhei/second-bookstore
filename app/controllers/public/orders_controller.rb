@@ -59,6 +59,12 @@ class Public::OrdersController < ApplicationController
     @cart_items = CartItem.all
   end
 
+  def update
+    @order = current_end_user.orders.find(params[:id])
+    @order.update!(order_params)
+    redirect_to order_path(@order), notice: "注文ステータスの変更が完了しました。"
+  end
+
   private
 
   def order_params

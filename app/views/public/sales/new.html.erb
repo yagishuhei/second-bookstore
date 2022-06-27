@@ -1,5 +1,7 @@
 <div class="container">
-  <h2 class="col-12 py-4">本の出品をする</h2>
+  <div class="row">
+    <h2 class="col-12 py-4 text-center">本の出品をする</h2>
+  </div>
   <% if current_end_user.books.ids.present? %>
     <%= form_with model: @sale, url: sales_path(book_id: @book), method: :post do |f| %>
     <div class="d-flex flex-row bd-higlight md-3">
@@ -49,7 +51,7 @@
             </div>
             <div class="col-12">
               <%= f.label :introduction,"商品説明" %>
-              <%= f.text_area :introduction, required: true, class: "form-control" %>
+              <%= f.text_area :introduction, required: true, class: "form-control", size: "5x5" %>
             </div>
             <div class="col-12">
               <%= f.label :price,"出品価格" %>
@@ -64,14 +66,16 @@
    <% end %>
     <div class = "card-list-container py-1 col-12">
       <div class="raw py-2">
-        <h2 class="col-12 py-4">ユーザーの出品本一覧</h2>
+        <div class= "col-12">
+          <h2 class="col-12 py-4 text-center">ユーザーの出品本一覧</h2>
+        </div>
         <div class="row mt-1 mx-auto row-cols-md-4 g-0">
           <% @sales.each do |sale| %>
             <!--idがnilだったらかどうかを判定 nextが次のeachにいく-->
             <% next if sale.id.nil? %>
-            <div class="card mb-3" style="max-width: 540px;">
+            <div class="card mb-3 px-2 mx-2" style="max-width: 540px;">
               <div class="row g-0">
-                <div class="col-md-4">
+                <div class="col-md-4 my-2">
                   <%= image_tag sale.get_sale_iamge("100x100") %>
                 </div>
                 <div class="col-md-8">

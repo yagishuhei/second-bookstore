@@ -30,7 +30,7 @@ class Public::BooksController < ApplicationController
       @book.save
       redirect_to book_path( @book), notice: "本の登録が完了しました。"
     else
-      redirect_to books_path(end_user_id: current_end_user.id), alert: "選択された本はすでにご登録されています。"
+      redirect_to books_path(end_user_id: current_end_user.id), alert: "選択された本はすでにご登録されているか、登録出来ない商品となっております。"
     end
   end
 

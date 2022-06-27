@@ -11,7 +11,7 @@
 
     <div class="row py-4">
         <div class="col-12 w-50 mx-auto mt-1">
-            <h2 class="col-12 w-50 mx-auto mt-1">配送先追加</h2>
+            <h2 class="col-12 w-50 mx-auto mt-1 text-center">配送先追加</h2>
         </div>
         <div class= "card w-50 mx-auto mt-1 shadow-lg">
             <%= form_with model: @address, url: addresses_path, method: :post do |f| %>
@@ -38,7 +38,7 @@
         </div>
     </div>
 
-    <h2>配送先一覧</h2>
+    <h2 class="text-center">配送先一覧</h2>
         <% @addresses.each do |address| %>
             <div class= "card w-90 mx-auto mt-1 shadow-lg">
                 <div class= "row card-body">

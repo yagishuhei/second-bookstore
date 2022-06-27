@@ -1,18 +1,23 @@
-<h1>
-  <strong>
-    本当に退会されてもよろしいですか？
-  </strong>
-</h1>
-<p>
-  退会された場合、投稿したレビュー、出品した本、購入履歴、</br>
-  が閲覧できなくなります。</br>
-  退会される場合は、『退会する』をクリックしてください。</br>
-</p>
-
-<li>
-  <%= link_to "退会しない", mypage_path %>
-</li>
-
-<li>
-  <%= link_to "退会する", withdraw_end_user_path, method: :patch, data: {confirm: "本当に退会してもよろしいですか？"} %>
-</li>
+<div class="container">
+  <div class="row text-align">
+    <h2 class="text-center py-4 mx-auto">
+      <strong>
+        本当に退会されてもよろしいですか？
+      </strong>
+    </h2>
+    <p class="h4 text-center mx-auto">
+      退会された場合、投稿したレビュー、出品した本、購入履歴が</br>
+      閲覧できなくなります。</br>
+      退会される場合は、『退会する』をクリックしてください。</br>
+    </p>
+  </div>
+  <div class="row mx-auto">
+    <div class="col-6 text-center mx-auto">
+      <%= link_to "退会しない", mypage_path, class: "btn btn-lg btn-info" %>
+    </div>
+    <div class="col-6 text-center mx-auto">
+      <%= link_to "退会する", withdraw_end_user_path, method: :patch,
+      data: {confirm: "本当に退会してもよろしいですか？"}, class: "btn btn-lg btn-danger" %>
+    </div>
+  </div>
+</div>

@@ -48,10 +48,11 @@ Rails.application.routes.draw do
     #カート内商品
     resources :cart_items, only: [:index, :create, :destroy]
     #注文
-    resources :orders, only: [:index, :new, :create, :show]
     get 'orders/order_confirm', to: 'orders#order_404'
     post 'orders/order_confirm', to: 'orders#order_confirm', as: 'order_confirm'
     get 'orders/thanks', to: 'orders#thanks', as: 'thanks'
+    resources :orders, only: [:index, :new, :create, :show, :update]
+
     #配送先
     resources :addresses, only: [:index, :create, :destroy, :edit, :update]
     get 'end_users/mypage', to: 'end_users#mypage', as: 'mypage'

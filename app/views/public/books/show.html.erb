@@ -1,6 +1,6 @@
 <div class= "container">
   <div="row">
-    <h2>楽天Booksから登録した本の詳細</h2>
+    <h2 class="text-center">楽天Booksから登録した本の詳細</h2>
     <div class= "col-md-6 col-sm-12 mx-sm-auto bg-light rounded my-5">
       <div class="row g-0">
         <div class="col-md-4 py-2">
@@ -15,7 +15,7 @@
         </div>
         <% if @book.item_caption.present? %>
           <div class="col-md-12">
-            <h6>要約</h6>
+            <h6 class="text-center">要約</h6>
             <P class="text-center"><%= @book.item_caption %></P>
           </div>
         <% end %>

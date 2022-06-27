@@ -1,6 +1,7 @@
 <div class="container">
-  <h2>本棚</h2>
-  <h4>気になる本を自分のページに追加できます</h4>
+  <h2 class="text-center">本棚</h2>
+  <h4 class="text-center">気になる本を自分のページに追加できます</h4>
+  <% if @books.present? %>
     <div class="row row-cols-3 row-cols-md-3 g-3">
       <% @books.each do |book| %>
         <div class="card mb-3 mx-2" style="max-width: 540px;">
@@ -27,6 +28,9 @@
         </div>
       <% end %>
     </div>
-  <%= paginate @books %>
+    <%= paginate @books %>
+  <% else %>
+    <P class="text-center">ご登録の本はございません</P>
+  <% end %>
 </div>
 

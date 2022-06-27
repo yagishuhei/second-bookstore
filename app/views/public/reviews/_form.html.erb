@@ -8,7 +8,7 @@
   </ul>
 <% end %>
 <div class= "no-gutters">
-  <div class= "col-md-5 col-sm-12 mx-1 mx-sm-auto bg-light rounded my-5">
+  <div class= "col-md-5 col-sm-12 mx-sm-auto bg-light">
     <P> この本に関するレビューを書く</P>
     <div class="form-body p-4">
       <%= form_with model: review, url: reviews_path(book_id: book.id), method: :post do |f| %>
@@ -42,7 +42,7 @@
           </div>
           <div class="col-12">
             <%= f.label :blog,'レビュー内容' %>
-            <%= f.text_area :blog, required: true, class: "form-control" %>
+            <%= f.text_area :blog, required: true, class: "form-control", size: "5x5" %>
           </div>
           <div class="col-12">
             <%= f.select :review_status, Review.review_statuses.keys.map {|k| [t("enums.review.review_status.#{k}"),k]},{},{class: "custom-select w-30"} %>

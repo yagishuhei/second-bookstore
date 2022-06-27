@@ -1,5 +1,7 @@
 <div class="container">
-  <h2 class="col-12 py-4">全ての出品本一覧</h2>
+  <div class="row">
+    <h2 class="col-12 py-4 text-center">全ての出品本一覧</h2>
+  </div>
   <% if @sales.present? %>
     <%= render 'public/sales/index', sales: @sales %>
   <% else %>
