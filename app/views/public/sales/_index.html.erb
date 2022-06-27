@@ -4,7 +4,7 @@
     <% if sale.status == 'on_sale' %>
       <!--idがnilだったらかどうかを判定 nextが次のeachにいく-->
       <% next if sale.id.nil? %>
-        <div class="row bg-light g-0">
+        <div class="row bg-light py-2 mx-2 g-0">
                 <div class="col-md-4">
                   <%= image_tag sale.get_sale_iamge("100x100") %>
                 </div>

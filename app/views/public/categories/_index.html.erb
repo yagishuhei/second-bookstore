@@ -1,9 +1,14 @@
+<h4 class="text-center">カテゴリー</h3>
+<div class="row align-items-start">
 <% categories.each do |category| %>
-  <p>
+
+
+
   <%= link_to category_path(category) do %>
-  <%= button_tag category.name, class: "btn btn-sm btn-info" %>
+  <%= button_tag category.name, class: "btn btn-sm btn-info mx-2" %>
   <% end %>
-</p>
+
 <% end %>
+</div>
 
 <%= paginate categories %>

@@ -1,5 +1,7 @@
 
 class Public::OrdersController < ApplicationController
+  before_action :authenticate_end_user!
+  
   def index
     @orders = current_end_user.orders
     @orders = @orders.page(params[:page])
@@ -64,22 +66,14 @@ class Public::OrdersController < ApplicationController
   def order_404
   end
 
-
-
-
   def show
     @order = Order.find(params[:id])
     @order_detail = OrderDetail.new
     @cart_items = CartItem.all
   end
 
-  def update
-    @order = Order.find(params[:id])
-    @order.update(order_params)
-    redirect_to order_path(@order)
-  end
-
   private
+  
   def order_params
     params.require(:order).permit(
       :postal_code,

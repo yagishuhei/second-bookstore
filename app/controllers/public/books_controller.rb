@@ -1,6 +1,7 @@
 class Public::BooksController < ApplicationController
    #ログインしているか確認、ログイン状態ではない場合ログインページに移動
   before_action :authenticate_end_user!
+  before_action :ensure_correct_end_user, only: [:destroy]
 
 
   def rakuten_result
@@ -22,7 +23,7 @@ class Public::BooksController < ApplicationController
     #カラの中にまずend_user_idがログインした会員idを入れる
     @book.end_user_id = current_end_user.id
     if @book.save
-      redirect_to book_path( @book)
+      redirect_to book_path( @book), notice: "本の登録が完了しました。"
     else
       @books = RakutenWebService::Books::Total.search(keyword: params[:keyword], orFlag: 1)
       render :rakuten_result
@@ -38,7 +39,7 @@ class Public::BooksController < ApplicationController
   def destroy
     book = current_end_user.books.find(params[:id])
     book.destroy
-    redirect_to books_path
+    redirect_to books_path(end_user_id: book.end_user.id), notice: "登録本の削除が完了しました。"
   end
 
 
@@ -50,7 +51,25 @@ class Public::BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:isbn, :title, :author, :publisher_name, :category_id, :item_caption, :item_url, :large_image_url, :medium_image_url)
+    params.require(:book).permit(
+      :isbn,
+      :title,
+      :author,
+      :publisher_name,
+      :category_id,
+      :item_caption,
+      :item_url,
+      :large_image_url,
+      :medium_image_url
+      )
+  end
 
+
+  def ensure_correct_end_user
+    @book = Book.find(params[:id])
+    @end_user = @book.end_user
+    unless @end_user == current_end_user
+      redirect_to root_path, alert: "他のユーザー情報を変更することはできません。"
+    end
   end
 end

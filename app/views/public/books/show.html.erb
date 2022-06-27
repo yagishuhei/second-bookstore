@@ -25,6 +25,11 @@
       <div class="mx-sm-auto pb-2">
       <%= link_to "登録本一覧", books_path(end_user_id: current_end_user.id), class: "btn btn-sm btn-info" %>
     </div>
+    <% if @book.reviews.ids.present? %>
+    <div class="mx-sm-auto pb-2">
+      <%= link_to "レビュー詳細", review_path(review_id: @book.reviews.ids), class: "btn btn-sm btn-info" %>
+    </div>
+    <% end %>
     </div>
 
   </div>

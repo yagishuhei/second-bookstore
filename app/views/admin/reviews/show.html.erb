@@ -3,7 +3,8 @@
   <div class= "row w-80 mx-auto my-2 bg-light shadow-lg">
     <div class="col-2 px-0">
       <%= link_to (image_tag(@review.book['large_image_url'])), @review.book['item_url'] %>
-      <div id="score"><%= render 'public/reviews/score', review: @review %></div><%= @review.score %>
+      <div id="score_<%= @index %>"><%= render 'public/reviews/score', review: @review, index: @index %></div>
+      <%= @review.score %>
     </div>
     <div class="col-2 px-0">
       <h5 class="title col-12 py-1">タイトル</h5>
@@ -26,5 +27,5 @@
   </div>
   <div>
     <%= link_to "このレビューを削除する", admin_review_path(@review),
-    method: :delete, class: "btn btn-lg btn-danger",date: {confirm: "本当に削除しますか？"} %>
+    method: :delete, data: {confirm: "本当に削除しますか？"},class: "btn btn-lg btn-danger" %>
   </div>

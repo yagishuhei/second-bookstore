@@ -1,7 +1,9 @@
 <!--楽天ブックス検索機能。（データベースに保存しないためURL指定）-->
 
   <%= form_with url: book_rakuten_result_path(:book_id), method: :get, local: true do |f| %>
-    <%= f.label :keyword, "レビューする本を検索" %>
+  <h4 class="text-center"><%= f.label :keyword, "レビューする本を検索" %></h4>
+  <p class= "text-center">
     <%= f.text_field :keyword, placeholder: "タイトル、著者 検索", required: true %>
     <%= button_tag '<i class="fa fa-search"></i>'.html_safe, :type => "submit", :class => "btn btn-success" %>
+  </p>
   <% end %>

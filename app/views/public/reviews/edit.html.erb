@@ -54,7 +54,7 @@
               <%= f.select :review_status, Review.review_statuses.keys.map {|k| [t("enums.review.review_status.#{k}"),k]},{},{class: "custom-select w-30"} %>
             </div>
           </div>
-          <%= f.submit"レビューを保存する", class: "btn btn-lg btn-block btn-info mt-4" %>
+          <%= f.submit"編集内容を保存する", class: "btn btn-lg btn-block btn-info mt-4" %>
           <%= link_to "他のレビューを見る", reviews_path %>
         <% end %>
 
