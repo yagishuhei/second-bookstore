@@ -16,16 +16,25 @@
       <p><%= @order.shipping_name %></p>
     </div>
   </div>
-  <div class="row w-80 mx-auto my-2 bg-light shadow-lg">
-    <h5 class="title col-12">注文情報</h5>
+
+  <h5 class="title col-12">注文情報</h5>
+  <div class="row row-cols-sm-1 g-1 row-cols-4 row-cols-md-4 g-4">
     <% total = 0 %>
     <% @cart_items.each do |cart_item| %>
-      <p class-"col-10 "> <%= image_tag cart_item.sale.get_sale_iamge("100x100") %></p>
-      <h5 class="title col-12"><%= cart_item.sale.book.title %></h5>
-      <p class-"col-12">¥<%= cart_item.sale.price %>円</p>
-      <% @cart_item_price = total += cart_item.sale.price %>
+      <div class="col py-1 px-1">
+        <div class="card h-100">
+          <div class="card_image">
+            <%= image_tag cart_item.sale.get_sale_iamge("100x100") %></p>
+          </div>
+          <div class="card-body">
+            <h6 class="card-title py-0"><%= cart_item.sale.book.title %></h6>
+            <p class="card-text">¥<%= cart_item.sale.price %>円</p>
+            <% @cart_item_price = total += cart_item.sale.price %>
+          </div>
+        </div>
+      </div>
     <% end %>
-  </div>
+   </div>
   <div class="col-md-4 bg-light my-3">
     <div class="card-body  px-0">
       <div class="col">
