@@ -1,0 +1,31 @@
+<% if books.present? %>
+  <div class="row row-cols-3 row-cols-md-3 g-3">
+    <% books.each do |book| %>
+      <div class="card mb-3 mx-2" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <%= link_to (image_tag(book.medium_image_url)), book.item_url %>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <p class="card-text"><%= book.title %></p>
+              <p class="card-text"><%= book.author %></p>
+              <p><%= book.publisher_name %></p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <% if book.end_user == current_end_user %>
+            <p class= "col-4 mx-2"><%= link_to "削除", book_path(id: book.id), method: :delete, class: "btn btn-sm btn-danger",
+            data: {confirm: "本当に削除しますか？"} %></p>
+          <% end %>
+          <p class= "col-4">
+          <%= link_to "詳細", book_path(book), class: "btn btn-sm btn-info" %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <%= paginate books %>
+<% else %>
+  <P class="text-center">ご登録の本はございません</P>
+<% end %>

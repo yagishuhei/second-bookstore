@@ -68,10 +68,19 @@
     <% end %>
   <% end %>
   <% if  @sale.end_user == current_end_user %>
-    <% if @sale.order_details.nil? %>
-      <%= link_to "編集", edit_sale_path(@sale), class: "btn btn-sm btn-success" %>
+    <% if @sale.status == "on_sale" %>
+    <div class="row">
+      <div class="col-1">
+        <%= link_to "編集", edit_sale_path(@sale), class: "btn btn-sm btn-success" %>
+      </div>
     <% end %>
-    <%= link_to "削除", sale_path(@sale), method: :delete,
-    data: {confirm: "本当に削除しますか？"}, class: "btn btn-sm btn-danger" %>
+      <div class="col-1">
+        <%= link_to "削除", sale_path(@sale), method: :delete,
+        data: {confirm: "本当に削除しますか？"}, class: "btn btn-sm btn-danger" %>
+      </div>
+      <div class="col-6 py-2">
+        <%= link_to "出品一覧", new_sale_path, class: "btn btn-lg btn-info" %>
+      </div>
+    </div>
   <% end %>
 </div>

@@ -6,6 +6,8 @@ class Public::CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
+    @books = @category.books
+    @books = @books.page(params[:page])
   end
 
   private
