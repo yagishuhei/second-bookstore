@@ -39,8 +39,12 @@ class Public::EndUsersController < ApplicationController
   end
 
   def update
-    current_end_user.update(end_user_params)
-    redirect_to mypage_path, notice: "プロフィール内容の編集が完了しました。"
+    @end_user = current_end_user.update(end_user_params)
+    if @end_user
+      redirect_to mypage_path, notice: "プロフィール内容の編集が完了しました。"
+    else
+      render :edit
+    end
   end
 
   def follows

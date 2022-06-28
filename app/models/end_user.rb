@@ -51,6 +51,16 @@ class EndUser < ApplicationRecord
   #profile_imageカラムが追加されたように扱える
   has_one_attached :profile_image
 
+  validate :profile_image_content_type, if: :was_attached?
+
+  def profile_image_content_type
+    extension = ['image/png', 'image/jpg', 'image/jpeg']
+    errors.add(:profile_image, "の拡張子が間違ってます") unless profile_image.content_type.in?(extension)
+  end
+
+  def was_attached?
+    self.profile_image.attached?
+  end
   #profile_imageが設定されない時、no-image.jpgをデフォルト画像としてActiveStorageに格納、その後表示。
   #サイズの変更も行う。
   def get_profile_image(size)
@@ -58,6 +68,7 @@ class EndUser < ApplicationRecord
       file_path = Rails.root.join('app/assets/images/no-image.jpg')
       profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
-    profile_image.variant(resize:size).processed
+
+    profile_image.variant(resize: size).processed
   end
 end
