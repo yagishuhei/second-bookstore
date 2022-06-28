@@ -43,7 +43,7 @@ class Public::EndUsersController < ApplicationController
     if @end_user
       redirect_to mypage_path, notice: "プロフィール内容の編集が完了しました。"
     else
-      render :edit
+      render :edit, alert: "イメージ画像の拡張子が間違ってます"
     end
   end
 

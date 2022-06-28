@@ -50,7 +50,7 @@ class EndUser < ApplicationRecord
 
   #profile_imageカラムが追加されたように扱える
   has_one_attached :profile_image
-
+  #拡張子を制限してエラーが出ないようにしている
   validate :profile_image_content_type, if: :was_attached?
 
   def profile_image_content_type

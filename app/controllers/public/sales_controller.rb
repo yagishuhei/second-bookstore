@@ -25,7 +25,7 @@ class Public::SalesController < ApplicationController
       @books = @books.page(params[:page])
       @sales = current_end_user.sales
       @sales = @sales.page(params[:page])
-      render :new
+      render :new, alert: "編集内容を保存できませんでした。"
     end
   end
 
@@ -46,8 +46,11 @@ class Public::SalesController < ApplicationController
 
   def update
     @sale = current_end_user.sales.find(params[:id])
-    @sale.update!(sale_params)
-    redirect_to sale_path(@sale), notice: "出品内容の編集が完了しました。"
+    if @sale.update!(sale_params)
+      redirect_to sale_path(@sale), notice: "出品内容の編集が完了しました。"
+    else
+      render :edit, alert: "編集内容を保存できませんでした。"
+    end
   end
 
   private
