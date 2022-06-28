@@ -26,7 +26,7 @@ class Public::BooksController < ApplicationController
     #カラの中にまずend_user_idがログインした会員idを入れる
     @book.end_user_id = current_end_user.id
     #既にisbnがあったら保存できないようにする
-    if @book_isbn != Book.find_by(isbn: @book.isbn)&.isbn
+    if @book_isbn != current_end_user.books.find_by(isbn: @book.isbn)&.isbn
       @book.save
       redirect_to book_path( @book), notice: "本の登録が完了しました。"
     else

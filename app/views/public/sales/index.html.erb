@@ -8,6 +8,8 @@
       <%= link_to "カート情報を確認する", cart_items_path, class: "btn btn-lg btn-info" %>
     </div>
   <% else %>
-    <p class ="col-12 mx-2">出品されている本はございません。</p>
+    <div class="row">
+      <p class ="col-12 mx-2 text-center">出品されている本はございません。</p>
+    </div>
   <% end %>
 </div>
