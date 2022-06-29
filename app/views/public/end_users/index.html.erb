@@ -4,28 +4,31 @@
     <div class="row ">
       <% @end_users.each do |end_user| %>
         <div class="row bg-light mx-2 my-2 g-0">
-          <div class="col-md-4">
-            <%= image_tag end_user.get_profile_image("100x100") %>
-            <p><%= end_user.nickname %>
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h6 class="card-title"></h6>
-              <p class="card-text"><%= end_user.introduction %></p>
-              <p class="card-text">レビュー投稿件数:<%= end_user.reviews.count %></p>
-              <p class="card-text">
-                <%= link_to "詳細", end_user_path(end_user), class: "btn btn-sm btn-info" %>
-              </p>
-              <% if end_user.books.present? %>
-                <p class="card-text">投稿ジャンル:
-                <% book_category(end_user).each do |book| %>
-                <p class="bg-secondary text-light text-center rounded-pill"><%= book %></p>
-                <% end %>
-              <% else %>
-                <P>ご登録の本はございません</P>
-              <% end %>
-
-              </p>
+          <div class="card" style= "width: 18rem;">
+            <div class="row">
+              <div class="col-md-5">
+                <%= image_tag end_user.get_profile_image("100x100") %>
+                <p><%= end_user.nickname %>
+              </div>
+              <div class="col-md-7">
+                <div class="card-body">
+                  <h6 class="card-title"></h6>
+                  <p class="card-text"><%= end_user.introduction %></p>
+                  <p class="card-text">レビュー件数:<%= end_user.reviews.count %></p>
+                  <p class="card-text">
+                    <%= link_to "詳細", end_user_path(end_user), class: "btn btn-sm btn-info" %>
+                  </p>
+                  <% if end_user.books.present? %>
+                    <p class="card-text">投稿ジャンル:
+                    <% book_category(end_user).each do |book| %>
+                    <p class="bg-secondary text-light text-center rounded-pill"><%= book %></p>
+                    <% end %>
+                  <% else %>
+                    <P>ご登録の本はございません</P>
+                  <% end %>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

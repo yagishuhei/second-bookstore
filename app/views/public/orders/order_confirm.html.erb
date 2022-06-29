@@ -21,18 +21,18 @@
   <div class="row row-cols-sm-1 g-1 row-cols-4 row-cols-md-4 g-4">
     <% total = 0 %>
     <% @cart_items.each do |cart_item| %>
-      <div class="col py-1 px-1">
-        <div class="card h-100">
-          <div class="card_image">
-            <%= image_tag cart_item.sale.get_sale_iamge("100x100") %></p>
-          </div>
-          <div class="card-body">
-            <h6 class="card-title py-0"><%= cart_item.sale.book.title %></h6>
-            <p class="card-text">¥<%= cart_item.sale.price %>円</p>
-            <% @cart_item_price = total += cart_item.sale.price %>
+        <div class="card h-100" style="width: 18rem;">
+          <div class="row">
+            <div class="card_image col-md-4 px-2 py-2">
+              <%= image_tag cart_item.sale.get_sale_iamge("100x100") %></p>
+            </div>
+            <div class="card-body col-md-7">
+              <h6 class="card-title py-0"><%= cart_item.sale.title %></h6>
+              <p class="card-text">¥<%= cart_item.sale.price %>円</p>
+              <% @cart_item_price = total += cart_item.sale.price %>
+            </div>
           </div>
         </div>
-      </div>
     <% end %>
    </div>
   <div class="col-md-4 bg-light my-3">
