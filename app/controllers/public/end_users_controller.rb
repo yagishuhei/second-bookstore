@@ -1,12 +1,14 @@
 class Public::EndUsersController < ApplicationController
   #ログインしているか確認、ログイン状態ではない場合ログインページに移動
   before_action :authenticate_end_user!
+  #ゲストユーザーが修正できないようにする
   before_action :ensure_guest_user, only: [:edit]
   before_action :ensure_correct_end_user, only: [:edit, :update]
 
   def index
     @end_users = EndUser.page(params[:page])
     @categories = Category.page(params[:page])
+    #いいね機能で多い順に表示
     @favorite_ranking = Review.includes(:favorited_end_users).sort {|a,b| b.favorited_end_users.size <=> a.favorited_end_users.size }
     @favorite_ranking = Kaminari.paginate_array(@favorite_ranking).page(params[:page]).per(4)
 
@@ -21,17 +23,21 @@ class Public::EndUsersController < ApplicationController
     @end_user = EndUser.find(params[:id])
     @reviews = @end_user.reviews
     @reviews = @reviews.page(params[:page])
+    #フォローユーザー
     @following_end_users = @end_user.following_end_user
+    #フォロワーユーザー
     @followers_end_users = @end_user.follower_end_user
   end
 
   def edit
     @end_user = current_end_user
   end
-
+  
+  #退会機能
   def withdraw
     end_user = current_end_user
     end_user.is_deleted = true
+    #論理削除
     end_user.save
     #ログイン情報をリセット
     reset_session
@@ -46,13 +52,15 @@ class Public::EndUsersController < ApplicationController
       render :edit, alert: "イメージ画像の拡張子が間違ってます"
     end
   end
-
+  
+   #フォローユーザー
   def follows
     end_user = EndUser.find(params[:id])
     @end_users = end_user.following_end_user.all.reverse_order
     @end_users =  @end_users.page(params[:page])
   end
-
+  
+  #フォロワーユーザー
   def followers
     end_user = EndUser.find(params[:id])
     @end_users = end_user.follower_end_user.all.reverse_order

@@ -1,4 +1,5 @@
 class Public::AddressesController < ApplicationController
+  #ログインしているかの検証
   before_action :authenticate_end_user!
   before_action :ensure_correct_end_user, only: [:update, :edit, :destroy]
 
@@ -41,7 +42,8 @@ class Public::AddressesController < ApplicationController
   def address_params
     params.require(:address).permit(:postal_code, :address, :name)
   end
-
+  
+  #他のユーザー情報を編集できないよう設定
   def ensure_correct_end_user
     @address = Address.find(params[:id])
     @end_user = @address.end_user

@@ -33,10 +33,12 @@ class Public::OrdersController < ApplicationController
       @cart_items.destroy_all
       redirect_to thanks_path
   end
-
+  
+  #注文情報入力
   def order_confirm
     @order = current_end_user.orders.new(order_params)
     @cart_items = current_end_user.cart_items
+    #住所の場合分け
     if params[:order][:address] == "1"
       @order.postal_code = current_end_user.postal_code
       @order.shipping_address = current_end_user.address
@@ -49,7 +51,8 @@ class Public::OrdersController < ApplicationController
       @order.shipping_name = @address.name
     end
   end
-
+  
+  #order_confirmでリロード時のエラー対応
   def order_404
   end
 
