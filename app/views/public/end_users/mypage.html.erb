@@ -11,7 +11,7 @@
       <div class= "card w-70 mx-auto mt-1 shadow-lg">
         <div class= "card-body">
           <div class = "row">
-            <div class="col-6 py-1">
+            <div class="col-md-6 col-sm-12 py-1">
               <p>メールアドレス</p>
               <%= @end_user.email %>
               <p>電話番号</p>
@@ -21,7 +21,7 @@
               <p>住所</p>
               <%= @end_user.address %>
             </div>
-            <div class="col-6 py-1">
+            <div class="col-md-6 col-sm-12 py-1">
               <div class="col-12 py-1">
                 <%= link_to "出品一覧", new_sale_path, class: "btn btn-lg btn-info" %>
               </div>
