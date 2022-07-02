@@ -1,5 +1,6 @@
 <!--レビュー５段階評価-->
 <script>
+  $('#score_<%= index %>').empty();
   $('#score_<%= index %>').raty({
     //imageを表示
     starOff: '<%= asset_path('star-off.png') %>',
