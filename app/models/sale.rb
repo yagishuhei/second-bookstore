@@ -5,6 +5,7 @@ class Sale < ApplicationRecord
   belongs_to :book
   has_many :order_details, dependent: :destroy
   has_many :cart_items, dependent: :destroy
+  has_many :tags, dependent: :destroy
 
   validates :title, presence: true
   validates :introduction, presence: true
