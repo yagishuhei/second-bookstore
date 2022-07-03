@@ -19,6 +19,12 @@ class Public::SalesController < ApplicationController
     @sale = current_end_user.sales.new(sale_params)
     @sale.book_id = params[:sale][:book_id]
     if @sale.save
+      tags = Vision.get_sale_image_data(@sale.sale_image)
+      tags.each do |tag|
+        @sale.tags.create(name: tag)
+      end
+
+
       redirect_to sale_path(@sale), notice: "出品が完了しました。"
     else
       @books= current_end_user.books
