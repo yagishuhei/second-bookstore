@@ -31,6 +31,7 @@ class Public::ReviewsController < ApplicationController
   def create
     @review = current_end_user.reviews.new(review_params)
     @review.book_id = params[:book_id]
+    @review.rate = Language.get_data(review_params[:blog])
     if @review.save
       redirect_to review_path(@review.id), notice: "レビューの登録が完了しました。"
     else
