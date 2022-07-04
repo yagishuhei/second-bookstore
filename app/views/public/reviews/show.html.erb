@@ -21,10 +21,11 @@
         <p>レビュー投稿日<%= @review.created_at.strftime('%Y/%m/%d') %></p>
         <p>レビュー更新日<%= @review.updated_at.strftime('%Y/%m/%d') %></p>
       </div>
-        <div class="col-3 pt-4" id="favorite-btn">
-          <%= render 'public/favorites/favorite-btn', review: @review %>
+      <div class="col-3 pt-4 text-center" id="favorite-btn">
+        <%= render 'public/favorites/favorite-btn', review: @review %>
+      </div>
+        <p class="col-5 pt-4 sentiment-rate">レビューの感情分析レート[<%= @review.rate %>]</p>
 
-        </div>
         <h5 class="title col-12 text-center">テーマ</h5>
         <p class="h6 mx-auto center-block"><%= @review.heading %></p>
         <h5 class="title col-12 text-center">批評</h5>
