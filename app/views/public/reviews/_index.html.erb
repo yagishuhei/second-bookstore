@@ -2,10 +2,10 @@
   <% reviews.each_with_index do |review,index| %>
     <div class= "card w-90 mx-auto mt-1 shadow-lg">
       <div class= "row card-body">
-        <div class="col-2 px-0 py-0">
+        <div class="col-md-2 col-sm-12 px-0 py-0">
           <%= link_to (image_tag(review.book.medium_image_url)), review.book.item_url %>
         </div>
-        <div class="col-10">
+        <div class="col-md-10 col-sm-12">
           <h6><strong><%= review.book.title %></strong></h6>
           <P class="h6">
             <%= link_to review_path(review, index: index) do %>
@@ -13,11 +13,11 @@
             <% end %>
           </P>
           <div class="row">
-            <div class="col-3 mx-0 px-0" id="score_<%= index %>">
+            <div class="col-md-3 col-sm-12 mx-0 px-0" id="score_<%= index %>">
               <%= render 'public/reviews/score', review: review, index: index %>
             </div>
-            <div class="col-1 mx-0 px-0"><%= review.score %></div>
-            <div class="col-8 mx-0 px-0 sentiment-rate">
+            <div class="col-md-1 col-sm-12 mx-0 px-0"><%= review.score %></div>
+            <div class="col-md-8 col-sm-12 mx-0 px-0 sentiment-rate">
               レビューの感情分析レート
               [<%= review.rate %>pt]
             </div>

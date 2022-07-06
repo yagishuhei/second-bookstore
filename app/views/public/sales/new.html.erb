@@ -4,10 +4,10 @@
   </div>
   <% if current_end_user.books.ids.present? %>
     <%= form_with model: @sale, url: sales_path(book_id: @book), method: :post do |f| %>
-    <div class="d-flex flex-row bd-higlight md-3">
+    <div class="row d-flex flex-md-row">
       <div class="row mx-auto row-cols-md-1 g-1">
         <% @books.each do |book| %>
-          <div class="py-1" style="max-width: 440px;">
+          <div class="py-1 mx-auto" style="max-width: 440px; min-width: 350px;">
             <div class="row g-0">
               <div class="col-md-4 col-sm-12 bg-light">
                 <%= link_to (image_tag(book.medium_image_url)), book.item_url %>
@@ -16,7 +16,7 @@
                   <%= f.radio_button :book_id, book.id, checked: true %>
                 </p>
               </div>
-              <div class="col-md-8  bg-light">
+              <div class="col-md-8 col-sm-12 bg-light">
                 <div class="card-body px-0">
                   <h6 class="card-title"><%= book.title %></h6>
                   <p class="card-text"><%= book.category.name %></p>
