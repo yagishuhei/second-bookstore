@@ -5,10 +5,10 @@
         <!--idがnilだったらかどうかを判定 nextが次のeachにいく-->
         <% next if sale.id.nil? %>
         <div class="row bg-light py-2 mx-2 g-0">
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-12">
             <%= image_tag sale.get_sale_iamge("100x100") %>
           </div>
-          <div class="col-md-8">
+          <div class="col-md-8 col-sm-1">
             <div class="card-body">
               <h6 class="card-title"><%= sale.title %></h6>
               <p class="card-text"><%= sale.price %>円</p>
