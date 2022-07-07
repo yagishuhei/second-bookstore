@@ -1,5 +1,5 @@
 <% if end_user_signed_in? %>
-  <div class="row px-0 my-0 py-0 h-100">
+  <div class="row px-0 my-0 py-0">
     <div class= "col-md-7 py-4 offset-md-1">
       <div class="col-md-8 offset-md-1 mx-auto py-3 text-center">
         <%= render 'public/books/rakuten_search' %>
@@ -37,7 +37,7 @@
           <% end %>
           <%= paginate @reviews %>
         <% else %>
-          <P>ご登録のレビューはございません</P>
+          <P class="text-center">ご登録のレビューはございません</P>
         <% end %>
       </div>
     </div>
