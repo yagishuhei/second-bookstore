@@ -1,44 +1,38 @@
 <div class= "container">
   <div class ="row">
     <div class = "card-list-container col-12">
-       <h2 class="text-dark  mt-5">マイページ</h2>
+       <h2 class="text-dark mt-5 text-center">マイページ</h2>
       <div class= "card mx-auto mt-1 shadow-lg">
         <div class= "card-body">
           <div class = "row">
-            <div class="col-2">
+            <div class="col-md-2 col-sm-12">
               <%= image_tag @end_user.get_profile_image("100x100") %>
             </div>
             <div class="col-10">
-              <table class= "profile">
-                <thead>
-                  <th class="col-2 py-1">氏名</th>
-                  <th class="col-2 py-1">フリガナ</th>
-                  <th class="col-2 py-1">ニックネーム</th>
-                  <th class="col-2 py-1">ステータス</th>
-                </thead>
-                <tbody>
-                  <td class="col-2 py-1"><%= @end_user.last_name %><%= @end_user.first_name %></td>
-                  <td class="col-2 py-1"><%=@end_user.last_name_kana %><%= @end_user.first_name_kana %> </td>
-                  <td class="col-2 py-1"><%= @end_user.nickname %> </td>
-                  <td class="col-2 py-1"><%= @end_user.is_deleted ? "退会" : "有効" %></td>
-                </tbody>
-              </table>
-              <div class="row">
-                <div class="col-12">
-                  <table class= "profile">
-                    <thead>
-                      <th class="col-2 py-1">メールアドレス</th>
-                      <th class="col-2 py-1">電話番号</th>
-                      <th class="col-2 py-1">郵便番号</th>
-                      <th class="col-2 py-1">住所</th>
-                    </thead>
-                    <tbody>
-                      <td class="col-2 py-1"><%= @end_user.email %></td>
-                      <td class="col-2 py-1"><%= @end_user.telephone_number %></td>
-                      <td class="col-2 py-1"><%= @end_user.postal_code %></td>
-                      <td class="col-2 py-1"><%= @end_user.address %></td>
-                    </tbody>
-                  </table>
+              <div class= "profile">
+                <div class="row">
+                  <div class="col-md-3 col-sm-12 py-1">氏名</div>
+                  <div class="col-md-3 col-sm-12 py-1">フリガナ</div>
+                  <div class="col-md-3 col-sm-12 py-1">ニックネーム</div>
+                  <div class="col-md-3 col-sm-12 py-1">ステータス</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3 col-sm-12 py-1"><%= @end_user.last_name %><%= @end_user.first_name %></div>
+                  <div class="col-md-3 col-sm-12 py-1"><%=@end_user.last_name_kana %><%= @end_user.first_name_kana %></div>
+                  <div class="col-md-3 col-sm-12 py-1"><%= @end_user.nickname %> </div>
+                  <div class="col-md-3 col-sm-12 py-1"><%= @end_user.is_deleted ? "退会" : "有効" %></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3 col-sm-12 py-1">メールアドレス</div>
+                  <div class="col-md-3 col-sm-12 py-1">電話番号</div>
+                  <div class="col-md-3 col-sm-12 py-1">郵便番号</div>
+                  <div class="col-md-3 col-sm-12 py-1">住所</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3 col-sm-12 py-1"><%= @end_user.email %></div>
+                  <div class="col-md-3 col-sm-12 py-1"><%= @end_user.telephone_number %></div>
+                  <div class="col-md-3 col-sm-12 py-1"><%= @end_user.postal_code %></div>
+                  <div class="col-md-3 col-sm-12 py-1"><%= @end_user.address %></div>
                 </div>
               </div>
               <div class="row col-12">
