@@ -5,66 +5,54 @@
       <div class="form-body bg-light p-4">
         <%= form_with model: @end_user, url: end_user_path, method: :patch do |f| %>
           <div class="input-group mb-3 mt-4">
-
             <div class="field col-12">
               <%= f.label :profile_image, "イメージ" %>
               <%= f.file_field :profile_image, placeholder: "profile image", accept: "image/*" %>
             </div>
-
             <div class="field col-12">
               <%= f.label :introduction,"自己紹介" %>
               <%= f.text_area :introduction, class: "form-control" %>
             </div>
-
             <div class="field col-6">
               <%= f.label :last_name, "姓" %><br/>
               <%= f.text_field :last_name, class: "form-control" %>
             </div>
-
             <div class="field col-6">
               <%= f.label :first_name, "名" %><br/>
               <%= f.text_field :first_name, class: "form-control" %>
             </div>
-
             <div class="field col-6">
               <%= f.label :last_name_kana, "姓（カナ）" %><br/>
               <%= f.text_field :last_name_kana, class: "form-control" %>
             </div>
-
             <div class="field col-6">
               <%= f.label :first_name_kana, "名（カナ）" %><br/>
               <%= f.text_field :first_name_kana, class: "form-control" %>
             </div>
-
             <div class="field col-12">
               <%= f.label :nickname, "ニックネーム" %><br/>
               <%= f.text_field :nickname, class: "form-control" %>
             </div>
-
             <div class="field col-12">
               <%= f.label :postal_code, "郵便番号" %><br/>
               <%= f.text_field :postal_code, class: "form-control" %>
             </div>
-
             <div class="field col-12">
               <%= f.label :address, "住所" %><br/>
               <%= f.text_field :address, class: "form-control" %>
             </div>
-
             <div class="field col-12">
               <%= f.label :telephone_number, "電話番号" %><br/>
               <%= f.text_field :telephone_number, class: "form-control" %>
             </div>
-
             <div class="field col-12">
               <%= f.label :email, "メールアドレス" %><br />
               <%= f.email_field :email, class: "form-control" %>
             </div>
-
             <div class="field col-12">
               <%= f.submit "プロフィール編集", class: "btn btn-lg btn-block btn-success mt-4" %>
             </div>
-            
+           
           <% end %>
       </div>
     </div>
