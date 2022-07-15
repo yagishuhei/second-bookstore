@@ -4,7 +4,7 @@
       <div class="col-md-8 offset-md-1 mx-auto py-3 text-center">
         <%= render 'public/books/rakuten_search' %>
       </div>
-      <h2 class="text-dark p-4 md-0 text-center">最新レビュー</h2>
+      <h3 class="text-dark p-4 md-0 text-center">最新レビュー</h3>
       <div class ="card-list-container py-1 col-12">
         <% if @reviews.present? %>
           <% @reviews.each_with_index do |review,index| %>
@@ -37,7 +37,7 @@
           <% end %>
           <%= paginate @reviews %>
         <% else %>
-          <P class="text-center">ご登録のレビューはございません</P>
+          <p class="text-center">ご登録のレビューはございません</p>
         <% end %>
       </div>
     </div>
