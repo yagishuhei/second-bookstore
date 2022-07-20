@@ -1,37 +1,36 @@
 <div class = "container py-1">
   <div class= "row w-50 mx-auto py-3  my-3 bg-light shadow-lg">
-    <h3 class= "col-12 my-auto">カテゴリー追加</h3>
+    <h4 class= "col-12 my-auto text-center">カテゴリー追加</h4>
     <%= form_with model: @category, url: admin_categories_path, method: :post do |f| %>
       <div class="form-body p-4">
-        <div class="col-12 my-2">
-          <%= f.label :name, "カテゴリー" %>
-        </div>
-        <div class="col-12 my-2">
-          <%= f.text_field :name, required: true, class: "form-control"%>
-        </div>
-        <div class="col-12 my-2">
-          <%= f.submit "カテゴリー追加", class: "btn btn-sm btn-success" %>
+        <div class="row">
+          <div class="col-md-6 my-2">
+            <%= f.text_field :name, required: true, class: "form-control"%>
+          </div>
+          <div class="col-md-6 my-2">
+            <%= f.submit "カテゴリー追加", class: "btn btn-sm btn-success" %>
+          </div>
         </div>
       </div>
     <% end %>
   </div>
   <div class="row mx-auto w-50">
-    <table class= "table-hover col-12 bg-light has_border">
-      <thead class = "py-5">
-        <th scope= "col">カテゴリー</th>
-      </thead>
-      <tbody>
-        <% @categories.each do |category| %>
-          <tr>
-            <td class="py-2"><%= category.name %></td>
-            <td>
+    <div class= " col-12 bg-light has_border">
+      <div class = "py-5">
+        <h4 class= "col-12 text-center">カテゴリー</h4>
+      </div>
+      <div>
+        <div class="row">
+          <% @categories.each do |category| %>
+            <div class="col-md-6 my-2 ml-2 btn-lg btn-secondary text-center"><%= category.name %></div>
+            <div class="col-md-5 py-2">
               <%= link_to "削除", admin_category_path(category),
               method: :delete, class: "btn btn-sm px-4 btn-danger",
               data: { confirm: "本当に削除しますか"} %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

@@ -2,8 +2,8 @@ class Public::EndUsersController < ApplicationController
   #ログインしているか確認、ログイン状態ではない場合ログインページに移動
   before_action :authenticate_end_user!
   #ゲストユーザーが修正できないようにする
-  before_action :ensure_guest_user, only: [:edit]
-  before_action :ensure_correct_end_user, only: [:edit, :update]
+  before_action :ensure_guest_user, only: [:edit, :unsubscribe]
+  before_action :ensure_correct_end_user, only: [:edit, :update, :unsubscribe]
 
   def index
     @end_users = EndUser.page(params[:page])
@@ -32,7 +32,7 @@ class Public::EndUsersController < ApplicationController
   def edit
     @end_user = current_end_user
   end
-  
+
   #退会機能
   def withdraw
     end_user = current_end_user
@@ -52,19 +52,22 @@ class Public::EndUsersController < ApplicationController
       render :edit, alert: "イメージ画像の拡張子が間違ってます"
     end
   end
-  
+
    #フォローユーザー
   def follows
     end_user = EndUser.find(params[:id])
     @end_users = end_user.following_end_user.all.reverse_order
     @end_users =  @end_users.page(params[:page])
   end
-  
+
   #フォロワーユーザー
   def followers
     end_user = EndUser.find(params[:id])
     @end_users = end_user.follower_end_user.all.reverse_order
     @end_users =  @end_users.page(params[:page])
+  end
+
+  def unsubscribe
   end
 
   private
@@ -87,7 +90,7 @@ class Public::EndUsersController < ApplicationController
   def ensure_guest_user
     @end_user = EndUser.find(params[:id])
     if @end_user.last_name == "ゲスト" && @end_user.first_name == "ユーザー"
-      redirect_to root_path , alert: 'ゲストユーザーはプロフィール編集画面へ遷移できません。'
+      redirect_to root_path , alert: 'ゲストユーザーは遷移できません。'
     end
   end
 

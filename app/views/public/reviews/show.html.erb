@@ -1,5 +1,7 @@
 <div class="container">
-  <h2 class= "col-md-6 col-sm-12 py-5 mx-auto">詳細</h2>
+
+  <h2 class= "col-md-6 col-sm-12 py-5 mx-auto text-center">詳細</h2>
+
     <div class= "row w-80 mx-auto my-2 bg-light shadow-lg">
       <div class="col-md-2 col-sm-12 px-0">
         <%= link_to (image_tag(@review.book['large_image_url'])), @review.book['item_url'] %>
@@ -37,10 +39,10 @@
         <p>レビュー投稿日<%= @review.created_at.strftime('%Y/%m/%d') %></p>
         <p>レビュー更新日<%= @review.updated_at.strftime('%Y/%m/%d') %></p>
       </div>
-        <div class="col-md-3 col-sm-12 pt-4" id="favorite-btn">
-          <%= render 'public/favorites/favorite-btn', review: @review %>
-
-        </div>
+      <div class="col-md-3 col-sm-12 pt-4 text-center" id="favorite-btn">
+        <%= render 'public/favorites/favorite-btn', review: @review %>
+      </div>
+        <p class="col-md-5 col-sm-12 pt-4 sentiment-rate">レビューの感情分析レート[<%= @review.rate %>]</p>
         <h5 class="title col-12 text-center">テーマ</h5>
         <p class="h6 mx-auto center-block"><%= @review.heading %></p>
         <h5 class="title col-12 text-center">批評</h5>

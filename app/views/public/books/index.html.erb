@@ -1,6 +1,23 @@
-<div class="container">
-  <h2 class="text-center">本棚</h2>
-  <h4 class="text-center">気になる本を自分のページに追加できます</h4>
-  <%= render 'public/books/index', books: @books %>
+<div class="row py-0">
+  <div class= "col-md-7 offset-md-1">
+    <div class= "col-12">
+      <h3 class="text-center">本棚</h3>
+      <h5 class="text-center py-2">気になる本を自分のページに追加できます</h5>
+    </div>
+    <div class = "card-list-container py-1 col-12">
+      <%= render 'public/books/index', books: @books %>
+    </div>
+  </div>
+  <div class= "col-md-4 py-4 my-0 bg-light">
+    <%= render 'public/books/rakuten_search' %>
+    <div class="py-3">
+      <%= render 'public/searchs/search' %>
+    </div>
+    <div class= "mt-4">
+      <%= render 'public/categories/index', categories: @categories %>
+    </div>
+    <div class="py-3 text-center">
+      <%= render 'public/favorites/index', favorite_ranking: @favorite_ranking %>
+    </div>
+  </div>
 </div>
-

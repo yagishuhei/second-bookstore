@@ -10,20 +10,19 @@ class Public::ReviewsController < ApplicationController
     @reviews =  @reviews.page(params[:page])
     @categories = Category.page(params[:page])
     @favorite_ranking = Review.published.includes(:favorited_end_users).sort {
-      |a,b| b.favorited_end_users.size <=> a.favorited_end_users.size 
-      
+      |a,b| b.favorited_end_users.size <=> a.favorited_end_users.size
     }
     @favorite_ranking = Kaminari.paginate_array(@favorite_ranking).page(params[:page]).per(4)
   end
-  
+
   #下書き機能
   def review_confirm
     @reviews = current_end_user.reviews.draft
     @reviews =  @reviews.page(params[:page])
     @categories = Category.page(params[:page])
     @favorite_ranking = Review.published.includes(:favorited_end_users).sort {
-      |a,b| b.favorited_end_users.size <=> a.favorited_end_users.size 
-      
+      |a,b| b.favorited_end_users.size <=> a.favorited_end_users.size
+
     }
     @favorite_ranking = Kaminari.paginate_array(@favorite_ranking).page(params[:page]).per(4)
   end
@@ -31,6 +30,7 @@ class Public::ReviewsController < ApplicationController
   def create
     @review = current_end_user.reviews.new(review_params)
     @review.book_id = params[:book_id]
+    @review.rate = Language.get_data(review_params[:blog])
     if @review.save
       redirect_to review_path(@review.id), notice: "レビューの登録が完了しました。"
     else

@@ -21,6 +21,12 @@
     <div class="col-md-2 col-sm-12 py-2 px-2">
       <p><%= image_tag @sale.get_sale_iamge("100x100") %></p>
     </div>
+    <div class="tag-box">
+      <h6>関連付けできそうなワード</h6>
+      <% @sale.tags.each do |tag| %>
+        <span class="tag py-2"><%=button_tag tag.name %></span>
+      <% end %>
+    </div>
     <div class="col-md-5 col-sm-12">
       <p>￥<%= @sale.price %>円</p>
       <p><%= @sale.title %></p>
@@ -70,15 +76,15 @@
   <% if  @sale.end_user == current_end_user %>
     <% if @sale.status == "on_sale" %>
     <div class="row">
-      <div class="col-1">
+      <div class="col-md-1 col-sm-12">
         <%= link_to "編集", edit_sale_path(@sale), class: "btn btn-sm btn-success" %>
       </div>
     <% end %>
-      <div class="col-1">
+      <div class="col-md-1 col-sm-12">
         <%= link_to "削除", sale_path(@sale), method: :delete,
         data: {confirm: "本当に削除しますか？"}, class: "btn btn-sm btn-danger" %>
       </div>
-      <div class="col-6 py-2">
+      <div class="col-md-6 col-sm-12 py-2">
         <%= link_to "出品一覧", new_sale_path, class: "btn btn-lg btn-info" %>
       </div>
     </div>

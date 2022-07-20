@@ -38,6 +38,11 @@ class Public::BooksController < ApplicationController
     @end_user = EndUser.find(params[:end_user_id])
     @books = @end_user.books
     @books = @books.page(params[:page])
+    @categories = Category.page(params[:page])
+    @favorite_ranking = Review.published.includes(:favorited_end_users).sort {
+      |a,b| b.favorited_end_users.size <=> a.favorited_end_users.size
+    }
+    @favorite_ranking = Kaminari.paginate_array(@favorite_ranking).page(params[:page]).per(4)
   end
 
   def destroy

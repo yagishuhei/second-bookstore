@@ -37,17 +37,6 @@ class EndUser < ApplicationRecord
     end
   end
 
-  # validates :last_name, presence: true
-  # validates :first_name, presence: true
-  # validates :last_name_kana, presence: true
-  # validates :first_name_kana, presence: true
-  # validates :nickname, presence: true
-  # validates :postal_code, presence: true
-  # validates :address, presence: true
-  # validates :telephone_number, presence: true
-
-
-
   #profile_imageカラムが追加されたように扱える
   has_one_attached :profile_image
   #拡張子を制限してエラーが出ないようにしている
