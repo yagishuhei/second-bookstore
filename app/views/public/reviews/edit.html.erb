@@ -2,11 +2,11 @@
 <div class="container">
   <div class="row">
     <h2 class="col-12 text-center">レビューの編集</h2>
-    <div class="col-6 bg-light shadow mx-auto">
-      <div class="col-3 py-2">
+    <div class="col-md-6 col-sm-12 bg-light shadow mx-auto">
+      <div class="col-md-3 col-sm-12 py-2">
         <%= link_to (image_tag(@review.book['large_image_url'])), @review.book['item_url'] %>
       </div>
-      <div class="col-6">
+      <div class="col-md-6 col-sm-12">
         <%= @review.book.title %>,</br>
         <%= @review.book.author %>
         <%= @review.book.publisher_name %>

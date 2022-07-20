@@ -4,11 +4,11 @@
     <div class="row ">
       <% end_users.each do |end_user| %>
         <div class="row bg-light mx-2 my-2 g-0">
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-12">
             <%= image_tag end_user.get_profile_image("100x100") %>
             <p><%= end_user.nickname %>
           </div>
-          <div class="col-md-8">
+          <div class="col-md-8 col-sm-12">
             <div class="card-body">
               <h6 class="card-title"></h6>
               <p class="card-text"><%= end_user.introduction %></p>
@@ -17,14 +17,13 @@
                 <%= link_to "詳細", end_user_path(end_user), class: "btn btn-sm btn-info" %>
               </p>
               <% if end_user.books.present? %>
-                <p class="card-text">投稿ジャンル:
+                <p class="card-text">投稿ジャンル:</p>
                 <% book_category(end_user).each do |book| %>
-                <p class="bg-secondary text-light text-center rounded-pill"><%= book %></p>
+                  <p class="bg-secondary text-light text-center rounded-pill"><%= book %></p>
                 <% end %>
               <% else %>
                 <P class="text-center">ご登録の本はございません</P>
               <% end %>
-              </p>
             </div>
           </div>
         </div>

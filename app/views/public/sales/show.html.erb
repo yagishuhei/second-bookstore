@@ -1,24 +1,24 @@
 <div class="container">
-  <h2 class= "col-6 py-2 mx-auto">詳細</h2>
+  <h2 class= "col-md-6 col-sm-12 py-2 mx-auto">詳細</h2>
   <h4>イメージ</h4>
   <div class= "row w-80 mx-auto my-2 bg-light shadow-lg">
-    <div class ="col-4 py-2">
+    <div class ="col-md-4 col-sm-12 py-2">
       <%= link_to (image_tag(@sale.book['large_image_url'])), @sale.book['item_url'] %>
     </div>
-    <div class ="col-6">
+    <div class ="col-md-6 col-sm-12">
       <p><%= @sale.book.title %></p>
       <p><%= @sale.book.author %></p>
       <p><%= @sale.book.publisher_name %></p>
     </div>
   </div>
   <div class= "row w-80 mx-auto my-2 bg-light shadow-lg">
-    <div class="col-2 py-2 px-2">
+    <div class="col-md-2 col-sm-12 py-2 px-2">
       <%= link_to end_user_path(@sale) do  %>
         <%= image_tag @sale.end_user.get_profile_image("100x100") %>
         <p><%= @sale.end_user.nickname %></p>
       <% end %>
     </div>
-    <div class="col-2 py-2 px-2">
+    <div class="col-md-2 col-sm-12 py-2 px-2">
       <p><%= image_tag @sale.get_sale_iamge("100x100") %></p>
     </div>
     <div class="tag-box">
@@ -27,7 +27,7 @@
         <span class="tag py-2"><%=button_tag tag.name %></span>
       <% end %>
     </div>
-    <div class="col-5">
+    <div class="col-md-5 col-sm-12">
       <p>￥<%= @sale.price %>円</p>
       <p><%= @sale.title %></p>
       <p><%= @sale.introduction %></p>
@@ -76,15 +76,15 @@
   <% if  @sale.end_user == current_end_user %>
     <% if @sale.status == "on_sale" %>
     <div class="row">
-      <div class="col-1">
+      <div class="col-md-1 col-sm-12">
         <%= link_to "編集", edit_sale_path(@sale), class: "btn btn-sm btn-success" %>
       </div>
     <% end %>
-      <div class="col-1">
+      <div class="col-md-1 col-sm-12">
         <%= link_to "削除", sale_path(@sale), method: :delete,
         data: {confirm: "本当に削除しますか？"}, class: "btn btn-sm btn-danger" %>
       </div>
-      <div class="col-6 py-2">
+      <div class="col-md-6 col-sm-12 py-2">
         <%= link_to "出品一覧", new_sale_path, class: "btn btn-lg btn-info" %>
       </div>
     </div>

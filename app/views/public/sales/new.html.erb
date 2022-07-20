@@ -75,10 +75,10 @@
             <% next if sale.id.nil? %>
             <div class="card mb-3 px-2 mx-2" style="max-width: 540px;">
               <div class="row g-0">
-                <div class="col-md-4 my-2">
+                <div class="col-md-4 col-sm-12 my-2">
                   <%= image_tag sale.get_sale_iamge("100x100") %>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-8 col-sm-12">
                   <div class="card-body">
                     <h6 class="card-title"><%= sale.title %></h6>
                     <p class="card-text"><%= sale.price %>円</p>
