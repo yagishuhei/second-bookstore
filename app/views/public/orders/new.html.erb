@@ -7,11 +7,11 @@
       <div class="form-body p-4">
         <h4>支払い方法</h4>
         <div class= "input-group md-3 mt-4">
-          <div class="col-6">
+          <div class="col-md-6 col-sm-12">
             <%= f.radio_button :payment_method, "credit_card", checked: true %>
             <%= f.label :payment_method, "クレジットカード" %>
           </div>
-          <div class="col-6">
+          <div class="col-md-6 col-sm-12">
             <%= f.radio_button :payment_method, "transfer" %>
             <%= f.label :payment_method, "銀行振込" %>
           </div>

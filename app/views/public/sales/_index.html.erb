@@ -1,14 +1,14 @@
-<div class="row row-cols-1 row-cols-md-4 g-4">
+<div class="row row-cols-sm-1 g-1 row-cols-md-4 g-4">
   <% sales.each do |sale| %>
     <% if sale.end_user != current_end_user %>
       <% if sale.status == 'on_sale' %>
         <!--idがnilだったらかどうかを判定 nextが次のeachにいく-->
         <% next if sale.id.nil? %>
         <div class="row bg-light py-2 mx-2 g-0">
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-12">
             <%= image_tag sale.get_sale_iamge("100x100") %>
           </div>
-          <div class="col-md-8">
+          <div class="col-md-8 col-sm-12">
             <div class="card-body">
               <h6 class="card-title"><%= sale.title %></h6>
               <p class="card-text"><%= sale.price %>円</p>

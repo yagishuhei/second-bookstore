@@ -44,16 +44,16 @@
                 <div class= "row card-body">
                     <!--idがnilだったらかどうかを判定 nextが次のeachにいく-->
                     <% next if address.id.nil? %>
-                    <div class="col-2">
+                    <div class="col-md-2 col-sm-12">
                         〒<%= address.postal_code %>
                     </div>
-                    <div class="col-4">
+                    <div class="col-4 col-sm-12">
                         <%= address.address %>
                     </div>
-                    <div class="col-3">
+                    <div class="col-3 col-sm-12">
                         <%= address.name %>
                     </div>
-                    <div class="col-2">
+                    <div class="col-2 col-sm-12">
                         <%= link_to "編集", edit_address_path(id: address.id), class: "btn btn-sm btn-success mt-4" %>
                         <%= link_to "削除", address_path(id: address.id), method: :delete,
                         class: "btn btn-sm btn-danger mt-4", data: {confirm: "本当に削除しますか？"} %>

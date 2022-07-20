@@ -6,7 +6,7 @@
         <div class= "card w-40 mx-auto mt-1 shadow-lg">
           <div class= "card-body">
             <div class = "row">
-              <div class "col-5 mx-4">
+              <div class "col-md-5 col-sm-12 mx-4">
                 <% order.order_details.each do |order_detail| %>
                   <P><%= image_tag order_detail.sale.get_sale_iamge("100x100") %></P>
                   <P>¥<%= order_detail.price %>円</P>
@@ -14,7 +14,7 @@
                   <P><%= order_detail.sale.status_i18n %></P>
                 <% end %>
               </div>
-              <div class "col-5 px-4">
+              <div class "col-md-5 col-sm-12 px-4">
                 <h6>請求金額</h6>
                 <p><%= order.total_payment %></p>
                 <h6>支払い方法</h6>

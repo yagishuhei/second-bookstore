@@ -1,12 +1,12 @@
 <div class="container">
-<h2 class= "col-6 py-5 mx-auto">注文情報確認</h2>
+<h2 class= "col-md-6 col-sm-12 py-5 mx-auto">注文情報確認</h2>
   <div class="row w-80 mx-auto my-2 bg-light shadow-lg">
       <h5 class="title col-12">カート内商品一覧</h5>
-    <div class="col-6">
+    <div class="col-md-6 col-sm-12">
       <p class="col-12">支払い方法</p>
       <%= @order.payment_method_i18n %>
     </div>
-    <div class="col-6">
+    <div class="col-md-6 col-sm-12">
       <p class="col-12">配送先</p>
       <p class="h6">郵便番号</p>
       <p>〒<%= @order.postal_code %></p>
@@ -18,15 +18,15 @@
   </div>
 
   <h5 class="title col-12">注文情報</h5>
-  <div class="row row-cols-sm-1 g-1 row-cols-4 row-cols-md-4 g-4">
+  <div class="row row-cols-sm-1 g-1 row-cols-md-4 g-4">
     <% total = 0 %>
     <% @cart_items.each do |cart_item| %>
         <div class="card h-100" style="width: 18rem;">
           <div class="row">
-            <div class="card_image col-md-4 px-2 py-2">
+            <div class="card_image col-md-4 col-sm-12 px-2 py-2">
               <%= image_tag cart_item.sale.get_sale_iamge("100x100") %></p>
             </div>
-            <div class="card-body col-md-7">
+            <div class="card-body col-md-7 col-sm-12">
               <h6 class="card-title py-0"><%= cart_item.sale.title %></h6>
               <p class="card-text">¥<%= cart_item.sale.price %>円</p>
               <% @cart_item_price = total += cart_item.sale.price %>

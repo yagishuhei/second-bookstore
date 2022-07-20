@@ -9,14 +9,14 @@
         <% @books.each do |book| %>
           <div class="py-1" style="max-width: 440px;">
             <div class="row g-0">
-              <div class="col-md-4 bg-light">
+              <div class="col-md-4 col-sm-12 bg-light">
                 <%= link_to (image_tag(book.medium_image_url)), book.item_url %>
                 <p class="pl-4 py-0">
                   <!--本の情報をデータに入れるためラジオボタンを活用-->
                   <%= f.radio_button :book_id, book.id, checked: true %>
                 </p>
               </div>
-              <div class="col-md-8  bg-light">
+              <div class="col-md-8 col-sm-12 bg-light">
                 <div class="card-body px-0">
                   <h6 class="card-title"><%= book.title %></h6>
                   <p class="card-text"><%= book.category.name %></p>
@@ -75,10 +75,10 @@
             <% next if sale.id.nil? %>
             <div class="card mb-3 px-2 mx-2" style="max-width: 540px;">
               <div class="row g-0">
-                <div class="col-md-4 my-2">
+                <div class="col-md-4 col-sm-12 my-2">
                   <%= image_tag sale.get_sale_iamge("100x100") %>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-8 col-sm-12">
                   <div class="card-body">
                     <h6 class="card-title"><%= sale.title %></h6>
                     <p class="card-text"><%= sale.price %>円</p>
