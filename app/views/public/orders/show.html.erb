@@ -8,7 +8,7 @@
         <div class = "row">
           <div class = "col-md-5 col-sm-12 mx-4">
             <% @order.order_details.each do |order_detail| %>
-            <P class="row row-cols-md-1 row-cols-md-3">
+            <P class="row row-cols-sm-1 row-cols-md-3">
             <%= image_tag order_detail.sale.get_sale_iamge("200x200") %></P>
               <P>¥<%= order_detail.price %>円</P>
               <P><%= order_detail.sale.title %></P>
