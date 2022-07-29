@@ -1,1 +1,5 @@
-<%= render 'end_users_detail', end_users: @end_users %>
+<% if @end_users.present? %>
+  <%= render 'end_users_detail', end_users: @end_users %>
+<% else %>
+  <p class="h4 text-center py-4">フォロワーはおりません</p>
+<% end %>

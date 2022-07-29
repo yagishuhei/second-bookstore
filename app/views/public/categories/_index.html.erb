@@ -1,7 +1,14 @@
-
-<% categories.each do |category| %>
-<p><%= link_to category_path(category) do %>
-  <%= button_tag category.name, class: "btn btn-lg btn-warning" %>
+<h4 class="text-center">
+  <i class="fas fa-tags"></i>
+  カテゴリー
+</h3>
+<div class="row align-items-start">
+  <% categories.each do |category| %>
+    <div class="col-12 py-2 text-center">
+      <%= link_to category_path(category) do %>
+        <%= button_tag category.name, class: "btn btn-sm btn-info mx-2" %>
+      <% end %>
+    </div>
   <% end %>
-</p>
-<% end %>
+  <%= paginate categories %>
+</div>

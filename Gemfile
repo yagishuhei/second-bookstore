@@ -8,7 +8,7 @@ gem 'rails', '~> 6.1.6'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
-gem 'puma', '~> 5.0'
+gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
@@ -66,5 +66,14 @@ gem 'rakuten_web_service'
 gem "enum_help"
 # 日本語化
 gem 'rails-i18n', '~> 6.0'
+# ページネーション
+gem 'kaminari','~> 1.2.1'
 gem 'devise-i18n'
+
+gem 'dotenv-rails'
+group :production do
+  gem 'mysql2'
+end
+
+gem 'dotenv-rails'
 

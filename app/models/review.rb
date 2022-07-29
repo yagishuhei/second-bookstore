@@ -3,6 +3,7 @@ class Review < ApplicationRecord
   belongs_to :book
   has_many :review_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :favorited_end_users, through: :favorites, source: :end_user
 
   enum review_status: {published: 0, draft: 1}
 

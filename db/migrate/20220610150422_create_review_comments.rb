@@ -1,11 +1,14 @@
 class CreateReviewComments < ActiveRecord::Migration[6.1]
+
   def change
     create_table :review_comments do |t|
-      t.references :end_user, null: false, foreign_key: true
-      t.references :review, null: false, foreign_key: true
+
+      t.integer :end_user_id
+      t.integer :review_id
       t.text :comment
 
       t.timestamps
     end
   end
 end
+

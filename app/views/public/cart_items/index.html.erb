@@ -1,19 +1,43 @@
-<h1>カート内商品一覧</h1>
-<%= link_to destroy_all_cart_items_path, method: :delete do  %><p>カート内を空にする</p><% end %>
-<div>
-   <% total = 0 %>
-<% @cart_items.each do |cart_item| %>
-    <%= image_tag cart_item.sale.get_sale_iamge("200x200") %>
-    <%= cart_item.sale.book.title %>
-    ¥<%= cart_item.sale.price %>円
-    <%= link_to "カート内から削除", cart_item_path(cart_item), method: :delete %>
- <% @cart_item_price = total += cart_item.sale.price %>
-<% end %>
+<div class="container">
+  <h2 class="col-12 py-4 text-center">カート内商品</h2>
+  <% if @cart_items.ids.present? %>
+    <p class="d-flex justify-content-end">
+      <%= link_to "カート内を空にする", destroy_all_cart_items_path(id: @cart_items.ids), method: :delete, class: "btn btn-lg btn-danger" %>
+    </p>
+  <% end %>
+    <% total = 0 %>
+    <% @cart_items.each do |cart_item| %>
+    <div class="row bg-light g-0">
+      <div class="col-md-4 col-sm-12">
+        <%= image_tag cart_item.sale.get_sale_iamge("150x150") %>
+      </div>
+      <div class="col-md-4 col-sm-12">
+        <div class="card-body">
+          <h6 class="card-title"></h6>
+          <p class="card-text"><%= cart_item.sale.title %></p>
+          <p class="card-text">¥<%= cart_item.sale.price %>円</p>
+          <% @cart_item_price = total += cart_item.sale.price %>
+        </div>
+        <div class="row">
+          <p class="card-text px-2"><%= link_to "詳細", sale_path(cart_item.sale), class: "btn btn-sm btn-info" %></p>
+          <p class="card-text px-2"><%= link_to "削除", cart_item_path(cart_item), method: :delete, class: "btn btn-sm btn-danger" %></p>
+        </div>
+      </div>
+    </div>
+    <% end %>
+    <div class="col-md-4 col-sm-12 bg-light my-3">
+      <div class="card-body  px-0">
+          <div class="col">
+          <h5 class="py-2">商品合計</h5>
+          <p class="h4 py-2"><strong>¥<%= @cart_item_price %>円</strong></p>
+        </div>
+       </div>
+    </div>
+  <div class="row  my-5 g-0">
+    <p class="px-2"><%= link_to "出品されている本を探す", sales_path, class: "btn btn-sm btn-info" %></p>
+    <!--カート内商品の情報を渡す-->
+    <% if @cart_items.ids.present? %>
+      <p class="px-2"><%= link_to "情報入力に進む", new_order_path(@cart_items), class: "btn btn-sm btn-success" %></p>
+    <% end %>
+  </div>
 </div>
-
-  <h4>商品合計</h4>
-  ¥<%= @cart_item_price %>円
-
-  <p><%= link_to "出品されている本を探す", sales_path %></p>
-  <!--カート内商品の情報を渡す-->
-  <p><%= link_to "情報入力に進む", new_order_path(@cart_items) %></p>

@@ -1,31 +1,92 @@
-
- <h1>出品したユーザー</h1>
-<%= link_to end_user_path(@sale) do  %>
-  <%= image_tag @sale.end_user.get_profile_image("100x100") %>
-  <%= @sale.end_user.nickname %>
+<div class="container">
+  <h2 class= "col-md-6 col-sm-12 py-2 mx-auto">詳細</h2>
+  <h4>イメージ</h4>
+  <div class= "row w-80 mx-auto my-2 bg-light shadow-lg">
+    <div class ="col-md-4 col-sm-12 py-2">
+      <%= link_to (image_tag(@sale.book['large_image_url'])), @sale.book['item_url'] %>
+    </div>
+    <div class ="col-md-6 col-sm-12">
+      <p><%= @sale.book.title %></p>
+      <p><%= @sale.book.author %></p>
+      <p><%= @sale.book.publisher_name %></p>
+    </div>
+  </div>
+  <div class= "row w-80 mx-auto my-2 bg-light shadow-lg">
+    <div class="col-md-2 col-sm-12 py-2 px-2">
+      <%= link_to end_user_path(@sale) do  %>
+        <%= image_tag @sale.end_user.get_profile_image("100x100") %>
+        <p><%= @sale.end_user.nickname %></p>
+      <% end %>
+    </div>
+    <div class="col-md-2 col-sm-12 py-2 px-2">
+      <p><%= image_tag @sale.get_sale_iamge("100x100") %></p>
+    </div>
+    <div class="tag-box">
+      <h6>関連付けできそうなワード</h6>
+      <% @sale.tags.each do |tag| %>
+        <span class="tag py-2"><%=button_tag tag.name %></span>
+      <% end %>
+    </div>
+    <div class="col-md-5 col-sm-12">
+      <p>￥<%= @sale.price %>円</p>
+      <p><%= @sale.title %></p>
+      <p><%= @sale.introduction %></p>
+      <p><%= @sale.status_i18n %></p>
+      <% if @sale.order_details.present? %>
+        <p>
+          <%= form_with model: @sale, url: sale_path(@sale), method: :patch do |f| %>
+            <%= f.select :status, {'発送中': 'shipping', '出品中': 'on_sale'} %>
+            <%= f.submit "変更" %>
+          <% end %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+  <% if @sale.order_details.present? %>
+    <h4>注文者情報</h4>
+    <table class= "table col-12 bg-light has_border">
+      <thead class = "py-5">
+        <th scope= "col-2">宛名</th>
+        <th scope= "col-2">郵便番号</th>
+        <th scope= "col-4">住所</th>
+        <th scope= "col-2">支払い方法</th>
+        <th scope= "col-2">注文者ステータス</th>
+      </thead>
+      <tbody>
+        <% @sale.order_details.each do |order_detail| %>
+          <tr>
+            <td class="h6 py-1 border-bottom border-dark"><%= order_detail.order.shipping_name %></td>
+            <td class="h6 py-1 border-bottom border-dark"><%= order_detail.order.postal_code %></td>
+            <td class="h6 py-1 border-bottom border-dark"><%= order_detail.order.shipping_address %></td>
+            <td class="h6 py-1 border-bottom border-dark"><%= order_detail.order.payment_method_i18n %></td>
+            <td class="h6 py-1 border-bottom border-dark"><%= order_detail.order.status_i18n %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   <% end %>
-
- <h1>出品本の詳細</h1>
- <h4>出品本イメージ</h4>
-  <%= link_to (image_tag(@sale.book['large_image_url'])), @sale.book['item_url'] %>
-   <%= @sale.book.title %>
-   <h4>ユーザーの本</h4>
-   <p>
-  <%= image_tag @sale.get_sale_iamge("100x200") %>
-  </p>
-  ￥<%= @sale.price %>円
-  <%= @sale.introduction %>
-  <% @sale.is_active ? "販売中" : "販売不可" %>
-
-  <% if @sale.is_active == true %>
   <% if end_user_signed_in? %>
-   <%= form_with model: [@sale, @cart_item], url: cart_items_path, method: :post do |f| %>
-    <%= f.hidden_field :sale_id, :value => @sale.id %>
-    <%= f.submit"カートに入れる" %>
+    <% if  @sale.end_user != current_end_user %>
+      <%= form_with model: [@sale, @cart_item], url: cart_items_path, method: :post do |f| %>
+        <%= f.hidden_field :sale_id, :value => @sale.id %>
+        <%= f.submit"カートに入れる", class: "btn btn-lg btn-success" %>
+      <% end %>
     <% end %>
   <% end %>
+  <% if  @sale.end_user == current_end_user %>
+    <% if @sale.status == "on_sale" %>
+    <div class="row">
+      <div class="col-md-2 col-sm-12 py-2">
+        <%= link_to "編集", edit_sale_path(@sale), class: "btn btn-sm btn-success" %>
+      </div>
+    <% end %>
+      <div class="col-md-2 col-sm-12 py-2">
+        <%= link_to "削除", sale_path(@sale), method: :delete,
+        data: {confirm: "本当に削除しますか？"}, class: "btn btn-sm btn-danger" %>
+      </div>
+      <div class="col-md-6 col-sm-12 py-2">
+        <%= link_to "出品一覧", new_sale_path, class: "btn btn-lg btn-info" %>
+      </div>
+    </div>
   <% end %>
-  <% if @end_user == current_end_user %>
-  <%= link_to "出品内容を変更する", edit_sale_path(@sale) %>
- <% end %>
-
+</div>

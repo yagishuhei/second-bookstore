@@ -32,8 +32,24 @@
 - 他の人がどんな本を持っているのか、お気に入り要録している本を閲覧できるサイト。
 - 自分の所持している本に関して、アウトプットをしたい人や、考察してそこから読み取ったことを発信していきたい時。
 - 加えて中古の本を誰かに譲りたい、または、本好きな人の持っている本を読んでみたい、自分とは違うジャンルでも読んでみたいと思う時。
+-
+## 実装機能
+- devise機能
+-　CRUD機能
+-　レビュー機能
+-　検索機能(レビュー検索)
+-　絞り込み表示機能
+-　フォローフォロワー機能
+-　コメント機能
+-　いいね機能
+-　投稿の公開・非公開(下書き)設定機能
+-　出品機能
+-　注文確認・ステータス管理機能
+-　カート機能
 
 ## 設計書
+- ER図,https://app.diagrams.net/#G1dFWJnrBTso4oa3zHxBPifUKARvfCgwMz
+- テーブル定義書,https://docs.google.com/spreadsheets/d/1wRK5KAnwb5XrvkDwzooUQmQ0Vl4aLdiR/edit?usp=sharing&ouid=103154563173461348502&rtpof=true&sd=true
 
 
 ## 開発環境
@@ -45,3 +61,5 @@
 
 ## 使用素材
 - 楽天API https://webservice.rakuten.co.jp/
+- フリービーAC,https://www.freebie-ac.jp/
+- ロゴメーカー,https://hatchful.shopify.com/ja/

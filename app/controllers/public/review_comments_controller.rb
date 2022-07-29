@@ -5,7 +5,6 @@ class Public::ReviewCommentsController < ApplicationController
     @review_comment = current_end_user.review_comments.new(review_comment_params)
     @review_comment.review_id = @review.id
     @review_comment.save
-
   end
 
   def destroy

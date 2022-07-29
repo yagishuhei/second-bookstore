@@ -1,23 +1,40 @@
-<h1>注文情報詳細</h1>
-
-<p>注文情報</p>
-
-<%= @order.payment_method_i18n %>
-<%= @order.postal_code %>
-<%= @order.address %>
-<%= @order.name %>
-
-<h1>カート内商品一覧</h1>
-<%= link_to destroy_all_cart_items_path, method: :delete do  %><p>カート内を空にする</p><% end %>
-<div>
-   <% total = 0 %>
-<% @cart_items.each do |cart_item| %>
-    <%= image_tag cart_item.sale.get_sale_iamge("100x100") %>
-    <%= cart_item.sale.book.title %>
-    ¥<%= cart_item.sale.price %>円
-   <% @cart_item_price = total += cart_item.sale.price %>
-<% end %>
-</div>
-
-  <h4>商品合計</h4>
-  ¥<%= @cart_item_price %>円
+<div class= "container px-5 px-sm-0">
+  <div class= "row">
+    <div class="col-12">
+      <h2 class="text-center py-4">注文情報詳細</h2>
+    </div>
+    <div class= "card col-md-10 col-sm-12 w-60 mx-auto mt-1 shadow-lg">
+      <div class= "card-body h-100">
+        <div class = "row">
+          <div class = "col-md-5 col-sm-12 mx-4">
+            <% @order.order_details.each do |order_detail| %>
+            <P class="row row-cols-sm-1 row-cols-md-3">
+            <%= image_tag order_detail.sale.get_sale_iamge("200x200") %></P>
+              <P>¥<%= order_detail.price %>円</P>
+              <P><%= order_detail.sale.title %></P>
+              <P><%= order_detail.sale.status_i18n %></P>
+            <% end %>
+          </div>
+          <div class ="col-md-5 col-sm-12 px-4">
+            <h6>郵便番号</h6>
+            <p><%= @order.postal_code %></p>
+            <h6>配送先住所</h6>
+            <p><%= @order.shipping_address %></p>
+            <h6>宛名</h6>
+            <p><%= @order.shipping_name %></p>
+            <h6>請求金額</h6>
+            <p>¥<%= @order.total_payment %>円</p>
+            <h6>支払い方法</h6>
+            <p><%= @order.payment_method_i18n %></p>
+            <h6>ステータス</h6>
+            <p><%= @order.status_i18n %></p>
+            <%= form_with model: @order, url: order_path(@order), method: :patch do |f| %>
+              <%= f.select :status,{'未完了': 'incomplete', '完了': 'complete' }%>
+              <%= f.submit "変更" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

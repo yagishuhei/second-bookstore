@@ -1,0 +1,34 @@
+<div class = "container py-1 px-0 mx-0 col-12">
+  <h4 class="text-dark p-4 md-0">
+    <i class="fas fa-crown"></i>
+    イイねランキング
+  </h4>
+    <% favorite_ranking.each_with_index do |review| %>
+      <div class= "px-0 mx-0 mt-1 border-bottom border-5 ">
+        <div class= "row py-0">
+          <div class="col-3 px-0 pt-4">
+            <%= image_tag review.end_user.get_profile_image("50x50"), class: "rounded-circle" %>
+          </div>
+          <div class="col-9 py-0">
+            <h6 class="text-center"><%= review.book.title %></h6>
+            <p class="h6">
+              <%= link_to review_path(review,) do %>
+                <%= review.heading %>
+              <% end %>
+            </P>
+            <div class="row py-0">
+              <p class="col-6 text-danger">
+                <small><i class="fas fa-heart"></i><%= review.favorites.count %>イイね</small>
+              </p>
+              <p class="col-6">
+                <small>
+                  <%= link_to "#{review.review_comments.count}コメント", review_path(review) %>
+                </small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <%= paginate favorite_ranking %>
+</div>

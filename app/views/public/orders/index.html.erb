@@ -1,2 +1,37 @@
-<h1>Public::Orders#index</h1>
-<p>Find me in app/views/public/orders/index.html.erb</p>
+<div class= "container px-5 px-sm-0">
+  <div class= "row">
+    <h2 class= "col-12 w-40 mx-auto mt-1 text-center py-4">注文履歴一覧</h2>
+      <% if @orders.ids.present? %>
+        <% @orders.each do |order| %>
+        <div class= "card w-40 mx-auto mt-1 shadow-lg">
+          <div class= "card-body">
+            <div class = "row">
+              <div class "col-md-5 col-sm-12 mx-4">
+                <% order.order_details.each do |order_detail| %>
+                  <P><%= image_tag order_detail.sale.get_sale_iamge("100x100") %></P>
+                  <P>¥<%= order_detail.price %>円</P>
+                  <P><%= order_detail.sale.title %></P>
+                  <P><%= order_detail.sale.status_i18n %></P>
+                <% end %>
+              </div>
+              <div class "col-md-5 col-sm-12 px-4">
+                <h6>請求金額</h6>
+                <p><%= order.total_payment %></p>
+                <h6>支払い方法</h6>
+                <p><%= order.payment_method_i18n %></p>
+                <h6>ステータス</h6>
+                <p><%= order.status_i18n %></p>
+                <%= link_to"詳細確認", order_path(order), class: "btn btn-sm btn-success" %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% end %>
+        <% else %>
+        <div class="col-12">
+          <p class="text-center py-2">購入された本はございません</p>
+        </div>
+      <% end %>
+    <%= paginate @orders %>
+  </div>
+</div>

@@ -1,45 +1,72 @@
 <% if end_user_signed_in? %>
-  <div class= "container px-5 px-sm-0">
-  <div class="row">
-    <div class= "col-md-8 offset-md-1">
-       <h2>レビューする本を探す。</h2>
-       <div class="col-md-8 offset-md-1 py-3">
-    <%= render 'public/books/rakuten_search' %>
-    </div>
-      <h2 class="text-dark p-4 md-0">レビュー一覧</h2>
-      <div class = "card-list-container py-1 col-12">
-        <%= render "public/reviews/index", reviews: @reviews %>
+  <div class="row px-0 ">
+    <div class= "col-md-7 col-sm-12 py-4 offset-md-1">
+      <div class="col-md-8 col-sm-12 offset-md-1 py-3 text-center">
+        <%= render 'public/books/rakuten_search' %>
+      </div>
+      <h3 class="text-dark p-4 md-0 text-center">最新レビュー</h3>
+      <div class ="card-list-container py-1 col-12">
+        <% if @reviews.present? %>
+          <% @reviews.each_with_index do |review,index| %>
+            <div class= "card w-90 mx-auto mt-1 shadow-lg">
+              <div class= "row card-body">
+                <div class="col-md-2 col-sm-12 px-0 py-0">
+                  <%= link_to (image_tag(review.book.medium_image_url)), review.book.item_url %>
+                </div>
+                <div class="col-md-2 col-sm-12 px-0 py-0 mx-0">
+                  <div><%= image_tag review.end_user.get_profile_image("100x100") %></div>
+                  <p><%= review.end_user.nickname %></p>
+                </div>
+                <div class="col-md-8 col-sm-12 px-0 py-0 mx-0">
+                  <h6><strong><%= review.book.title %></strong></h6>
+                  <P class="h6 px-0 py-0 mx-0">
+                    <%= link_to review_path(review, index: index) do %>
+                    <%= review.heading %>
+                    <% end %>
+                  </P>
+                  <div class="row px-0 py-0 mx-0">
+                    <div class="col-md-4 col-sm-12 mx-0 px-0" id="score_<%= index %>">
+                      <%= render 'public/reviews/score', review: review, index: index %>
+                    </div>
+                    <div class="col-md-1 col-sm-12 mx-0 px-0"><%= review.score %></div>
+                  </div>
+                  <p class="my-0"><%= link_to "#{review.review_comments.count}コメント", review_path(review) %></p>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          <%= paginate @reviews %>
+        <% else %>
+          <p class="text-center">ご登録のレビューはございません</p>
+        <% end %>
       </div>
     </div>
-    <div class= "col-md-3">
-      <%= render 'public/books/rakuten_search' %>
-
-    <div class= "mt-3">
-      <h3>カテゴリー</h3>
-      <%= render 'public/categories/index', categories: @categories %>
-    </div>
-    <div>
-      <%= render 'public/searchs/search' %>
+    <div class= "col-md-4 col-sm-12 py-4 mt-0 h-100 bg-light">
+      <div class="py-3">
+        <%= render 'public/searchs/search' %>
+      </div>
+      <div class= "mt-4">
+        <%= render 'public/categories/index', categories: @categories %>
+      </div>
+      <div class="py-3 text-center">
+        <%= render 'public/favorites/index', favorite_ranking: @favorite_ranking %>
+      </div>
     </div>
   </div>
-  </div>
-</div>
-
-
-
 <% else %>
-<h1>ようこそsecond-bookstoreへ</h1>
-<h2>ここでは本好きが集まれるサイトとなっております</h2>
-<h4>利用の仕方</h4>
-<h6>
-  自分のおすすめ本を紹介できる、またお気に入りになる本を調べられる。</br>
-　本に関してのおすすめポイントをまとめることができ、自分の趣味嗜好について考えられる。</br>
-　インターネット上にMy.本棚として管理できるようにする。</br>
-　他の人がどんな本を持っているのか、お気に入り要録している本を閲覧できる。</br>
-　自分の所持している本に関して、アウトプットをしたい人や、考察してそこから読み取ったことを発信していきたい時。</br>
-　加えて中古の本を誰かに譲りたい、または、本好きな人の持っている本を読んでみたい、自分とは違うジャンルでも読んでみたいと思う時。</br>
-</h6>
-
+  <div class="container">
+    <div class="row">
+      <div class="col text-center py-4">
+        <h1 class="text-center"><strong>ようこそ2nd-BookStoreへ</strong></h1>
+        <h2 class="text-center">ここは本好きが集まれるサイトです</h2>
+        <p class="text-center">
+          自分のおすすめ本を紹介でき</br>
+          本のポイントをまとめられます</br>
+          是非本探しにご活用ください</br>
+        </p>
+      </div>
+    </div>
+  </div>
 <% end %>
 
 

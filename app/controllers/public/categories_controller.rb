@@ -1,11 +1,13 @@
 class Public::CategoriesController < ApplicationController
   def index
     @category = Category.new
-    @categories = Category.all
+    @categories = Category.page(params[:page])
   end
 
   def show
     @category = Category.find(params[:id])
+    @books = @category.books
+    @books = @books.page(params[:page])
   end
 
   private

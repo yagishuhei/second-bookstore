@@ -1,6 +1,7 @@
 class Public::BooksController < ApplicationController
    #ログインしているか確認、ログイン状態ではない場合ログインページに移動
   before_action :authenticate_end_user!
+  before_action :ensure_correct_end_user, only: [:destroy]
 
 
   def rakuten_result
@@ -10,7 +11,8 @@ class Public::BooksController < ApplicationController
       #@books = RakutenWebService::Books::Book.search(title: params[:keyword])
       # 引数に , page: ページ数を入れると次の30件が取得できる
       # orFlag: 1で複数検索可能
-      @books = RakutenWebService::Books::Total.search(keyword: params[:keyword], orFlag: 1)
+      @books = RakutenWebService::Books::Total.search(keyword: params[:keyword], orFlag: 1, hits: 12)
+
       #検証用
       #binding.pry
       @book = Book.new
@@ -19,21 +21,34 @@ class Public::BooksController < ApplicationController
 
   def create
     @book = Book.new(book_params)
+    #isbn(書籍のコード)を取り出す
+    @book_isbn = @book.isbn
     #カラの中にまずend_user_idがログインした会員idを入れる
     @book.end_user_id = current_end_user.id
-    @book.save
-    redirect_to book_path( @book)
+    #既にisbnがあったら保存できないようにする
+    if @book_isbn != current_end_user.books.find_by(isbn: @book.isbn)&.isbn
+      @book.save
+      redirect_to book_path( @book), notice: "本の登録が完了しました。"
+    else
+      redirect_to books_path(end_user_id: current_end_user.id), alert: "選択された本はすでにご登録されているか、登録出来ない商品となっております。"
+    end
   end
 
   def index
     @end_user = EndUser.find(params[:end_user_id])
     @books = @end_user.books
+    @books = @books.page(params[:page])
+    @categories = Category.page(params[:page])
+    @favorite_ranking = Review.published.includes(:favorited_end_users).sort {
+      |a,b| b.favorited_end_users.size <=> a.favorited_end_users.size
+    }
+    @favorite_ranking = Kaminari.paginate_array(@favorite_ranking).page(params[:page]).per(4)
   end
 
   def destroy
     book = current_end_user.books.find(params[:id])
     book.destroy
-    redirect_to books_path
+    redirect_to books_path(end_user_id: book.end_user.id), notice: "登録本の削除が完了しました。"
   end
 
 
@@ -45,7 +60,25 @@ class Public::BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:isbn, :title, :author, :publisher_name, :category_id, :item_price, :item_url, :large_image_url, :medium_image_url)
+    params.require(:book).permit(
+      :isbn,
+      :title,
+      :author,
+      :publisher_name,
+      :category_id,
+      :item_caption,
+      :item_url,
+      :large_image_url,
+      :medium_image_url
+      )
+  end
 
+
+  def ensure_correct_end_user
+    @book = Book.find(params[:id])
+    @end_user = @book.end_user
+    unless @end_user == current_end_user
+      redirect_to root_path, alert: "他のユーザー情報を変更することはできません。"
+    end
   end
 end

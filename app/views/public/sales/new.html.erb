@@ -1,61 +1,103 @@
-
-<h1>本の出品をする</h1>
-<% if current_end_user.books.ids.present? %>
-  <%= form_with model: @sale, url: sales_path(book_id: @book), method: :post do |f| %>
-
-<div class="row row-cols-1 mx-auto row-cols-md-5 g-5">
-    <% @books.each do |book| %>
-      <div class="col">
-        <div class="card h-100">
-            <%= link_to (image_tag(book.medium_image_url)), book.item_url %>
-          <div class="card-body">
-            <h5 class="card-title"><%= book.title %></h5>
-            <p class="card-text"><%= book.category.name %></p>
-            <p class= "card-info">
-              <!--本の情報をデータに入れるためラジオボタンを活用-->
-              <%= f.radio_button :book_id, book.id, checked: true %>
-              <!--/本の情報をデータに入れるためラジオボタンを活用-->
-            </p>
+<div class="container">
+  <div class="row">
+    <h2 class="col-12 py-4 text-center">本の出品をする</h2>
+  </div>
+  <% if current_end_user.books.ids.present? %>
+    <%= form_with model: @sale, url: sales_path(book_id: @book), method: :post do |f| %>
+    <div class="row d-flex flex-md-row">
+      <div class="row mx-auto row-cols-md-1 g-1">
+        <% @books.each do |book| %>
+          <div class="py-1 mx-auto" style="max-width: 440px; min-width: 350px;">
+            <div class="row g-0">
+              <div class="col-md-4 col-sm-12 bg-light">
+                <%= link_to (image_tag(book.medium_image_url)), book.item_url %>
+                <p class="pl-4 py-0">
+                  <!--本の情報をデータに入れるためラジオボタンを活用-->
+                  <%= f.radio_button :book_id, book.id, checked: true %>
+                </p>
+              </div>
+              <div class="col-md-8 col-sm-12 bg-light">
+                <div class="card-body px-0">
+                  <h6 class="card-title"><%= book.title %></h6>
+                  <p class="card-text"><%= book.category.name %></p>
+                </div>
+              </div>
+            </div>
           </div>
-
+        <% end %>
+        <%= paginate @books %>
+      </div>
+      <div class= "card mx-auto mt-1 shadow-lg" style="max-width: 420px;">
+        <div class="form-body p-4">
+          <div class= "input-group md-3 mt-4">
+            <p>
+              <!--エラーメッセージ-->
+              <% if @sale.errors.any? %>
+              <%= @sale.errors.count %>件のエラーが発生しました
+              <ul>
+                <% @sale.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+              <% end %>
+            </p>
+            <div class="col-12">
+              <%= f.label :sale_image, "本の詳細画像" %>
+              <%= f.file_field :sale_image, placeholder: "出品する本の画像", accept: "image/*" %>
+            </div>
+            <div class="col-12">
+              <%= f.label :title,"商品名" %>
+              <%= f.text_field :title, required: true, class: "form-control" %>
+            </div>
+            <div class="col-12">
+              <%= f.label :introduction,"商品説明" %>
+              <%= f.text_area :introduction, required: true, class: "form-control", size: "5x5" %>
+            </div>
+            <div class="col-12">
+              <%= f.label :price,"出品価格" %>
+              <%= f.text_field :price, required: true, class: "form-control" %>
+            </div>
+            <%= f.hidden_field :status, {:value => "on_sale"} %>
+            <%= f.submit"出品する", class: "btn btn-lg btn-block btn-info mt-4" %>
+          </div>
         </div>
       </div>
-    <% end %>
- </div>
-
-<div class = "card-list-container py-1 col-12">
-
- <div class= "card w-50 mx-auto mt-1 shadow-lg">
-
-    <div class="form-body p-4">
-      <div class= "input-group md-3 mt-4">
-
-         <div class="col-12">
-        <%= f.label :sale_image, "本の詳細画像" %>
-        <%= f.file_field :sale_image, placeholder: "出品する本の画像", accept: "image/*" %>
-        </div>
-         <div class="col-12">
-        <%= f.label :introduction,"商品説明" %>
-        <%= f.text_area :introduction, required: true, class: "form-control" %>
-        </div>
-         <div class="col-12">
-        <%= f.label :price,"出品価格" %>
-        <%= f.text_field :price, required: true, class: "form-control" %>
-        </div>
-         <div class="col-12">
-        <%= f.label :is_active,"出品の状態" %>
-        <%= f.select :is_active, [['出品中', true], ['出品不可', false]], prompt: "--選択してください--" %>
-        </div>
-        <%= f.submit"出品する", class: "btn btn-lg btn-block btn-info mt-4" %>
-      </div>
-       </div>
     </div>
-    <% end %>
+   <% end %>
+    <div class = "card-list-container col-12">
+      <div class="raw py-2">
+        <div class= "col-12">
+          <h2 class="col-12 py-4 text-center">ユーザーの出品本一覧</h2>
+        </div>
+        <div class="row mt-1 mx-auto row-cols-md-4 g-0">
+          <% @sales.each do |sale| %>
+            <!--idがnilだったらかどうかを判定 nextが次のeachにいく-->
+            <% next if sale.id.nil? %>
+            <div class="card mb-3 px-2 mx-2" style="max-width: 540px;">
+              <div class="row g-0">
+                <div class="col-md-4 col-sm-12 my-2">
+                  <%= image_tag sale.get_sale_iamge("100x100") %>
+                </div>
+                <div class="col-md-8 col-sm-12">
+                  <div class="card-body">
+                    <h6 class="card-title"><%= sale.title %></h6>
+                    <p class="card-text"><%= sale.price %>円</p>
+                    <p class="card-text"><%= sale.status_i18n %></p>
+                    <p class= "card-info"><%= link_to "詳細",sale_path(sale), class: "btn btn-sm btn-info" %></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% if @end_user == current_end_user %>
+              <%= link_to "削除", sale_path(sale), method: :delete %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <div class="row">
+      <p class ="col-12 mx-2 text-center">ご登録の本はございません。</p>
+    </div>
+  <% end %>
 </div>
-
-
-<h1>出品した本一覧</h1>
-  <%= render 'public/sales/index', sales: @sales %>
-<% else %>
-    <p>ご登録された本はございません。</p>
-<% end %>
