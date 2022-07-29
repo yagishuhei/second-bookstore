@@ -35,15 +35,15 @@
             <%= f.label :address, "新規配送先" %>
             <div class="col-12">
               <%= f.label :postal_code, "郵便番号" %>
-              <p><%= f.text_field :postal_code %></p>
+              <p><%= f.text_field :postal_code, required: true %></p>
             </div>
             <div class="col-12">
               <%= f.label :shipping_address, "住所" %>
-              <p><%= f.text_field :shipping_address %></p>
+              <p><%= f.text_field :shipping_address, required: true %></p>
             </div>
             <div class="col-12">
               <%= f.label :shipping_name, "宛名" %>
-              <p><%= f.text_field :shipping_name %></p>
+              <p><%= f.text_field :shipping_name, required: true %></p>
             </div>
             <%= f.submit "登録", class: "btn btn-lg btn-success" %>
           </div>
