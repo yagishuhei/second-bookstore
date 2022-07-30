@@ -1,6 +1,6 @@
 <div class="container">
 
-  <h2 class= "col-md-6 col-sm-12 py-5 mx-auto text-center">詳細</h2>
+  <h2 class= "col-md-6 col-sm-12 py-5 mx-auto">詳細</h2>
 
     <div class= "row w-80 mx-auto my-2 bg-light shadow-lg">
       <div class="col-md-2 col-sm-12 px-0">
@@ -39,13 +39,13 @@
         <p>レビュー投稿日<%= @review.created_at.strftime('%Y/%m/%d') %></p>
         <p>レビュー更新日<%= @review.updated_at.strftime('%Y/%m/%d') %></p>
       </div>
-      <div class="col-md-3 col-sm-12 pt-4 text-center" id="favorite-btn">
+      <div class="col-md-3 col-sm-12 pt-4" id="favorite-btn">
         <%= render 'public/favorites/favorite-btn', review: @review %>
       </div>
         <p class="col-md-5 col-sm-12 pt-4 sentiment-rate">レビューの感情分析レート[<%= @review.rate %>]</p>
-        <h5 class="title col-12 text-center">テーマ</h5>
+        <h5 class="title col-12">テーマ</h5>
         <p class="h6 mx-auto center-block"><%= @review.heading %></p>
-        <h5 class="title col-12 text-center">批評</h5>
+        <h5 class="title col-12">批評</h5>
         <p class="h6 mx-auto center-block"><%= @review.blog %></p>
         <% if @review.end_user == current_end_user %>
           <div class="col-12 py-1">

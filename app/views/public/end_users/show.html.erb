@@ -1,6 +1,6 @@
 <div class= "container px-5 px-sm-0">
   <div class="row">
-    <h3 class="text-dark py-4 md-0 text-center">プロフィール</h3>
+    <h3 class="text-dark py-4 md-0">プロフィール</h3>
     <%= render 'public/end_users/profile', end_user: @end_user, following_users: @following_users, follower_users: @follower_users %>
   </div>
   <div class="row">
@@ -9,11 +9,11 @@
     </div>
   </div>
   <div class = "card-list-container py-1 col-12">
-  <h3 class="text-center">レビュー</h3>
+  <h3>レビュー</h3>
     <% if @reviews.present? %>
       <%= render "public/reviews/index", reviews: @reviews %>
     <% else %>
-      <p class="text-center">ご登録のレビューはございません。</p>
+      <p>ご登録のレビューはございません。</p>
     <% end %>
   </div>
 </div>

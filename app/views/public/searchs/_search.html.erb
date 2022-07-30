@@ -1,9 +1,9 @@
 <%= form_with url: search_result_path, method: :get, local: true do |f| %>
- <h4 class="text-center">
+ <h4>
   <i class="fas fa-edit"></i>
   <%= f.label :review, "レビューを探す" %>
  </h4>
- <p class= "text-center">
+ <p>
   <%= f.text_field :search, placeholder: "見出し検索", required: true %>
   <%= button_tag '<i class="fa fa-search"></i>'.html_safe, :type => "submit", :class => "btn btn-success" %>
  </p>

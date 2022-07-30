@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <h2 class="col-12 py-4 text-center">本の出品をする</h2>
+    <h2 class="col-12 py-4">本の出品をする</h2>
   </div>
   <% if current_end_user.books.ids.present? %>
     <%= form_with model: @sale, url: sales_path(book_id: @book), method: :post do |f| %>
@@ -67,7 +67,7 @@
     <div class = "card-list-container col-12">
       <div class="raw py-2">
         <div class= "col-12">
-          <h2 class="col-12 py-4 text-center">ユーザーの出品本一覧</h2>
+          <h2 class="col-12 py-4">ユーザーの出品本一覧</h2>
         </div>
         <div class="row mt-1 mx-auto row-cols-md-4 g-0">
           <% @sales.each do |sale| %>
@@ -97,7 +97,7 @@
     </div>
   <% else %>
     <div class="row">
-      <p class ="col-12 mx-2 text-center">ご登録の本はございません。</p>
+      <p class ="col-12 mx-2">ご登録の本はございません。</p>
     </div>
   <% end %>
 </div>

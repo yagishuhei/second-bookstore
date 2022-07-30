@@ -1,10 +1,10 @@
 <% if end_user_signed_in? %>
   <div class="row px-0 ">
     <div class= "col-md-7 col-sm-12 py-4 offset-md-1">
-      <div class="col-md-8 col-sm-12 offset-md-1 py-3 text-center">
+      <div class="col-md-8 col-sm-12 offset-md-1 py-3">
         <%= render 'public/books/rakuten_search' %>
       </div>
-      <h3 class="text-dark p-4 md-0 text-center">最新レビュー</h3>
+      <h3 class="text-dark p-4 md-0">最新レビュー</h3>
       <div class ="card-list-container py-1 col-12">
         <% if @reviews.present? %>
           <% @reviews.each_with_index do |review,index| %>
@@ -37,7 +37,7 @@
           <% end %>
           <%= paginate @reviews %>
         <% else %>
-          <p class="text-center">ご登録のレビューはございません</p>
+          <p>ご登録のレビューはございません</p>
         <% end %>
       </div>
     </div>

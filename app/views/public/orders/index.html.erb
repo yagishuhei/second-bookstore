@@ -1,6 +1,6 @@
 <div class= "container px-5 px-sm-0">
   <div class= "row">
-    <h2 class= "col-12 w-40 mx-auto mt-1 text-center py-4">注文履歴一覧</h2>
+    <h2 class= "col-12 w-40 mx-auto mt-1 py-4">注文履歴一覧</h2>
       <% if @orders.ids.present? %>
         <% @orders.each do |order| %>
         <div class= "card w-40 mx-auto mt-1 shadow-lg">
@@ -29,7 +29,7 @@
         <% end %>
         <% else %>
         <div class="col-12">
-          <p class="text-center py-2">購入された本はございません</p>
+          <p class="py-2">購入された本はございません</p>
         </div>
       <% end %>
     <%= paginate @orders %>
