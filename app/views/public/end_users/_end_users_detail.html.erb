@@ -19,10 +19,10 @@
               <% if end_user.books.present? %>
                 <p class="card-text">投稿ジャンル:</p>
                 <% book_category(end_user).each do |book| %>
-                  <p class="bg-secondary text-light text-center rounded-pill"><%= book %></p>
+                  <p class="bg-secondary text-light rounded-pill"><%= book %></p>
                 <% end %>
               <% else %>
-                <P class="">ご登録の本はございません</P>
+                <p>ご登録の本はございません</p>
               <% end %>
             </div>
           </div>

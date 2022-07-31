@@ -1,4 +1,5 @@
 <% if @end_users.present? %>
+  <p class="h4 py-4"><%= @end_user.nickname %>さんをフォローしているユーザー</p>
   <%= render 'end_users_detail', end_users: @end_users %>
 <% else %>
   <p class="h4 py-4">フォロワーはおりません</p>
