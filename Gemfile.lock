@@ -89,10 +89,6 @@ GEM
       warden (~> 1.2.3)
     devise-i18n (1.10.2)
       devise (>= 4.8.0)
-    dotenv (2.7.6)
-    dotenv-rails (2.7.6)
-      dotenv (= 2.7.6)
-      railties (>= 3.2)
     enum_help (0.0.19)
       activesupport (>= 3.0.0)
     erubi (1.10.0)
@@ -136,7 +132,6 @@ GEM
     mini_portile2 (2.8.0)
     minitest (5.15.0)
     msgpack (1.5.2)
-    mysql2 (0.5.4)
     nio4r (2.5.8)
     nokogiri (1.13.6)
       mini_portile2 (~> 2.8.0)
@@ -263,13 +258,11 @@ DEPENDENCIES
   capybara (>= 3.26)
   devise
   devise-i18n
-  dotenv-rails
   enum_help
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
   kaminari (~> 1.2.1)
   listen (~> 3.3)
-  mysql2
   pry-rails
   puma (~> 3.11)
   rack-mini-profiler (~> 2.0)

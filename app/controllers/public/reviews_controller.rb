@@ -9,10 +9,7 @@ class Public::ReviewsController < ApplicationController
     @reviews = current_end_user.reviews.published
     @reviews =  @reviews.page(params[:page])
     @categories = Category.page(params[:page])
-    @favorite_ranking = Review.published.includes(:favorited_end_users).sort {
-      |a,b| b.favorited_end_users.size <=> a.favorited_end_users.size
-    }
-    @favorite_ranking = Kaminari.paginate_array(@favorite_ranking).page(params[:page]).per(4)
+    @favorite_ranking = Review.left_joins(:favorites).group(:id).order('count(favorites.review_id) desc').page(params[:page]).per(4)
   end
 
   #下書き機能
@@ -20,11 +17,7 @@ class Public::ReviewsController < ApplicationController
     @reviews = current_end_user.reviews.draft
     @reviews =  @reviews.page(params[:page])
     @categories = Category.page(params[:page])
-    @favorite_ranking = Review.published.includes(:favorited_end_users).sort {
-      |a,b| b.favorited_end_users.size <=> a.favorited_end_users.size
-
-    }
-    @favorite_ranking = Kaminari.paginate_array(@favorite_ranking).page(params[:page]).per(4)
+    @favorite_ranking = Review.left_joins(:favorites).group(:id).order('count(favorites.review_id) desc').page(params[:page]).per(4)
   end
 
   def create
