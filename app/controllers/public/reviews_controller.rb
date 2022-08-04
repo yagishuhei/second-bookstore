@@ -35,7 +35,7 @@ class Public::ReviewsController < ApplicationController
   def destroy
     review = current_end_user.reviews.find(params[:id])
     review.destroy
-    redirect_to reviews_path, notice: "登録されたレビューの削除が完了しました。"
+    redirect_to reviews_path, notice: "レビューの削除が完了しました。"
   end
 
   def show
@@ -51,7 +51,7 @@ class Public::ReviewsController < ApplicationController
   def update
     @review = current_end_user.reviews.find(params[:id])
     @review.update!(review_params)
-    redirect_to review_path(@review.id), notice: "登録されたレビューの編集が完了しました。"
+    redirect_to review_path(@review.id), notice: "レビューの編集が完了しました。"
   end
 
   private
