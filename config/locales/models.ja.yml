@@ -1,0 +1,57 @@
+ja:
+  activerecord:
+    attributes:
+      end_user:
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: 確認用パスワード
+        remember_me: 次回から自動的にログイン
+        last_name: 姓
+        first_name: 名
+        last_name_kana: セイ
+        first_name_kana: メイ
+        nickname: ニックネーム
+        introduction: 自己紹介文
+        postal_code: 郵便番号
+        address: 住所
+        telephone_number: 電話番号
+        is_deleted: 会員ステータス
+      address:
+        name: 宛名
+        postal_code: 郵便番号
+        address: 住所
+      admin:
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: 確認用パスワード
+        remember_me: 次回から自動的にログイン
+      book:
+        isbn: 国際標準図書番号
+        title: タイトル
+        author: 著者
+        publisher_name: 出版社
+        item_caption: 書籍紹介
+      category:
+        name: カテゴリー
+      order_detail:
+        price: 価格
+      order:
+        postal_code: 配送先郵便番号
+        shipping_address: 配送先住所
+        shipping_name: 宛名
+        total_payment: 精算金額
+        payment_method: 支払い方法
+        status: 注文ステータス
+      review_comment:
+        comment: コメント
+      review:
+        heading: 標題
+        blog: レビュー
+        score: 評価
+      sale:
+        title: 商品名
+        introduction: 商品説明
+        price: 価格
+        status: 商品ステータス
+      tag:
+        name: タグ
