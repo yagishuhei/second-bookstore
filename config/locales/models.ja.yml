@@ -36,8 +36,8 @@ ja:
       order_detail:
         price: 価格
       order:
-        postal_code: 配送先郵便番号
-        shipping_address: 配送先住所
+        postal_code: 郵便番号
+        shipping_address: 住所
         shipping_name: 宛名
         total_payment: 精算金額
         payment_method: 支払い方法

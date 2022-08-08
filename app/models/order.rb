@@ -3,4 +3,8 @@ class Order < ApplicationRecord
   enum status: {incomplete: 0, complete: 1}
   belongs_to :end_user
   has_many :order_details, dependent: :destroy
+
+  validates :postal_code, presence: true
+  validates :shipping_address, presence: true
+  validates :shipping_name, presence: true
 end
