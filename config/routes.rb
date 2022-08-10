@@ -53,7 +53,7 @@ Rails.application.routes.draw do
     get 'orders/thanks', to: 'orders#thanks', as: 'thanks'
     resources :orders, only: [:index, :new, :create, :show, :update]
 
-    #配送先
+    #住所
     resources :addresses, only: [:index, :create, :destroy, :edit, :update]
     get 'end_users/mypage', to: 'end_users#mypage', as: 'mypage'
     get 'end_users/unsubscribe', to: 'end_users#unsubscribe', as: 'confirm_unsubscribe'
