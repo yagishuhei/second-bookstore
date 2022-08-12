@@ -18,6 +18,9 @@ Category.create!(
 Category.create!(
   name: '小説',
   )
+Category.create!(
+  name: 'ライトノベル',
+  )
 
 EndUser.create!(
   last_name: 'ゲスト',
