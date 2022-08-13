@@ -24,34 +24,14 @@ Category.create!(
 
 EndUser.create!(
   last_name: 'ゲスト',
-  )
-EndUser.create!(
   first_name: 'ユーザー',
-  )
-EndUser.create!(
   last_name_kana: 'ゲスト',
-  )
-EndUser.create!(
   first_name_kana: 'ユーザー',
-  )
-EndUser.create!(
   nickname: 'ゲストユーザー',
-  )
-EndUser.create!(
   introduction: 'ゲスト用です',
-  )
-EndUser.create!(
   postal_code: '1111111',
-  )
-EndUser.create!(
   address: '東京都一丁目一番地',
-  )
-EndUser.create!(
   telephone_number: '11111111111',
-  )
-EndUser.create!(
   email: 'guest@example.com',
-  )
-EndUser.create!(
   password: '111111',
   )
