@@ -9,8 +9,9 @@
         <div class= "col-md-2 col-sm-12 py-2">フリガナ</div>
         <div class= "col-md-2 col-sm-12 py-2">会員ステータス</div>
       </div>
+      <% if @end_users.present? %>
         <% @end_users.each do |end_user| %>
-        <div class="row">
+          <div class="row">
             <div class="col-md-1 col-sm-12"><%= end_user.id %></div>
             <div class="col-md-2 col-sm-12"><%= image_tag end_user.get_profile_image("100x100") %></div>
             <div class="col-md-2 col-sm-12"><%= end_user.last_name %><%= end_user.first_name %></div>
@@ -22,6 +23,9 @@
             </div>
           </div>
         <% end %>
+      <% else %>
+        <p>ユーザーはおりません</p>
+      <% end %>
     </div>
   </div>
   <%= paginate @end_users %>
