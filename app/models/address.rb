@@ -5,7 +5,7 @@ class Address < ApplicationRecord
     '〒'+postal_code+''+address+''+name
   end
 
-  validates :postal_code, presence: true
+  validates :postal_code, presence: true,length:{maximum:10}
   validates :address, presence: true
   validates :name, presence: true
 
